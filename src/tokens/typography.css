@@ -5,7 +5,7 @@
   --font-family-mono:    'Fira Code', 'Courier New', Courier, monospace;
   --font-family:         var(--font-family-mono); /* component default — monospace for UI elements */
 
-  /* ── Size Scale (fireship) ── */
+  /* ── Size Scale (Pastis) ── */
   --font-size-display: 56px;
   --font-size-h1:      38px;
   --font-size-h2:      34px;

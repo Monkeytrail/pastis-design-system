@@ -1,12 +1,12 @@
 :root {
-  /* ── Fireship Brand Palette ── */
+  /* ── Pastis Brand Palette ── */
   --color-black:    #0d0d0d;
   --color-dark:     #0f0d0e;
   --color-darkgray: #1e1e1e;
   --color-gray:     #767980;
   --color-white:    #ffffff;
 
-  /* ── Fireship Brand Colors ── */
+  /* ── Pastis Brand Colors ── */
   --color-orange:  #fc7428;
   --color-yellow:  #fcba28;
   --color-pink:    #f38ba3;
@@ -29,7 +29,7 @@
   --gray-25:  #f7f7f7;
 }
 
-/* ── Default = Dark. Fireship runs in the dark. ── */
+/* ── Default = Dark. Pastis runs in the dark. ── */
 :root,
 [data-theme="dark"] {
   --bg-primary:  #0d0d0d;
@@ -38,20 +38,20 @@
   --bg-elevated: #262522;
   --bg-overlay:  #231f20;
 
-  --text-primary:   #f9f4da;  /* fireship beige — 13.6:1 on #0d0d0d ✓ */
+  --text-primary:   #f9f4da;  /* pastis beige — 13.6:1 on #0d0d0d ✓ */
   --text-secondary: #f9f4da;
   --text-tertiary:  #909498;  /* 5.0:1 on #262522, 5.4:1 on #1e1e1e ✓ */
   --text-disabled:  #383c44;
   --text-inverse:   #0d0d0d;
   --text-on-accent: #0d0d0d;  /* dark text on bright backgrounds */
-  --text-code:      #f38ba3;  /* fireship pink for inline code */
+  --text-code:      #f38ba3;  /* pastis pink for inline code */
 
   --border-default: #383c44;
   --border-subtle:  #1e1e1e;
   --border-strong:  #fc7428;
   --border-focus:   #fcba28;
 
-  --action-primary:         #fcba28;  /* yellow — fireship CTA */
+  --action-primary:         #fcba28;  /* yellow — pastis CTA */
   --action-primary-hover:   #f5b01e;
   --action-primary-pressed: #e0a018;
   --action-primary-text:    #0d0d0d;  /* WCAG: 12.6:1 ✓ */
@@ -68,7 +68,7 @@
   --status-error:   #f0505e;  /* 5.57:1 on #0d0d0d, 4.77:1 on #1e1e1e ✓ */
   --status-info:    #12b5e5;
 
-  /* Fireship hard offset shadows — 5px, no blur */
+  /* Pastis hard offset shadows — 5px, no blur */
   --shadow-sm:  3px 3px 0 #262522;
   --shadow-md:  5px 5px 0 #231f20;
   --shadow-lg:  5px 5px 0 #fcba28;
@@ -89,7 +89,7 @@
   --text-disabled:  #b1b4b9;
   --text-inverse:   #f9f4da;
   --text-on-accent: #0d0d0d;
-  --text-code:      #6c4c9f;  /* fireship light-mode code purple */
+  --text-code:      #6c4c9f;  /* pastis light-mode code purple */
 
   --border-default: #e1e2e4;
   --border-subtle:  #e9eaec;
