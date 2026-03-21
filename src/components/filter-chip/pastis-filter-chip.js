@@ -1,0 +1,217 @@
+import { LitElement, html, css } from 'lit';
+
+export class PastisFilterChip extends LitElement {
+  static properties = {
+    label:    { type: String },
+    value:    { type: String },
+    selected: { type: Boolean, reflect: true },
+    disabled: { type: Boolean, reflect: true },
+    removable: { type: Boolean, reflect: true },
+    icon:     { type: String },
+    count:    { type: Number },
+  };
+
+  static styles = css`
+    :host { display: inline-block; }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      height: 34px;
+      background: var(--bg-card, #0A0A0F);
+      border: 3px solid var(--border-subtle, #1A1A1A);
+      color: var(--text-tertiary, #808080);
+      font-family: var(--font-family, 'Courier New', monospace);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border-radius: 0;
+      transition: border-color 50ms, color 50ms;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      border-color: var(--action-primary, #00FF41);
+      color: var(--text-secondary, #fff);
+    }
+
+    :host([selected]) button {
+      background: var(--action-primary, #00FF41);
+      border-color: var(--action-primary, #00FF41);
+      color: var(--action-primary-text, #000);
+      filter: brightness(0.9);
+    }
+
+    :host([disabled]) button {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .icon { font-size: 14px; }
+    .count {
+      background: var(--bg-elevated, #1A1A1A);
+      color: var(--text-tertiary, #808080);
+      font-size: 10px;
+      padding: 1px 5px;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    :host([selected]) .count {
+      background: var(--action-primary-text, #000);
+      color: var(--action-primary, #00FF41);
+    }
+
+    .remove {
+      margin-left: 2px;
+      opacity: 0.7;
+      font-size: 13px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .remove:hover { opacity: 1; }
+
+    button:focus-visible { outline: 4px solid var(--border-focus, #00FF41); outline-offset: 2px; }
+  `;
+
+  constructor() {
+    super();
+    this.selected = false;
+    this.disabled = false;
+    this.removable = false;
+  }
+
+  _toggle() {
+    if (this.disabled) return;
+    this.selected = !this.selected;
+    this.dispatchEvent(new CustomEvent('pastis-toggle', {
+      detail: { selected: this.selected, value: this.value },
+      bubbles: true, composed: true,
+    }));
+  }
+
+  _remove(e) {
+    e.stopPropagation();
+    this.dispatchEvent(new CustomEvent('pastis-remove', {
+      detail: { value: this.value },
+      bubbles: true, composed: true,
+    }));
+  }
+
+  render() {
+    return html`
+      <button @click=${this._toggle} part="filter-chip">
+        ${this.icon ? html`<span class="icon" aria-hidden="true">${this.icon}</span>` : ''}
+        ${this.label || this.value || ''}
+        ${this.count != null ? html`<span class="count">${this.count}</span>` : ''}
+        ${this.removable ? html`<span class="remove" @click=${this._remove} aria-label="Remove">✕</span>` : ''}
+      </button>
+    `;
+  }
+}
+
+customElements.define('pastis-filter-chip', PastisFilterChip);
+
+
+export class PastisFilterBar extends LitElement {
+  static properties = {
+    filters: { type: Array },
+    active:  { type: Array },
+    label:   { type: String },
+  };
+
+  static styles = css`
+    :host { display: block; }
+
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+      font-family: var(--font-family, 'Courier New', monospace);
+    }
+
+    .filter-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-tertiary, #808080);
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+
+    .clear-btn {
+      background: none;
+      border: 2px solid var(--action-ghost-border, #808080);
+      color: var(--text-tertiary, #808080);
+      font-family: var(--font-family, 'Courier New', monospace);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      height: 34px;
+      cursor: pointer;
+    }
+
+    .clear-btn:hover { border-color: var(--status-error, #FF006E); color: var(--status-error, #FF006E); }
+  `;
+
+  constructor() {
+    super();
+    this.filters = [];
+    this.active = [];
+    this.label = 'Filter';
+  }
+
+  _isActive(value) { return this.active.includes(value); }
+
+  _handleToggle(e) {
+    const { value, selected } = e.detail;
+    this.active = selected
+      ? [...this.active, value]
+      : this.active.filter(v => v !== value);
+    this.dispatchEvent(new CustomEvent('pastis-filter-change', {
+      detail: { active: this.active },
+      bubbles: true, composed: true,
+    }));
+  }
+
+  _clearAll() {
+    this.active = [];
+    this.dispatchEvent(new CustomEvent('pastis-filter-change', {
+      detail: { active: [] },
+      bubbles: true, composed: true,
+    }));
+  }
+
+  render() {
+    return html`
+      <div class="filter-bar" part="filter-bar">
+        ${this.label ? html`<span class="filter-label">${this.label}:</span>` : ''}
+        ${this.filters.map(f => html`
+          <pastis-filter-chip
+            .label=${f.label}
+            .value=${f.value}
+            .icon=${f.icon || ''}
+            .count=${f.count}
+            ?selected=${this._isActive(f.value)}
+            @pastis-toggle=${this._handleToggle}
+          ></pastis-filter-chip>
+        `)}
+        ${this.active.length > 0 ? html`
+          <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
+        ` : ''}
+      </div>
+    `;
+  }
+}
+
+customElements.define('pastis-filter-bar', PastisFilterBar);

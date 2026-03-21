@@ -1,0 +1,15 @@
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  image-rendering: pixelated;
+}
