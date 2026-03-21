@@ -30,30 +30,30 @@ export class PastisBreadcrumb extends LitElement {
     li {
       display: inline-flex;
       align-items: center;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
 
     .crumb {
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       text-decoration: none;
-      transition: color 50ms;
+      transition: color 120ms ease;
       padding: 4px 2px;
-      border-radius: 0;
+      border-radius: var(--radius-md, 6px);
     }
 
-    .crumb:hover { color: var(--text-primary, #00FF41); }
+    .crumb:hover { color: var(--text-primary, #f9f4da); }
 
     .crumb:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
 
     .crumb.active {
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
       font-weight: 700;
       cursor: default;
       pointer-events: none;
@@ -62,24 +62,32 @@ export class PastisBreadcrumb extends LitElement {
     .crumb-icon { margin-right: 4px; font-size: 11px; }
 
     .separator {
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 12px;
       margin: 0 8px;
       user-select: none;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .ellipsis {
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       cursor: pointer;
       padding: 4px 6px;
-      border-radius: 0;
-      font-family: var(--font-family, 'Courier New', monospace);
+      border-radius: var(--radius-md, 6px);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
-      transition: color 50ms;
+      font-size: 12px;
+      transition: color 120ms ease;
+      background: none;
+      border: none;
     }
 
     .ellipsis:hover { color: var(--text-secondary, #fff); }
+
+    .ellipsis:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
   `;
 
   constructor() {
@@ -112,7 +120,7 @@ export class PastisBreadcrumb extends LitElement {
               <li>
                 ${isEllipsis
                   ? html`
-                    <span class="ellipsis" @click="${() => { this._expanded = true; this.requestUpdate(); }}" aria-label="Show all">…</span>
+                    <button class="ellipsis" @click="${() => { this._expanded = true; this.requestUpdate(); }}" aria-label="Show all breadcrumb items">…</button>
                   `
                   : isLast
                     ? html`<span class="crumb active" aria-current="page">${item.icon ? html`<span class="crumb-icon">${item.icon}</span>` : ''}${item.label}</span>`

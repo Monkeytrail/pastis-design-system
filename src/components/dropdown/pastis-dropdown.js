@@ -20,12 +20,12 @@ export class PastisDropdown extends LitElement {
     .field { display: flex; flex-direction: column; gap: 6px; }
 
     label {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
     }
 
     .trigger {
@@ -35,25 +35,25 @@ export class PastisDropdown extends LitElement {
       gap: 8px;
       padding: 10px 12px;
       height: auto;
-      background: var(--bg-primary, #000);
-      border: 4px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
+      background: var(--bg-primary, #0d0d0d);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
       cursor: pointer;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 14px;
       font-weight: 700;
       color: var(--text-secondary, #fff);
-      transition: border-color 50ms;
+      transition: border-color 120ms ease;
       user-select: none;
     }
 
     :host([size="sm"]) .trigger { font-size: 12px; padding: 8px 10px; }
     :host([size="lg"]) .trigger { font-size: 16px; padding: 12px 16px; }
 
-    .trigger:hover { border-color: var(--text-tertiary, #808080); }
+    .trigger:hover { border-color: var(--text-tertiary, #909498); }
 
     :host([open]) .trigger {
-      border-color: var(--border-focus, #00FF41);
+      border-color: var(--border-focus, #fcba28);
     }
 
     :host([disabled]) .trigger {
@@ -62,14 +62,14 @@ export class PastisDropdown extends LitElement {
     }
 
     .trigger-text { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .placeholder { color: var(--text-tertiary, #808080); }
+    .placeholder { color: var(--text-tertiary, #909498); }
 
     .chevron {
       flex-shrink: 0;
-      color: var(--text-tertiary, #808080);
-      transition: transform 50ms;
+      color: var(--text-tertiary, #909498);
+      transition: transform 120ms ease;
       font-size: 12px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     :host([open]) .chevron { transform: rotate(180deg); }
@@ -79,9 +79,9 @@ export class PastisDropdown extends LitElement {
       top: calc(100% + 4px);
       left: 0;
       right: 0;
-      background: var(--bg-card, #0A0A0F);
-      border: 4px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       z-index: 1000;
       overflow: hidden;
       max-height: 260px;
@@ -91,25 +91,25 @@ export class PastisDropdown extends LitElement {
 
     .search-wrap {
       padding: 8px;
-      border-bottom: 4px solid var(--border-default, #00FF41);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
       flex-shrink: 0;
     }
 
     .search-input {
       width: 100%;
       padding: 6px 10px;
-      border: 3px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
-      font-family: var(--font-family, 'Courier New', monospace);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
-      background: var(--bg-primary, #000);
+      background: var(--bg-primary, #0d0d0d);
       color: var(--text-secondary, #fff);
       outline: none;
       box-sizing: border-box;
     }
 
-    .search-input:focus { border-color: var(--border-focus, #00FF41); }
+    .search-input:focus { border-color: var(--border-focus, #fcba28); }
 
     .options-list {
       overflow-y: auto;
@@ -118,22 +118,22 @@ export class PastisDropdown extends LitElement {
 
     .option {
       padding: 8px 12px;
-      border-radius: 0;
+      border-radius: var(--radius-md, 6px);
       cursor: pointer;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       color: var(--text-secondary, #fff);
-      transition: background 50ms;
+      transition: background 120ms ease;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .option:hover { background: rgba(0, 255, 65, 0.1); color: var(--text-primary, #00FF41); }
+    .option:hover { background: rgba(252, 186, 40, 0.1); color: var(--text-primary, #f9f4da); }
 
     .option.selected {
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
       color: #000;
     }
 
@@ -148,11 +148,11 @@ export class PastisDropdown extends LitElement {
     .no-options {
       padding: 16px;
       text-align: center;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 12px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
 
     .wrap {
@@ -161,10 +161,10 @@ export class PastisDropdown extends LitElement {
 
     .error-text {
       font-size: 11px;
-      font-family: var(--font-family, 'Courier New', monospace);
-      color: var(--status-error, #FF006E);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      color: var(--status-error, #ed203d);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
   `;
 
@@ -179,6 +179,7 @@ export class PastisDropdown extends LitElement {
     this._search = '';
     this._selectedValues = [];
     this._boundClose = this._handleOutsideClick.bind(this);
+    this._focusedIndex = -1;
   }
 
   connectedCallback() {
@@ -198,8 +199,70 @@ export class PastisDropdown extends LitElement {
   _toggle() {
     if (this.disabled) return;
     this.open = !this.open;
-    if (this.open && this.searchable) {
-      requestAnimationFrame(() => this.shadowRoot?.querySelector('.search-input')?.focus());
+    if (this.open) {
+      this._focusedIndex = -1;
+      if (this.searchable) {
+        requestAnimationFrame(() => this.shadowRoot?.querySelector('.search-input')?.focus());
+      } else {
+        requestAnimationFrame(() => this._focusOptionAt(0));
+      }
+    }
+  }
+
+  _getOptionElements() {
+    return Array.from(this.shadowRoot?.querySelectorAll('.option') || []);
+  }
+
+  _focusOptionAt(index) {
+    const opts = this._getOptionElements();
+    if (!opts.length) return;
+    const clamped = Math.max(0, Math.min(index, opts.length - 1));
+    this._focusedIndex = clamped;
+    opts[clamped]?.focus();
+  }
+
+  _handleTriggerKeydown(e) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!this.open) {
+        this.open = true;
+        this._focusedIndex = -1;
+        requestAnimationFrame(() => this._focusOptionAt(0));
+      } else {
+        this._focusOptionAt(this._focusedIndex + 1);
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (this.open) {
+        this._focusOptionAt(this._focusedIndex - 1);
+      }
+    } else if (e.key === 'Escape') {
+      if (this.open) {
+        this.open = false;
+        this.shadowRoot?.querySelector('.trigger')?.focus();
+      }
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      this._toggle();
+    }
+  }
+
+  _handleOptionKeydown(e, opt, index) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      this._focusOptionAt(index + 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (index === 0) {
+        this.shadowRoot?.querySelector('.trigger')?.focus();
+      } else {
+        this._focusOptionAt(index - 1);
+      }
+    } else if (e.key === 'Escape') {
+      this.open = false;
+      this.shadowRoot?.querySelector('.trigger')?.focus();
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this._selectOption(opt);
     }
   }
 
@@ -250,7 +313,7 @@ export class PastisDropdown extends LitElement {
           <div
             class="trigger"
             @click="${this._toggle}"
-            @keydown="${e => (e.key === 'Enter' || e.key === ' ') && this._toggle()}"
+            @keydown="${this._handleTriggerKeydown}"
             tabindex="${this.disabled ? -1 : 0}"
             role="combobox"
             aria-expanded="${this.open}"
@@ -281,14 +344,15 @@ export class PastisDropdown extends LitElement {
                 </div>
               ` : ''}
               <div class="options-list" role="listbox">
-                ${filtered.length ? filtered.map(opt => html`
+                ${filtered.length ? filtered.map((opt, index) => html`
                   <div
                     class="option ${this._isSelected(opt) ? 'selected' : ''} ${opt.disabled ? 'disabled' : ''}"
                     role="option"
-                    aria-selected="${this._isSelected(opt)}"
+                    aria-selected="${this._isSelected(opt) ? 'true' : 'false'}"
+                    aria-disabled="${opt.disabled ? 'true' : 'false'}"
                     @click="${e => { e.stopPropagation(); this._selectOption(opt); }}"
-                    @keydown="${e => (e.key === 'Enter' || e.key === ' ') && this._selectOption(opt)}"
-                    tabindex="0"
+                    @keydown="${e => this._handleOptionKeydown(e, opt, index)}"
+                    tabindex="${opt.disabled ? -1 : 0}"
                   >
                     ${opt.icon ? html`<span>${opt.icon}</span>` : ''}
                     ${opt.label}

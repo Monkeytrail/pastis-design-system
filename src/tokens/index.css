@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;700&family=Paytone+One&display=swap');
+
 @import './colors.css';
 @import './typography.css';
 @import './spacing.css';
@@ -5,11 +7,11 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-family-body);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   color: var(--text-primary);
   background: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
-  image-rendering: pixelated;
+  -moz-osx-font-smoothing: grayscale;
 }

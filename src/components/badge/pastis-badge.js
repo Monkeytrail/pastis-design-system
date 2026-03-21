@@ -7,6 +7,7 @@ export class PastisBadge extends LitElement {
     dot: { type: Boolean, reflect: true },
     count: { type: Number },
     max: { type: Number },
+    label: { type: String },
   };
 
   static styles = css`
@@ -16,86 +17,86 @@ export class PastisBadge extends LitElement {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      font-family: var(--font-family, 'Courier New', monospace);
-      font-weight: 700;
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      border: 3px solid currentColor;
-      border-radius: 0;
+      letter-spacing: 0.05em;
+      border: var(--border-width, 1px) solid currentColor;
+      border-radius: var(--radius-full, 9999px);
       white-space: nowrap;
       line-height: 1;
     }
 
     /* Sizes */
-    .badge { font-size: 11px; padding: 4px 10px; }
-    :host([size="sm"]) .badge { font-size: 10px; padding: 2px 6px; }
-    :host([size="lg"]) .badge { font-size: 13px; padding: 5px 12px; }
+    .badge { font-size: 11px; padding: 3px 10px; }
+    :host([size="sm"]) .badge { font-size: 10px; padding: 2px 8px; }
+    :host([size="lg"]) .badge { font-size: 13px; padding: 4px 12px; }
 
     /* Dot variant */
-    :host([dot]) .badge { padding: 0; width: 10px; height: 10px; border-radius: 0; }
+    :host([dot]) .badge { padding: 0; width: 10px; height: 10px; border-radius: 50%; }
     :host([dot][size="sm"]) .badge { width: 8px; height: 8px; }
     :host([dot][size="lg"]) .badge { width: 14px; height: 14px; }
 
     /* Variants */
     :host(:not([variant])) .badge,
     :host([variant="default"]) .badge {
-      color: var(--text-primary, #00FF41);
-      background: #000;
+      color: var(--text-primary, #f9f4da);
+      background: transparent;
     }
 
     :host([variant="primary"]) .badge {
-      color: var(--text-primary, #00FF41);
-      background: #000;
+      color: var(--action-primary, #fcba28);
+      background: transparent;
     }
 
     :host([variant="success"]) .badge {
-      color: var(--status-success, #00FF41);
-      background: #000;
+      color: var(--status-success, #0ba95b);
+      background: transparent;
     }
 
     :host([variant="warning"]) .badge {
-      color: var(--status-warning, #FFE600);
-      background: #000;
+      color: var(--status-warning, #fcba28);
+      background: transparent;
     }
 
     :host([variant="error"]) .badge {
-      color: var(--status-error, #FF006E);
-      background: #000;
+      color: var(--status-error, #ed203d);
+      background: transparent;
     }
 
     :host([variant="info"]) .badge {
-      color: var(--status-info, #00FFFF);
-      background: #000;
+      color: var(--status-info, #12b5e5);
+      background: transparent;
     }
 
     :host([variant="solid-primary"]) .badge {
-      background: var(--action-primary, #00FF41);
-      color: #000;
-      border-color: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+      border-color: var(--action-primary, #fcba28);
     }
 
     :host([variant="solid-success"]) .badge {
-      background: var(--status-success, #00FF41);
-      color: #000;
-      border-color: var(--status-success, #00FF41);
+      background: var(--status-success, #0ba95b);
+      color: #000000;
+      border-color: var(--status-success, #0ba95b);
     }
 
     :host([variant="solid-error"]) .badge {
-      background: var(--status-error, #FF006E);
-      color: #fff;
-      border-color: var(--status-error, #FF006E);
+      background: var(--status-error, #f0505e);
+      color: #000000;
+      border-color: var(--status-error, #f0505e);
     }
 
     :host([variant="solid-warning"]) .badge {
-      background: var(--status-warning, #FFE600);
-      color: #000;
-      border-color: var(--status-warning, #FFE600);
+      background: var(--status-warning, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+      border-color: var(--status-warning, #fcba28);
     }
 
     .dot-indicator {
       width: 6px;
       height: 6px;
-      border-radius: 0;
+      border-radius: 50%;
       background: currentColor;
       flex-shrink: 0;
     }
@@ -111,7 +112,7 @@ export class PastisBadge extends LitElement {
 
   render() {
     if (this.dot) {
-      return html`<span class="badge" role="status" part="badge"></span>`;
+      return html`<span class="badge" role="status" part="badge" aria-label="${this.label || 'indicator'}"></span>`;
     }
 
     let content;

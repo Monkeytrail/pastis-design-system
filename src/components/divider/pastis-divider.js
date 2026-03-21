@@ -43,44 +43,44 @@ export class PastisDivider extends LitElement {
 
     .line {
       flex: 1;
-      background: var(--border-default, #00FF41);
+      background: var(--border-default, #fcba28);
     }
 
     :host(:not([orientation])) .line,
     :host([orientation="horizontal"]) .line {
-      height: 4px;
+      height: var(--border-width, 1px);
     }
 
     :host([orientation="vertical"]) .line {
-      width: 4px;
+      width: var(--border-width, 1px);
       min-height: 16px;
     }
 
     :host([variant="subtle"]) .line {
-      background: var(--border-subtle, #1A1A1A);
-      height: 2px;
+      background: var(--border-subtle, #383c44);
+      height: var(--border-width, 1px);
     }
 
     :host([variant="dashed"]) .line {
       background: none;
-      border-top: 4px dashed var(--text-tertiary, #808080);
+      border-top: var(--border-width, 1px) dashed var(--text-tertiary, #909498);
       height: 0;
     }
 
     :host([orientation="vertical"][variant="dashed"]) .line {
       border-top: none;
-      border-left: 4px dashed var(--text-tertiary, #808080);
+      border-left: var(--border-width, 1px) dashed var(--text-tertiary, #909498);
       width: 0;
       height: auto;
     }
 
     :host([variant="dotted"]) .line {
       background: none;
-      border-top: 4px dotted var(--border-default, #00FF41);
+      border-top: var(--border-width, 1px) dotted var(--border-default, #fcba28);
       height: 0;
     }
 
-    :host([variant="thick"]) .line { height: 8px; }
+    :host([variant="thick"]) .line { height: 4px; }
 
     /* Spacing */
     :host([spacing="sm"]) { margin: 8px 0; }
@@ -93,12 +93,12 @@ export class PastisDivider extends LitElement {
     :host([orientation="vertical"][spacing="lg"]) { margin: 0 24px; }
 
     .label {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-tertiary, #808080);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-tertiary, #909498);
       white-space: nowrap;
     }
   `;

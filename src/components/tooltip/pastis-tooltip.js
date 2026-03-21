@@ -18,28 +18,28 @@ export class PastisTooltip extends LitElement {
     .tooltip {
       position: absolute;
       z-index: 9000;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--bg-primary, #000);
-      background: var(--text-primary, #00FF41);
-      border: 3px solid var(--text-primary, #00FF41);
-      border-radius: 0;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--bg-primary, #0d0d0d);
+      background: var(--text-primary, #f9f4da);
+      border: var(--border-width, 1px) solid var(--text-primary, #f9f4da);
+      border-radius: var(--radius-md, 6px);
       padding: 6px 10px;
       white-space: nowrap;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 50ms;
+      transition: opacity 120ms ease;
       max-width: 240px;
       line-height: 1.4;
     }
 
     :host([variant="light"]) .tooltip {
-      background: var(--bg-card, #0A0A0F);
-      color: var(--text-primary, #00FF41);
-      border: 3px solid var(--text-primary, #00FF41);
+      background: var(--bg-card, #1e1e1e);
+      color: var(--text-primary, #f9f4da);
+      border: var(--border-width, 1px) solid var(--text-primary, #f9f4da);
     }
 
     /* Top */
@@ -99,6 +99,7 @@ export class PastisTooltip extends LitElement {
       <div
         class="tooltip"
         role="tooltip"
+        aria-hidden="${!this.visible}"
         style="${this.maxWidth ? `max-width:${this.maxWidth}` : ''}"
         part="tooltip"
       >

@@ -19,11 +19,11 @@ export class PastisToggle extends LitElement {
       gap: 10px;
       cursor: pointer;
       user-select: none;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       color: var(--text-secondary, #fff);
     }
 
@@ -37,10 +37,10 @@ export class PastisToggle extends LitElement {
       position: relative;
       width: 56px;
       height: 28px;
-      background: var(--bg-elevated, #1A1A1A);
-      border: 4px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
-      transition: border-color 50ms;
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-full, 9999px);
+      transition: border-color 120ms ease;
       flex-shrink: 0;
       padding: 2px;
     }
@@ -48,7 +48,7 @@ export class PastisToggle extends LitElement {
     :host([size="sm"]) .track { width: 40px; height: 22px; }
     :host([size="lg"]) .track { width: 64px; height: 32px; }
 
-    :host([checked]) .track { border-color: var(--action-primary, #00FF41); }
+    :host([checked]) .track { border-color: var(--action-primary, #fcba28); }
 
     .thumb {
       position: absolute;
@@ -56,9 +56,9 @@ export class PastisToggle extends LitElement {
       left: 2px;
       width: 16px;
       height: 16px;
-      background: var(--text-tertiary, #808080);
-      border-radius: 0;
-      transition: transform 50ms steps(4), background 50ms;
+      background: var(--text-tertiary, #909498);
+      border-radius: 50%;
+      transition: transform 120ms ease, background 120ms ease;
     }
 
     :host([size="sm"]) .thumb { width: 10px; height: 10px; }
@@ -66,14 +66,14 @@ export class PastisToggle extends LitElement {
 
     :host([checked]) .thumb {
       transform: translateX(28px);
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
     }
 
     :host([size="sm"][checked]) .thumb { transform: translateX(18px); }
     :host([size="lg"][checked]) .thumb { transform: translateX(36px); }
 
     input:focus-visible ~ .track {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
 
@@ -102,7 +102,7 @@ export class PastisToggle extends LitElement {
           aria-checked="${this.checked}"
           @change="${this._handleChange}"
         />
-        <span class="track">
+        <span class="track" aria-hidden="true">
           <span class="thumb"></span>
         </span>
         ${this.labelPosition !== 'left' ? labelEl : ''}

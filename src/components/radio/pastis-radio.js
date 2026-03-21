@@ -18,7 +18,7 @@ export class PastisRadio extends LitElement {
       align-items: flex-start;
       gap: 10px;
       cursor: pointer;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 14px;
       color: var(--text-secondary, #fff);
       user-select: none;
@@ -26,39 +26,48 @@ export class PastisRadio extends LitElement {
 
     :host([disabled]) label { opacity: 0.4; cursor: not-allowed; }
 
-    input[type="radio"] { display: none; }
+    input[type="radio"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      margin: 0;
+    }
 
     .radio-visual {
       width: 20px;
       height: 20px;
-      border: 4px solid var(--border-default, #00FF41);
-      background: var(--bg-primary, #000);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      background: var(--bg-primary, #0d0d0d);
+      border-radius: 50%;
       flex-shrink: 0;
       margin-top: 1px;
       position: relative;
-      transition: box-shadow 50ms;
+      transition: box-shadow 120ms ease;
     }
 
     :host([checked]) .radio-visual {
-      border-color: var(--action-primary, #00FF41);
+      border-color: var(--action-primary, #fcba28);
     }
 
     :host([checked]) .radio-visual::after {
       content: '';
       position: absolute;
       inset: 2px;
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
+      border-radius: 50%;
     }
 
-    /* radio border is green → hover shadow is cyan */
-    label:hover .radio-visual { box-shadow: 4px 4px 0 var(--action-secondary, #00FFFF); }
+    label:hover .radio-visual { box-shadow: 4px 4px 0 var(--action-secondary, #fc7428); }
     :host([disabled]) label:hover .radio-visual { box-shadow: none; }
 
-    .radio-visual:focus-visible { outline: 4px solid var(--border-focus, #00FF41); outline-offset: 2px; }
+    :host(:focus-within) .radio-visual { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
 
     .label-wrap { display: flex; flex-direction: column; gap: 2px; }
     .label-text { line-height: 1.4; }
-    .helper { font-size: 12px; color: var(--text-tertiary, #808080); margin: 0; }
+    .helper { font-size: 12px; color: var(--text-tertiary, #909498); margin: 0; }
   `;
 
   constructor() {
@@ -78,7 +87,7 @@ export class PastisRadio extends LitElement {
           ?disabled=${this.disabled}
           @change=${this._handleChange}
         />
-        <span class="radio-visual" tabindex=${this.disabled ? -1 : 0} @keydown=${this._handleKey}></span>
+        <span class="radio-visual" aria-hidden="true"></span>
         ${this.label || this.helper ? html`
           <span class="label-wrap">
             ${this.label ? html`<span class="label-text">${this.label}</span>` : ''}

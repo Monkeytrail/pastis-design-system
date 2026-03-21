@@ -14,19 +14,25 @@ export class PastisStatCard extends LitElement {
     :host { display: block; }
 
     .stat-card {
-      background: var(--bg-card, #0A0A0F);
-      border: 4px solid var(--border-default, #00FF41);
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       padding: 20px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       display: flex;
       flex-direction: column;
       gap: 8px;
+      transition: box-shadow 120ms ease;
     }
 
-    :host([variant="primary"]) .stat-card { border-color: var(--action-primary, #00FF41); }
-    :host([variant="success"]) .stat-card { border-color: var(--status-success, #00FF41); }
-    :host([variant="warning"]) .stat-card { border-color: var(--status-warning, #FFE600); }
-    :host([variant="error"]) .stat-card   { border-color: var(--status-error, #FF006E); }
+    .stat-card:hover {
+      box-shadow: var(--shadow-md, 5px 5px 0 #231f20);
+    }
+
+    :host([variant="primary"]) .stat-card { border-color: var(--action-primary, #fcba28); }
+    :host([variant="success"]) .stat-card { border-color: var(--status-success, #fcba28); }
+    :host([variant="warning"]) .stat-card { border-color: var(--status-warning, #fcba28); }
+    :host([variant="error"]) .stat-card   { border-color: var(--status-error, #ed203d); }
 
     .header {
       display: flex;
@@ -39,7 +45,7 @@ export class PastisStatCard extends LitElement {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-secondary, #f9f4da);
     }
 
     .icon {
@@ -50,7 +56,7 @@ export class PastisStatCard extends LitElement {
     .value {
       font-size: 32px;
       font-weight: 700;
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
       line-height: 1;
     }
 
@@ -66,11 +72,11 @@ export class PastisStatCard extends LitElement {
       text-transform: uppercase;
     }
 
-    .trend-up   { color: var(--status-success, #00FF41); }
-    .trend-down { color: var(--status-error, #FF006E); }
-    .trend-neutral { color: var(--text-tertiary, #808080); }
+    .trend-up   { color: var(--status-success, #fcba28); }
+    .trend-down { color: var(--status-error, #ed203d); }
+    .trend-neutral { color: var(--text-tertiary, #909498); }
 
-    .delta-label { color: var(--text-tertiary, #808080); }
+    .delta-label { color: var(--text-tertiary, #909498); }
   `;
 
   constructor() {

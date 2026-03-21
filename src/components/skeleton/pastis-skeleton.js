@@ -14,9 +14,9 @@ export class PastisSkeleton extends LitElement {
     :host { display: block; }
 
     .skeleton {
-      background: var(--bg-elevated, #1A1A1A);
-      border: 2px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-sm, 4px);
     }
 
     :host([animated]) .skeleton {
@@ -28,14 +28,19 @@ export class PastisSkeleton extends LitElement {
       50% { opacity: 0.3; }
     }
 
-    /* No circular shapes — all square */
+    @media (prefers-reduced-motion: reduce) {
+      :host([animated]) .skeleton {
+        animation: none;
+      }
+    }
+
     :host([variant="circle"]) .skeleton {
-      border-radius: 0;
+      border-radius: 50%;
     }
 
     :host([variant="text"]) .skeleton {
       height: 14px;
-      border-radius: 0;
+      border-radius: var(--radius-sm, 4px);
     }
 
     .lines-wrap {
@@ -44,7 +49,7 @@ export class PastisSkeleton extends LitElement {
       gap: 8px;
     }
 
-    .line { height: 14px; border-radius: 0; border: 2px solid var(--border-subtle, #1A1A1A); background: var(--bg-elevated, #1A1A1A); }
+    .line { height: 14px; border-radius: var(--radius-sm, 4px); border: var(--border-width, 1px) solid var(--border-subtle, #383c44); background: var(--bg-elevated, #383c44); }
     .line:last-child { width: 70% !important; }
   `;
 

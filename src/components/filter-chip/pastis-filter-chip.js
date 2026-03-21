@@ -20,28 +20,28 @@ export class PastisFilterChip extends LitElement {
       gap: 6px;
       padding: 0 12px;
       height: 34px;
-      background: var(--bg-card, #0A0A0F);
-      border: 3px solid var(--border-subtle, #1A1A1A);
-      color: var(--text-tertiary, #808080);
-      font-family: var(--font-family, 'Courier New', monospace);
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      color: var(--text-tertiary, #909498);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       cursor: pointer;
-      border-radius: 0;
-      transition: border-color 50ms, color 50ms;
+      border-radius: var(--radius-full, 9999px);
+      transition: border-color 120ms ease, color 120ms ease;
       white-space: nowrap;
     }
 
     button:hover {
-      border-color: var(--action-primary, #00FF41);
+      border-color: var(--action-primary, #fcba28);
       color: var(--text-secondary, #fff);
     }
 
     :host([selected]) button {
-      background: var(--action-primary, #00FF41);
-      border-color: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
+      border-color: var(--action-primary, #fcba28);
       color: var(--action-primary-text, #000);
       filter: brightness(0.9);
     }
@@ -54,17 +54,18 @@ export class PastisFilterChip extends LitElement {
 
     .icon { font-size: 14px; }
     .count {
-      background: var(--bg-elevated, #1A1A1A);
-      color: var(--text-tertiary, #808080);
+      background: var(--bg-elevated, #383c44);
+      color: var(--text-tertiary, #909498);
       font-size: 10px;
       padding: 1px 5px;
       min-width: 18px;
       text-align: center;
+      border-radius: var(--radius-full, 9999px);
     }
 
     :host([selected]) .count {
       background: var(--action-primary-text, #000);
-      color: var(--action-primary, #00FF41);
+      color: var(--action-primary, #fcba28);
     }
 
     .remove {
@@ -76,7 +77,7 @@ export class PastisFilterChip extends LitElement {
     }
     .remove:hover { opacity: 1; }
 
-    button:focus-visible { outline: 4px solid var(--border-focus, #00FF41); outline-offset: 2px; }
+    button:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
   `;
 
   constructor() {
@@ -105,7 +106,7 @@ export class PastisFilterChip extends LitElement {
 
   render() {
     return html`
-      <button @click=${this._toggle} part="filter-chip">
+      <button @click=${this._toggle} aria-pressed="${this.selected}" part="filter-chip">
         ${this.icon ? html`<span class="icon" aria-hidden="true">${this.icon}</span>` : ''}
         ${this.label || this.value || ''}
         ${this.count != null ? html`<span class="count">${this.count}</span>` : ''}
@@ -134,7 +135,7 @@ export class PastisFilterBar extends LitElement {
       gap: 8px;
       flex-wrap: wrap;
       padding: 12px 0;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .filter-label {
@@ -142,16 +143,17 @@ export class PastisFilterBar extends LitElement {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       margin-right: 4px;
       white-space: nowrap;
     }
 
     .clear-btn {
       background: none;
-      border: 2px solid var(--action-ghost-border, #808080);
-      color: var(--text-tertiary, #808080);
-      font-family: var(--font-family, 'Courier New', monospace);
+      border: var(--border-width, 1px) solid var(--action-ghost-border, #909498);
+      border-radius: var(--radius-full, 9999px);
+      color: var(--text-tertiary, #909498);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
@@ -161,7 +163,7 @@ export class PastisFilterBar extends LitElement {
       cursor: pointer;
     }
 
-    .clear-btn:hover { border-color: var(--status-error, #FF006E); color: var(--status-error, #FF006E); }
+    .clear-btn:hover { border-color: var(--status-error, #ed203d); color: var(--status-error, #ed203d); }
   `;
 
   constructor() {

@@ -19,9 +19,9 @@ export class PastisNav extends LitElement {
       align-items: center;
       justify-content: space-between;
       gap: 0;
-      background: var(--bg-card, #0A0A0F);
-      border-bottom: 4px solid var(--border-default, #00FF41);
-      font-family: var(--font-family, 'Courier New', monospace);
+      background: var(--bg-card, #1e1e1e);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       padding: 0 24px;
       height: 64px;
       position: relative;
@@ -35,7 +35,7 @@ export class PastisNav extends LitElement {
 
     :host([variant="minimal"]) nav {
       background: transparent;
-      border-bottom-color: var(--border-subtle, #1A1A1A);
+      border-bottom-color: var(--border-subtle, #383c44);
     }
 
     /* ── Brand ── */
@@ -44,16 +44,16 @@ export class PastisNav extends LitElement {
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
       font-size: 16px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       white-space: nowrap;
       flex-shrink: 0;
     }
 
-    .brand:hover { color: var(--text-primary, #00FF41); }
+    .brand:hover { color: var(--text-primary, #f9f4da); }
 
     .brand-icon { font-size: 20px; line-height: 1; }
 
@@ -77,35 +77,35 @@ export class PastisNav extends LitElement {
       gap: 6px;
       padding: 0 16px;
       height: 100%;
-      color: var(--text-tertiary, #808080);
-      font-family: var(--font-family, 'Courier New', monospace);
+      color: var(--text-primary, #f9f4da);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       text-decoration: none;
       background: none;
       border: none;
       cursor: pointer;
       white-space: nowrap;
       position: relative;
-      transition: color 50ms;
-      border-bottom: 4px solid transparent;
-      margin-bottom: -4px; /* align bottom border with nav border */
+      transition: color 120ms ease;
+      border-bottom: var(--border-width, 1px) solid transparent;
+      margin-bottom: calc(-1 * var(--border-width, 1px));
     }
 
     .nav-link:hover {
       color: var(--text-secondary, #fff);
-      border-bottom-color: var(--action-secondary, #00FFFF);
+      border-bottom-color: var(--action-secondary, #fc7428);
     }
 
     .nav-link.active {
-      color: var(--text-primary, #00FF41);
-      border-bottom-color: var(--action-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
+      border-bottom-color: var(--action-primary, #fcba28);
     }
 
     .nav-link:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: -4px;
     }
 
@@ -115,7 +115,32 @@ export class PastisNav extends LitElement {
       line-height: 1;
     }
 
-    .nav-item.dropdown-open > .nav-link .chevron { transform: rotate(180deg); }
+    .chevron-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 0 8px 0 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+      font-size: 9px;
+      line-height: 1;
+    }
+
+    .chevron-btn:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -4px;
+    }
+
+    .nav-item.dropdown-open > .nav-link-wrap .chevron-btn .chevron { transform: rotate(180deg); }
+
+    .nav-link-wrap {
+      display: inline-flex;
+      align-items: stretch;
+      height: 100%;
+    }
 
     /* ── Dropdown ── */
     .dropdown {
@@ -123,8 +148,9 @@ export class PastisNav extends LitElement {
       top: calc(100% + 4px);
       left: 0;
       min-width: 200px;
-      background: var(--bg-card, #0A0A0F);
-      border: 4px solid var(--border-default, #00FF41);
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       z-index: 200;
       display: none;
       flex-direction: column;
@@ -137,33 +163,33 @@ export class PastisNav extends LitElement {
       align-items: center;
       gap: 8px;
       padding: 10px 14px;
-      color: var(--text-tertiary, #808080);
-      font-family: var(--font-family, 'Courier New', monospace);
+      color: var(--text-primary, #f9f4da);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       text-decoration: none;
       background: none;
       border: none;
       cursor: pointer;
-      border-bottom: 2px solid var(--border-subtle, #1A1A1A);
+      border-bottom: var(--border-width, 1px) solid var(--border-subtle, #383c44);
       width: 100%;
       text-align: left;
-      transition: background 50ms, color 50ms;
+      transition: background 120ms ease, color 120ms ease;
     }
 
     .dropdown-link:last-child { border-bottom: none; }
 
     .dropdown-link:hover {
-      background: var(--bg-elevated, #1A1A1A);
+      background: var(--bg-elevated, #383c44);
       color: var(--text-secondary, #fff);
-      box-shadow: inset 4px 0 0 var(--action-secondary, #00FFFF);
+      box-shadow: inset 4px 0 0 var(--action-secondary, #fc7428);
     }
 
     .dropdown-link.active {
-      color: var(--text-primary, #00FF41);
-      box-shadow: inset 4px 0 0 var(--action-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
+      box-shadow: inset 4px 0 0 var(--action-primary, #fcba28);
     }
 
     /* ── Actions slot ── */
@@ -184,21 +210,22 @@ export class PastisNav extends LitElement {
       height: 40px;
       padding: 8px;
       background: none;
-      border: 3px solid var(--border-default, #00FF41);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-sm, 4px);
       cursor: pointer;
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
       flex-shrink: 0;
-      transition: box-shadow 50ms;
+      transition: box-shadow 120ms ease;
     }
 
-    .hamburger:hover { box-shadow: 4px 4px 0 var(--action-secondary, #00FFFF); }
-    .hamburger:focus-visible { outline: 4px solid var(--border-focus, #00FF41); outline-offset: 2px; }
+    .hamburger:hover { box-shadow: 4px 4px 0 var(--action-secondary, #fc7428); }
+    .hamburger:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
 
     .bar {
       display: block;
       width: 100%;
       height: 3px;
-      background: var(--text-primary, #00FF41);
+      background: var(--text-primary, #f9f4da);
       transition: transform 100ms, opacity 100ms;
     }
 
@@ -213,8 +240,8 @@ export class PastisNav extends LitElement {
       top: 100%;
       left: 0;
       right: 0;
-      background: var(--bg-card, #0A0A0F);
-      border-bottom: 4px solid var(--border-default, #00FF41);
+      background: var(--bg-card, #1e1e1e);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
       border-top: none;
       flex-direction: column;
       z-index: 99;
@@ -229,39 +256,39 @@ export class PastisNav extends LitElement {
       align-items: center;
       gap: 10px;
       padding: 14px 24px;
-      color: var(--text-tertiary, #808080);
-      font-family: var(--font-family, 'Courier New', monospace);
+      color: var(--text-primary, #f9f4da);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       text-decoration: none;
       background: none;
       border: none;
       cursor: pointer;
-      border-bottom: 2px solid var(--border-subtle, #1A1A1A);
+      border-bottom: var(--border-width, 1px) solid var(--border-subtle, #383c44);
       width: 100%;
       text-align: left;
-      transition: background 50ms, color 50ms;
+      transition: background 120ms ease, color 120ms ease;
     }
 
     .mobile-link:last-child { border-bottom: none; }
-    .mobile-link:hover { background: var(--bg-elevated, #1A1A1A); color: var(--text-secondary, #fff); }
-    .mobile-link.active { color: var(--text-primary, #00FF41); border-left: 4px solid var(--action-primary, #00FF41); padding-left: 20px; }
+    .mobile-link:hover { background: var(--bg-elevated, #383c44); color: var(--text-secondary, #fff); }
+    .mobile-link.active { color: var(--text-primary, #f9f4da); border-left: 4px solid var(--action-primary, #fcba28); padding-left: 20px; }
 
     .mobile-sub-link {
       padding-left: 48px;
       font-size: 11px;
-      background: var(--bg-secondary, #0A0A0F);
+      background: var(--bg-secondary, #1e1e1e);
     }
 
-    .mobile-sub-link:hover { background: var(--bg-elevated, #1A1A1A); }
+    .mobile-sub-link:hover { background: var(--bg-elevated, #383c44); }
 
     ::slotted([slot="mobile-actions"]) {
       display: block;
       width: 100%;
       margin: 0;
-      border-top: 4px solid var(--border-subtle, #1A1A1A);
+      border-top: var(--border-width, 1px) solid var(--border-subtle, #383c44);
     }
 
     /* ── Responsive breakpoint ── */
@@ -345,18 +372,34 @@ export class PastisNav extends LitElement {
 
     return html`
       <div class="nav-item ${isOpen ? 'dropdown-open' : ''}">
-        <a
-          class="nav-link ${isActive ? 'active' : ''}"
-          href=${item.href || '#'}
-          role=${hasChildren ? 'button' : undefined}
-          aria-haspopup=${hasChildren ? 'true' : undefined}
-          aria-expanded=${hasChildren ? String(isOpen) : undefined}
-          @click=${(e) => this._handleNavClick(item, e)}
-        >
-          ${item.icon ? html`<span aria-hidden="true">${item.icon}</span>` : ''}
-          ${item.label}
-          ${hasChildren ? html`<span class="chevron" aria-hidden="true">▼</span>` : ''}
-        </a>
+        ${hasChildren ? html`
+          <div class="nav-link-wrap">
+            <a
+              class="nav-link ${isActive ? 'active' : ''}"
+              href=${item.href || '#'}
+              @click=${(e) => this._handleNavClick(item, e)}
+            >
+              ${item.icon ? html`<span aria-hidden="true">${item.icon}</span>` : ''}
+              ${item.label}
+            </a>
+            <button
+              class="chevron-btn"
+              aria-haspopup="true"
+              aria-expanded=${String(isOpen)}
+              aria-label="Toggle ${item.label} submenu"
+              @click=${(e) => { e.preventDefault(); this._toggleDropdown(item.id); }}
+            ><span class="chevron" aria-hidden="true">▼</span></button>
+          </div>
+        ` : html`
+          <a
+            class="nav-link ${isActive ? 'active' : ''}"
+            href=${item.href || '#'}
+            @click=${(e) => this._handleNavClick(item, e)}
+          >
+            ${item.icon ? html`<span aria-hidden="true">${item.icon}</span>` : ''}
+            ${item.label}
+          </a>
+        `}
         ${hasChildren ? html`
           <div class="dropdown" role="menu">
             ${item.children.map(child => this._renderDropdownLink(child))}

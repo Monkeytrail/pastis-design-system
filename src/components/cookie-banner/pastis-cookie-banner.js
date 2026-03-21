@@ -23,11 +23,11 @@ export class PastisCookieBanner extends LitElement {
       position: fixed;
       z-index: 9999;
       max-width: 480px;
-      background: var(--bg-card, #0A0A0F);
-      border: 4px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-lg, 8px);
       padding: 24px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     :host([position="bottom-left"]) .banner,
@@ -45,17 +45,17 @@ export class PastisCookieBanner extends LitElement {
     .cookie-icon { font-size: 24px; margin-bottom: 12px; display: block; }
 
     .banner-title {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 14px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
       margin: 0 0 8px;
     }
 
     .banner-message {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       color: var(--text-secondary, #fff);
       line-height: 1.6;
@@ -63,9 +63,9 @@ export class PastisCookieBanner extends LitElement {
     }
 
     .privacy-link {
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
       text-decoration: underline;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .categories {
@@ -74,9 +74,9 @@ export class PastisCookieBanner extends LitElement {
       gap: 10px;
       margin-bottom: 16px;
       padding: 12px;
-      background: var(--bg-primary, #000);
-      border: 3px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
+      background: var(--bg-primary, #0d0d0d);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
     }
 
     .category {
@@ -89,32 +89,32 @@ export class PastisCookieBanner extends LitElement {
     .category-info {}
 
     .category-name {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       color: var(--text-secondary, #fff);
       margin: 0;
     }
 
     .category-desc {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 10px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       margin: 2px 0 0;
     }
 
     .required-badge {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      background: var(--bg-elevated, #1A1A1A);
-      color: var(--text-tertiary, #808080);
-      border: 2px solid var(--text-tertiary, #808080);
-      border-radius: 0;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      background: var(--bg-elevated, #383c44);
+      color: var(--text-tertiary, #909498);
+      border: var(--border-width, 1px) solid var(--text-tertiary, #909498);
+      border-radius: var(--radius-full, 9999px);
       padding: 2px 6px;
       white-space: nowrap;
     }
@@ -133,53 +133,53 @@ export class PastisCookieBanner extends LitElement {
     .btn {
       flex: 1;
       padding: 10px 16px;
-      border-radius: 0;
-      font-family: var(--font-family, 'Courier New', monospace);
+      border-radius: var(--radius-md, 6px);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       cursor: pointer;
-      border: 4px solid currentColor;
-      transition: box-shadow 50ms, transform 50ms;
+      border: var(--border-width, 1px) solid currentColor;
+      transition: box-shadow 120ms ease, transform 120ms ease;
       text-align: center;
     }
 
-    .btn-primary:hover  { box-shadow: 4px 4px 0 var(--action-secondary, #00FFFF); }
-    .btn-primary:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--action-secondary, #00FFFF); }
-    .btn-secondary:hover  { box-shadow: 4px 4px 0 var(--action-primary, #00FF41); }
-    .btn-secondary:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--action-primary, #00FF41); }
+    .btn-primary:hover  { box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428); }
+    .btn-primary:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--action-secondary, #fc7428); }
+    .btn-secondary:hover  { box-shadow: 4px 4px 0 var(--action-primary, #fcba28); }
+    .btn-secondary:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--action-primary, #fcba28); }
 
     .btn-primary {
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
       color: #000;
-      border-color: var(--action-primary, #00FF41);
+      border-color: var(--action-primary, #fcba28);
     }
 
     .btn-secondary {
-      background: var(--bg-primary, #000);
+      background: var(--bg-primary, #0d0d0d);
       color: var(--text-secondary, #fff);
       border-color: var(--text-secondary, #fff);
     }
 
     .btn-ghost {
       background: none;
-      color: var(--text-tertiary, #808080);
-      border-color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
+      border-color: var(--text-tertiary, #909498);
       font-weight: 700;
       font-size: 11px;
       padding: 6px;
     }
 
-    .btn-ghost:hover { color: var(--text-secondary, #fff); border-color: var(--text-secondary, #fff); box-shadow: 4px 4px 0 var(--action-primary, #00FF41); }
+    .btn-ghost:hover { color: var(--text-secondary, #fff); border-color: var(--text-secondary, #fff); box-shadow: 4px 4px 0 var(--action-primary, #fcba28); }
 
     .details-toggle {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
       background: none;
       border: none;
       cursor: pointer;

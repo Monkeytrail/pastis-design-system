@@ -20,9 +20,10 @@ export class PastisEmptyState extends LitElement {
       justify-content: center;
       text-align: center;
       padding: 48px 32px;
-      font-family: var(--font-family, 'Courier New', monospace);
-      border: 4px solid var(--border-subtle, #1A1A1A);
-      background: var(--bg-card, #0A0A0F);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
+      background: var(--bg-card, #1e1e1e);
       gap: 16px;
     }
 
@@ -36,14 +37,14 @@ export class PastisEmptyState extends LitElement {
       font-size: 16px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
       margin: 0;
     }
 
     .body {
       font-size: 13px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       max-width: 320px;
       line-height: 1.6;
       margin: 0;
@@ -58,46 +59,48 @@ export class PastisEmptyState extends LitElement {
     }
 
     .cta-primary {
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
       color: var(--action-primary-text, #000);
-      border: 4px solid var(--action-primary, #00FF41);
+      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
+      border-radius: var(--radius-md, 6px);
       padding: 0 20px;
       height: 44px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       cursor: pointer;
-      transition: box-shadow 50ms;
+      transition: box-shadow 120ms ease;
     }
-    /* primary CTA is green → hover shadow is cyan */
-  .cta-primary:hover { box-shadow: 4px 4px 0 var(--action-secondary, #00FFFF); filter: brightness(0.9); }
+    /* primary CTA hover shadow */
+    .cta-primary:hover { box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428); filter: brightness(0.9); }
 
     .cta-secondary {
       background: transparent;
-      color: var(--text-tertiary, #808080);
-      border: 4px solid var(--action-ghost-border, #808080);
+      color: var(--text-tertiary, #909498);
+      border: var(--border-width, 1px) solid var(--action-ghost-border, #909498);
+      border-radius: var(--radius-md, 6px);
       padding: 0 20px;
       height: 44px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       cursor: pointer;
-      transition: box-shadow 50ms;
+      transition: box-shadow 120ms ease;
     }
-    /* secondary CTA is gray → hover shadow is green */
-  .cta-secondary:hover { box-shadow: 4px 4px 0 var(--action-primary, #00FF41); }
+    /* secondary CTA hover shadow */
+    .cta-secondary:hover { box-shadow: 4px 4px 0 var(--action-primary, #fcba28); }
 
-    :host([variant="error"]) .heading { color: var(--status-error, #FF006E); }
-    :host([variant="error"]) .empty-state { border-color: var(--status-error, #FF006E); }
+    :host([variant="error"]) .heading { color: var(--status-error, #ed203d); }
+    :host([variant="error"]) .empty-state { border-color: var(--status-error, #ed203d); }
 
     .pixel-deco {
       width: 80px;
-      height: 4px;
-      background: var(--border-default, #00FF41);
+      height: var(--border-width, 1px);
+      background: var(--border-default, #fcba28);
       opacity: 0.3;
     }
   `;
@@ -121,8 +124,8 @@ export class PastisEmptyState extends LitElement {
         ${this.body ? html`<p class="body">${this.body}</p>` : ''}
         ${(this.cta || this.ctaSecondary) ? html`
           <div class="actions">
-            ${this.cta ? html`<button class="cta-primary" @click=${() => this.dispatchEvent(new CustomEvent('pastis-cta', { bubbles: true, composed: true }))}>${this.cta}</button>` : ''}
-            ${this.ctaSecondary ? html`<button class="cta-secondary" @click=${() => this.dispatchEvent(new CustomEvent('pastis-cta-secondary', { bubbles: true, composed: true }))}>${this.ctaSecondary}</button>` : ''}
+            ${this.cta ? html`<button class="cta-primary" aria-label="${this.cta || 'Action'}" @click=${() => this.dispatchEvent(new CustomEvent('pastis-cta', { bubbles: true, composed: true }))}>${this.cta}</button>` : ''}
+            ${this.ctaSecondary ? html`<button class="cta-secondary" aria-label="${this.ctaSecondary || 'Action'}" @click=${() => this.dispatchEvent(new CustomEvent('pastis-cta-secondary', { bubbles: true, composed: true }))}>${this.ctaSecondary}</button>` : ''}
           </div>
         ` : ''}
         <slot></slot>

@@ -14,9 +14,10 @@ export class PastisCodeBlock extends LitElement {
     :host { display: block; }
 
     .code-block {
-      background: var(--bg-card, #0A0A0F);
-      border: 4px solid var(--border-default, #00FF41);
-      font-family: var(--font-family, 'Courier New', monospace);
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       overflow: hidden;
     }
 
@@ -25,8 +26,8 @@ export class PastisCodeBlock extends LitElement {
       align-items: center;
       justify-content: space-between;
       padding: 8px 14px;
-      border-bottom: 4px solid var(--border-default, #00FF41);
-      background: var(--bg-elevated, #1A1A1A);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      background: var(--bg-elevated, #383c44);
       gap: 12px;
     }
 
@@ -48,35 +49,37 @@ export class PastisCodeBlock extends LitElement {
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
-      border: 2px solid var(--border-default, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-full, 9999px);
       padding: 1px 6px;
     }
 
     .copy-btn {
       background: none;
-      border: 2px solid var(--border-default, #00FF41);
-      color: var(--text-primary, #00FF41);
-      font-family: var(--font-family, 'Courier New', monospace);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-sm, 4px);
+      color: var(--text-primary, #f9f4da);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       padding: 4px 10px;
       cursor: pointer;
-      transition: background 50ms;
+      transition: background 120ms ease;
     }
 
-    .copy-btn:hover { background: var(--action-primary, #00FF41); color: var(--action-primary-text, #000); }
-    .copy-btn.copied { border-color: var(--status-success, #00FF41); color: var(--status-success, #00FF41); }
+    .copy-btn:hover { background: var(--action-primary, #fcba28); color: var(--action-primary-text, #000); }
+    .copy-btn.copied { border-color: var(--status-success, #fcba28); color: var(--status-success, #fcba28); }
 
     .code-scroll { overflow-x: auto; }
 
     pre {
       margin: 0;
       padding: 16px;
-      color: var(--text-code, #00FFFF);
+      color: var(--text-code, #fc7428);
       font-size: 13px;
       line-height: 1.6;
       display: flex;
@@ -89,10 +92,10 @@ export class PastisCodeBlock extends LitElement {
       min-width: 36px;
       text-align: right;
       padding-right: 16px;
-      border-right: 2px solid var(--border-subtle, #1A1A1A);
+      border-right: var(--border-width, 1px) solid var(--border-subtle, #383c44);
       margin-right: 16px;
       user-select: none;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 12px;
       line-height: 1.6;
     }
@@ -132,9 +135,16 @@ export class PastisCodeBlock extends LitElement {
               ${this.language && this.language !== 'text' ? html`<span class="lang-badge">${this.language}</span>` : ''}
             </div>
             ${this.copyable ? html`
-              <button class="copy-btn ${this._copied ? 'copied' : ''}" @click=${this._copy}>
+              <button
+                class="copy-btn ${this._copied ? 'copied' : ''}"
+                @click=${this._copy}
+                aria-label="${this._copied ? 'Copied to clipboard' : 'Copy code'}"
+              >
                 ${this._copied ? '✓ Copied' : '⎘ Copy'}
               </button>
+              <span aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+                ${this._copied ? 'Copied to clipboard' : ''}
+              </span>
             ` : ''}
           </div>
         ` : ''}

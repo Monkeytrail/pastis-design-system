@@ -17,15 +17,15 @@ export class PastisTag extends LitElement {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      border-radius: 0;
-      border: 3px solid currentColor;
-      font-family: var(--font-family, 'Courier New', monospace);
+      border-radius: var(--radius-full, 9999px);
+      border: var(--border-width, 1px) solid currentColor;
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       cursor: default;
       user-select: none;
-      transition: box-shadow 50ms;
+      transition: box-shadow 120ms ease;
     }
 
     /* Sizes */
@@ -36,45 +36,45 @@ export class PastisTag extends LitElement {
     /* Default variant */
     :host(:not([variant])) .tag,
     :host([variant="default"]) .tag {
-      background: var(--bg-primary, #000);
-      color: var(--text-primary, #00FF41);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--text-primary, #f9f4da);
     }
 
     :host([variant="primary"]) .tag {
-      background: var(--bg-primary, #000);
-      color: var(--text-primary, #00FF41);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--text-primary, #f9f4da);
     }
 
     :host([variant="success"]) .tag {
-      background: var(--bg-primary, #000);
-      color: var(--status-success, #00FF41);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--status-success, #fcba28);
     }
 
     :host([variant="warning"]) .tag {
-      background: var(--bg-primary, #000);
-      color: var(--status-warning, #FFE600);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--status-warning, #fcba28);
     }
 
     :host([variant="error"]) .tag {
-      background: var(--bg-primary, #000);
-      color: var(--status-error, #FF006E);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--status-error, #ed203d);
     }
 
     :host([variant="info"]) .tag {
-      background: var(--bg-primary, #000);
-      color: var(--status-info, #00FFFF);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--status-info, #fc7428);
     }
 
     :host([variant="solid"]) .tag {
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
       color: #000;
-      border-color: var(--action-primary, #00FF41);
+      border-color: var(--action-primary, #fcba28);
     }
 
     :host([variant="outline"]) .tag {
       background: transparent;
-      color: var(--text-tertiary, #808080);
-      border-color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
+      border-color: var(--text-tertiary, #909498);
     }
 
     :host([disabled]) .tag { opacity: 0.3; pointer-events: none; }
@@ -87,19 +87,15 @@ export class PastisTag extends LitElement {
       border: none;
       cursor: pointer;
       color: inherit;
-      opacity: 0.7;
       padding: 0;
       font-size: 12px;
       line-height: 1;
-      transition: opacity 50ms;
       margin-left: 1px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
-    .remove-btn:hover { opacity: 1; }
-
     .remove-btn:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
 

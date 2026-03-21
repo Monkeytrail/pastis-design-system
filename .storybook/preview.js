@@ -22,7 +22,7 @@ export const globalTypes = {
   },
 };
 
-const bgMap = { dark: '#000000', light: '#F2F2EF' };
+const bgMap = { dark: '#0d0d0d', light: '#f7f7f7' };
 
 const withTheme = (Story, context) => {
   const theme = context.globals.theme || 'dark';

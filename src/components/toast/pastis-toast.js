@@ -39,12 +39,12 @@ export class PastisToast extends LitElement {
       align-items: flex-start;
       gap: 10px;
       padding: 14px 16px;
-      border-radius: 0;
-      border: 4px solid currentColor;
+      border-radius: var(--radius-md, 6px);
+      border: var(--border-width, 1px) solid currentColor;
       max-width: 360px;
       min-width: 280px;
-      font-family: var(--font-family, 'Courier New', monospace);
-      background: var(--bg-primary, #000);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      background: var(--bg-primary, #0d0d0d);
       position: relative;
       overflow: hidden;
     }
@@ -53,13 +53,13 @@ export class PastisToast extends LitElement {
       opacity: 0;
     }
 
-    :host([variant="success"]) .toast { color: var(--status-success, #00FF41); }
-    :host([variant="error"]) .toast { color: var(--status-error, #FF006E); }
-    :host([variant="warning"]) .toast { color: var(--status-warning, #FFE600); }
+    :host([variant="success"]) .toast { color: var(--status-success, #fcba28); }
+    :host([variant="error"]) .toast { color: var(--status-error, #ed203d); }
+    :host([variant="warning"]) .toast { color: var(--status-warning, #fcba28); }
     :host([variant="info"]) .toast,
-    :host(:not([variant])) .toast { color: var(--status-info, #00FFFF); }
+    :host(:not([variant])) .toast { color: var(--status-info, #fc7428); }
     :host([variant="default"]) .toast {
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
     }
 
     .toast-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
@@ -67,17 +67,17 @@ export class PastisToast extends LitElement {
     .toast-content { flex: 1; min-width: 0; }
 
     .toast-title {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       margin: 0 0 4px;
       color: inherit;
     }
 
     .toast-message {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       color: var(--text-secondary, #fff);
       margin: 0;
@@ -89,22 +89,18 @@ export class PastisToast extends LitElement {
       border: none;
       cursor: pointer;
       color: inherit;
-      opacity: 0.7;
       font-size: 14px;
       padding: 0;
       flex-shrink: 0;
-      transition: opacity 50ms;
       line-height: 1;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
-
-    .dismiss-btn:hover { opacity: 1; }
 
     .progress-bar {
       position: absolute;
       bottom: 0;
       left: 0;
-      height: 4px;
+      height: var(--border-width, 1px);
       background: currentColor;
       opacity: 0.6;
       border-radius: 0;
@@ -159,7 +155,7 @@ export class PastisToast extends LitElement {
 
     return html`
       <div class="toast-container" part="container">
-        <div class="toast" role="alert" aria-live="polite" part="toast">
+        <div class="toast" role="alert" aria-live="${this.variant === 'error' ? 'assertive' : 'polite'}" part="toast">
           <span class="toast-icon" aria-hidden="true">${this._getIcon()}</span>
           <div class="toast-content">
             ${this.title ? html`<p class="toast-title">${this.title}</p>` : ''}

@@ -18,12 +18,13 @@ export class PastisTable extends LitElement {
     table {
       width: 100%;
       border-collapse: collapse;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
-      border: 4px solid var(--border-default, #00FF41);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
     }
 
-    thead { background: var(--bg-elevated, #1A1A1A); }
+    thead { background: var(--bg-elevated, #383c44); }
 
     th {
       text-align: left;
@@ -32,54 +33,81 @@ export class PastisTable extends LitElement {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: var(--text-primary, #00FF41);
-      border-bottom: 4px solid var(--border-default, #00FF41);
+      color: var(--text-primary, #f9f4da);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
       white-space: nowrap;
     }
 
     td {
       padding: 10px 14px;
       color: var(--text-secondary, #fff);
-      border-bottom: 2px solid var(--border-subtle, #1A1A1A);
+      border-bottom: var(--border-width, 1px) solid var(--border-subtle, #383c44);
       vertical-align: middle;
     }
 
     tr:last-child td { border-bottom: none; }
 
-    :host([striped]) tr:nth-child(even) td { background: var(--bg-secondary, #0A0A0F); }
+    :host([striped]) tr:nth-child(even) td { background: var(--bg-secondary, #1e1e1e); }
 
-    :host([hoverable]) tbody tr:hover td { background: var(--bg-elevated, #1A1A1A); cursor: pointer; }
+    :host([hoverable]) tbody tr:hover td { background: var(--bg-elevated, #383c44); cursor: pointer; }
 
-    .row-selected td { background: color-mix(in srgb, var(--action-primary, #00FF41) 12%, transparent); }
+    .row-selected td { background: color-mix(in srgb, var(--action-primary, #fcba28) 12%, transparent); }
 
     .checkbox-cell {
       width: 44px;
       padding: 10px;
     }
 
+    .checkbox-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+    }
+
+    .checkbox-real {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      margin: 0;
+    }
+
     .checkbox-visual {
       width: 16px;
       height: 16px;
-      border: 3px solid var(--border-default, #00FF41);
-      background: var(--bg-primary, #000);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-sm, 4px);
+      background: var(--bg-primary, #0d0d0d);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--action-primary, #00FF41);
+      color: var(--action-primary, #fcba28);
       font-size: 11px;
       font-weight: 700;
+      pointer-events: none;
+    }
+
+    .checkbox-real:focus-visible + .checkbox-visual {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
     }
 
     .empty-row td {
       text-align: center;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       padding: 32px;
     }
 
     .skeleton-cell {
       height: 12px;
-      background: var(--bg-elevated, #1A1A1A);
+      background: var(--bg-elevated, #383c44);
+      border-radius: var(--radius-sm, 4px);
       animation: pulse 1s steps(2) infinite;
     }
 
@@ -125,7 +153,16 @@ export class PastisTable extends LitElement {
           <tr>
             ${this.selectable ? html`
               <th class="checkbox-cell">
-                <span class="checkbox-visual" @click=${this._toggleAll}>${allSelected ? '✓' : ''}</span>
+                <label class="checkbox-wrapper">
+                  <input
+                    class="checkbox-real"
+                    type="checkbox"
+                    .checked=${allSelected}
+                    aria-label="Select all rows"
+                    @change=${this._toggleAll}
+                  />
+                  <span class="checkbox-visual" aria-hidden="true">${allSelected ? '✓' : ''}</span>
+                </label>
               </th>
             ` : ''}
             ${this.columns.map(col => html`<th>${col.label || col.key}</th>`)}
@@ -145,7 +182,16 @@ export class PastisTable extends LitElement {
             <tr class=${this._isSelected(row.id) ? 'row-selected' : ''}>
               ${this.selectable ? html`
                 <td class="checkbox-cell">
-                  <span class="checkbox-visual" @click=${() => this._toggleRow(row.id)}>${this._isSelected(row.id) ? '✓' : ''}</span>
+                  <label class="checkbox-wrapper">
+                    <input
+                      class="checkbox-real"
+                      type="checkbox"
+                      .checked=${this._isSelected(row.id)}
+                      aria-label="Select row"
+                      @change=${() => this._toggleRow(row.id)}
+                    />
+                    <span class="checkbox-visual" aria-hidden="true">${this._isSelected(row.id) ? '✓' : ''}</span>
+                  </label>
                 </td>
               ` : ''}
               ${this.columns.map(col => html`<td>${row[col.key] ?? '—'}</td>`)}

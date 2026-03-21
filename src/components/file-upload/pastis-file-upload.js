@@ -21,27 +21,27 @@ export class PastisFileUpload extends LitElement {
     .field { display: flex; flex-direction: column; gap: 6px; }
 
     .field-label {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
     }
 
     .dropzone {
-      border: 4px dashed var(--border-default, #00FF41);
-      border-radius: 0;
+      border: var(--border-width, 1px) dashed var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       padding: 40px 20px;
       text-align: center;
       cursor: pointer;
-      transition: background 50ms, box-shadow 50ms;
-      background: var(--bg-card, #0A0A0F);
+      transition: background 120ms ease, box-shadow 120ms ease;
+      background: var(--bg-card, #1e1e1e);
     }
 
     .dropzone:hover, :host([dragover]) .dropzone {
-      background: rgba(0, 255, 65, 0.05);
-      box-shadow: 6px 6px 0 var(--action-secondary, #00FFFF);
+      background: rgba(252, 186, 40, 0.05);
+      box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428);
     }
 
     :host([disabled]) .dropzone {
@@ -51,7 +51,7 @@ export class PastisFileUpload extends LitElement {
     }
 
     .has-error .dropzone {
-      border-color: var(--status-error, #FF006E);
+      border-color: var(--status-error, #ed203d);
     }
 
     .upload-icon {
@@ -61,7 +61,7 @@ export class PastisFileUpload extends LitElement {
     }
 
     .upload-text {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       color: var(--text-secondary, #fff);
@@ -69,18 +69,18 @@ export class PastisFileUpload extends LitElement {
     }
 
     .upload-sub {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       margin: 0;
     }
 
     .browse-link {
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
       font-weight: 700;
       cursor: pointer;
       text-decoration: underline;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     input[type="file"] { display: none; }
@@ -97,10 +97,10 @@ export class PastisFileUpload extends LitElement {
       align-items: center;
       gap: 10px;
       padding: 10px 12px;
-      background: var(--bg-primary, #000);
-      border: 3px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
-      font-family: var(--font-family, 'Courier New', monospace);
+      background: var(--bg-primary, #0d0d0d);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .file-icon { font-size: 18px; flex-shrink: 0; }
@@ -110,7 +110,7 @@ export class PastisFileUpload extends LitElement {
     .file-name {
       font-size: 12px;
       font-weight: 700;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       color: var(--text-secondary, #fff);
       overflow: hidden;
       text-overflow: ellipsis;
@@ -119,54 +119,54 @@ export class PastisFileUpload extends LitElement {
 
     .file-size {
       font-size: 10px;
-      font-family: var(--font-family, 'Courier New', monospace);
-      color: var(--text-tertiary, #808080);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      color: var(--text-tertiary, #909498);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
 
     .remove-file {
       background: none;
-      border: 2px solid var(--text-tertiary, #808080);
-      border-radius: 0;
+      border: var(--border-width, 1px) solid var(--text-tertiary, #909498);
+      border-radius: var(--radius-sm, 4px);
       cursor: pointer;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 12px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       padding: 4px 6px;
-      transition: color 50ms, border-color 50ms;
+      transition: color 120ms ease, border-color 120ms ease;
     }
 
-    .remove-file:hover { color: var(--status-error, #FF006E); border-color: var(--status-error, #FF006E); }
+    .remove-file:hover { color: var(--status-error, #ed203d); border-color: var(--status-error, #ed203d); }
 
     .error-text {
       font-size: 11px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--status-error, #FF006E);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--status-error, #ed203d);
     }
 
     .helper-text {
       font-size: 11px;
-      font-family: var(--font-family, 'Courier New', monospace);
-      color: var(--text-tertiary, #808080);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      color: var(--text-tertiary, #909498);
     }
 
     .progress-bar {
       height: 8px;
-      background: var(--bg-elevated, #1A1A1A);
-      border: 2px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-sm, 4px);
       overflow: hidden;
       margin-top: 4px;
     }
 
     .progress-fill {
       height: 100%;
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
       border-radius: 0;
       transition: width 100ms steps(10);
     }
@@ -272,7 +272,7 @@ export class PastisFileUpload extends LitElement {
           aria-label="Upload files"
           part="dropzone"
         >
-          <span class="upload-icon">📁</span>
+          <span class="upload-icon" aria-hidden="true">📁</span>
           <p class="upload-text">
             <span class="browse-link">Choose files</span> or drag & drop
           </p>
@@ -308,7 +308,7 @@ export class PastisFileUpload extends LitElement {
           </div>
         ` : ''}
 
-        ${this.error ? html`<p class="error-text">⚠ ${this.error}</p>` : ''}
+        ${this.error ? html`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>` : ''}
         ${this.helper && !this.error ? html`<p class="helper-text">${this.helper}</p>` : ''}
       </div>
     `;

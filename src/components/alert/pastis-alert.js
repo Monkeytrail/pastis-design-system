@@ -17,28 +17,28 @@ export class PastisAlert extends LitElement {
       display: flex;
       gap: 12px;
       padding: 14px 16px;
-      border-radius: 0;
-      border: 4px solid currentColor;
-      border-left: 8px solid currentColor;
-      font-family: var(--font-family, 'Courier New', monospace);
-      background: var(--bg-primary, #000);
+      border-radius: var(--radius-md, 6px);
+      border: var(--border-width, 1px) solid currentColor;
+      border-left: 4px solid currentColor;
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      background: var(--bg-primary, #0d0d0d);
     }
 
     :host([variant="success"]) .alert {
-      color: var(--status-success, #00FF41);
+      color: var(--status-success, #fcba28);
     }
 
     :host([variant="warning"]) .alert {
-      color: var(--status-warning, #FFE600);
+      color: var(--status-warning, #fcba28);
     }
 
     :host([variant="error"]) .alert {
-      color: var(--status-error, #FF006E);
+      color: var(--status-error, #ed203d);
     }
 
     :host([variant="info"]) .alert,
     :host(:not([variant])) .alert {
-      color: var(--status-info, #00FFFF);
+      color: var(--status-info, #fc7428);
     }
 
     .alert-icon {
@@ -53,17 +53,17 @@ export class PastisAlert extends LitElement {
     }
 
     .alert-title {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       margin: 0 0 4px;
       color: inherit;
     }
 
     .alert-body {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       color: var(--text-secondary, #fff);
       margin: 0;
@@ -74,18 +74,14 @@ export class PastisAlert extends LitElement {
       border: none;
       cursor: pointer;
       color: inherit;
-      opacity: 0.7;
       font-size: 16px;
       padding: 0;
       line-height: 1;
       flex-shrink: 0;
       align-self: flex-start;
-      transition: opacity 50ms;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
-
-    .dismiss-btn:hover { opacity: 1; }
-    .dismiss-btn:focus-visible { outline: 4px solid var(--border-focus, #00FF41); outline-offset: 2px; }
+    .dismiss-btn:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
   `;
 
   constructor() {

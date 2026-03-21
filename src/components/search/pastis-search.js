@@ -20,12 +20,12 @@ export class PastisSearch extends LitElement {
     .field { display: flex; flex-direction: column; gap: 6px; }
 
     label {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
     }
 
     .wrap { position: relative; }
@@ -34,15 +34,15 @@ export class PastisSearch extends LitElement {
       width: 100%;
       padding: 10px 40px 10px 38px;
       height: auto;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 14px;
       font-weight: 700;
       color: var(--text-secondary, #fff);
-      background: var(--bg-primary, #000);
-      border: 4px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
+      background: var(--bg-primary, #0d0d0d);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
       outline: none;
-      transition: border-color 50ms;
+      transition: border-color 120ms ease;
       box-sizing: border-box;
     }
 
@@ -50,11 +50,11 @@ export class PastisSearch extends LitElement {
     :host([size="lg"]) .search-input { font-size: 16px; padding: 13px 48px 13px 44px; }
 
     .search-input:focus {
-      border-color: var(--border-focus, #00FF41);
-      box-shadow: 4px 4px 0 var(--border-focus, #00FF41);
+      border-color: var(--border-focus, #fcba28);
+      box-shadow: 4px 4px 0 var(--border-focus, #fcba28);
     }
 
-    .search-input::placeholder { color: var(--text-tertiary, #808080); }
+    .search-input::placeholder { color: var(--text-tertiary, #909498); }
 
     :host([disabled]) .search-input { opacity: 0.3; cursor: not-allowed; }
 
@@ -64,7 +64,7 @@ export class PastisSearch extends LitElement {
       transform: translateY(-50%);
       display: flex;
       align-items: center;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       pointer-events: none;
     }
 
@@ -77,24 +77,24 @@ export class PastisSearch extends LitElement {
       right: 10px;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--bg-elevated, #1A1A1A);
-      border: 2px solid var(--text-tertiary, #808080);
-      border-radius: 0;
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--text-tertiary, #909498);
+      border-radius: var(--radius-sm, 4px);
       width: 22px;
       height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 11px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
-      transition: color 50ms, border-color 50ms;
+      transition: color 120ms ease, border-color 120ms ease;
       pointer-events: all;
     }
 
-    .clear-btn:hover { color: var(--text-primary, #00FF41); border-color: var(--text-primary, #00FF41); }
+    .clear-btn:hover { color: var(--text-primary, #f9f4da); border-color: var(--text-primary, #f9f4da); }
 
     .spinner-icon {
       position: absolute;
@@ -103,9 +103,9 @@ export class PastisSearch extends LitElement {
       transform: translateY(-50%);
       width: 16px;
       height: 16px;
-      border: 3px solid var(--border-subtle, #1A1A1A);
-      border-top-color: var(--text-primary, #00FF41);
-      border-radius: 0;
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-top-color: var(--text-primary, #f9f4da);
+      border-radius: var(--radius-sm, 4px);
       animation: pixel-spin 0.5s steps(8) infinite;
     }
 
@@ -116,9 +116,9 @@ export class PastisSearch extends LitElement {
       top: calc(100% + 4px);
       left: 0;
       right: 0;
-      background: var(--bg-card, #0A0A0F);
-      border: 4px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       z-index: 1000;
       max-height: 300px;
       overflow-y: auto;
@@ -130,45 +130,45 @@ export class PastisSearch extends LitElement {
       align-items: center;
       gap: 10px;
       padding: 9px 12px;
-      border-radius: 0;
+      border-radius: var(--radius-md, 6px);
       cursor: pointer;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       color: var(--text-secondary, #fff);
-      transition: background 50ms;
+      transition: background 120ms ease;
     }
 
     .suggestion:hover, .suggestion.focused {
-      background: rgba(0, 255, 65, 0.1);
-      color: var(--text-primary, #00FF41);
+      background: rgba(252, 186, 40, 0.1);
+      color: var(--text-primary, #f9f4da);
     }
 
-    .suggestion-icon { color: var(--text-tertiary, #808080); font-size: 13px; }
+    .suggestion-icon { color: var(--text-tertiary, #909498); font-size: 13px; }
 
     .suggestion-label { flex: 1; }
 
     .suggestion-sub {
       font-size: 11px;
-      color: var(--text-tertiary, #808080);
-      font-family: var(--font-family, 'Courier New', monospace);
+      color: var(--text-tertiary, #909498);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .no-results {
       padding: 16px;
       text-align: center;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 11px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
 
     mark {
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
       color: #000;
-      border-radius: 0;
+      border-radius: var(--radius-xs, 2px);
       padding: 0 2px;
       font-weight: 700;
     }
@@ -251,10 +251,13 @@ export class PastisSearch extends LitElement {
   }
 
   _highlight(text) {
-    if (!this.value) return text;
+    if (!this.value) return html`${text}`;
     const idx = text.toLowerCase().indexOf(this.value.toLowerCase());
-    if (idx === -1) return text;
-    return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + this.value.length) + '</mark>' + text.slice(idx + this.value.length);
+    if (idx === -1) return html`${text}`;
+    const before = text.slice(0, idx);
+    const match = text.slice(idx, idx + this.value.length);
+    const after = text.slice(idx + this.value.length);
+    return html`${before}<mark>${match}</mark>${after}`;
   }
 
   render() {
@@ -289,10 +292,11 @@ export class PastisSearch extends LitElement {
                 <div
                   class="suggestion ${i === this._focusedIndex ? 'focused' : ''}"
                   role="option"
+                  aria-selected="${i === this._focusedIndex}"
                   @click="${() => this._select(item)}"
                 >
                   ${item.icon ? html`<span class="suggestion-icon">${item.icon}</span>` : ''}
-                  <span class="suggestion-label" .innerHTML="${this._highlight(item.label || item)}"></span>
+                  <span class="suggestion-label">${this._highlight(item.label || item)}</span>
                   ${item.sub ? html`<span class="suggestion-sub">${item.sub}</span>` : ''}
                 </div>
               `) : html`

@@ -23,19 +23,19 @@ export class PastisInput extends LitElement {
     .field { display: flex; flex-direction: column; gap: 6px; }
 
     label {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
     .required-dot {
-      color: var(--status-error, #FF006E);
+      color: var(--status-error, #ed203d);
       font-size: 16px;
       line-height: 1;
     }
@@ -48,31 +48,31 @@ export class PastisInput extends LitElement {
 
     input {
       width: 100%;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 14px;
       font-weight: 700;
       color: var(--text-secondary, #fff);
-      background: var(--bg-primary, #000);
-      border: 4px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
+      background: var(--bg-primary, #0d0d0d);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
       padding: 10px 12px;
       height: auto;
       outline: none;
-      transition: border-color 50ms;
+      transition: border-color 120ms ease;
       box-sizing: border-box;
     }
 
     :host([size="sm"]) input { font-size: 12px; padding: 8px 10px; }
     :host([size="lg"]) input { font-size: 16px; padding: 12px 16px; }
 
-    input:hover { border-color: var(--text-tertiary, #808080); }
+    input:hover { border-color: var(--text-tertiary, #909498); }
 
     input:focus {
-      border-color: var(--border-focus, #00FF41);
-      box-shadow: 4px 4px 0 var(--border-focus, #00FF41);
+      border-color: var(--border-focus, #fcba28);
+      box-shadow: 4px 4px 0 var(--border-focus, #fcba28);
     }
 
-    input::placeholder { color: var(--text-tertiary, #808080); }
+    input::placeholder { color: var(--text-tertiary, #909498); }
 
     :host([disabled]) input {
       opacity: 0.3;
@@ -85,18 +85,18 @@ export class PastisInput extends LitElement {
     }
 
     .has-error input {
-      border-color: var(--status-error, #FF006E);
+      border-color: var(--status-error, #ed203d);
     }
 
     .has-error input:focus {
-      box-shadow: 4px 4px 0 var(--status-error, #FF006E);
+      box-shadow: 4px 4px 0 var(--status-error, #ed203d);
     }
 
     .leading-icon, .trailing-icon {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       display: flex;
       align-items: center;
       pointer-events: none;
@@ -109,16 +109,16 @@ export class PastisInput extends LitElement {
     .has-trailing input { padding-right: 34px; }
 
     .helper-text {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       margin: 0;
     }
 
     .error-text {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
-      color: var(--status-error, #FF006E);
+      color: var(--status-error, #ed203d);
       margin: 0;
       display: flex;
       align-items: center;
@@ -126,8 +126,17 @@ export class PastisInput extends LitElement {
     }
 
     input:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
     }
   `;
 
@@ -139,6 +148,7 @@ export class PastisInput extends LitElement {
     this.readonly = false;
     this.required = false;
     this.size = 'md';
+    this._inputId = `pastis-input-${Math.random().toString(36).slice(2, 9)}`;
   }
 
   render() {
@@ -153,14 +163,14 @@ export class PastisInput extends LitElement {
       hasTrailing ? 'has-trailing' : '',
     ].filter(Boolean).join(' ');
 
-    const inputId = `pastis-input-${Math.random().toString(36).slice(2, 9)}`;
+    const inputId = this._inputId;
 
     return html`
       <div class="field">
         ${this.label ? html`
           <label for="${inputId}">
             ${this.label}
-            ${this.required ? html`<span class="required-dot" aria-hidden="true">*</span>` : ''}
+            ${this.required ? html`<span class="required-dot" aria-hidden="true">*</span><span class="sr-only">required</span>` : ''}
           </label>
         ` : ''}
         <div class="${wrapClasses}">

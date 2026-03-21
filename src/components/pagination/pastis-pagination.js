@@ -18,16 +18,16 @@ export class PastisPagination extends LitElement {
       align-items: center;
       gap: 4px;
       flex-wrap: wrap;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .info {
       font-size: 11px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-tertiary, #808080);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-tertiary, #909498);
       margin-left: auto;
     }
 
@@ -38,27 +38,27 @@ export class PastisPagination extends LitElement {
       min-width: 36px;
       height: 36px;
       padding: 0 6px;
-      border: 3px solid var(--border-subtle, #1A1A1A);
-      border-radius: 0;
-      background: var(--bg-primary, #000);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
+      background: var(--bg-primary, #0d0d0d);
       cursor: pointer;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      color: var(--text-tertiary, #808080);
-      transition: border-color 50ms, color 50ms, box-shadow 50ms;
+      color: var(--text-tertiary, #909498);
+      transition: border-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
       user-select: none;
     }
 
     .btn:hover:not(:disabled) {
-      border-color: var(--text-primary, #00FF41);
-      color: var(--text-primary, #00FF41);
+      border-color: var(--text-primary, #f9f4da);
+      color: var(--text-primary, #f9f4da);
     }
 
     .btn.active {
-      background: var(--action-primary, #00FF41);
-      border-color: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
+      border-color: var(--action-primary, #fcba28);
       color: #000;
       font-weight: 700;
     }
@@ -69,7 +69,7 @@ export class PastisPagination extends LitElement {
     }
 
     .btn:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
 
@@ -79,9 +79,9 @@ export class PastisPagination extends LitElement {
       justify-content: center;
       width: 36px;
       height: 36px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 12px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
     }
 
@@ -90,9 +90,9 @@ export class PastisPagination extends LitElement {
       min-width: 36px;
     }
 
-    /* Pills variant — still no border-radius */
+    /* Pills variant */
     :host([variant="pills"]) .btn {
-      border-radius: 0;
+      border-radius: var(--radius-full, 9999px);
     }
 
     /* Minimal variant */
@@ -102,14 +102,23 @@ export class PastisPagination extends LitElement {
     }
 
     :host([variant="minimal"]) .btn:hover:not(:disabled) {
-      background: rgba(0, 255, 65, 0.05);
-      border-color: var(--text-primary, #00FF41);
+      background: rgba(252, 186, 40, 0.05);
+      border-color: var(--text-primary, #f9f4da);
     }
 
     :host([variant="minimal"]) .btn.active {
-      background: rgba(0, 255, 65, 0.15);
-      color: var(--text-primary, #00FF41);
-      border-color: var(--text-primary, #00FF41);
+      background: rgba(252, 186, 40, 0.15);
+      color: var(--text-primary, #f9f4da);
+      border-color: var(--text-primary, #f9f4da);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
     }
   `;
 
@@ -162,6 +171,7 @@ export class PastisPagination extends LitElement {
 
     return html`
       <nav aria-label="Pagination">
+        <span class="sr-only" aria-live="polite" aria-atomic="true">Page ${this.page} of ${this.totalPages}</span>
         <div class="pagination">
           <button
             class="btn nav-btn"

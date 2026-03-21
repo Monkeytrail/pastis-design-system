@@ -28,35 +28,35 @@ export class PastisProgress extends LitElement {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-tertiary, #808080);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-tertiary, #909498);
     }
 
     .label {
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
     }
 
     .track {
       width: 100%;
-      background: var(--bg-elevated, #1A1A1A);
-      border: 4px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-sm, 4px);
       overflow: hidden;
     }
 
     /* Sizes */
     :host(:not([size])) .track,
     :host([size="md"]) .track { height: 24px; }
-    :host([size="xs"]) .track { height: 12px; border-width: 2px; }
-    :host([size="sm"]) .track { height: 16px; border-width: 2px; }
+    :host([size="xs"]) .track { height: 12px; border-width: var(--border-width, 1px); }
+    :host([size="sm"]) .track { height: 16px; border-width: var(--border-width, 1px); }
     :host([size="lg"]) .track { height: 32px; }
     :host([size="xl"]) .track { height: 40px; }
 
@@ -64,16 +64,16 @@ export class PastisProgress extends LitElement {
       height: 100%;
       border-radius: 0;
       transition: width 100ms steps(10);
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
     }
 
     :host([animated]) .bar {
       background: repeating-linear-gradient(
         90deg,
-        var(--action-primary, #00FF41) 0px,
-        var(--action-primary, #00FF41) 8px,
-        rgba(0,255,65,0.4) 8px,
-        rgba(0,255,65,0.4) 12px
+        var(--action-primary, #fcba28) 0px,
+        var(--action-primary, #fcba28) 8px,
+        rgba(252,186,40,0.4) 8px,
+        rgba(252,186,40,0.4) 12px
       );
       animation: pixel-march 0.5s steps(4) infinite;
     }
@@ -106,27 +106,43 @@ export class PastisProgress extends LitElement {
 
     .ring-track {
       fill: none;
-      stroke: var(--bg-elevated, #1A1A1A);
+      stroke: var(--bg-elevated, #383c44);
     }
 
     .ring-fill {
       fill: none;
-      stroke: var(--action-primary, #00FF41);
+      stroke: var(--action-primary, #fcba28);
       stroke-linecap: square;
       transition: stroke-dashoffset 100ms steps(10);
     }
 
     .ring-value {
       position: absolute;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
-      color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
     }
 
     :host([size="sm"]) .ring-value { font-size: 14px; }
     :host(:not([size])) .ring-value, :host([size="md"]) .ring-value { font-size: 18px; }
     :host([size="lg"]) .ring-value { font-size: 24px; }
     :host([size="xl"]) .ring-value { font-size: 32px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bar {
+        transition: none;
+        animation: none;
+      }
+      :host([animated]) .bar {
+        animation: none;
+      }
+      :host([indeterminate]) .bar {
+        animation: none;
+      }
+      .ring-fill {
+        transition: none;
+      }
+    }
   `;
 
   constructor() {
@@ -155,8 +171,8 @@ export class PastisProgress extends LitElement {
     const offset = circumference - (pct / 100) * circumference;
 
     return html`
-      <div class="ring-wrap" part="ring">
-        <svg class="ring-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+      <div class="ring-wrap" part="ring" role="progressbar" aria-valuenow="${this.indeterminate ? undefined : Math.round(pct)}" aria-valuemin="0" aria-valuemax="100" aria-label="${this.label || 'Progress'}">
+        <svg class="ring-svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true">
           <circle class="ring-track" cx="${size/2}" cy="${size/2}" r="${r}" stroke-width="${sw}" />
           <circle
             class="ring-fill"
@@ -188,7 +204,7 @@ export class PastisProgress extends LitElement {
             ${this.showValue && !this.indeterminate ? html`<span>${Math.round(pct)}%</span>` : ''}
           </div>
         ` : ''}
-        <div class="track" role="progressbar" aria-valuenow="${this.value}" aria-valuemin="0" aria-valuemax="${this.max}" part="track">
+        <div class="track" role="progressbar" aria-valuenow="${this.indeterminate ? undefined : this.value}" aria-valuemin="0" aria-valuemax="${this.max}" aria-label="${this.label || 'Progress'}" part="track">
           <div
             class="bar"
             style="width:${this.indeterminate ? '40%' : pct + '%'};${this.color ? `background:${this.color}` : ''}"

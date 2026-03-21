@@ -15,8 +15,8 @@ export class PastisAccordion extends LitElement {
       display: flex;
       flex-direction: column;
       gap: 0;
-      border: 4px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       overflow: hidden;
     }
 
@@ -35,20 +35,20 @@ export class PastisAccordion extends LitElement {
     }
 
     .item {
-      background: var(--bg-card, #0A0A0F);
-      border-bottom: 4px solid var(--border-default, #00FF41);
+      background: var(--bg-card, #1e1e1e);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
     }
 
     .item:last-child { border-bottom: none; }
 
     :host([variant="flush"]) .item {
       border-radius: 0;
-      border-bottom: 4px solid var(--border-default, #00FF41);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
     }
 
     :host([variant="separated"]) .item {
-      border: 4px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       overflow: hidden;
       margin-bottom: 4px;
     }
@@ -63,20 +63,20 @@ export class PastisAccordion extends LitElement {
       background: none;
       border: none;
       cursor: pointer;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
       text-align: left;
-      transition: background 50ms;
+      transition: background 120ms ease;
     }
 
-    .header:hover { background: rgba(0, 255, 65, 0.05); }
+    .header:hover { background: rgba(252, 186, 40, 0.05); }
 
     .header:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
 
@@ -86,10 +86,10 @@ export class PastisAccordion extends LitElement {
 
     .chevron {
       flex-shrink: 0;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       font-size: 12px;
-      transition: transform 50ms;
-      font-family: var(--font-family, 'Courier New', monospace);
+      transition: transform 120ms ease;
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .item.open .chevron { transform: rotate(180deg); }
@@ -102,20 +102,20 @@ export class PastisAccordion extends LitElement {
 
     .body-inner {
       padding: 0 20px 16px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       color: var(--text-secondary, #fff);
       line-height: 1.6;
     }
 
     .badge {
-      background: var(--bg-primary, #000);
-      color: var(--text-tertiary, #808080);
-      border: 2px solid var(--text-tertiary, #808080);
-      border-radius: 0;
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--text-tertiary, #909498);
+      border: var(--border-width, 1px) solid var(--text-tertiary, #909498);
+      border-radius: var(--radius-full, 9999px);
       font-size: 10px;
       font-weight: 700;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       padding: 1px 6px;
     }
   `;
@@ -165,6 +165,7 @@ export class PastisAccordion extends LitElement {
         ${this.items.map(item => html`
           <div class="item ${this._isOpen(item.id) ? 'open' : ''}" part="item">
             <button
+              id="header-${item.id}"
               class="header"
               @click="${() => this._toggle(item.id)}"
               aria-expanded="${this._isOpen(item.id)}"
@@ -178,7 +179,7 @@ export class PastisAccordion extends LitElement {
               </span>
               <span class="chevron" aria-hidden="true">▾</span>
             </button>
-            <div class="body" id="body-${item.id}" role="region" part="body">
+            <div class="body" id="body-${item.id}" role="region" aria-labelledby="header-${item.id}" part="body">
               <div class="body-inner">${item.content}</div>
             </div>
           </div>

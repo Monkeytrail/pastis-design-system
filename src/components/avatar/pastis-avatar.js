@@ -20,21 +20,23 @@ export class PastisAvatar extends LitElement {
       justify-content: center;
       overflow: hidden;
       flex-shrink: 0;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      background: var(--bg-primary, #000);
-      color: var(--text-primary, #00FF41);
-      border: 4px solid var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--text-primary, #f9f4da);
+      border: var(--border-width, 1px) solid var(--text-primary, #f9f4da);
       user-select: none;
     }
 
-    /* All shapes are square — no border-radius */
+    /* Shape variants */
     :host([shape="circle"]) .avatar,
-    :host([shape="rounded"]) .avatar,
-    :host([shape="square"]) .avatar,
-    :host(:not([shape])) .avatar { border-radius: 0; }
+    :host(:not([shape])) .avatar { border-radius: 50%; }
+
+    :host([shape="rounded"]) .avatar { border-radius: var(--radius-lg, 8px); }
+
+    :host([shape="square"]) .avatar { border-radius: 0; }
 
     /* Sizes */
     .avatar { width: 40px; height: 40px; font-size: 14px; }
@@ -48,7 +50,6 @@ export class PastisAvatar extends LitElement {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      image-rendering: pixelated;
     }
 
     .status-dot {
@@ -57,8 +58,8 @@ export class PastisAvatar extends LitElement {
       right: 0;
       width: 10px;
       height: 10px;
-      border-radius: 0;
-      border: 2px solid var(--bg-primary, #000);
+      border-radius: 50%;
+      border: var(--border-width, 1px) solid var(--bg-primary, #0d0d0d);
     }
 
     :host([size="xs"]) .status-dot { width: 6px; height: 6px; }
@@ -67,10 +68,10 @@ export class PastisAvatar extends LitElement {
     :host([size="xl"]) .status-dot { width: 14px; height: 14px; }
     :host([size="2xl"]) .status-dot { width: 18px; height: 18px; }
 
-    :host([status="online"]) .status-dot { background: var(--status-success, #00FF41); }
-    :host([status="away"]) .status-dot { background: var(--status-warning, #FFE600); }
-    :host([status="busy"]) .status-dot { background: var(--status-error, #FF006E); }
-    :host([status="offline"]) .status-dot { background: var(--text-tertiary, #808080); }
+    :host([status="online"]) .status-dot { background: var(--status-success, #fcba28); }
+    :host([status="away"]) .status-dot { background: var(--status-warning, #fcba28); }
+    :host([status="busy"]) .status-dot { background: var(--status-error, #ed203d); }
+    :host([status="offline"]) .status-dot { background: var(--text-tertiary, #909498); }
 
     .icon { font-size: 1.2em; }
   `;
@@ -101,7 +102,7 @@ export class PastisAvatar extends LitElement {
   render() {
     const bgColor = this._getColorFromName();
     return html`
-      <div class="avatar" part="avatar" style="background:${this.src ? 'transparent' : bgColor}" role="img" aria-label="${this.alt || this.name || 'avatar'}">
+      <div class="avatar" part="avatar" style="background:${this.src ? 'transparent' : bgColor}" role="img" aria-label="${this.alt || this.name || 'Avatar'}${this.status ? ', status: ' + this.status : ''}">
         ${this.src
           ? html`<img src="${this.src}" alt="${this.alt || this.name || ''}" />`
           : this.name
@@ -109,7 +110,7 @@ export class PastisAvatar extends LitElement {
             : html`<span class="icon">👤</span>`
         }
       </div>
-      ${this.status ? html`<span class="status-dot" aria-label="Status: ${this.status}"></span>` : ''}
+      ${this.status ? html`<span class="status-dot" aria-hidden="true"></span>` : ''}
     `;
   }
 }

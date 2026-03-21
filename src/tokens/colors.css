@@ -1,111 +1,120 @@
 :root {
-  /* ── Base Palette ── */
-  --color-black:    #000000;
-  --color-dark:     #0A0A0F;
-  --color-darkgray: #1A1A1A;
-  --color-gray:     #808080;
-  --color-white:    #FFFFFF;
+  /* ── Fireship Brand Palette ── */
+  --color-black:    #0d0d0d;
+  --color-dark:     #0f0d0e;
+  --color-darkgray: #1e1e1e;
+  --color-gray:     #767980;
+  --color-white:    #ffffff;
 
-  /* ── Neon Palette ── */
-  --color-neon-green:  #00FF41;
-  --color-neon-cyan:   #00FFFF;
-  --color-neon-pink:   #FF006E;
-  --color-neon-yellow: #FFE600;
-  --color-neon-purple: #9900FF;
-  --color-neon-orange: #FF6B00;
-  --color-neon-red:    #FF0000;
-  --color-neon-blue:   #0055FF;
+  /* ── Fireship Brand Colors ── */
+  --color-orange:  #fc7428;
+  --color-yellow:  #fcba28;
+  --color-pink:    #f38ba3;
+  --color-green:   #0ba95b;
+  --color-blue:    #12b5e5;
+  --color-purple:  #7b5ea7;
+  --color-red:     #ed203d;
+  --color-beige:   #f9f4da;
+
+  /* ── Gray Scale ── */
+  --gray-700: #131519;
+  --gray-600: #1d2025;
+  --gray-500: #383c44;
+  --gray-400: #5c6069;
+  --gray-300: #767980;
+  --gray-200: #b1b4b9;
+  --gray-100: #e1e2e4;
+  --gray-75:  #e9eaec;
+  --gray-50:  #f3f3f5;
+  --gray-25:  #f7f7f7;
 }
 
-/* ── Default = Dark. The 8-bit system runs in the dark. ── */
+/* ── Default = Dark. Fireship runs in the dark. ── */
 :root,
 [data-theme="dark"] {
-  --bg-primary:  #000000;
-  --bg-secondary: #0A0A0F;
-  --bg-card:     #0A0A0F;
-  --bg-elevated: #1A1A1A;
-  --bg-overlay:  #1A1A1A;
+  --bg-primary:  #0d0d0d;
+  --bg-secondary: #0f0d0e;
+  --bg-card:     #1e1e1e;
+  --bg-elevated: #262522;
+  --bg-overlay:  #231f20;
 
-  --text-primary:   #00FF41;
-  --text-secondary: #FFFFFF;
-  --text-tertiary:  #808080;
-  --text-disabled:  #1A1A1A;
-  --text-inverse:   #000000;
-  --text-code:      #00FFFF;
+  --text-primary:   #f9f4da;  /* fireship beige — 13.6:1 on #0d0d0d ✓ */
+  --text-secondary: #f9f4da;
+  --text-tertiary:  #909498;  /* 5.0:1 on #262522, 5.4:1 on #1e1e1e ✓ */
+  --text-disabled:  #383c44;
+  --text-inverse:   #0d0d0d;
+  --text-on-accent: #0d0d0d;  /* dark text on bright backgrounds */
+  --text-code:      #f38ba3;  /* fireship pink for inline code */
 
-  --border-default: #00FF41;
-  --border-subtle:  #1A1A1A;
-  --border-strong:  #00FFFF;
-  --border-focus:   #00FF41;
+  --border-default: #383c44;
+  --border-subtle:  #1e1e1e;
+  --border-strong:  #fc7428;
+  --border-focus:   #fcba28;
 
-  --action-primary:         #00FF41;
-  --action-primary-hover:   #00CC33;
-  --action-primary-pressed: #009922;
-  --action-primary-text:    #000000;
-  --action-secondary:       #00FFFF;
-  --action-secondary-text:  #000000;
-  --action-destructive:      #FF006E;
-  --action-destructive-text: #FFFFFF;
-  --action-warning:          #FFE600;
-  --action-special:          #9900FF;
-  --action-ghost-border:     #808080;
+  --action-primary:         #fcba28;  /* yellow — fireship CTA */
+  --action-primary-hover:   #f5b01e;
+  --action-primary-pressed: #e0a018;
+  --action-primary-text:    #0d0d0d;  /* WCAG: 12.6:1 ✓ */
+  --action-secondary:       #fc7428;  /* orange — brand accent */
+  --action-secondary-text:  #0d0d0d;  /* WCAG: 6.9:1 ✓ */
+  --action-destructive:      #ed203d;
+  --action-destructive-text: #000000;  /* 4.87:1 on #ed203d ✓ */
+  --action-warning:          #fcba28;
+  --action-special:          #7b5ea7;
+  --action-ghost-border:     #383c44;
 
-  --status-success: #00FF41;
-  --status-warning: #FFE600;
-  --status-error:   #FF006E;
-  --status-info:    #00FFFF;
+  --status-success: #0ba95b;
+  --status-warning: #fcba28;
+  --status-error:   #f0505e;  /* 5.57:1 on #0d0d0d, 4.77:1 on #1e1e1e ✓ */
+  --status-info:    #12b5e5;
 
-  /* Pixel shadows — offset only, zero blur */
-  --shadow-sm:  4px 4px 0 #00FF41;
-  --shadow-md:  6px 6px 0 #00FF41;
-  --shadow-lg:  8px 8px 0 #00FF41;
-  --shadow-xl: 10px 10px 0 #FF006E;
-
-  /* Scanline overlay opacity */
-  --scanline-opacity: 0.03;
+  /* Fireship hard offset shadows — 5px, no blur */
+  --shadow-sm:  3px 3px 0 #262522;
+  --shadow-md:  5px 5px 0 #231f20;
+  --shadow-lg:  5px 5px 0 #fcba28;
+  --shadow-xl:  5px 5px 0 #fc7428;
 }
 
-/* ── "Light" mode — off-white backgrounds, WCAG AA compliant ── */
+/* ── Light mode ── */
 [data-theme="light"] {
-  --bg-primary:  #F2F2EF;
-  --bg-secondary: #FFFFFF;
-  --bg-card:     #FFFFFF;
-  --bg-elevated: #E2E2DF;
-  --bg-overlay:  #E2E2DF;
+  --bg-primary:  #f7f7f7;
+  --bg-secondary: #ffffff;
+  --bg-card:     #ffffff;
+  --bg-elevated: #f3f3f5;
+  --bg-overlay:  #e9eaec;
 
-  --text-primary:   #005C14; /* 8.3:1 on white — AAA */
-  --text-secondary: #0D0D0D; /* 20:1 — AAA */
-  --text-tertiary:  #595959; /* 7.0:1 — AAA */
-  --text-disabled:  #C4C4C0;
-  --text-inverse:   #FFFFFF;
-  --text-code:      #005C5C; /* 6.8:1 — AA */
+  --text-primary:   #0f0d0e;  /* 19:1 on white ✓ */
+  --text-secondary: #231f20;
+  --text-tertiary:  #5c6069;  /* 7.2:1 on white ✓ */
+  --text-disabled:  #b1b4b9;
+  --text-inverse:   #f9f4da;
+  --text-on-accent: #0d0d0d;
+  --text-code:      #6c4c9f;  /* fireship light-mode code purple */
 
-  --border-default: #005C14;
-  --border-subtle:  #C4C4C0;
-  --border-strong:  #005C5C;
-  --border-focus:   #005C14;
+  --border-default: #e1e2e4;
+  --border-subtle:  #e9eaec;
+  --border-strong:  #fc7428;
+  --border-focus:   #fcba28;
 
-  --action-primary:         #00CC33; /* fill, used with black text = 8.0:1 */
-  --action-primary-hover:   #00AA2B;
-  --action-primary-pressed: #008822;
-  --action-primary-text:    #000000;
-  --action-secondary:       #00AAAA;
-  --action-secondary-text:  #000000;
-  --action-destructive:      #CC0038; /* 6.5:1 on white — AA */
-  --action-destructive-text: #FFFFFF;
-  --action-warning:          #7A5800; /* 7.3:1 on white — AA */
-  --action-special:          #7700CC;
-  --action-ghost-border:     #595959;
+  --action-primary:         #fcba28;
+  --action-primary-hover:   #f5b01e;
+  --action-primary-pressed: #e0a018;
+  --action-primary-text:    #0d0d0d;
+  --action-secondary:       #fc7428;
+  --action-secondary-text:  #0d0d0d;
+  --action-destructive:      #ed203d;
+  --action-destructive-text: #000000;  /* 4.87:1 on #ed203d ✓ */
+  --action-warning:          #fcba28;
+  --action-special:          #7b5ea7;
+  --action-ghost-border:     #767980;
 
-  --status-success: #005C14; /* 8.3:1 — AAA */
-  --status-warning: #7A5800; /* 7.3:1 — AA */
-  --status-error:   #CC0038; /* 6.5:1 — AA */
-  --status-info:    #005C5C; /* 6.8:1 — AA */
+  --status-success: #0ba95b;
+  --status-warning: #fcba28;
+  --status-error:   #ed203d;
+  --status-info:    #12b5e5;
 
-  --shadow-sm:  4px 4px 0 #005C14;
-  --shadow-md:  6px 6px 0 #005C14;
-  --shadow-lg:  8px 8px 0 #005C14;
-  --shadow-xl: 10px 10px 0 #CC0038;
-
-  --scanline-opacity: 0;
+  --shadow-sm:  3px 3px 0 #e1e2e4;
+  --shadow-md:  5px 5px 0 #e1e2e4;
+  --shadow-lg:  5px 5px 0 #fcba28;
+  --shadow-xl:  5px 5px 0 #fc7428;
 }

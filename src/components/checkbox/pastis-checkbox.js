@@ -19,11 +19,11 @@ export class PastisCheckbox extends LitElement {
       align-items: flex-start;
       gap: 10px;
       cursor: pointer;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       color: var(--text-secondary, #fff);
       user-select: none;
     }
@@ -36,20 +36,20 @@ export class PastisCheckbox extends LitElement {
       width: 20px;
       height: 20px;
       min-width: 20px;
-      border-radius: 0;
-      border: 4px solid var(--border-subtle, #1A1A1A);
-      background: var(--bg-primary, #000);
+      border-radius: var(--radius-sm, 4px);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      background: var(--bg-primary, #0d0d0d);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: border-color 50ms, background 50ms;
+      transition: border-color 120ms ease, background 120ms ease;
       margin-top: 1px;
     }
 
     :host([checked]) .box,
     :host([indeterminate]) .box {
-      background: var(--action-primary, #00FF41);
-      border-color: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
+      border-color: var(--action-primary, #fcba28);
     }
 
     .checkmark {
@@ -73,20 +73,20 @@ export class PastisCheckbox extends LitElement {
     :host([indeterminate]) .indeterminate-mark { display: block; }
     :host([indeterminate]) .checkmark { display: none; }
 
-    label:hover .box { border-color: var(--action-primary, #00FF41); }
+    label:hover .box { border-color: var(--action-primary, #fcba28); }
     :host([checked]) label:hover .box,
     :host([indeterminate]) label:hover .box { opacity: 0.85; }
 
     input:focus-visible ~ .box {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
 
     .label-content { display: flex; flex-direction: column; gap: 2px; }
     .helper {
       font-size: 11px;
-      font-family: var(--font-family, 'Courier New', monospace);
-      color: var(--text-tertiary, #808080);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      color: var(--text-tertiary, #909498);
       text-transform: none;
     }
   `;

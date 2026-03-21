@@ -11,5 +11,9 @@ export default {
     '@storybook/addon-vitest',
     '@storybook/addon-a11y',
     '@chromatic-com/storybook'
-  ]
+  ],
+
+  core: {
+    disableWhatsNewNotifications: true
+  }
 };

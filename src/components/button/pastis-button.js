@@ -17,70 +17,66 @@ export class PastisButton extends LitElement {
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      border: 4px solid var(--action-primary, #00FF41);
-      border-radius: 0;
+      letter-spacing: 0.05em;
+      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
+      border-radius: var(--radius-md, 6px);
       cursor: pointer;
       text-decoration: none;
-      transition: box-shadow 50ms, transform 50ms;
+      transition: box-shadow 120ms ease, transform 80ms ease;
       white-space: nowrap;
-      background: var(--bg-primary, #000);
-      color: var(--action-primary, #00FF41);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--action-primary, #fcba28);
     }
 
-    button:hover, a:hover { box-shadow: 6px 6px 0 var(--action-secondary, #00FFFF); }
-    button:active, a:active { transform: translate(2px, 2px); box-shadow: 4px 4px 0 var(--action-secondary, #00FFFF); }
+    button:hover, a:hover { box-shadow: var(--shadow-md, 5px 5px 0 #231f20); }
+    button:active, a:active { transform: translate(2px, 2px); box-shadow: var(--shadow-sm, 3px 3px 0 #262522); }
 
     :host([size="sm"]) button, :host([size="sm"]) a { font-size: 12px; padding: 0 12px; height: 32px; }
     :host([size="lg"]) button, :host([size="lg"]) a { font-size: 18px; padding: 0 24px; height: 56px; }
-    button, a { font-size: 14px; padding: 0 16px; height: 48px; }
+    button, a { font-size: 14px; padding: 0 16px; height: 40px; }
 
     :host([variant="primary"]) button,
     :host(:not([variant])) button {
-      background: var(--action-primary, #00FF41);
-      color: var(--action-primary-text, #000);
-      border-color: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+      border-color: var(--action-primary, #fcba28);
     }
-    /* primary (green) → cyan shadow */
     :host([variant="primary"]) button:hover,
     :host(:not([variant])) button:hover {
-      box-shadow: 6px 6px 0 var(--action-secondary, #00FFFF);
+      box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428);
     }
     :host([variant="primary"]) button:active,
     :host(:not([variant])) button:active {
       transform: translate(2px, 2px);
-      box-shadow: 4px 4px 0 var(--action-secondary, #00FFFF);
+      box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28);
     }
 
     :host([variant="secondary"]) button {
-      background: var(--bg-primary, #000);
-      color: var(--action-secondary, #00FFFF);
-      border-color: var(--action-secondary, #00FFFF);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--action-secondary, #fc7428);
+      border-color: var(--action-secondary, #fc7428);
     }
-    /* secondary (cyan) → green shadow */
-    :host([variant="secondary"]) button:hover { box-shadow: 6px 6px 0 var(--action-primary, #00FF41); }
+    :host([variant="secondary"]) button:hover { box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428); }
 
     :host([variant="ghost"]) button {
       background: transparent;
-      color: var(--text-tertiary, #808080);
-      border-color: var(--action-ghost-border, #808080);
+      color: var(--text-primary, #f9f4da);
+      border-color: var(--action-ghost-border, #383c44);
     }
-    /* ghost (gray) → primary green shadow */
-    :host([variant="ghost"]) button:hover { box-shadow: 6px 6px 0 var(--action-primary, #00FF41); }
+    :host([variant="ghost"]) button:hover { box-shadow: var(--shadow-md, 5px 5px 0 #231f20); }
 
     :host([variant="destructive"]) button {
-      background: var(--action-destructive, #FF006E);
-      color: var(--action-destructive-text, #FFFFFF);
-      border-color: var(--action-destructive, #FF006E);
+      background: var(--action-destructive, #ed203d);
+      color: var(--action-destructive-text, #000000);
+      border-color: var(--action-destructive, #ed203d);
     }
-    /* destructive (pink) → yellow shadow */
-    :host([variant="destructive"]) button:hover { box-shadow: 6px 6px 0 var(--action-warning, #FFE600); }
+    :host([variant="destructive"]) button:hover { box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28); }
 
     :host([disabled]) button {
-      opacity: 0.3;
+      opacity: 0.4;
       cursor: not-allowed;
       pointer-events: none;
       box-shadow: none;
@@ -88,16 +84,16 @@ export class PastisButton extends LitElement {
 
     .spinner {
       width: 14px; height: 14px;
-      border: 3px solid currentColor;
+      border: 2px solid currentColor;
       border-top-color: transparent;
-      border-radius: 0;
-      animation: spin 0.4s steps(8) infinite;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     button:focus-visible, a:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
-      outline-offset: 2px;
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 3px;
     }
   `;
 

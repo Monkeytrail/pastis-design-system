@@ -17,10 +17,11 @@ export class PastisCarousel extends LitElement {
 
     .carousel {
       position: relative;
-      border: 4px solid var(--border-default, #00FF41);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       overflow: hidden;
-      background: var(--bg-card, #0A0A0F);
-      font-family: var(--font-family, 'Courier New', monospace);
+      background: var(--bg-card, #1e1e1e);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
 
     .slides-track {
@@ -61,26 +62,25 @@ export class PastisCarousel extends LitElement {
     .slide-image {
       width: 100%;
       display: block;
-      image-rendering: pixelated;
     }
 
     .slide-caption {
       padding: 16px;
-      border-top: 4px solid var(--border-subtle, #1A1A1A);
+      border-top: var(--border-width, 1px) solid var(--border-subtle, #383c44);
     }
 
     .slide-title {
       font-size: 14px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary, #00FF41);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
       margin: 0 0 4px;
     }
 
     .slide-body {
       font-size: 12px;
-      color: var(--text-tertiary, #808080);
+      color: var(--text-tertiary, #909498);
       margin: 0;
     }
 
@@ -89,9 +89,10 @@ export class PastisCarousel extends LitElement {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--bg-elevated, #1A1A1A);
-      border: 3px solid var(--border-default, #00FF41);
-      color: var(--text-primary, #00FF41);
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-sm, 4px);
+      color: var(--text-primary, #f9f4da);
       width: 40px;
       height: 40px;
       display: flex;
@@ -101,10 +102,10 @@ export class PastisCarousel extends LitElement {
       font-size: 18px;
       font-weight: 700;
       z-index: 10;
-      transition: background 50ms;
+      transition: background 120ms ease;
     }
-    .arrow:hover { background: var(--action-primary, #00FF41); color: var(--action-primary-text, #000); }
-    .arrow:focus-visible { outline: 4px solid var(--border-focus, #00FF41); outline-offset: 2px; }
+    .arrow:hover { background: var(--action-primary, #fcba28); color: var(--action-primary-text, #000); }
+    .arrow:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
     .arrow.prev { left: 8px; }
     .arrow.next { right: 8px; }
     .arrow[disabled] { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
@@ -115,20 +116,28 @@ export class PastisCarousel extends LitElement {
       justify-content: center;
       gap: 8px;
       padding: 12px;
-      border-top: 4px solid var(--border-subtle, #1A1A1A);
+      border-top: var(--border-width, 1px) solid var(--border-subtle, #383c44);
     }
 
     .dot {
       width: 10px;
       height: 10px;
-      border: 2px solid var(--border-default, #00FF41);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-sm, 4px);
       background: transparent;
       cursor: pointer;
-      transition: background 50ms;
+      transition: background 120ms ease;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .dot:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
     }
 
     .dot.active-dot {
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
     }
 
     /* Counter */
@@ -136,14 +145,30 @@ export class PastisCarousel extends LitElement {
       position: absolute;
       top: 8px;
       right: 8px;
-      background: var(--bg-elevated, #1A1A1A);
-      border: 2px solid var(--border-subtle, #1A1A1A);
-      color: var(--text-tertiary, #808080);
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-sm, 4px);
+      color: var(--text-primary, #f9f4da);
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       padding: 3px 8px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slides-track {
+        transition: none;
+      }
+      .slide {
+        transition: none;
+      }
+      .arrow {
+        transition: none;
+      }
+      .dot {
+        transition: none;
+      }
     }
   `;
 
@@ -202,7 +227,7 @@ export class PastisCarousel extends LitElement {
         >
           ${this.slides.map((slide, i) => html`
             <div class="slide ${i === this.active ? 'active-slide' : ''}" part="slide">
-              ${slide.image ? html`<img class="slide-image" src=${slide.image} alt=${slide.title || ''} />` : ''}
+              ${slide.image ? html`<img class="slide-image" src=${slide.image} alt=${slide.title || 'Slide ' + (i + 1)} />` : ''}
               ${(slide.title || slide.body) ? html`
                 <div class="slide-caption">
                   ${slide.title ? html`<p class="slide-title">${slide.title}</p>` : ''}
@@ -213,7 +238,7 @@ export class PastisCarousel extends LitElement {
           `)}
         </div>
 
-        <span class="counter">${this.active + 1} / ${total}</span>
+        <span class="counter" aria-live="polite" aria-atomic="true">${this.active + 1} / ${total}</span>
 
         ${this.showArrows ? html`
           <button class="arrow prev" ?disabled=${!canPrev} @click=${this._prev} aria-label="Previous">◀</button>
@@ -221,16 +246,14 @@ export class PastisCarousel extends LitElement {
         ` : ''}
 
         ${this.showDots ? html`
-          <div class="dots" role="tablist">
+          <div class="dots">
             ${this.slides.map((_, i) => html`
-              <span
+              <button
                 class="dot ${i === this.active ? 'active-dot' : ''}"
-                role="tab"
-                tabindex=${i === this.active ? 0 : -1}
-                aria-selected=${i === this.active}
                 aria-label="Go to slide ${i + 1}"
+                aria-pressed=${i === this.active}
                 @click=${() => this._goTo(i)}
-              ></span>
+              ></button>
             `)}
           </div>
         ` : ''}

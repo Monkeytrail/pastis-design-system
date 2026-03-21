@@ -15,26 +15,27 @@ export class PastisThemeToggle extends LitElement {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--bg-card, #0A0A0F);
-      border: 4px solid var(--border-default, #00FF41);
-      color: var(--text-primary, #00FF41);
-      font-family: var(--font-family, 'Courier New', monospace);
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
+      color: var(--text-primary, #f9f4da);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
       cursor: pointer;
       padding: 0 14px;
       height: 40px;
-      transition: box-shadow 50ms, background 50ms;
+      transition: box-shadow 120ms ease, background 120ms ease;
     }
 
     button:hover {
-      box-shadow: 4px 4px 0 var(--action-primary, #00FF41);
-      background: var(--bg-elevated, #1A1A1A);
+      box-shadow: 4px 4px 0 var(--action-primary, #fcba28);
+      background: var(--bg-elevated, #383c44);
     }
 
-    button:focus-visible { outline: 4px solid var(--border-focus, #00FF41); outline-offset: 2px; }
+    button:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
 
     :host([size="sm"]) button { height: 32px; padding: 0 10px; font-size: 11px; }
     :host([size="lg"]) button { height: 48px; padding: 0 20px; font-size: 15px; }

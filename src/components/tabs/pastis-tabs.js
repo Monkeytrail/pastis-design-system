@@ -16,7 +16,7 @@ export class PastisTabs extends LitElement {
 
     .tab-list {
       display: flex;
-      border-bottom: 4px solid var(--border-default, #00FF41);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
       overflow-x: auto;
       scrollbar-width: none;
       gap: 0;
@@ -26,9 +26,9 @@ export class PastisTabs extends LitElement {
 
     :host([variant="pills"]) .tab-list {
       border-bottom: none;
-      background: var(--bg-primary, #000);
-      border: 4px solid var(--border-default, #00FF41);
-      border-radius: 0;
+      background: var(--bg-primary, #0d0d0d);
+      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-radius: var(--radius-md, 6px);
       padding: 4px;
       gap: 4px;
     }
@@ -40,20 +40,20 @@ export class PastisTabs extends LitElement {
       align-items: center;
       gap: 6px;
       padding: 10px 16px;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-tertiary, #808080);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-tertiary, #909498);
       background: none;
       border: none;
-      border-bottom: 4px solid transparent;
-      margin-bottom: -4px;
+      border-bottom: var(--border-width, 1px) solid transparent;
+      margin-bottom: calc(-1 * var(--border-width, 1px));
       cursor: pointer;
       white-space: nowrap;
       position: relative;
-      transition: color 50ms;
+      transition: color 120ms ease;
     }
 
     :host([size="sm"]) .tab-btn { padding: 7px 12px; font-size: 11px; }
@@ -64,8 +64,8 @@ export class PastisTabs extends LitElement {
     .tab-btn:hover { color: var(--text-secondary, #fff); }
 
     .tab-btn.active {
-      color: var(--text-primary, #00FF41);
-      border-bottom-color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
+      border-bottom-color: var(--text-primary, #f9f4da);
       font-weight: 700;
     }
 
@@ -75,51 +75,51 @@ export class PastisTabs extends LitElement {
     }
 
     .tab-btn:focus-visible {
-      outline: 4px solid var(--border-focus, #00FF41);
+      outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
 
     /* Pills variant */
     :host([variant="pills"]) .tab-btn {
       border-bottom: none;
-      border-radius: 0;
+      border-radius: var(--radius-sm, 4px);
       margin-bottom: 0;
-      border: 3px solid transparent;
+      border: var(--border-width, 1px) solid transparent;
     }
 
     :host([variant="pills"]) .tab-btn.active {
-      background: var(--action-primary, #00FF41);
+      background: var(--action-primary, #fcba28);
       color: #000;
-      border-color: var(--action-primary, #00FF41);
+      border-color: var(--action-primary, #fcba28);
     }
 
     .badge {
-      background: var(--bg-elevated, #1A1A1A);
-      color: var(--text-tertiary, #808080);
-      border-radius: 0;
-      border: 2px solid currentColor;
+      background: var(--bg-elevated, #383c44);
+      color: var(--text-tertiary, #909498);
+      border-radius: var(--radius-full, 9999px);
+      border: var(--border-width, 1px) solid currentColor;
       font-size: 10px;
       font-weight: 700;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       padding: 1px 5px;
       line-height: 14px;
     }
 
     .tab-btn.active .badge {
-      background: var(--bg-primary, #000);
-      color: var(--text-primary, #00FF41);
-      border-color: var(--text-primary, #00FF41);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--text-primary, #f9f4da);
+      border-color: var(--text-primary, #f9f4da);
     }
 
     :host([variant="pills"]) .tab-btn.active .badge {
       background: #000;
-      color: var(--text-primary, #00FF41);
-      border-color: var(--text-primary, #00FF41);
+      color: var(--text-primary, #f9f4da);
+      border-color: var(--text-primary, #f9f4da);
     }
 
     .tab-panel {
       padding: 20px 0;
-      font-family: var(--font-family, 'Courier New', monospace);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       color: var(--text-secondary, #fff);
       font-size: 14px;
     }
