@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
-    outDir: '../portfolio26/public',
+    outDir: 'dist',
     emptyOutDir: false,
     lib: {
       entry: 'src/index.js',
