@@ -10,6 +10,7 @@ export class PastisCarousel extends LitElement {
     showArrows: { type: Boolean, reflect: true },
     variant:    { type: String, reflect: true }, // 'default' | 'peek' | 'fade'
     _timer:     { state: true },
+    _paused:    { state: true },
   };
 
   static styles = css`
@@ -17,7 +18,7 @@ export class PastisCarousel extends LitElement {
 
     .carousel {
       position: relative;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       overflow: hidden;
       background: var(--bg-card, #1e1e1e);
@@ -90,7 +91,7 @@ export class PastisCarousel extends LitElement {
       top: 50%;
       transform: translateY(-50%);
       background: var(--bg-elevated, #383c44);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-sm, 4px);
       color: var(--text-primary, #f9f4da);
       width: 40px;
@@ -114,29 +115,38 @@ export class PastisCarousel extends LitElement {
     .dots {
       display: flex;
       justify-content: center;
-      gap: 8px;
       padding: 12px;
       border-top: var(--border-width, 1px) solid var(--border-subtle, #383c44);
     }
 
     .dot {
-      width: 10px;
-      height: 10px;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
-      border-radius: var(--radius-sm, 4px);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
       background: transparent;
       cursor: pointer;
-      transition: background 120ms ease;
-      padding: 0;
       flex-shrink: 0;
+    }
+
+    .dot::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
+      border-radius: var(--radius-sm, 4px);
+      background: transparent;
+      transition: background 120ms ease;
     }
 
     .dot:focus-visible {
       outline: 2px solid var(--border-focus, #fcba28);
-      outline-offset: 2px;
+      outline-offset: -2px;
     }
 
-    .dot.active-dot {
+    .dot.active-dot::after {
       background: var(--action-primary, #fcba28);
     }
 
@@ -155,6 +165,27 @@ export class PastisCarousel extends LitElement {
       letter-spacing: var(--letter-spacing-wide, 0.05em);
       padding: 3px 8px;
     }
+
+    .play-pause {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-elevated, #383c44);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-sm, 4px);
+      color: var(--text-primary, #f9f4da);
+      font-size: 12px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 120ms ease;
+    }
+    .play-pause:hover { background: var(--action-primary, #fcba28); color: var(--action-primary-text, #000); }
+    .play-pause:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
 
     @media (prefers-reduced-motion: reduce) {
       .slides-track {
@@ -181,11 +212,13 @@ export class PastisCarousel extends LitElement {
     this.showDots = true;
     this.showArrows = true;
     this.variant = 'default';
+    this._paused = false;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    if (this.autoplay > 0) this._startAutoplay();
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (this.autoplay > 0 && !prefersReducedMotion) this._startAutoplay();
   }
 
   disconnectedCallback() {
@@ -194,11 +227,26 @@ export class PastisCarousel extends LitElement {
   }
 
   _startAutoplay() {
+    this._stopAutoplay();
     this._timer = setInterval(() => this._next(), this.autoplay);
   }
 
   _stopAutoplay() {
     if (this._timer) { clearInterval(this._timer); this._timer = null; }
+  }
+
+  _togglePause() {
+    this._paused = !this._paused;
+    if (this._paused) this._stopAutoplay();
+    else if (this.autoplay > 0) this._startAutoplay();
+  }
+
+  _handlePointerEnter() {
+    if (this.autoplay > 0 && !this._paused) this._stopAutoplay();
+  }
+
+  _handlePointerLeave() {
+    if (this.autoplay > 0 && !this._paused) this._startAutoplay();
   }
 
   _goTo(index) {
@@ -220,7 +268,14 @@ export class PastisCarousel extends LitElement {
     const canNext = this.loop || this.active < total - 1;
 
     return html`
-      <div class="carousel" part="carousel">
+      <div
+        class="carousel"
+        part="carousel"
+        @pointerenter=${this._handlePointerEnter}
+        @pointerleave=${this._handlePointerLeave}
+        @focusin=${this._handlePointerEnter}
+        @focusout=${this._handlePointerLeave}
+      >
         <div
           class="slides-track"
           style=${this.variant !== 'fade' ? `transform: translateX(-${this.active * 100}%)` : ''}
@@ -239,6 +294,15 @@ export class PastisCarousel extends LitElement {
         </div>
 
         <span class="counter" aria-live="polite" aria-atomic="true">${this.active + 1} / ${total}</span>
+
+        ${this.autoplay > 0 ? html`
+          <button
+            class="play-pause"
+            @click=${this._togglePause}
+            aria-label="${this._paused ? 'Play slideshow' : 'Pause slideshow'}"
+            aria-pressed="${this._paused}"
+          >${this._paused ? '▶' : '❚❚'}</button>
+        ` : ''}
 
         ${this.showArrows ? html`
           <button class="arrow prev" ?disabled=${!canPrev} @click=${this._prev} aria-label="Previous">◀</button>

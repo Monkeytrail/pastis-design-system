@@ -56,8 +56,8 @@ export class PastisCheckbox extends LitElement {
       display: none;
       width: 10px;
       height: 7px;
-      border-left: 3px solid #000;
-      border-bottom: 3px solid #000;
+      border-left: 3px solid var(--action-primary-text, #0d0d0d);
+      border-bottom: 3px solid var(--action-primary-text, #0d0d0d);
       transform: rotate(-45deg) translateY(-1px);
     }
 
@@ -65,7 +65,7 @@ export class PastisCheckbox extends LitElement {
       display: none;
       width: 10px;
       height: 3px;
-      background: #000;
+      background: var(--action-primary-text, #0d0d0d);
       border-radius: 0;
     }
 

@@ -15,7 +15,7 @@ export class PastisAccordion extends LitElement {
       display: flex;
       flex-direction: column;
       gap: 0;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       overflow: hidden;
     }
@@ -36,18 +36,18 @@ export class PastisAccordion extends LitElement {
 
     .item {
       background: var(--bg-card, #1e1e1e);
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
     }
 
     .item:last-child { border-bottom: none; }
 
     :host([variant="flush"]) .item {
       border-radius: 0;
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
     }
 
     :host([variant="separated"]) .item {
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       overflow: hidden;
       margin-bottom: 4px;
@@ -106,6 +106,8 @@ export class PastisAccordion extends LitElement {
       font-size: 13px;
       color: var(--text-secondary, #fff);
       line-height: 1.6;
+      text-transform: none;
+      letter-spacing: normal;
     }
 
     .badge {
@@ -147,7 +149,8 @@ export class PastisAccordion extends LitElement {
     }));
   }
 
-  updated() {
+  updated(changedProperties) {
+    if (!changedProperties.has('openItems') && !changedProperties.has('items')) return;
     this.shadowRoot?.querySelectorAll('.body').forEach(body => {
       const item = body.closest('.item');
       const inner = body.querySelector('.body-inner');

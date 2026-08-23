@@ -32,3 +32,8 @@ export * from './components/empty-state/pastis-empty-state.js';
 export * from './components/filter-chip/pastis-filter-chip.js';
 export * from './components/theme-toggle/pastis-theme-toggle.js';
 export * from './components/carousel/pastis-carousel.js';
+export * from './components/timeline/pastis-timeline.js';
+export * from './components/testimonial/pastis-testimonial.js';
+export * from './components/section/pastis-section.js';
+export * from './components/footer/pastis-footer.js';
+export * from './components/nav/pastis-nav.js';

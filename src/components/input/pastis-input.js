@@ -18,7 +18,7 @@ export class PastisInput extends LitElement {
   };
 
   static styles = css`
-    :host { display: block; }
+    :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
 
@@ -35,7 +35,7 @@ export class PastisInput extends LitElement {
     }
 
     .required-dot {
-      color: var(--status-error, #ed203d);
+      color: var(--status-error, #f0505e);
       font-size: 16px;
       line-height: 1;
     }
@@ -85,11 +85,11 @@ export class PastisInput extends LitElement {
     }
 
     .has-error input {
-      border-color: var(--status-error, #ed203d);
+      border-color: var(--status-error, #f0505e);
     }
 
     .has-error input:focus {
-      box-shadow: 4px 4px 0 var(--status-error, #ed203d);
+      box-shadow: 4px 4px 0 var(--status-error, #f0505e);
     }
 
     .leading-icon, .trailing-icon {
@@ -118,7 +118,7 @@ export class PastisInput extends LitElement {
     .error-text {
       font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 11px;
-      color: var(--status-error, #ed203d);
+      color: var(--status-error, #f0505e);
       margin: 0;
       display: flex;
       align-items: center;

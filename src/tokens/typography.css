@@ -1,9 +1,9 @@
 :root {
   /* ── Fonts ── */
-  --font-family-display: 'Cubano', 'Paytone One', 'Outfit', sans-serif;
-  --font-family-body:    'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-family-mono:    'Fira Code', 'Courier New', Courier, monospace;
-  --font-family:         var(--font-family-mono); /* component default — monospace for UI elements */
+  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family:         var(--font-family-mono); /* component default */
 
   /* ── Size Scale (Pastis) ── */
   --font-size-display: 56px;

@@ -60,7 +60,7 @@ export class PastisBadge extends LitElement {
     }
 
     :host([variant="error"]) .badge {
-      color: var(--status-error, #ed203d);
+      color: var(--status-error, #f0505e);
       background: transparent;
     }
 

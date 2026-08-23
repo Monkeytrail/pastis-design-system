@@ -30,7 +30,7 @@ export class PastisDrawer extends LitElement {
     .drawer {
       position: absolute;
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-lg, 8px);
       display: flex;
       flex-direction: column;
@@ -86,7 +86,7 @@ export class PastisDrawer extends LitElement {
       align-items: center;
       justify-content: space-between;
       padding: 20px 24px;
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       flex-shrink: 0;
     }
 
@@ -115,7 +115,7 @@ export class PastisDrawer extends LitElement {
       background: var(--bg-primary, #0d0d0d);
       border: var(--border-width, 1px) solid var(--text-primary, #f9f4da);
       border-radius: var(--radius-sm, 4px);
-      width: 32px; height: 32px;
+      width: 40px; height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -141,7 +141,7 @@ export class PastisDrawer extends LitElement {
 
     .drawer-footer {
       padding: 16px 24px;
-      border-top: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-top: var(--border-width, 1px) solid var(--border-default, #383c44);
       flex-shrink: 0;
     }
   `;

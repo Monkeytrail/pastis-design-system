@@ -9,6 +9,7 @@ export class PastisToast extends LitElement {
     visible: { type: Boolean, reflect: true },
     title: { type: String },
     dismissible: { type: Boolean, reflect: true },
+    _hiding: { state: true },
   };
 
   static styles = css`
@@ -54,7 +55,7 @@ export class PastisToast extends LitElement {
     }
 
     :host([variant="success"]) .toast { color: var(--status-success, #fcba28); }
-    :host([variant="error"]) .toast { color: var(--status-error, #ed203d); }
+    :host([variant="error"]) .toast { color: var(--status-error, #f0505e); }
     :host([variant="warning"]) .toast { color: var(--status-warning, #fcba28); }
     :host([variant="info"]) .toast,
     :host(:not([variant])) .toast { color: var(--status-info, #fc7428); }
@@ -120,7 +121,9 @@ export class PastisToast extends LitElement {
     this.position = 'top-right';
     this.visible = false;
     this.dismissible = true;
+    this._hiding = false;
     this._timer = null;
+    this._hideTimer = null;
   }
 
   _getIcon() {
@@ -138,16 +141,19 @@ export class PastisToast extends LitElement {
   }
 
   hide() {
-    const toast = this.shadowRoot?.querySelector('.toast');
-    if (toast) {
-      toast.classList.add('hiding');
-      setTimeout(() => {
-        this.visible = false;
-        this.dispatchEvent(new CustomEvent('pastis-hide', { bubbles: true, composed: true }));
-      }, 200);
-    } else {
+    clearTimeout(this._hideTimer);
+    this._hiding = true;
+    this._hideTimer = setTimeout(() => {
+      this._hiding = false;
       this.visible = false;
-    }
+      this.dispatchEvent(new CustomEvent('pastis-hide', { bubbles: true, composed: true }));
+    }, 200);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearTimeout(this._timer);
+    clearTimeout(this._hideTimer);
   }
 
   render() {
@@ -155,7 +161,7 @@ export class PastisToast extends LitElement {
 
     return html`
       <div class="toast-container" part="container">
-        <div class="toast" role="alert" aria-live="${this.variant === 'error' ? 'assertive' : 'polite'}" part="toast">
+        <div class="toast ${this._hiding ? 'hiding' : ''}" role="alert" aria-live="${this.variant === 'error' ? 'assertive' : 'polite'}" part="toast">
           <span class="toast-icon" aria-hidden="true">${this._getIcon()}</span>
           <div class="toast-content">
             ${this.title ? html`<p class="toast-title">${this.title}</p>` : ''}

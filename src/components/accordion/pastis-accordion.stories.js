@@ -4,22 +4,22 @@ const faqItems = [
   {
     id: 'q1',
     title: 'WHAT IS PASTIS DESIGN SYSTEM?',
-    content: 'PASTIS IS A MODERN, COMPONENT-DRIVEN DESIGN SYSTEM BUILT WITH LIT WEB COMPONENTS. IT PROVIDES A COMPREHENSIVE SET OF ACCESSIBLE, THEMEABLE UI COMPONENTS.',
+    content: 'Pastis is a modern, component-driven design system built with Lit web components. It provides a comprehensive set of accessible, themeable UI components.',
   },
   {
     id: 'q2',
     title: 'CAN I USE IT WITH ANY FRAMEWORK?',
-    content: 'AFFIRMATIVE! SINCE PASTIS USES STANDARD WEB COMPONENTS, IT OPERATES WITH ANY FRAMEWORK INCLUDING REACT, VUE, ANGULAR, OR VANILLA JAVASCRIPT.',
+    content: 'Yes! Since Pastis uses standard web components, it works with any framework including React, Vue, Angular, or vanilla JavaScript.',
   },
   {
     id: 'q3',
     title: 'IS IT ACCESSIBLE?',
-    content: 'ALL COMPONENTS INCLUDE PROPER ARIA ATTRIBUTES, KEYBOARD NAVIGATION SUPPORT, AND FOCUS MANAGEMENT FOLLOWING WCAG 2.1 PROTOCOL.',
+    content: 'All components include proper ARIA attributes, keyboard navigation support, and focus management following WCAG 2.1 guidelines.',
   },
   {
     id: 'q4',
     title: 'HOW DO I CUSTOMIZE THE THEME?',
-    content: 'PASTIS USES CSS CUSTOM PROPERTIES FOR ALL DESIGN TOKENS. OVERRIDE THEM IN YOUR STYLESHEET TO CUSTOMIZE COLORS, TYPOGRAPHY, AND SPACING SYSTEM-WIDE.',
+    content: 'Pastis uses CSS custom properties for all design tokens. Override them in your stylesheet to customize colors, typography, and spacing system-wide.',
   },
 ];
 

@@ -14,7 +14,7 @@ export class PastisFilterChip extends LitElement {
   static styles = css`
     :host { display: inline-block; }
 
-    button {
+    .chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -34,19 +34,27 @@ export class PastisFilterChip extends LitElement {
       white-space: nowrap;
     }
 
-    button:hover {
+    :host([removable]) .chip {
+      padding-right: 6px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+    }
+
+    .chip:hover {
       border-color: var(--action-primary, #fcba28);
       color: var(--text-secondary, #fff);
     }
 
-    :host([selected]) button {
+    :host([selected]) .chip {
       background: var(--action-primary, #fcba28);
       border-color: var(--action-primary, #fcba28);
       color: var(--action-primary-text, #000);
       filter: brightness(0.9);
     }
 
-    :host([disabled]) button {
+    :host([disabled]) .chip,
+    :host([disabled]) .remove {
       opacity: 0.4;
       cursor: not-allowed;
       pointer-events: none;
@@ -69,15 +77,36 @@ export class PastisFilterChip extends LitElement {
     }
 
     .remove {
-      margin-left: 2px;
-      opacity: 0.7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      width: 28px;
+      padding: 0;
+      margin: 0;
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-left: none;
+      border-top-right-radius: var(--radius-full, 9999px);
+      border-bottom-right-radius: var(--radius-full, 9999px);
+      color: var(--text-tertiary, #909498);
       font-size: 13px;
       line-height: 1;
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
       cursor: pointer;
+      transition: border-color 120ms ease, color 120ms ease;
     }
-    .remove:hover { opacity: 1; }
+    .remove:hover { color: var(--text-secondary, #fff); border-color: var(--action-primary, #fcba28); }
 
-    button:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
+    :host([selected]) .remove {
+      background: var(--action-primary, #fcba28);
+      border-color: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #000);
+      filter: brightness(0.9);
+    }
+
+    .chip:focus-visible,
+    .remove:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
   `;
 
   constructor() {
@@ -105,13 +134,18 @@ export class PastisFilterChip extends LitElement {
   }
 
   render() {
+    const name = this.label || this.value || '';
     return html`
-      <button @click=${this._toggle} aria-pressed="${this.selected}" part="filter-chip">
-        ${this.icon ? html`<span class="icon" aria-hidden="true">${this.icon}</span>` : ''}
-        ${this.label || this.value || ''}
-        ${this.count != null ? html`<span class="count">${this.count}</span>` : ''}
-        ${this.removable ? html`<span class="remove" @click=${this._remove} aria-label="Remove">✕</span>` : ''}
-      </button>
+      <span part="filter-chip">
+        <button class="chip" @click=${this._toggle} aria-pressed="${this.selected}" ?disabled=${this.disabled}>
+          ${this.icon ? html`<span class="icon" aria-hidden="true">${this.icon}</span>` : ''}
+          ${name}
+          ${this.count != null ? html`<span class="count">${this.count}</span>` : ''}
+        </button>
+        ${this.removable ? html`
+          <button class="remove" @click=${this._remove} aria-label="Remove ${name}" ?disabled=${this.disabled}>✕</button>
+        ` : ''}
+      </span>
     `;
   }
 }
@@ -163,7 +197,7 @@ export class PastisFilterBar extends LitElement {
       cursor: pointer;
     }
 
-    .clear-btn:hover { border-color: var(--status-error, #ed203d); color: var(--status-error, #ed203d); }
+    .clear-btn:hover { border-color: var(--status-error, #f0505e); color: var(--status-error, #f0505e); }
   `;
 
   constructor() {

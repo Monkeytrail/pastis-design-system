@@ -39,7 +39,7 @@ export class PastisRadio extends LitElement {
     .radio-visual {
       width: 20px;
       height: 20px;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       background: var(--bg-primary, #0d0d0d);
       border-radius: 50%;
       flex-shrink: 0;
@@ -78,7 +78,7 @@ export class PastisRadio extends LitElement {
 
   render() {
     return html`
-      <label>
+      <label @keydown="${this._handleKey}">
         <input
           type="radio"
           .name=${this.name || ''}

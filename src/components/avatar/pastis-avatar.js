@@ -12,7 +12,18 @@ export class PastisAvatar extends LitElement {
   };
 
   static styles = css`
-    :host { display: inline-flex; position: relative; }
+    :host {
+      display: inline-flex;
+      position: relative;
+      --avatar-color-1: #0071E3;
+      --avatar-color-2: #34C759;
+      --avatar-color-3: #FF9500;
+      --avatar-color-4: #FF3B30;
+      --avatar-color-5: #AF52DE;
+      --avatar-color-6: #5856D6;
+      --avatar-color-7: #5AC8FA;
+      --avatar-color-8: #FF2D55;
+    }
 
     .avatar {
       display: flex;
@@ -26,7 +37,6 @@ export class PastisAvatar extends LitElement {
       letter-spacing: var(--letter-spacing-wide, 0.05em);
       background: var(--bg-primary, #0d0d0d);
       color: var(--text-primary, #f9f4da);
-      border: var(--border-width, 1px) solid var(--text-primary, #f9f4da);
       user-select: none;
     }
 
@@ -70,7 +80,7 @@ export class PastisAvatar extends LitElement {
 
     :host([status="online"]) .status-dot { background: var(--status-success, #fcba28); }
     :host([status="away"]) .status-dot { background: var(--status-warning, #fcba28); }
-    :host([status="busy"]) .status-dot { background: var(--status-error, #ed203d); }
+    :host([status="busy"]) .status-dot { background: var(--status-error, #f0505e); }
     :host([status="offline"]) .status-dot { background: var(--text-tertiary, #909498); }
 
     .icon { font-size: 1.2em; }
@@ -92,11 +102,15 @@ export class PastisAvatar extends LitElement {
 
   _getColorFromName() {
     if (this.color) return this.color;
-    if (!this.name) return '#0071E3';
-    const colors = ['#0071E3','#34C759','#FF9500','#FF3B30','#AF52DE','#5856D6','#5AC8FA','#FF2D55'];
+    const slots = [
+      'var(--avatar-color-1)', 'var(--avatar-color-2)', 'var(--avatar-color-3)',
+      'var(--avatar-color-4)', 'var(--avatar-color-5)', 'var(--avatar-color-6)',
+      'var(--avatar-color-7)', 'var(--avatar-color-8)',
+    ];
+    if (!this.name) return slots[0];
     let hash = 0;
     for (let i = 0; i < this.name.length; i++) hash = this.name.charCodeAt(i) + ((hash << 5) - hash);
-    return colors[Math.abs(hash) % colors.length];
+    return slots[Math.abs(hash) % slots.length];
   }
 
   render() {
@@ -104,7 +118,7 @@ export class PastisAvatar extends LitElement {
     return html`
       <div class="avatar" part="avatar" style="background:${this.src ? 'transparent' : bgColor}" role="img" aria-label="${this.alt || this.name || 'Avatar'}${this.status ? ', status: ' + this.status : ''}">
         ${this.src
-          ? html`<img src="${this.src}" alt="${this.alt || this.name || ''}" />`
+          ? html`<img src="${this.src}" alt="${this.alt || this.name || 'User avatar'}" />`
           : this.name
             ? html`<span>${this._getInitials()}</span>`
             : html`<span class="icon">👤</span>`

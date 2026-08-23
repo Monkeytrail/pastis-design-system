@@ -16,7 +16,7 @@ export class PastisThemeToggle extends LitElement {
       align-items: center;
       gap: 8px;
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       color: var(--text-primary, #f9f4da);
       font-family: var(--font-family-mono, 'Fira Code', monospace);
@@ -59,9 +59,19 @@ export class PastisThemeToggle extends LitElement {
     // Sync with current page theme on mount
     const root = this._getTarget();
     if (root) {
-      const current = root.getAttribute('data-theme') || 'dark';
-      this.theme = current;
+      this.theme = root.getAttribute('data-theme') || 'dark';
     }
+    // Observe data-theme changes so all instances stay in sync
+    this._observer = new MutationObserver(() => {
+      const current = this._getTarget()?.getAttribute('data-theme') || 'dark';
+      if (current !== this.theme) this.theme = current;
+    });
+    this._observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._observer?.disconnect();
   }
 
   _getTarget() {
@@ -70,13 +80,39 @@ export class PastisThemeToggle extends LitElement {
   }
 
   _toggle() {
-    this.theme = this.theme === 'dark' ? 'light' : 'dark';
-    const root = this._getTarget();
-    if (root) root.setAttribute('data-theme', this.theme);
-    this.dispatchEvent(new CustomEvent('pastis-theme-change', {
-      detail: { theme: this.theme },
-      bubbles: true, composed: true,
-    }));
+    const next = this.theme === 'dark' ? 'light' : 'dark';
+
+    const applyTheme = () => {
+      this.theme = next;
+      const root = this._getTarget();
+      if (root) root.setAttribute('data-theme', next);
+      this.dispatchEvent(new CustomEvent('pastis-theme-change', {
+        detail: { theme: next },
+        bubbles: true, composed: true,
+      }));
+    };
+
+    if (!document.startViewTransition) {
+      applyTheme();
+      return;
+    }
+
+    const rect = this.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(applyTheme);
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+        { duration: 500, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+      );
+    });
   }
 
   render() {

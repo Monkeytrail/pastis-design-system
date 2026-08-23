@@ -15,7 +15,7 @@ export class PastisStatCard extends LitElement {
 
     .stat-card {
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       padding: 20px;
       font-family: var(--font-family-mono, 'Fira Code', monospace);
@@ -32,7 +32,7 @@ export class PastisStatCard extends LitElement {
     :host([variant="primary"]) .stat-card { border-color: var(--action-primary, #fcba28); }
     :host([variant="success"]) .stat-card { border-color: var(--status-success, #fcba28); }
     :host([variant="warning"]) .stat-card { border-color: var(--status-warning, #fcba28); }
-    :host([variant="error"]) .stat-card   { border-color: var(--status-error, #ed203d); }
+    :host([variant="error"]) .stat-card   { border-color: var(--status-error, #f0505e); }
 
     .header {
       display: flex;
@@ -73,7 +73,7 @@ export class PastisStatCard extends LitElement {
     }
 
     .trend-up   { color: var(--status-success, #fcba28); }
-    .trend-down { color: var(--status-error, #ed203d); }
+    .trend-down { color: var(--status-error, #f0505e); }
     .trend-neutral { color: var(--text-tertiary, #909498); }
 
     .delta-label { color: var(--text-tertiary, #909498); }
@@ -88,18 +88,22 @@ export class PastisStatCard extends LitElement {
   render() {
     const trendIcon = this.trend === 'up' ? '▲' : this.trend === 'down' ? '▼' : '─';
     const trendClass = `delta trend-${this.trend}`;
+    const trendDescription = this.delta
+      ? `${this.trend === 'up' ? 'up' : this.trend === 'down' ? 'down' : 'no change'} ${this.delta} vs last period`
+      : '';
+    const regionLabel = [this.label || 'Metric', this.value || '0', trendDescription].filter(Boolean).join(', ');
 
     return html`
-      <div class="stat-card" part="stat-card">
+      <div class="stat-card" part="stat-card" role="region" aria-label="${regionLabel}">
         <div class="header">
-          <span class="label">${this.label || 'Metric'}</span>
+          <span class="label" aria-hidden="true">${this.label || 'Metric'}</span>
           ${this.icon ? html`<span class="icon" aria-hidden="true">${this.icon}</span>` : ''}
         </div>
-        <div class="value">${this.value || '0'}</div>
+        <div class="value" aria-hidden="true">${this.value || '0'}</div>
         ${this.delta ? html`
           <div class="footer">
-            <span class=${trendClass}>${trendIcon} ${this.delta}</span>
-            <span class="delta-label">vs last period</span>
+            <span class=${trendClass} aria-hidden="true">${trendIcon} ${this.delta}</span>
+            <span class="delta-label" aria-hidden="true">vs last period</span>
           </div>
         ` : ''}
       </div>

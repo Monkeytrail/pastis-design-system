@@ -120,7 +120,7 @@ export class PastisBreadcrumb extends LitElement {
               <li>
                 ${isEllipsis
                   ? html`
-                    <button class="ellipsis" @click="${() => { this._expanded = true; this.requestUpdate(); }}" aria-label="Show all breadcrumb items">…</button>
+                    <button class="ellipsis" @click="${() => { this._expanded = true; this.requestUpdate(); }}" aria-label="Show all breadcrumb items" aria-expanded="false">…</button>
                   `
                   : isLast
                     ? html`<span class="crumb active" aria-current="page">${item.icon ? html`<span class="crumb-icon">${item.icon}</span>` : ''}${item.label}</span>`

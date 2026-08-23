@@ -20,7 +20,7 @@ export class PastisNav extends LitElement {
       justify-content: space-between;
       gap: 0;
       background: var(--bg-card, #1e1e1e);
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       font-family: var(--font-family-mono, 'Fira Code', monospace);
       padding: 0 24px;
       height: 64px;
@@ -149,7 +149,7 @@ export class PastisNav extends LitElement {
       left: 0;
       min-width: 200px;
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       z-index: 200;
       display: none;
@@ -210,7 +210,7 @@ export class PastisNav extends LitElement {
       height: 40px;
       padding: 8px;
       background: none;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-sm, 4px);
       cursor: pointer;
       color: var(--text-primary, #f9f4da);
@@ -241,7 +241,7 @@ export class PastisNav extends LitElement {
       left: 0;
       right: 0;
       background: var(--bg-card, #1e1e1e);
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-top: none;
       flex-direction: column;
       z-index: 99;

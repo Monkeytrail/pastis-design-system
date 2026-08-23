@@ -16,7 +16,7 @@ export class PastisTabs extends LitElement {
 
     .tab-list {
       display: flex;
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       overflow-x: auto;
       scrollbar-width: none;
       gap: 0;
@@ -27,7 +27,7 @@ export class PastisTabs extends LitElement {
     :host([variant="pills"]) .tab-list {
       border-bottom: none;
       background: var(--bg-primary, #0d0d0d);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       padding: 4px;
       gap: 4px;

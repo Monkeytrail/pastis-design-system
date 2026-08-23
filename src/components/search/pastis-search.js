@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 export class PastisSearch extends LitElement {
   static properties = {
@@ -117,7 +118,7 @@ export class PastisSearch extends LitElement {
       left: 0;
       right: 0;
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       z-index: 1000;
       max-height: 300px;
@@ -186,6 +187,11 @@ export class PastisSearch extends LitElement {
     this.noResultsText = 'No results found';
     this._focusedIndex = -1;
     this._boundClose = this._handleOutsideClick.bind(this);
+    this._listboxId = `pastis-search-listbox-${Math.random().toString(36).slice(2, 9)}`;
+  }
+
+  _optionId(index) {
+    return `${this._listboxId}-option-${index}`;
   }
 
   connectedCallback() {
@@ -276,6 +282,8 @@ export class PastisSearch extends LitElement {
             role="combobox"
             aria-expanded="${this.open}"
             aria-autocomplete="list"
+            aria-controls="${this._listboxId}"
+            aria-activedescendant="${ifDefined(this._focusedIndex >= 0 ? this._optionId(this._focusedIndex) : undefined)}"
             @input="${this._handleInput}"
             @focus="${() => { if (this.value.length >= this.minChars) this.open = true; }}"
             @keydown="${this._handleKeydown}"
@@ -287,9 +295,10 @@ export class PastisSearch extends LitElement {
           ` : ''}
 
           ${this.open ? html`
-            <div class="dropdown" role="listbox" part="dropdown">
+            <div class="dropdown" role="listbox" id="${this._listboxId}" part="dropdown">
               ${this.suggestions.length ? this.suggestions.map((item, i) => html`
                 <div
+                  id="${this._optionId(i)}"
                   class="suggestion ${i === this._focusedIndex ? 'focused' : ''}"
                   role="option"
                   aria-selected="${i === this._focusedIndex}"

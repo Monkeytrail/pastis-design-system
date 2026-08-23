@@ -25,7 +25,7 @@ export class PastisModal extends LitElement {
 
     .dialog {
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-lg, 8px);
       width: 100%;
       max-height: calc(100vh - 32px);
@@ -47,7 +47,7 @@ export class PastisModal extends LitElement {
       align-items: center;
       justify-content: space-between;
       padding: 20px 24px 16px;
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       flex-shrink: 0;
     }
 
@@ -65,8 +65,8 @@ export class PastisModal extends LitElement {
       background: var(--bg-primary, #0d0d0d);
       border: var(--border-width, 1px) solid var(--text-primary, #f9f4da);
       border-radius: var(--radius-sm, 4px);
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -99,7 +99,7 @@ export class PastisModal extends LitElement {
 
     .modal-footer {
       padding: 16px 24px;
-      border-top: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-top: var(--border-width, 1px) solid var(--border-default, #383c44);
       display: flex;
       gap: 8px;
       justify-content: flex-end;

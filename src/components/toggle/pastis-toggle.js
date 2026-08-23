@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 export class PastisToggle extends LitElement {
   static properties = {
@@ -90,6 +91,7 @@ export class PastisToggle extends LitElement {
 
   render() {
     const labelEl = this.label ? html`<span class="label-text">${this.label}</span>` : '';
+    const a11yLabel = this.label ? undefined : (this.getAttribute('aria-label') || 'Toggle');
     return html`
       <label>
         ${this.labelPosition === 'left' ? labelEl : ''}
@@ -100,6 +102,7 @@ export class PastisToggle extends LitElement {
           name="${this.name || ''}"
           role="switch"
           aria-checked="${this.checked}"
+          aria-label="${ifDefined(a11yLabel)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">

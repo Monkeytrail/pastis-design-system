@@ -30,7 +30,7 @@ export class PastisFileUpload extends LitElement {
     }
 
     .dropzone {
-      border: var(--border-width, 1px) dashed var(--border-default, #fcba28);
+      border: var(--border-width, 1px) dashed var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       padding: 40px 20px;
       text-align: center;
@@ -51,7 +51,7 @@ export class PastisFileUpload extends LitElement {
     }
 
     .has-error .dropzone {
-      border-color: var(--status-error, #ed203d);
+      border-color: var(--status-error, #f0505e);
     }
 
     .upload-icon {
@@ -138,7 +138,7 @@ export class PastisFileUpload extends LitElement {
       transition: color 120ms ease, border-color 120ms ease;
     }
 
-    .remove-file:hover { color: var(--status-error, #ed203d); border-color: var(--status-error, #ed203d); }
+    .remove-file:hover { color: var(--status-error, #f0505e); border-color: var(--status-error, #f0505e); }
 
     .error-text {
       font-size: 11px;
@@ -146,7 +146,7 @@ export class PastisFileUpload extends LitElement {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: var(--letter-spacing-wide, 0.05em);
-      color: var(--status-error, #ed203d);
+      color: var(--status-error, #f0505e);
     }
 
     .helper-text {
@@ -158,7 +158,7 @@ export class PastisFileUpload extends LitElement {
     .progress-bar {
       height: 8px;
       background: var(--bg-elevated, #383c44);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-sm, 4px);
       overflow: hidden;
       margin-top: 4px;

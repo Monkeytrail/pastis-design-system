@@ -47,7 +47,7 @@ export class PastisProgress extends LitElement {
     .track {
       width: 100%;
       background: var(--bg-elevated, #383c44);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-sm, 4px);
       overflow: hidden;
     }

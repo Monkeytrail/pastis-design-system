@@ -33,7 +33,7 @@ export class PastisAlert extends LitElement {
     }
 
     :host([variant="error"]) .alert {
-      color: var(--status-error, #ed203d);
+      color: var(--status-error, #f0505e);
     }
 
     :host([variant="info"]) .alert,

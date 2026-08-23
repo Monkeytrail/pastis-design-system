@@ -159,7 +159,7 @@ export class PastisHero extends LitElement {
       width: 100%;
       max-width: 500px;
       border-radius: var(--radius-md, 6px);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       box-shadow: 8px 8px 0 var(--text-primary, #f9f4da);
     }
 

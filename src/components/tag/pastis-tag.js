@@ -57,7 +57,7 @@ export class PastisTag extends LitElement {
 
     :host([variant="error"]) .tag {
       background: var(--bg-primary, #0d0d0d);
-      color: var(--status-error, #ed203d);
+      color: var(--status-error, #f0505e);
     }
 
     :host([variant="info"]) .tag {
@@ -137,7 +137,6 @@ export class PastisTag extends LitElement {
       bubbles: true, composed: true,
       detail: { value: this.textContent.trim() }
     }));
-    this.remove();
   }
 }
 

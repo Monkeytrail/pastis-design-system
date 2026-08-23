@@ -94,13 +94,13 @@ export class PastisEmptyState extends LitElement {
     /* secondary CTA hover shadow */
     .cta-secondary:hover { box-shadow: 4px 4px 0 var(--action-primary, #fcba28); }
 
-    :host([variant="error"]) .heading { color: var(--status-error, #ed203d); }
-    :host([variant="error"]) .empty-state { border-color: var(--status-error, #ed203d); }
+    :host([variant="error"]) .heading { color: var(--status-error, #f0505e); }
+    :host([variant="error"]) .empty-state { border-color: var(--status-error, #f0505e); }
 
     .pixel-deco {
       width: 80px;
       height: var(--border-width, 1px);
-      background: var(--border-default, #fcba28);
+      background: var(--border-default, #383c44);
       opacity: 0.3;
     }
   `;

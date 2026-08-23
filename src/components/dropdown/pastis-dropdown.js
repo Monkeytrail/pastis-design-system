@@ -15,7 +15,7 @@ export class PastisDropdown extends LitElement {
   };
 
   static styles = css`
-    :host { display: block; }
+    :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
 
@@ -80,7 +80,7 @@ export class PastisDropdown extends LitElement {
       left: 0;
       right: 0;
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       z-index: 1000;
       overflow: hidden;
@@ -91,7 +91,7 @@ export class PastisDropdown extends LitElement {
 
     .search-wrap {
       padding: 8px;
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       flex-shrink: 0;
     }
 
@@ -162,7 +162,7 @@ export class PastisDropdown extends LitElement {
     .error-text {
       font-size: 11px;
       font-family: var(--font-family-mono, 'Fira Code', monospace);
-      color: var(--status-error, #ed203d);
+      color: var(--status-error, #f0505e);
       text-transform: uppercase;
       letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
@@ -180,6 +180,8 @@ export class PastisDropdown extends LitElement {
     this._selectedValues = [];
     this._boundClose = this._handleOutsideClick.bind(this);
     this._focusedIndex = -1;
+    this._labelId = `pastis-dropdown-label-${Math.random().toString(36).slice(2, 9)}`;
+    this._listboxId = `pastis-dropdown-listbox-${Math.random().toString(36).slice(2, 9)}`;
   }
 
   connectedCallback() {
@@ -308,7 +310,7 @@ export class PastisDropdown extends LitElement {
 
     return html`
       <div class="field">
-        ${this.label ? html`<label>${this.label}</label>` : ''}
+        ${this.label ? html`<label id="${this._labelId}">${this.label}</label>` : ''}
         <div class="wrap">
           <div
             class="trigger"
@@ -318,6 +320,8 @@ export class PastisDropdown extends LitElement {
             role="combobox"
             aria-expanded="${this.open}"
             aria-haspopup="listbox"
+            aria-labelledby="${this.label ? this._labelId : ''}"
+            aria-controls="${this._listboxId}"
             part="trigger"
           >
             <span class="trigger-text">
@@ -343,7 +347,7 @@ export class PastisDropdown extends LitElement {
                   />
                 </div>
               ` : ''}
-              <div class="options-list" role="listbox">
+              <div class="options-list" role="listbox" id="${this._listboxId}" aria-label="${this.label || 'Options'}">
                 ${filtered.length ? filtered.map((opt, index) => html`
                   <div
                     class="option ${this._isSelected(opt) ? 'selected' : ''} ${opt.disabled ? 'disabled' : ''}"

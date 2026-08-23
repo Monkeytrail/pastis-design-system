@@ -16,7 +16,7 @@ export class PastisCard extends LitElement {
 
     .card {
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       overflow: hidden;
       transition:
@@ -32,7 +32,7 @@ export class PastisCard extends LitElement {
 
     :host([variant="outlined"]) .card {
       box-shadow: none;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
     }
 
     :host([variant="ghost"]) .card {
@@ -101,7 +101,7 @@ export class PastisCard extends LitElement {
 
     .card-footer {
       padding: 16px 24px;
-      border-top: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-top: var(--border-width, 1px) solid var(--border-default, #383c44);
       background: var(--bg-primary, #0d0d0d);
     }
 
@@ -124,6 +124,96 @@ export class PastisCard extends LitElement {
       display: block;
       width: 100%;
     }
+
+    /* ── Cover variant ─────────────────────────────────────────── */
+
+    :host([variant="cover"]) .card {
+      position: relative;
+      min-height: var(--card-cover-min-height, 320px);
+      padding: 0;
+      border-color: var(--border-default, #383c44);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .cover-bg {
+      display: none;
+    }
+
+    :host([variant="cover"]) .cover-bg {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      border-radius: inherit;
+    }
+
+    :host([variant="cover"]) .cover-bg::slotted(*),
+    :host([variant="cover"]) slot[name="media"]::slotted(*) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    :host([variant="cover"]) .cover-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.5) 45%,
+        rgba(0, 0, 0, 0.08) 100%
+      );
+    }
+
+    .cover-overlay {
+      display: none;
+    }
+
+    :host([variant="cover"]) .cover-content {
+      position: relative;
+      z-index: 2;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cover-content {
+      display: none;
+    }
+
+    :host([variant="cover"]) .cover-content .card-header {
+      padding: 0;
+    }
+
+    :host([variant="cover"]) .cover-content .card-body {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 13px;
+    }
+
+    :host([variant="cover"]) .cover-content .card-footer {
+      padding: 16px 0 0;
+      background: none;
+      border-top-color: rgba(255, 255, 255, 0.15);
+    }
+
+    :host([variant="cover"]) slot[name="header"]::slotted(*) {
+      color: var(--text-primary, #f9f4da);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    :host([variant="cover"][hoverable]) .card:hover,
+    :host([variant="cover"][clickable]) .card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-md, 5px 5px 0 #231f20);
+    }
   `;
 
   constructor() {
@@ -136,6 +226,29 @@ export class PastisCard extends LitElement {
   }
 
   render() {
+    if (this.variant === 'cover') {
+      const coverInner = html`
+        <div class="cover-bg"><slot name="media"></slot></div>
+        <div class="cover-overlay"></div>
+        <div class="cover-content">
+          <slot name="header" class="card-header"></slot>
+          <div class="card-body"><slot></slot></div>
+          <slot name="footer" class="card-footer"></slot>
+        </div>
+      `;
+      if (this.clickable) {
+        return html`
+          <button class="card" part="card" aria-pressed="${this.selected}" @click="${this._handleClick}">
+            ${coverInner}
+          </button>
+        `;
+      }
+      return html`
+        <div class="card" part="card" aria-selected="${this.selected || undefined}">
+          ${coverInner}
+        </div>
+      `;
+    }
     if (this.clickable) {
       return html`
         <button
@@ -174,14 +287,6 @@ export class PastisCard extends LitElement {
     this.dispatchEvent(
       new CustomEvent("pastis-click", { bubbles: true, composed: true }),
     );
-  }
-
-  _handleKeydown(e) {
-    if (!this.clickable) return;
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      this._handleClick();
-    }
   }
 }
 

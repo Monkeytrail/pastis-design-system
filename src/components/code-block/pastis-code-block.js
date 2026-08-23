@@ -15,7 +15,7 @@ export class PastisCodeBlock extends LitElement {
 
     .code-block {
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
       font-family: var(--font-family-mono, 'Fira Code', monospace);
       overflow: hidden;
@@ -26,7 +26,7 @@ export class PastisCodeBlock extends LitElement {
       align-items: center;
       justify-content: space-between;
       padding: 8px 14px;
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       background: var(--bg-elevated, #383c44);
       gap: 12px;
     }
@@ -51,14 +51,14 @@ export class PastisCodeBlock extends LitElement {
       text-transform: uppercase;
       letter-spacing: var(--letter-spacing-wide, 0.05em);
       color: var(--text-primary, #f9f4da);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-full, 9999px);
       padding: 1px 6px;
     }
 
     .copy-btn {
       background: none;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-sm, 4px);
       color: var(--text-primary, #f9f4da);
       font-family: var(--font-family-mono, 'Fira Code', monospace);

@@ -24,7 +24,7 @@ export class PastisCookieBanner extends LitElement {
       z-index: 9999;
       max-width: 480px;
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-lg, 8px);
       padding: 24px;
       font-family: var(--font-family-mono, 'Fira Code', monospace);
@@ -201,6 +201,7 @@ export class PastisCookieBanner extends LitElement {
     this.settingsText = 'Manage Preferences';
     this.showSettings = false;
     this._showDetails = false;
+    this._titleId = `pastis-cookie-banner-title-${Math.random().toString(36).slice(2, 9)}`;
     this.categories = [
       { id: 'necessary', name: 'Necessary', description: 'Required for the site to function.', required: true, enabled: true },
       { id: 'analytics', name: 'Analytics', description: 'Help us understand how visitors use the site.', required: false, enabled: false },
@@ -239,9 +240,9 @@ export class PastisCookieBanner extends LitElement {
 
   render() {
     return html`
-      <div class="banner" role="dialog" aria-label="Cookie consent" part="banner">
+      <div class="banner" role="region" aria-live="polite" aria-labelledby="${this._titleId}" part="banner">
         <span class="cookie-icon" aria-hidden="true">🍪</span>
-        <h2 class="banner-title">${this.title}</h2>
+        <h2 class="banner-title" id="${this._titleId}">${this.title}</h2>
         <p class="banner-message">
           ${this.message}
           ${this.privacyUrl ? html` <a class="privacy-link" href="${this.privacyUrl}" target="_blank">Privacy Policy</a>` : ''}
@@ -260,6 +261,7 @@ export class PastisCookieBanner extends LitElement {
                   : html`
                     <pastis-toggle
                       size="sm"
+                      aria-label="${cat.name}"
                       ?checked="${cat.enabled}"
                       @pastis-change="${() => this._toggleCategory(cat.id)}"
                     ></pastis-toggle>

@@ -20,7 +20,7 @@ export class PastisTable extends LitElement {
       border-collapse: collapse;
       font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 13px;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-md, 6px);
     }
 
@@ -34,7 +34,7 @@ export class PastisTable extends LitElement {
       text-transform: uppercase;
       letter-spacing: 1.5px;
       color: var(--text-primary, #f9f4da);
-      border-bottom: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
       white-space: nowrap;
     }
 
@@ -80,7 +80,7 @@ export class PastisTable extends LitElement {
     .checkbox-visual {
       width: 16px;
       height: 16px;
-      border: var(--border-width, 1px) solid var(--border-default, #fcba28);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
       border-radius: var(--radius-sm, 4px);
       background: var(--bg-primary, #0d0d0d);
       display: inline-flex;

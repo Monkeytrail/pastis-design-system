@@ -5,7 +5,7 @@ export default {
   component: 'pastis-card',
   tags: ['autodocs'],
   argTypes: {
-    variant: { control: 'select', options: ['default', 'elevated', 'outlined', 'ghost'] },
+    variant: { control: 'select', options: ['default', 'elevated', 'outlined', 'ghost', 'cover'] },
     padding: { control: 'select', options: ['none', 'sm', 'md', 'lg'] },
     hoverable: { control: 'boolean' },
     clickable: { control: 'boolean' },
@@ -42,6 +42,46 @@ export const WithFooter = {
         <pastis-button variant="primary">▶ EXECUTE</pastis-button>
       </div>
     </pastis-card>
+  `,
+};
+
+export const Cover = {
+  render: () => `
+    <pastis-card variant="cover" hoverable style="max-width:360px;--card-cover-min-height:400px;">
+      <img
+        slot="media"
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=720&q=80"
+        alt="Mountain landscape at dusk"
+        style="width:100%;height:100%;object-fit:cover;display:block;"
+      />
+      <h3 slot="header" style="font-size:20px;font-weight:700;margin:0">SECTOR 7 — MOUNTAIN PASS</h3>
+      <p style="margin:4px 0 0;font-size:13px;">ELEVATION 3,400M — HOSTILE TERRAIN DETECTED</p>
+      <div slot="footer" style="display:flex;gap:8px;justify-content:flex-end">
+        <pastis-button variant="primary">▶ DEPLOY</pastis-button>
+      </div>
+    </pastis-card>
+  `,
+};
+
+export const CoverGrid = {
+  render: () => `
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px;max-width:1000px;background:#000000;">
+      <pastis-card variant="cover" hoverable style="--card-cover-min-height:280px;">
+        <img slot="media" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=480&q=70" alt="Mountain" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        <h3 slot="header" style="font-size:16px;font-weight:700;margin:0">MOUNTAIN PASS</h3>
+        <p style="margin:4px 0 0;font-size:12px;">ELEVATION 3,400M</p>
+      </pastis-card>
+      <pastis-card variant="cover" hoverable style="--card-cover-min-height:280px;">
+        <img slot="media" src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=480&q=70" alt="Forest" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        <h3 slot="header" style="font-size:16px;font-weight:700;margin:0">DEEP FOREST</h3>
+        <p style="margin:4px 0 0;font-size:12px;">SECTOR 12 — DENSE CANOPY</p>
+      </pastis-card>
+      <pastis-card variant="cover" hoverable style="--card-cover-min-height:280px;">
+        <img slot="media" src="https://images.unsplash.com/photo-1510784722466-f2aa240477b8?w=480&q=70" alt="Desert" style="width:100%;height:100%;object-fit:cover;display:block;" />
+        <h3 slot="header" style="font-size:16px;font-weight:700;margin:0">ARID ZONE</h3>
+        <p style="margin:4px 0 0;font-size:12px;">SECTOR 9 — EXTREME HEAT</p>
+      </pastis-card>
+    </div>
   `,
 };
 

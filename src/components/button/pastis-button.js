@@ -22,7 +22,7 @@ export class PastisButton extends LitElement {
       text-transform: uppercase;
       letter-spacing: 0.05em;
       border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
-      border-radius: var(--radius-md, 6px);
+      border-radius: var(--radius-2xl, 24px);
       cursor: pointer;
       text-decoration: none;
       transition: box-shadow 120ms ease, transform 80ms ease;

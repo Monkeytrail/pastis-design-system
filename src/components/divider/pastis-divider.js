@@ -43,7 +43,7 @@ export class PastisDivider extends LitElement {
 
     .line {
       flex: 1;
-      background: var(--border-default, #fcba28);
+      background: var(--border-default, #383c44);
     }
 
     :host(:not([orientation])) .line,
@@ -76,7 +76,7 @@ export class PastisDivider extends LitElement {
 
     :host([variant="dotted"]) .line {
       background: none;
-      border-top: var(--border-width, 1px) dotted var(--border-default, #fcba28);
+      border-top: var(--border-width, 1px) dotted var(--border-default, #383c44);
       height: 0;
     }
 
@@ -109,17 +109,25 @@ export class PastisDivider extends LitElement {
     this.variant = 'solid';
   }
 
+  _hasSlottedContent() {
+    if (this.querySelector('*')) return true;
+    return Array.from(this.childNodes).some(
+      n => n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0
+    );
+  }
+
   render() {
     const lineStyle = [
       this.color ? `background:${this.color};border-color:${this.color}` : '',
       this.thickness ? `height:${this.thickness};width:${this.thickness}` : '',
     ].filter(Boolean).join(';');
+    const hasContent = this.label || this._hasSlottedContent();
 
     return html`
       <div class="divider" role="separator" aria-orientation="${this.orientation || 'horizontal'}" part="divider">
         <span class="line" style="${lineStyle}"></span>
         ${this.label ? html`<span class="label">${this.label}</span>` : html`<slot></slot>`}
-        ${this.label || this.querySelector('*') ? html`<span class="line" style="${lineStyle}"></span>` : ''}
+        ${hasContent ? html`<span class="line" style="${lineStyle}"></span>` : ''}
       </div>
     `;
   }
