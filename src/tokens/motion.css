@@ -1,0 +1,31 @@
+:root {
+  /* ── Durations ── */
+  --duration-instant: 80ms;
+  --duration-fast:    120ms;
+  --duration-base:    200ms;
+  --duration-slow:    400ms;
+  --duration-reveal:  700ms;
+
+  /* ── Easing ── */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit:     cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* ── Composite ── */
+  --transition-fast: var(--duration-fast) var(--ease-standard);
+  --transition-base: var(--duration-base) var(--ease-standard);
+
+  /* ── Reveal distance for scroll-in motion ── */
+  --motion-reveal-offset: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0ms;
+    --duration-fast:    0ms;
+    --duration-base:    0ms;
+    --duration-slow:    0ms;
+    --duration-reveal:  0ms;
+    --motion-reveal-offset: 0px;
+  }
+}

@@ -45,4 +45,11 @@
   --grid-gutter:        24px;
   --grid-margin:        40px;
   --grid-margin-mobile: 16px;
+
+  /* ── Layout ── */
+  --container-prose:  680px;
+  --container-wide:   1200px;
+  --container-full:   1600px;
+  --layout-gutter:    clamp(16px, 4vw, 40px);
+  --section-gap:      clamp(64px, 10vw, 160px);
 }

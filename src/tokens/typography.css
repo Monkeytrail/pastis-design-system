@@ -1,9 +1,16 @@
 :root {
   /* ── Fonts ── */
-  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-display: 'Bricolage Grotesque', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-family-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-family-mono:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-family:         var(--font-family-mono); /* component default */
+
+  /* ── Fluid Statement Scale (editorial headlines, 375px → 1440px) ── */
+  --font-size-statement-xl: clamp(3rem, 1.5rem + 6.4vw, 8.5rem);
+  --font-size-statement-lg: clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem);
+  --font-size-statement-md: clamp(1.75rem, 1.3rem + 1.9vw, 3.25rem);
+  --line-height-statement:  0.95;
+  --letter-spacing-statement: -0.035em;
 
   /* ── Size Scale (Pastis) ── */
   --font-size-display: 56px;
