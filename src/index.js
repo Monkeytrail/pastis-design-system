@@ -37,3 +37,7 @@ export * from './components/testimonial/pastis-testimonial.js';
 export * from './components/section/pastis-section.js';
 export * from './components/footer/pastis-footer.js';
 export * from './components/nav/pastis-nav.js';
+export * from './components/project-card/pastis-project-card.js';
+export * from './components/statement/pastis-statement.js';
+export * from './components/token-swatch/pastis-token-swatch.js';
+export * from './components/spec-table/pastis-spec-table.js';

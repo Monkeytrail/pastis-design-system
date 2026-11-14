@@ -16,3 +16,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Accent emphasis inside <pastis-statement>; lives in light DOM CSS because
+   ::slotted() can't style descendants of slotted nodes. */
+pastis-statement em {
+  font-style: normal;
+  color: var(--action-primary);
+}

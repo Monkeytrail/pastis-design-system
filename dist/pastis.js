@@ -3523,7 +3523,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </span>
         `:``}
       </label>
-    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Ve);var $=class extends J{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Ve);var He=class extends J{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .stat-card {
@@ -3604,7 +3604,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-stat-card`,$);var He=class extends J{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-stat-card`,He);var Ue=class extends J{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
     :host { display: block; overflow-x: auto; }
 
     table {
@@ -3759,7 +3759,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-table`,He);var Ue=class extends J{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
+    `}};customElements.define(`pastis-table`,Ue);var We=class extends J{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
     :host { display: block; }
 
     .code-block {
@@ -3884,7 +3884,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </slot></pre>
         </div>
       </div>
-    `}};customElements.define(`pastis-code-block`,Ue);var We=class extends J{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-code-block`,We);var Ge=class extends J{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .empty-state {
@@ -3991,7 +3991,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         `:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-empty-state`,We);var Ge=class extends J{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=s`
+    `}};customElements.define(`pastis-empty-state`,Ge);var Ke=class extends J{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=s`
     :host { display: inline-block; }
 
     .chip {
@@ -4098,7 +4098,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="remove" @click=${this._remove} aria-label="Remove ${e}" ?disabled=${this.disabled}>✕</button>
         `:``}
       </span>
-    `}};customElements.define(`pastis-filter-chip`,Ge);var Ke=class extends J{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-chip`,Ke);var qe=class extends J{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
     :host { display: block; }
 
     .filter-bar {
@@ -4153,7 +4153,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
         `:``}
       </div>
-    `}};customElements.define(`pastis-filter-bar`,Ke);var qe=class extends J{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-bar`,qe);var Je=class extends J{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
     :host { display: inline-block; }
 
     button {
@@ -4195,7 +4195,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <span class="icon" aria-hidden="true">${t}</span>
         ${this.label?L`<span class="label-text">${n} Mode</span>`:``}
       </button>
-    `}};customElements.define(`pastis-theme-toggle`,qe);var Je=class extends J{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-theme-toggle`,Je);var $=class extends J{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
     :host { display: block; }
 
     .carousel {
@@ -4438,7 +4438,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-carousel`,Je);var Ye=class extends J{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-carousel`,$);var Ye=class extends J{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .timeline {
@@ -5046,13 +5046,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       z-index: 100;
     }
 
-    :host([sticky]) nav {
+    /* Stick the host, not the inner nav — a sticky child can't outlive its host box */
+    :host([sticky]) {
       position: sticky;
       top: 0;
+      z-index: 100;
     }
 
     :host([variant="minimal"]) nav {
       background: transparent;
+      border-bottom-color: var(--border-subtle, #383c44);
+    }
+
+    :host([variant="overlay"]) nav {
+      background: color-mix(in srgb, var(--bg-primary, #0d0d0d) 72%, transparent);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
       border-bottom-color: var(--border-subtle, #383c44);
     }
 
@@ -5430,4 +5439,401 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};return customElements.define(`pastis-nav`,$e),e.PastisAccordion=Ae,e.PastisAlert=Se,e.PastisAvatar=be,e.PastisBadge=ye,e.PastisBreadcrumb=je,e.PastisButton=Y,e.PastisCard=xe,e.PastisCarousel=Je,e.PastisCheckbox=Z,e.PastisCodeBlock=Ue,e.PastisCookieBanner=Be,e.PastisDivider=Fe,e.PastisDrawer=Re,e.PastisDropdown=Oe,e.PastisEmptyState=We,e.PastisFileUpload=ze,e.PastisFilterBar=Ke,e.PastisFilterChip=Ge,e.PastisFooter=Qe,e.PastisHero=Ie,e.PastisInput=X,e.PastisModal=Ce,e.PastisNav=$e,e.PastisPagination=Me,e.PastisProgress=Ne,e.PastisRadio=Ve,e.PastisSearch=Le,e.PastisSection=Ze,e.PastisSkeleton=Ee,e.PastisSpinner=Te,e.PastisStatCard=$,e.PastisTable=He,e.PastisTabs=ke,e.PastisTag=Pe,e.PastisTestimonial=Xe,e.PastisThemeToggle=qe,e.PastisTimeline=Ye,e.PastisToast=we,e.PastisToggle=ve,e.PastisTooltip=De,e})({});
+    `}};customElements.define(`pastis-nav`,$e);var et=class extends J{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0}};static styles=s`
+    :host {
+      display: block;
+      --_ratio: 1 / 1;
+    }
+
+    :host([size="wide"]) { --_ratio: 16 / 9; }
+    :host([size="tall"]) { --_ratio: 4 / 5; }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--text-primary, #f9f4da);
+      text-decoration: none;
+      font-family: var(--font-family-mono, 'JetBrains Mono', monospace);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 6px;
+      border-radius: var(--radius-md, 6px);
+    }
+
+    .media {
+      position: relative;
+      aspect-ratio: var(--_ratio);
+      overflow: hidden;
+      border-radius: var(--radius-md, 6px);
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-subtle, #1e1e1e);
+      transition: box-shadow var(--duration-base, 200ms) var(--ease-standard, ease);
+    }
+
+    .media img,
+    .media video,
+    ::slotted([slot="media"]) {
+      position: absolute !important;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+      transform: scale(1.001);
+      transition: transform var(--duration-slow, 400ms) var(--ease-enter, ease);
+    }
+
+    a:hover .media,
+    a:focus-visible .media {
+      box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28);
+    }
+
+    a:hover .media img,
+    a:hover .media video,
+    a:hover ::slotted([slot="media"]) {
+      transform: scale(1.035);
+    }
+
+    .tags {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      right: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition:
+        opacity var(--duration-base, 200ms) var(--ease-standard, ease),
+        transform var(--duration-base, 200ms) var(--ease-standard, ease);
+    }
+
+    a:hover .tags,
+    a:focus-visible .tags {
+      opacity: 1;
+      transform: none;
+    }
+
+    .tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      padding: 4px 9px;
+      border-radius: var(--radius-full, 9999px);
+      background: var(--bg-primary, #0d0d0d);
+      color: var(--text-primary, #f9f4da);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .index,
+    .year,
+    .client {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-tertiary, #909498);
+    }
+
+    .title {
+      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
+      font-size: clamp(20px, 1.2rem + 0.6vw, 28px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin: 0;
+    }
+
+    .arrow {
+      display: inline-block;
+      color: var(--action-primary, #fcba28);
+      transform: translateX(-4px);
+      opacity: 0;
+      transition:
+        opacity var(--duration-base, 200ms) var(--ease-standard, ease),
+        transform var(--duration-base, 200ms) var(--ease-standard, ease);
+    }
+
+    a:hover .arrow,
+    a:focus-visible .arrow {
+      opacity: 1;
+      transform: none;
+    }
+
+    .summary {
+      margin: 4px 0 0;
+      font-family: var(--font-family-body, 'Inter', sans-serif);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-tertiary, #909498);
+    }
+
+    /* Touch devices never see hover — keep tags visible */
+    @media (hover: none) {
+      .tags { opacity: 1; transform: none; }
+    }
+  `;constructor(){super(),this.tags=[],this.size=`square`}willUpdate(){if(typeof this.tags==`string`)try{this.tags=JSON.parse(this.tags)}catch{this.tags=[]}}_renderMedia(){return this.video?L`<video src=${this.video} poster=${this.image||``} autoplay muted loop playsinline aria-hidden="true"></video>`:this.image?L`<img src=${this.image} alt=${this.imageAlt||``} loading="lazy" decoding="async" />`:``}render(){return L`
+      <a href=${this.href||`#`} part="link">
+        <div class="media" part="media">
+          <slot name="media">${this._renderMedia()}</slot>
+          ${this.tags?.length?L`
+            <div class="tags" aria-hidden="true">
+              ${this.tags.map(e=>L`<span class="tag">${e}</span>`)}
+            </div>
+          `:``}
+        </div>
+        <div>
+          <div class="meta">
+            ${this.index?L`<span class="index">${this.index}</span>`:L`<span></span>`}
+            <span class="client">${this.client||``}</span>
+            ${this.year?L`<span class="year">${this.year}</span>`:``}
+          </div>
+          <h3 class="title">${this.heading||``} <span class="arrow" aria-hidden="true">→</span></h3>
+          ${this.summary?L`<p class="summary">${this.summary}</p>`:``}
+        </div>
+      </a>
+    `}};customElements.define(`pastis-project-card`,et);var tt=class extends J{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
+    :host {
+      display: block;
+      --_size: var(--font-size-statement-lg, clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem));
+    }
+
+    :host([size="md"]) { --_size: var(--font-size-statement-md, clamp(1.75rem, 1.3rem + 1.9vw, 3.25rem)); }
+    :host([size="xl"]) { --_size: var(--font-size-statement-xl, clamp(3rem, 1.5rem + 6.4vw, 8.5rem)); }
+
+    .eyebrow {
+      display: block;
+      margin-bottom: 20px;
+      font-family: var(--font-family-mono, 'JetBrains Mono', monospace);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-tertiary, #909498);
+    }
+
+    .body {
+      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
+      font-size: var(--_size);
+      font-weight: 600;
+      line-height: var(--line-height-statement, 0.95);
+      letter-spacing: var(--letter-spacing-statement, -0.035em);
+      color: var(--text-primary, #f9f4da);
+      text-wrap: balance;
+    }
+
+    ::slotted(*) {
+      font: inherit !important;
+      letter-spacing: inherit !important;
+      color: inherit;
+      margin: 0 !important;
+    }
+
+    /* Nested <em> accents can't be reached through ::slotted — consumers load
+       this from pastis-tokens.css (see tokens/index.css). */
+    ::slotted(em) {
+      font-style: normal;
+      color: var(--action-primary, #fcba28);
+    }
+
+    :host([reveal]) .eyebrow,
+    :host([reveal]) .body {
+      opacity: 0;
+      transform: translateY(var(--motion-reveal-offset, 24px));
+      transition:
+        opacity var(--duration-reveal, 700ms) var(--ease-enter, ease),
+        transform var(--duration-reveal, 700ms) var(--ease-enter, ease);
+    }
+
+    :host([reveal]) .body { transition-delay: 80ms; }
+
+    :host([reveal]) .visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :host([reveal]) .eyebrow,
+      :host([reveal]) .body {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return L`
+      ${this.eyebrow?L`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
+      <div class="body ${e}" part="body"><slot></slot></div>
+    `}};customElements.define(`pastis-statement`,tt);var nt=class extends J{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
+    :host { display: block; }
+
+    figure {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
+      border-radius: var(--radius-md, 6px);
+      overflow: hidden;
+      background: var(--bg-card, #1e1e1e);
+      font-family: var(--font-family-mono, 'JetBrains Mono', monospace);
+    }
+
+    .chip {
+      aspect-ratio: 3 / 2;
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
+      transition: background var(--duration-base, 200ms) var(--ease-standard, ease);
+    }
+
+    figcaption {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px 12px;
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary, #f9f4da);
+    }
+
+    .token,
+    .value {
+      font-size: 11px;
+      color: var(--text-tertiary, #909498);
+      overflow-wrap: anywhere;
+    }
+  `;connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`token`)&&this._read()}_read(){this.token&&(this._value=getComputedStyle(document.documentElement).getPropertyValue(this.token).trim())}render(){return L`
+      <figure part="swatch">
+        <div class="chip" style="background: var(${this.token})" aria-hidden="true"></div>
+        <figcaption>
+          <span class="label">${this.label||this.token}</span>
+          <code class="token">${this.token}</code>
+          <code class="value">${this._value||`—`}</code>
+        </figcaption>
+      </figure>
+    `}};customElements.define(`pastis-token-swatch`,nt);var rt=class extends J{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
+    :host { display: block; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-family-mono, 'JetBrains Mono', monospace);
+      font-size: 12px;
+      color: var(--text-primary, #f9f4da);
+    }
+
+    caption {
+      text-align: left;
+      padding-bottom: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-tertiary, #909498);
+    }
+
+    th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-tertiary, #909498);
+      padding: 8px 12px 8px 0;
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
+    }
+
+    td {
+      padding: 14px 12px 14px 0;
+      border-bottom: var(--border-width, 1px) solid var(--border-subtle, #1e1e1e);
+      vertical-align: middle;
+    }
+
+    td.value { color: var(--text-tertiary, #909498); white-space: nowrap; }
+
+    .preview { width: 55%; }
+
+    .type-sample {
+      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .bar {
+      height: 10px;
+      background: var(--action-primary, #fcba28);
+      border-radius: var(--radius-xs, 2px);
+    }
+
+    .radius {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--action-primary, #fcba28);
+      background: var(--bg-card, #1e1e1e);
+    }
+
+    .motion {
+      position: relative;
+      height: 10px;
+      background: var(--bg-elevated, #262522);
+      border-radius: var(--radius-full, 9999px);
+    }
+
+    .motion::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--action-primary, #fcba28);
+      transition-property: left;
+      transition-duration: var(--_d);
+      transition-timing-function: var(--ease-standard, ease);
+    }
+
+    tr:hover .motion::after { left: calc(100% - 10px); }
+
+    .color {
+      width: 48px;
+      height: 24px;
+      border-radius: var(--radius-sm, 4px);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
+    }
+
+    @media (max-width: 560px) {
+      td.value { display: none; }
+      th.value { display: none; }
+    }
+  `;constructor(){super(),this.tokens=[],this.kind=`space`,this.sample=`Design systems, Figma ↔ code`,this._values={}}willUpdate(){if(typeof this.tokens==`string`)try{this.tokens=JSON.parse(this.tokens)}catch{this.tokens=[]}}connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`tokens`)&&this._read()}_read(){let e=getComputedStyle(document.documentElement);this._values=Object.fromEntries((Array.isArray(this.tokens)?this.tokens:[]).map(t=>[t,e.getPropertyValue(t).trim()]))}_renderPreview(e){switch(this.kind){case`type`:return L`<div class="type-sample" style="font-size: var(${e})">${this.sample}</div>`;case`radius`:return L`<div class="radius" style="border-radius: var(${e})"></div>`;case`motion`:return L`<div class="motion" style="--_d: var(${e})"></div>`;case`color`:return L`<div class="color" style="background: var(${e})"></div>`;default:return L`<div class="bar" style="width: var(${e})"></div>`}}render(){return L`
+      <table part="table">
+        ${this.caption?L`<caption>${this.caption}</caption>`:``}
+        <thead>
+          <tr>
+            <th scope="col">Token</th>
+            <th scope="col" class="value">Value</th>
+            <th scope="col" class="preview">Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${(this.tokens||[]).map(e=>L`
+            <tr>
+              <td><code>${e}</code></td>
+              <td class="value"><code>${this._values[e]||`—`}</code></td>
+              <td class="preview">${this._renderPreview(e)}</td>
+            </tr>
+          `)}
+        </tbody>
+      </table>
+    `}};return customElements.define(`pastis-spec-table`,rt),e.PastisAccordion=Ae,e.PastisAlert=Se,e.PastisAvatar=be,e.PastisBadge=ye,e.PastisBreadcrumb=je,e.PastisButton=Y,e.PastisCard=xe,e.PastisCarousel=$,e.PastisCheckbox=Z,e.PastisCodeBlock=We,e.PastisCookieBanner=Be,e.PastisDivider=Fe,e.PastisDrawer=Re,e.PastisDropdown=Oe,e.PastisEmptyState=Ge,e.PastisFileUpload=ze,e.PastisFilterBar=qe,e.PastisFilterChip=Ke,e.PastisFooter=Qe,e.PastisHero=Ie,e.PastisInput=X,e.PastisModal=Ce,e.PastisNav=$e,e.PastisPagination=Me,e.PastisProgress=Ne,e.PastisProjectCard=et,e.PastisRadio=Ve,e.PastisSearch=Le,e.PastisSection=Ze,e.PastisSkeleton=Ee,e.PastisSpecTable=rt,e.PastisSpinner=Te,e.PastisStatCard=He,e.PastisStatement=tt,e.PastisTable=Ue,e.PastisTabs=ke,e.PastisTag=Pe,e.PastisTestimonial=Xe,e.PastisThemeToggle=Je,e.PastisTimeline=Ye,e.PastisToast=we,e.PastisToggle=ve,e.PastisTokenSwatch=nt,e.PastisTooltip=De,e})({});

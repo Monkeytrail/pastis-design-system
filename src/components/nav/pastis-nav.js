@@ -6,7 +6,7 @@ export class PastisNav extends LitElement {
     items:       { type: Array },
     active:      { type: String },
     sticky:      { type: Boolean, reflect: true },
-    variant:     { type: String, reflect: true }, // 'default' | 'minimal'
+    variant:     { type: String, reflect: true }, // 'default' | 'minimal' | 'overlay'
     _mobileOpen: { state: true },
     _openDropdown: { state: true },
   };
@@ -28,13 +28,22 @@ export class PastisNav extends LitElement {
       z-index: 100;
     }
 
-    :host([sticky]) nav {
+    /* Stick the host, not the inner nav — a sticky child can't outlive its host box */
+    :host([sticky]) {
       position: sticky;
       top: 0;
+      z-index: 100;
     }
 
     :host([variant="minimal"]) nav {
       background: transparent;
+      border-bottom-color: var(--border-subtle, #383c44);
+    }
+
+    :host([variant="overlay"]) nav {
+      background: color-mix(in srgb, var(--bg-primary, #0d0d0d) 72%, transparent);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
       border-bottom-color: var(--border-subtle, #383c44);
     }
 
