@@ -5439,7 +5439,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};customElements.define(`pastis-nav`,$e);var et=class extends J{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-nav`,$e);var et=class extends J{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
     :host {
       display: block;
       --_ratio: 1 / 1;
@@ -5463,14 +5463,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       border-radius: var(--radius-md, 6px);
     }
 
+    /* Perspective lives on the parent so the media can lean in 3D */
+    .stage { perspective: 1500px; }
+
     .media {
       position: relative;
-      aspect-ratio: var(--_ratio);
+      aspect-ratio: var(--pastis-project-card-ratio, var(--_ratio));
       overflow: hidden;
       border-radius: var(--radius-md, 6px);
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-subtle, #1e1e1e);
-      transition: box-shadow var(--duration-base, 200ms) var(--ease-standard, ease);
+      clip-path: inset(0 0 0 0 round var(--radius-md, 6px));
+      transform-origin: center bottom;
+      will-change: transform;
+      transition:
+        transform var(--duration-tilt, 800ms) var(--ease-out-expo, cubic-bezier(0.19, 1, 0.22, 1)),
+        clip-path var(--duration-tilt, 800ms) var(--ease-out-expo, cubic-bezier(0.19, 1, 0.22, 1)),
+        opacity var(--duration-base, 200ms) var(--ease-standard, ease);
     }
 
     .media img,
@@ -5481,19 +5489,41 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       width: 100% !important;
       height: 100% !important;
       object-fit: cover;
-      transform: scale(1.001);
-      transition: transform var(--duration-slow, 400ms) var(--ease-enter, ease);
     }
 
-    a:hover .media,
-    a:focus-visible .media {
-      box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28);
+    /* Hover: the card leans its top edge toward the viewer; pressing flattens it */
+    @media (any-pointer: fine) {
+      a:hover .media { transform: rotateX(-10deg); }
+      a:hover:active .media { transform: rotateX(0deg); }
     }
 
-    a:hover .media img,
-    a:hover .media video,
-    a:hover ::slotted([slot="media"]) {
-      transform: scale(1.035);
+    a:focus-visible .media { transform: rotateX(-10deg); }
+    a:focus-visible:active .media { transform: rotateX(0deg); }
+
+    /* Entrance: rise out of a clip mask while untilting */
+    :host([reveal]:not([revealed])) .media {
+      clip-path: inset(100% 0 0 0 round var(--radius-md, 6px));
+      opacity: 0;
+      transform: rotateX(50deg);
+    }
+
+    :host([reveal]:not([revealed])) .info { opacity: 0; }
+
+    .info {
+      transition: opacity var(--duration-slow, 400ms) var(--ease-standard, ease) 150ms;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      a:hover .media,
+      a:focus-visible .media { transform: none; }
+
+      :host([reveal]:not([revealed])) .media {
+        clip-path: inset(0 0 0 0 round var(--radius-md, 6px));
+        opacity: 1;
+        transform: none;
+      }
+
+      :host([reveal]:not([revealed])) .info { opacity: 1; }
     }
 
     .tags {
@@ -5553,6 +5583,8 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       line-height: 1.15;
       letter-spacing: -0.015em;
       margin: 0;
+      /* Reserve lines (e.g. 2) so media bottoms line up across cards in a row */
+      min-height: calc(var(--pastis-project-card-title-lines, 0) * 1.15em);
     }
 
     .arrow {
@@ -5577,23 +5609,26 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       font-size: 15px;
       line-height: 1.5;
       color: var(--text-tertiary, #909498);
+      min-height: calc(var(--pastis-project-card-summary-lines, 0) * 1.5em);
     }
 
     /* Touch devices never see hover — keep tags visible */
     @media (hover: none) {
       .tags { opacity: 1; transform: none; }
     }
-  `;constructor(){super(),this.tags=[],this.size=`square`}willUpdate(){if(typeof this.tags==`string`)try{this.tags=JSON.parse(this.tags)}catch{this.tags=[]}}_renderMedia(){return this.video?L`<video src=${this.video} poster=${this.image||``} autoplay muted loop playsinline aria-hidden="true"></video>`:this.image?L`<img src=${this.image} alt=${this.imageAlt||``} loading="lazy" decoding="async" />`:``}render(){return L`
+  `;constructor(){super(),this.tags=[],this.size=`square`}willUpdate(){if(typeof this.tags==`string`)try{this.tags=JSON.parse(this.tags)}catch{this.tags=[]}}updated(e){e.has(`reveal`)&&this.reveal&&!this.revealed&&!this._observer&&(this._observer=new IntersectionObserver(e=>{if(!e.some(e=>e.isIntersecting))return;this._observer.disconnect();let t=parseFloat(getComputedStyle(this).getPropertyValue(`--pastis-reveal-delay`))||0;setTimeout(()=>{this.revealed=!0},t)},{threshold:.2}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}_renderMedia(){return this.video?L`<video src=${this.video} poster=${this.image||``} autoplay muted loop playsinline aria-hidden="true"></video>`:this.image?L`<img src=${this.image} alt=${this.imageAlt||``} loading="lazy" decoding="async" />`:``}render(){return L`
       <a href=${this.href||`#`} part="link">
-        <div class="media" part="media">
-          <slot name="media">${this._renderMedia()}</slot>
-          ${this.tags?.length?L`
-            <div class="tags" aria-hidden="true">
-              ${this.tags.map(e=>L`<span class="tag">${e}</span>`)}
-            </div>
-          `:``}
+        <div class="stage">
+          <div class="media" part="media">
+            <slot name="media">${this._renderMedia()}</slot>
+            ${this.tags?.length?L`
+              <div class="tags" aria-hidden="true">
+                ${this.tags.map(e=>L`<span class="tag">${e}</span>`)}
+              </div>
+            `:``}
+          </div>
         </div>
-        <div>
+        <div class="info">
           <div class="meta">
             ${this.index?L`<span class="index">${this.index}</span>`:L`<span></span>`}
             <span class="client">${this.client||``}</span>
@@ -5836,4 +5871,120 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};return customElements.define(`pastis-spec-table`,rt),e.PastisAccordion=Ae,e.PastisAlert=Se,e.PastisAvatar=be,e.PastisBadge=ye,e.PastisBreadcrumb=je,e.PastisButton=Y,e.PastisCard=xe,e.PastisCarousel=$,e.PastisCheckbox=Z,e.PastisCodeBlock=We,e.PastisCookieBanner=Be,e.PastisDivider=Fe,e.PastisDrawer=Re,e.PastisDropdown=Oe,e.PastisEmptyState=Ge,e.PastisFileUpload=ze,e.PastisFilterBar=qe,e.PastisFilterChip=Ke,e.PastisFooter=Qe,e.PastisHero=Ie,e.PastisInput=X,e.PastisModal=Ce,e.PastisNav=$e,e.PastisPagination=Me,e.PastisProgress=Ne,e.PastisProjectCard=et,e.PastisRadio=Ve,e.PastisSearch=Le,e.PastisSection=Ze,e.PastisSkeleton=Ee,e.PastisSpecTable=rt,e.PastisSpinner=Te,e.PastisStatCard=He,e.PastisStatement=tt,e.PastisTable=Ue,e.PastisTabs=ke,e.PastisTag=Pe,e.PastisTestimonial=Xe,e.PastisThemeToggle=Je,e.PastisTimeline=Ye,e.PastisToast=we,e.PastisToggle=ve,e.PastisTokenSwatch=nt,e.PastisTooltip=De,e})({});
+    `}};customElements.define(`pastis-spec-table`,rt);var it=class extends J{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
+    :host {
+      display: block;
+      --_inset: var(--pastis-shelf-inset, var(--layout-gutter, 24px));
+      --_gap: var(--pastis-shelf-gap, 16px);
+    }
+
+    .track {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--_gap);
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: var(--_inset);
+      padding-inline: var(--_inset);
+      /* Room for the hover tilt so it isn't clipped by the scroller */
+      padding-block: 48px 8px;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+
+    .track::-webkit-scrollbar { display: none; }
+
+    .track.dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      user-select: none;
+    }
+
+    ::slotted(*) {
+      flex: 0 0 var(--pastis-shelf-item-width, clamp(260px, 26vw, 380px));
+      scroll-snap-align: start;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+      padding-inline: var(--_inset);
+    }
+
+    .progress {
+      flex: 1;
+      height: 2px;
+      background: var(--border-default, #383c44);
+      border-radius: var(--radius-full, 9999px);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--action-primary, #fcba28);
+      transform-origin: left center;
+      transition: transform var(--duration-fast, 120ms) linear;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full, 9999px);
+      border: var(--border-width, 1px) solid var(--border-default, #383c44);
+      background: transparent;
+      color: var(--text-primary, #f9f4da);
+      font-family: var(--font-family-mono, 'JetBrains Mono', monospace);
+      font-size: 16px;
+      cursor: pointer;
+      transition:
+        border-color var(--duration-fast, 120ms) var(--ease-standard, ease),
+        opacity var(--duration-fast, 120ms) var(--ease-standard, ease),
+        transform var(--duration-tilt, 800ms) var(--ease-out-expo, ease);
+    }
+
+    button:hover:not(:disabled) { border-color: var(--action-primary, #fcba28); }
+    button:active:not(:disabled) { transform: scale(0.92); }
+
+    button:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
+
+    button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    @media (hover: none) {
+      .track { cursor: auto; }
+    }
+  `;constructor(){super(),this.label=`Carousel`,this.stagger=90,this._progress=0,this._atStart=!0,this._atEnd=!1,this._dragging=!1,this._drag=null,this._suppressClick=!1}get _track(){return this.renderRoot?.querySelector(`.track`)}firstUpdated(){this._resizeObserver=new ResizeObserver(()=>this._updateScrollState()),this._resizeObserver.observe(this._track)}disconnectedCallback(){super.disconnectedCallback(),this._resizeObserver?.disconnect()}_onSlotChange(e){e.target.assignedElements().forEach((e,t)=>e.style.setProperty(`--pastis-reveal-delay`,`${t*this.stagger}ms`)),this._updateScrollState()}_updateScrollState(){let e=this._track;if(!e)return;let t=e.scrollWidth-e.clientWidth;this._progress=t>0?e.scrollLeft/t:1,this._atStart=e.scrollLeft<=1,this._atEnd=e.scrollLeft>=t-1}_scrollByPage(e){let t=this._track,n=this.querySelector(`:scope > *`),r=n?n.getBoundingClientRect().width+parseFloat(getComputedStyle(t).columnGap||0):t.clientWidth,i=Math.max(1,Math.floor((t.clientWidth-1)/r)),a=!window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;t.scrollBy({left:e*i*r,behavior:a?`smooth`:`auto`})}_onPointerDown(e){e.pointerType!==`mouse`||e.button!==0||(this._drag={x:e.clientX,scrollLeft:this._track.scrollLeft,moved:!1})}_onPointerMove(e){if(!this._drag)return;let t=e.clientX-this._drag.x;!this._drag.moved&&Math.abs(t)<5||(this._drag.moved||(this._drag.moved=!0,this._dragging=!0,this._track.setPointerCapture(e.pointerId)),this._track.scrollLeft=this._drag.scrollLeft-t)}_onPointerUp(){if(!this._drag)return;let{moved:e,scrollLeft:t}=this._drag;if(this._drag=null,!e)return;this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),this._snapToNearest(this._track.scrollLeft>t?1:-1);let n=()=>{this._dragging=!1};this._track.addEventListener(`scrollend`,n,{once:!0}),setTimeout(n,700)}_snapToNearest(e){let t=this._track,n=parseFloat(getComputedStyle(t).scrollPaddingInlineStart)||0,r=t.getBoundingClientRect().left,i=[...this.children].map(e=>e.getBoundingClientRect().left-r-n),a=e>0?i.find(e=>e>8)??i.at(-1):[...i].reverse().find(e=>e<-8)??i[0];a!==void 0&&t.scrollBy({left:a,behavior:`smooth`})}_onClickCapture(e){this._suppressClick&&(e.preventDefault(),e.stopPropagation())}render(){return L`
+      <div
+        class="track ${this._dragging?`dragging`:``}"
+        part="track"
+        role="region"
+        aria-label=${this.label}
+        @scroll=${this._updateScrollState}
+        @pointerdown=${this._onPointerDown}
+        @pointermove=${this._onPointerMove}
+        @pointerup=${this._onPointerUp}
+        @pointercancel=${this._onPointerUp}
+        @click=${{handleEvent:e=>this._onClickCapture(e),capture:!0}}
+        @dragstart=${e=>e.preventDefault()}
+      >
+        <slot @slotchange=${this._onSlotChange}></slot>
+      </div>
+      <div class="controls" part="controls">
+        <div class="progress" aria-hidden="true">
+          <div class="progress-bar" style="transform: scaleX(${Math.max(this._progress,.04)})"></div>
+        </div>
+        <button aria-label="Previous" ?disabled=${this._atStart} @click=${()=>this._scrollByPage(-1)}>←</button>
+        <button aria-label="Next" ?disabled=${this._atEnd} @click=${()=>this._scrollByPage(1)}>→</button>
+      </div>
+    `}};return customElements.define(`pastis-shelf`,it),e.PastisAccordion=Ae,e.PastisAlert=Se,e.PastisAvatar=be,e.PastisBadge=ye,e.PastisBreadcrumb=je,e.PastisButton=Y,e.PastisCard=xe,e.PastisCarousel=$,e.PastisCheckbox=Z,e.PastisCodeBlock=We,e.PastisCookieBanner=Be,e.PastisDivider=Fe,e.PastisDrawer=Re,e.PastisDropdown=Oe,e.PastisEmptyState=Ge,e.PastisFileUpload=ze,e.PastisFilterBar=qe,e.PastisFilterChip=Ke,e.PastisFooter=Qe,e.PastisHero=Ie,e.PastisInput=X,e.PastisModal=Ce,e.PastisNav=$e,e.PastisPagination=Me,e.PastisProgress=Ne,e.PastisProjectCard=et,e.PastisRadio=Ve,e.PastisSearch=Le,e.PastisSection=Ze,e.PastisShelf=it,e.PastisSkeleton=Ee,e.PastisSpecTable=rt,e.PastisSpinner=Te,e.PastisStatCard=He,e.PastisStatement=tt,e.PastisTable=Ue,e.PastisTabs=ke,e.PastisTag=Pe,e.PastisTestimonial=Xe,e.PastisThemeToggle=Je,e.PastisTimeline=Ye,e.PastisToast=we,e.PastisToggle=ve,e.PastisTokenSwatch=nt,e.PastisTooltip=De,e})({});

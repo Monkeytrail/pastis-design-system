@@ -5,11 +5,13 @@
   --duration-base:    200ms;
   --duration-slow:    400ms;
   --duration-reveal:  700ms;
+  --duration-tilt:    800ms;
 
   /* ── Easing ── */
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-enter:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-exit:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
   /* ── Composite ── */
   --transition-fast: var(--duration-fast) var(--ease-standard);
@@ -26,6 +28,7 @@
     --duration-base:    0ms;
     --duration-slow:    0ms;
     --duration-reveal:  0ms;
+    --duration-tilt:    0ms;
     --motion-reveal-offset: 0px;
   }
 }

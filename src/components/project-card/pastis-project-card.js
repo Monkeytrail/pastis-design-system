@@ -13,6 +13,8 @@ export class PastisProjectCard extends LitElement {
     tags:     { type: Array },
     index:    { type: String },
     size:     { type: String, reflect: true }, // 'square' | 'wide' | 'tall'
+    reveal:   { type: Boolean, reflect: true },  // rise in from a clip mask when scrolled into view
+    revealed: { type: Boolean, reflect: true },
   };
 
   static styles = css`
@@ -39,14 +41,22 @@ export class PastisProjectCard extends LitElement {
       border-radius: var(--radius-md, 6px);
     }
 
+    /* Perspective lives on the parent so the media can lean in 3D */
+    .stage { perspective: 1500px; }
+
     .media {
       position: relative;
-      aspect-ratio: var(--_ratio);
+      aspect-ratio: var(--pastis-project-card-ratio, var(--_ratio));
       overflow: hidden;
       border-radius: var(--radius-md, 6px);
       background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-subtle, #1e1e1e);
-      transition: box-shadow var(--duration-base, 200ms) var(--ease-standard, ease);
+      clip-path: inset(0 0 0 0 round var(--radius-md, 6px));
+      transform-origin: center bottom;
+      will-change: transform;
+      transition:
+        transform var(--duration-tilt, 800ms) var(--ease-out-expo, cubic-bezier(0.19, 1, 0.22, 1)),
+        clip-path var(--duration-tilt, 800ms) var(--ease-out-expo, cubic-bezier(0.19, 1, 0.22, 1)),
+        opacity var(--duration-base, 200ms) var(--ease-standard, ease);
     }
 
     .media img,
@@ -57,19 +67,41 @@ export class PastisProjectCard extends LitElement {
       width: 100% !important;
       height: 100% !important;
       object-fit: cover;
-      transform: scale(1.001);
-      transition: transform var(--duration-slow, 400ms) var(--ease-enter, ease);
     }
 
-    a:hover .media,
-    a:focus-visible .media {
-      box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28);
+    /* Hover: the card leans its top edge toward the viewer; pressing flattens it */
+    @media (any-pointer: fine) {
+      a:hover .media { transform: rotateX(-10deg); }
+      a:hover:active .media { transform: rotateX(0deg); }
     }
 
-    a:hover .media img,
-    a:hover .media video,
-    a:hover ::slotted([slot="media"]) {
-      transform: scale(1.035);
+    a:focus-visible .media { transform: rotateX(-10deg); }
+    a:focus-visible:active .media { transform: rotateX(0deg); }
+
+    /* Entrance: rise out of a clip mask while untilting */
+    :host([reveal]:not([revealed])) .media {
+      clip-path: inset(100% 0 0 0 round var(--radius-md, 6px));
+      opacity: 0;
+      transform: rotateX(50deg);
+    }
+
+    :host([reveal]:not([revealed])) .info { opacity: 0; }
+
+    .info {
+      transition: opacity var(--duration-slow, 400ms) var(--ease-standard, ease) 150ms;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      a:hover .media,
+      a:focus-visible .media { transform: none; }
+
+      :host([reveal]:not([revealed])) .media {
+        clip-path: inset(0 0 0 0 round var(--radius-md, 6px));
+        opacity: 1;
+        transform: none;
+      }
+
+      :host([reveal]:not([revealed])) .info { opacity: 1; }
     }
 
     .tags {
@@ -129,6 +161,8 @@ export class PastisProjectCard extends LitElement {
       line-height: 1.15;
       letter-spacing: -0.015em;
       margin: 0;
+      /* Reserve lines (e.g. 2) so media bottoms line up across cards in a row */
+      min-height: calc(var(--pastis-project-card-title-lines, 0) * 1.15em);
     }
 
     .arrow {
@@ -153,6 +187,7 @@ export class PastisProjectCard extends LitElement {
       font-size: 15px;
       line-height: 1.5;
       color: var(--text-tertiary, #909498);
+      min-height: calc(var(--pastis-project-card-summary-lines, 0) * 1.5em);
     }
 
     /* Touch devices never see hover — keep tags visible */
@@ -175,6 +210,25 @@ export class PastisProjectCard extends LitElement {
     }
   }
 
+  updated(changed) {
+    if (changed.has('reveal') && this.reveal && !this.revealed && !this._observer) {
+      this._observer = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        this._observer.disconnect();
+        // Delay comes from the consumer (e.g. a shelf staggering its items)
+        const delay = parseFloat(getComputedStyle(this).getPropertyValue('--pastis-reveal-delay')) || 0;
+        setTimeout(() => { this.revealed = true; }, delay);
+      }, { threshold: 0.2 });
+      this._observer.observe(this);
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._observer?.disconnect();
+    this._observer = null;
+  }
+
   _renderMedia() {
     if (this.video) {
       return html`<video src=${this.video} poster=${this.image || ''} autoplay muted loop playsinline aria-hidden="true"></video>`;
@@ -188,15 +242,17 @@ export class PastisProjectCard extends LitElement {
   render() {
     return html`
       <a href=${this.href || '#'} part="link">
-        <div class="media" part="media">
-          <slot name="media">${this._renderMedia()}</slot>
-          ${this.tags?.length ? html`
-            <div class="tags" aria-hidden="true">
-              ${this.tags.map((t) => html`<span class="tag">${t}</span>`)}
-            </div>
-          ` : ''}
+        <div class="stage">
+          <div class="media" part="media">
+            <slot name="media">${this._renderMedia()}</slot>
+            ${this.tags?.length ? html`
+              <div class="tags" aria-hidden="true">
+                ${this.tags.map((t) => html`<span class="tag">${t}</span>`)}
+              </div>
+            ` : ''}
+          </div>
         </div>
-        <div>
+        <div class="info">
           <div class="meta">
             ${this.index ? html`<span class="index">${this.index}</span>` : html`<span></span>`}
             <span class="client">${this.client || ''}</span>
