@@ -5577,11 +5577,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .title {
-      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
-      font-size: clamp(20px, 1.2rem + 0.6vw, 28px);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.015em;
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
+      font-size: clamp(24px, 1.4rem + 0.7vw, 32px);
+      font-weight: var(--font-weight-display, 400);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
       margin: 0;
       /* Reserve lines (e.g. 2) so media bottoms line up across cards in a row */
       min-height: calc(var(--pastis-project-card-title-lines, 0) * 1.15em);
@@ -5659,10 +5659,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .body {
-      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
       font-size: var(--_size);
-      font-weight: 600;
-      line-height: var(--line-height-statement, 0.95);
+      font-weight: var(--font-weight-display, 400);
+      line-height: var(--line-height-statement, 1);
       letter-spacing: var(--letter-spacing-statement, -0.035em);
       color: var(--text-primary, #f9f4da);
       text-wrap: balance;
@@ -5678,8 +5678,8 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     /* Nested <em> accents can't be reached through ::slotted — consumers load
        this from pastis-tokens.css (see tokens/index.css). */
     ::slotted(em) {
-      font-style: normal;
-      color: var(--action-primary, #fcba28);
+      font-style: italic;
+      color: var(--text-accent, #fcba28);
     }
 
     :host([reveal]) .eyebrow,
@@ -5796,7 +5796,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     .preview { width: 55%; }
 
     .type-sample {
-      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
       line-height: 1.1;
       white-space: nowrap;
       overflow: hidden;

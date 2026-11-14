@@ -49,7 +49,7 @@ export class PastisSpecTable extends LitElement {
     .preview { width: 55%; }
 
     .type-sample {
-      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
       line-height: 1.1;
       white-space: nowrap;
       overflow: hidden;

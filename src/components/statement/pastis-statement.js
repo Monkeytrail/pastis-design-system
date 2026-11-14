@@ -29,10 +29,10 @@ export class PastisStatement extends LitElement {
     }
 
     .body {
-      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
       font-size: var(--_size);
-      font-weight: 600;
-      line-height: var(--line-height-statement, 0.95);
+      font-weight: var(--font-weight-display, 400);
+      line-height: var(--line-height-statement, 1);
       letter-spacing: var(--letter-spacing-statement, -0.035em);
       color: var(--text-primary, #f9f4da);
       text-wrap: balance;
@@ -48,8 +48,8 @@ export class PastisStatement extends LitElement {
     /* Nested <em> accents can't be reached through ::slotted — consumers load
        this from pastis-tokens.css (see tokens/index.css). */
     ::slotted(em) {
-      font-style: normal;
-      color: var(--action-primary, #fcba28);
+      font-style: italic;
+      color: var(--text-accent, #fcba28);
     }
 
     :host([reveal]) .eyebrow,

@@ -155,11 +155,11 @@ export class PastisProjectCard extends LitElement {
     }
 
     .title {
-      font-family: var(--font-family-display, 'Bricolage Grotesque', sans-serif);
-      font-size: clamp(20px, 1.2rem + 0.6vw, 28px);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.015em;
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
+      font-size: clamp(24px, 1.4rem + 0.7vw, 32px);
+      font-weight: var(--font-weight-display, 400);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
       margin: 0;
       /* Reserve lines (e.g. 2) so media bottoms line up across cards in a row */
       min-height: calc(var(--pastis-project-card-title-lines, 0) * 1.15em);

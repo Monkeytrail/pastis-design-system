@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
   /* ── Pastis Brand Palette ── */
@@ -31,25 +31,29 @@
   --gray-25:  #f7f7f7;
 }
 
-/* ── Default = Dark. Pastis runs in the dark. ── */
+/* ── Default = Dark. Pastis runs in the dark — warm near-black, not grey. ──
+   [data-surface="inverse"] flips a section to the opposite theme, so pages
+   can alternate light and dark bands while still following the user's theme. */
 :root,
-[data-theme="dark"] {
-  --bg-primary:  #0d0d0d;
-  --bg-secondary: #0f0d0e;
-  --bg-card:     #1e1e1e;
-  --bg-elevated: #262522;
-  --bg-overlay:  #231f20;
+[data-theme="dark"],
+[data-theme="light"] [data-surface="inverse"] {
+  --bg-primary:  #110d0a;
+  --bg-secondary: #16110d;
+  --bg-card:     #1b1612;
+  --bg-elevated: #251f1a;
+  --bg-overlay:  #2b241e;
 
-  --text-primary:   #f9f4da;  /* pastis beige — 13.6:1 on #0d0d0d ✓ */
-  --text-secondary: #f9f4da;
-  --text-tertiary:  #909498;  /* 5.0:1 on #262522, 5.4:1 on #1e1e1e ✓ */
-  --text-disabled:  #383c44;
-  --text-inverse:   #0d0d0d;
-  --text-on-accent: #0d0d0d;  /* dark text on bright backgrounds */
+  --text-primary:   #f4eee3;  /* 16.7:1 on bg ✓ */
+  --text-secondary: #e6dfd2;
+  --text-tertiary:  #a39b90;  /* 7.0:1 on bg, 5.9:1 on elevated ✓ */
+  --text-disabled:  #4a4139;
+  --text-inverse:   #110d0a;
+  --text-on-accent: #110d0a;  /* dark text on bright backgrounds */
   --text-code:      #f38ba3;  /* pastis pink for inline code */
+  --text-accent:    #fcba28;  /* 11.2:1 on bg ✓ */
 
-  --border-default: #383c44;
-  --border-subtle:  #1e1e1e;
+  --border-default: #3a322b;
+  --border-subtle:  #221c17;
   --border-strong:  #fc7428;
   --border-focus:   #fcba28;
 
@@ -77,24 +81,26 @@
   --shadow-xl:  5px 5px 0 #fc7428;
 }
 
-/* ── Light mode ── */
-[data-theme="light"] {
-  --bg-primary:  #f7f7f7;
-  --bg-secondary: #ffffff;
-  --bg-card:     #ffffff;
-  --bg-elevated: #f3f3f5;
-  --bg-overlay:  #e9eaec;
+/* ── Light mode — warm paper ── */
+[data-theme="light"],
+[data-theme="dark"] [data-surface="inverse"] {
+  --bg-primary:  #f4f1ea;
+  --bg-secondary: #fffdf9;
+  --bg-card:     #fffdf9;
+  --bg-elevated: #ebe5da;
+  --bg-overlay:  #e2dbcf;
 
-  --text-primary:   #0f0d0e;  /* 19:1 on white ✓ */
-  --text-secondary: #231f20;
-  --text-tertiary:  #5c6069;  /* 7.2:1 on white ✓ */
-  --text-disabled:  #b1b4b9;
-  --text-inverse:   #f9f4da;
-  --text-on-accent: #0d0d0d;
+  --text-primary:   #16110d;  /* 16.6:1 on bg ✓ */
+  --text-secondary: #2b241e;
+  --text-tertiary:  #655d54;  /* 5.7:1 on bg, 5.2:1 on elevated ✓ */
+  --text-disabled:  #b3aa9e;
+  --text-inverse:   #f4eee3;
+  --text-on-accent: #110d0a;
   --text-code:      #6c4c9f;  /* pastis light-mode code purple */
+  --text-accent:    #8a5200;  /* 5.4:1 on bg ✓ — yellow fails on paper */
 
-  --border-default: #e1e2e4;
-  --border-subtle:  #e9eaec;
+  --border-default: #d9d1c4;
+  --border-subtle:  #ebe5da;
   --border-strong:  #fc7428;
   --border-focus:   #fcba28;
 
@@ -123,7 +129,7 @@
 
 :root {
   /* ── Fonts ── */
-  --font-family-display: 'Bricolage Grotesque', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-display: 'Instrument Serif', 'Times New Roman', Georgia, serif;
   --font-family-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-family-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-family:         var(--font-family-mono); /* component default */
@@ -132,8 +138,9 @@
   --font-size-statement-xl: clamp(3rem, 1.5rem + 6.4vw, 8.5rem);
   --font-size-statement-lg: clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem);
   --font-size-statement-md: clamp(1.75rem, 1.3rem + 1.9vw, 3.25rem);
-  --line-height-statement:  0.95;
-  --letter-spacing-statement: -0.035em;
+  --line-height-statement:  1;
+  --letter-spacing-statement: -0.02em;
+  --font-weight-display:    400;  /* Instrument Serif ships one weight */
 
   /* ── Size Scale (Pastis) ── */
   --font-size-display: 56px;
@@ -282,6 +289,11 @@ body {
 /* Accent emphasis inside <pastis-statement>; lives in light DOM CSS because
    ::slotted() can't style descendants of slotted nodes. */
 pastis-statement em {
-  font-style: normal;
-  color: var(--action-primary);
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+[data-surface="inverse"] {
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
