@@ -1,5 +1,4 @@
-var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Module`});var t=globalThis,n=t.ShadowRoot&&(t.ShadyCSS===void 0||t.ShadyCSS.nativeShadow)&&`adoptedStyleSheets`in Document.prototype&&`replace`in CSSStyleSheet.prototype,r=Symbol(),i=new WeakMap,a=class{constructor(e,t,n){if(this._$cssResult$=!0,n!==r)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o,t=this.t;if(n&&e===void 0){let n=t!==void 0&&t.length===1;n&&(e=i.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),n&&i.set(t,e))}return e}toString(){return this.cssText}},o=e=>new a(typeof e==`string`?e:e+``,void 0,r),s=(e,...t)=>new a(e.length===1?e[0]:t.reduce((t,n,r)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if(typeof e==`number`)return e;throw Error(`Value passed to 'css' function must be a 'css' function result: `+e+`. Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.`)})(n)+e[r+1],e[0]),e,r),c=(e,r)=>{if(n)e.adoptedStyleSheets=r.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(let n of r){let r=document.createElement(`style`),i=t.litNonce;i!==void 0&&r.setAttribute(`nonce`,i),r.textContent=n.cssText,e.appendChild(r)}},l=n?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t=``;for(let n of e.cssRules)t+=n.cssText;return o(t)})(e):e,{is:u,defineProperty:d,getOwnPropertyDescriptor:ee,getOwnPropertyNames:te,getOwnPropertySymbols:ne,getPrototypeOf:re}=Object,f=globalThis,p=f.trustedTypes,ie=p?p.emptyScript:``,ae=f.reactiveElementPolyfillSupport,m=(e,t)=>e,h={toAttribute(e,t){switch(t){case Boolean:e=e?ie:null;break;case Object:case Array:e=e==null?e:JSON.stringify(e)}return e},fromAttribute(e,t){let n=e;switch(t){case Boolean:n=e!==null;break;case Number:n=e===null?null:Number(e);break;case Object:case Array:try{n=JSON.parse(e)}catch{n=null}}return n}},oe=(e,t)=>!u(e,t),g={attribute:!0,type:String,converter:h,reflect:!1,useDefault:!1,hasChanged:oe};Symbol.metadata??=Symbol(`metadata`),f.litPropertyMetadata??=new WeakMap;var _=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=g){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){let n=Symbol(),r=this.getPropertyDescriptor(e,n,t);r!==void 0&&d(this.prototype,e,r)}}static getPropertyDescriptor(e,t,n){let{get:r,set:i}=ee(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:r,set(t){let a=r?.call(this);i?.call(this,t),this.requestUpdate(e,a,n)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??g}static _$Ei(){if(this.hasOwnProperty(m(`elementProperties`)))return;let e=re(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(m(`finalized`)))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(m(`properties`))){let e=this.properties,t=[...te(e),...ne(e)];for(let n of t)this.createProperty(n,e[n])}let e=this[Symbol.metadata];if(e!==null){let t=litPropertyMetadata.get(e);if(t!==void 0)for(let[e,n]of t)this.elementProperties.set(e,n)}this._$Eh=new Map;for(let[e,t]of this.elementProperties){let n=this._$Eu(e,t);n!==void 0&&this._$Eh.set(n,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){let t=[];if(Array.isArray(e)){let n=new Set(e.flat(1/0).reverse());for(let e of n)t.unshift(l(e))}else e!==void 0&&t.push(l(e));return t}static _$Eu(e,t){let n=t.attribute;return!1===n?void 0:typeof n==`string`?n:typeof e==`string`?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){let e=new Map,t=this.constructor.elementProperties;for(let n of t.keys())this.hasOwnProperty(n)&&(e.set(n,this[n]),delete this[n]);e.size>0&&(this._$Ep=e)}createRenderRoot(){let e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return c(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,n){this._$AK(e,n)}_$ET(e,t){let n=this.constructor.elementProperties.get(e),r=this.constructor._$Eu(e,n);if(r!==void 0&&!0===n.reflect){let i=(n.converter?.toAttribute===void 0?h:n.converter).toAttribute(t,n.type);this._$Em=e,i==null?this.removeAttribute(r):this.setAttribute(r,i),this._$Em=null}}_$AK(e,t){let n=this.constructor,r=n._$Eh.get(e);if(r!==void 0&&this._$Em!==r){let e=n.getPropertyOptions(r),i=typeof e.converter==`function`?{fromAttribute:e.converter}:e.converter?.fromAttribute===void 0?h:e.converter;this._$Em=r;let a=i.fromAttribute(t,e.type);this[r]=a??this._$Ej?.get(r)??a,this._$Em=null}}requestUpdate(e,t,n,r=!1,i){if(e!==void 0){let a=this.constructor;if(!1===r&&(i=this[e]),n??=a.getPropertyOptions(e),!((n.hasChanged??oe)(i,t)||n.useDefault&&n.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(a._$Eu(e,n))))return;this.C(e,t,n)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:n,reflect:r,wrapped:i},a){n&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,a??t??this[e]),!0!==i||a!==void 0)||(this._$AL.has(e)||(this.hasUpdated||n||(t=void 0),this._$AL.set(e,t)),!0===r&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}let e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(let[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}let e=this.constructor.elementProperties;if(e.size>0)for(let[t,n]of e){let{wrapped:e}=n,r=this[t];!0!==e||this._$AL.has(t)||r===void 0||this.C(t,void 0,n,r)}}let e=!1,t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}};_.elementStyles=[],_.shadowRootOptions={mode:`open`},_[m(`elementProperties`)]=new Map,_[m(`finalized`)]=new Map,ae?.({ReactiveElement:_}),(f.reactiveElementVersions??=[]).push(`2.1.2`);var v=globalThis,y=e=>e,b=v.trustedTypes,x=b?b.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,S=`$lit$`,C=`lit$${Math.random().toFixed(9).slice(2)}$`,w=`?`+C,se=`<${w}>`,T=document,E=()=>T.createComment(``),D=e=>e===null||typeof e!=`object`&&typeof e!=`function`,O=Array.isArray,ce=e=>O(e)||typeof e?.[Symbol.iterator]==`function`,k=`[ 	
-\f\r]`,A=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,j=/-->/g,M=/>/g,N=RegExp(`>|${k}(?:([^\\s"'>=/]+)(${k}*=${k}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),P=/'/g,F=/"/g,I=/^(?:script|style|textarea|title)$/i,L=(e=>(t,...n)=>({_$litType$:e,strings:t,values:n}))(1),R=Symbol.for(`lit-noChange`),z=Symbol.for(`lit-nothing`),B=new WeakMap,V=T.createTreeWalker(T,129);function H(e,t){if(!O(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return x===void 0?t:x.createHTML(t)}var le=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=A;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===A?c[1]===`!--`?o=j:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=N):(I.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=N):o=M:o===N?c[0]===`>`?(o=i??A,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?N:c[3]===`"`?F:P):o===F||o===P?o=N:o===j||o===M?o=A:(o=N,i=void 0);let d=o===N&&e[t+1].startsWith(`/>`)?` `:``;a+=o===A?n+se:l>=0?(r.push(s),n.slice(0,l)+S+n.slice(l)+C+d):n+C+(l===-2?t:d)}return[H(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},U=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=le(t,n);if(this.el=e.createElement(l,r),V.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=V.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(S)){let t=u[o++],n=i.getAttribute(e).split(C),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?de:r[1]===`?`?fe:r[1]===`@`?pe:K}),i.removeAttribute(e)}else e.startsWith(C)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(I.test(i.tagName)){let e=i.textContent.split(C),t=e.length-1;if(t>0){i.textContent=b?b.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],E()),V.nextNode(),c.push({type:2,index:++a});i.append(e[t],E())}}}else if(i.nodeType===8)if(i.data===w)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(C,e+1))!==-1;)c.push({type:7,index:a}),e+=C.length-1}a++}}static createElement(e,t){let n=T.createElement(`template`);return n.innerHTML=e,n}};function W(e,t,n=e,r){if(t===R)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=D(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=W(e,i._$AS(e,t.values),i,r)),t}var ue=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??T).importNode(t,!0);V.currentNode=r;let i=V.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new G(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new me(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=V.nextNode(),a++)}return V.currentNode=T,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},G=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=z,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=W(this,e,t),D(e)?e===z||e==null||e===``?(this._$AH!==z&&this._$AR(),this._$AH=z):e!==this._$AH&&e!==R&&this._(e):e._$litType$===void 0?e.nodeType===void 0?ce(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==z&&D(this._$AH)?this._$AA.nextSibling.data=e:this.T(T.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=U.createElement(H(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new ue(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=B.get(e.strings);return t===void 0&&B.set(e.strings,t=new U(e)),t}k(t){O(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(E()),this.O(E()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=y(e).nextSibling;y(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},K=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=z,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=z}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=W(this,e,t,0),a=!D(e)||e!==this._$AH&&e!==R,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=W(this,r[n+o],t,o),s===R&&(s=this._$AH[o]),a||=!D(s)||s!==this._$AH[o],s===z?e=z:e!==z&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===z?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},de=class extends K{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===z?void 0:e}},fe=class extends K{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==z)}},pe=class extends K{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=W(this,e,t,0)??z)===R)return;let n=this._$AH,r=e===z&&n!==z||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==z&&(n===z||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},me=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){W(this,e)}},he=v.litHtmlPolyfillSupport;he?.(U,G),(v.litHtmlVersions??=[]).push(`3.3.2`);var ge=(e,t,n)=>{let r=n?.renderBefore??t,i=r._$litPart$;if(i===void 0){let e=n?.renderBefore??null;r._$litPart$=i=new G(t.insertBefore(E(),e),e,void 0,n??{})}return i._$AI(e),i},q=globalThis,J=class extends _{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){let e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){let t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=ge(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return R}};J._$litElement$=!0,J.finalized=!0,q.litElementHydrateSupport?.({LitElement:J});var _e=q.litElementPolyfillSupport;_e?.({LitElement:J}),(q.litElementVersions??=[]).push(`4.2.2`);var Y=class extends J{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},disabled:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},href:{type:String}};static styles=s`
+(function(e,t){typeof exports==`object`&&typeof module<`u`?t(exports,require(`lit`)):typeof define==`function`&&define.amd?define([`exports`,`lit`],t):(e=typeof globalThis<`u`?globalThis:e||self,t(e.Pastis={},e.Lit))})(this,function(e,t){Object.defineProperty(e,Symbol.toStringTag,{value:`Module`});var n=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},disabled:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},href:{type:String},copy:{type:String},_copied:{type:Boolean,state:!0}};static styles=t.css`
     :host { display: inline-block; }
 
     button, a {
@@ -85,17 +84,17 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 3px;
     }
-  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1}render(){return L`
+  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1,this._copied=!1}render(){return t.html`
       <button
         ?disabled=${this.disabled||this.loading}
         @click=${this._handleClick}
         aria-busy=${this.loading}
         part="button"
       >
-        ${this.loading?L`<span class="spinner" aria-hidden="true"></span>`:``}
-        <slot></slot>
+        ${this.loading?t.html`<span class="spinner" aria-hidden="true"></span>`:``}
+        ${this.copy&&this._copied?`✓ Copied`:t.html`<slot></slot>`}
       </button>
-    `}_handleClick(e){if(this.disabled||this.loading){e.preventDefault(),e.stopPropagation();return}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-button`,Y);var X=class extends J{static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String}};static styles=s`
+    `}async _handleClick(e){if(this.disabled||this.loading){e.preventDefault(),e.stopPropagation();return}if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-button`,n);var r=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String}};static styles=t.css`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -216,18 +215,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this._inputId=`pastis-input-${Math.random().toString(36).slice(2,9)}`}render(){let e=!!this.error,t=!!this.leadingIcon,n=!!this.trailingIcon,r=[`input-wrap`,e?`has-error`:``,t?`has-leading`:``,n?`has-trailing`:``].filter(Boolean).join(` `),i=this._inputId;return L`
+  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this._inputId=`pastis-input-${Math.random().toString(36).slice(2,9)}`}render(){let e=!!this.error,n=!!this.leadingIcon,r=!!this.trailingIcon,i=[`input-wrap`,e?`has-error`:``,n?`has-leading`:``,r?`has-trailing`:``].filter(Boolean).join(` `),a=this._inputId;return t.html`
       <div class="field">
-        ${this.label?L`
-          <label for="${i}">
+        ${this.label?t.html`
+          <label for="${a}">
             ${this.label}
-            ${this.required?L`<span class="required-dot" aria-hidden="true">*</span><span class="sr-only">required</span>`:``}
+            ${this.required?t.html`<span class="required-dot" aria-hidden="true">*</span><span class="sr-only">required</span>`:``}
           </label>
         `:``}
-        <div class="${r}">
-          ${t?L`<span class="leading-icon" aria-hidden="true">${this.leadingIcon}</span>`:``}
+        <div class="${i}">
+          ${n?t.html`<span class="leading-icon" aria-hidden="true">${this.leadingIcon}</span>`:``}
           <input
-            id="${i}"
+            id="${a}"
             type="${this.type}"
             .value="${this.value}"
             placeholder="${this.placeholder||``}"
@@ -241,11 +240,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             @change="${this._handleChange}"
             part="input"
           />
-          ${n?L`<span class="trailing-icon" aria-hidden="true">${this.trailingIcon}</span>`:``}
+          ${r?t.html`<span class="trailing-icon" aria-hidden="true">${this.trailingIcon}</span>`:``}
         </div>
-        ${e?L`<p class="error-text" id="error" role="alert">⚠ ${this.error}</p>`:this.helper?L`<p class="helper-text" id="helper">${this.helper}</p>`:``}
+        ${e?t.html`<p class="error-text" id="error" role="alert">⚠ ${this.error}</p>`:this.helper?t.html`<p class="helper-text" id="helper">${this.helper}</p>`:``}
       </div>
-    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-input`,X);var Z=class extends J{static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String}};static styles=s`
+    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-input`,r);var i=class extends t.LitElement{static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: flex-start; }
 
     label {
@@ -323,7 +322,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-tertiary, #909498);
       text-transform: none;
     }
-  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``}updated(e){if(e.has(`indeterminate`)){let e=this.shadowRoot?.querySelector(`input`);e&&(e.indeterminate=this.indeterminate)}}render(){return L`
+  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``}updated(e){if(e.has(`indeterminate`)){let e=this.shadowRoot?.querySelector(`input`);e&&(e.indeterminate=this.indeterminate)}}render(){return t.html`
       <label @click="${this._handleClick}">
         <input
           type="checkbox"
@@ -338,14 +337,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <span class="checkmark"></span>
           <span class="indeterminate-mark"></span>
         </span>
-        ${this.label?L`
+        ${this.label?t.html`
           <span class="label-content">
             <span>${this.label}</span>
-            ${this.helper?L`<span class="helper">${this.helper}</span>`:``}
+            ${this.helper?t.html`<span class="helper">${this.helper}</span>`:``}
           </span>
         `:``}
       </label>
-    `}_handleClick(e){if(this.disabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,Z);var Q=e=>e??z,ve=class extends J{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=s`
+    `}_handleClick(e){if(this.disabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,i);var a=globalThis,o=e=>e,s=a.trustedTypes,c=s?s.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,l=`$lit$`,u=`lit$${Math.random().toFixed(9).slice(2)}$`,d=`?`+u,f=`<${d}>`,p=document,m=()=>p.createComment(``),h=e=>e===null||typeof e!=`object`&&typeof e!=`function`,g=Array.isArray,ee=e=>g(e)||typeof e?.[Symbol.iterator]==`function`,_=`[ 	
+\f\r]`,v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,y=/-->/g,b=/>/g,x=RegExp(`>|${_}(?:([^\\s"'>=/]+)(${_}*=${_}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),S=/'/g,C=/"/g,te=/^(?:script|style|textarea|title)$/i,w=Symbol.for(`lit-noChange`),T=Symbol.for(`lit-nothing`),E=new WeakMap,D=p.createTreeWalker(p,129);function O(e,t){if(!g(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return c===void 0?t:c.createHTML(t)}var ne=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=v;for(let t=0;t<n;t++){let n=e[t],s,c,d=-1,p=0;for(;p<n.length&&(o.lastIndex=p,c=o.exec(n),c!==null);)p=o.lastIndex,o===v?c[1]===`!--`?o=y:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=x):(te.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=x):o=b:o===x?c[0]===`>`?(o=i??v,d=-1):c[1]===void 0?d=-2:(d=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?x:c[3]===`"`?C:S):o===C||o===S?o=x:o===y||o===b?o=v:(o=x,i=void 0);let m=o===x&&e[t+1].startsWith(`/>`)?` `:``;a+=o===v?n+f:d>=0?(r.push(s),n.slice(0,d)+l+n.slice(d)+u+m):n+u+(d===-2?t:m)}return[O(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},k=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,c=t.length-1,f=this.parts,[p,h]=ne(t,n);if(this.el=e.createElement(p,r),D.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=D.nextNode())!==null&&f.length<c;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(l)){let t=h[o++],n=i.getAttribute(e).split(u),r=/([.?@])?(.*)/.exec(t);f.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?ie:r[1]===`?`?ae:r[1]===`@`?oe:M}),i.removeAttribute(e)}else e.startsWith(u)&&(f.push({type:6,index:a}),i.removeAttribute(e));if(te.test(i.tagName)){let e=i.textContent.split(u),t=e.length-1;if(t>0){i.textContent=s?s.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],m()),D.nextNode(),f.push({type:2,index:++a});i.append(e[t],m())}}}else if(i.nodeType===8)if(i.data===d)f.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(u,e+1))!==-1;)f.push({type:7,index:a}),e+=u.length-1}a++}}static createElement(e,t){let n=p.createElement(`template`);return n.innerHTML=e,n}};function A(e,t,n=e,r){if(t===w)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=h(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=A(e,i._$AS(e,t.values),i,r)),t}var re=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??p).importNode(t,!0);D.currentNode=r;let i=D.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new j(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new se(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=D.nextNode(),a++)}return D.currentNode=p,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},j=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=T,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=A(this,e,t),h(e)?e===T||e==null||e===``?(this._$AH!==T&&this._$AR(),this._$AH=T):e!==this._$AH&&e!==w&&this._(e):e._$litType$===void 0?e.nodeType===void 0?ee(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==T&&h(this._$AH)?this._$AA.nextSibling.data=e:this.T(p.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=k.createElement(O(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new re(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=E.get(e.strings);return t===void 0&&E.set(e.strings,t=new k(e)),t}k(t){g(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(m()),this.O(m()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=o(e).nextSibling;o(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},M=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=T,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=T}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=A(this,e,t,0),a=!h(e)||e!==this._$AH&&e!==w,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=A(this,r[n+o],t,o),s===w&&(s=this._$AH[o]),a||=!h(s)||s!==this._$AH[o],s===T?e=T:e!==T&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===T?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},ie=class extends M{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===T?void 0:e}},ae=class extends M{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==T)}},oe=class extends M{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=A(this,e,t,0)??T)===w)return;let n=this._$AH,r=e===T&&n!==T||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==T&&(n===T||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},se=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){A(this,e)}},ce=a.litHtmlPolyfillSupport;ce?.(k,j),(a.litHtmlVersions??=[]).push(`3.3.2`);var N=e=>e??T,P=class extends t.LitElement{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     label {
@@ -413,7 +413,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .label-text { line-height: 1.4; }
-  `;constructor(){super(),this.checked=!1,this.disabled=!1,this.labelPosition=`right`,this.size=`md`}render(){let e=this.label?L`<span class="label-text">${this.label}</span>`:``,t=this.label?void 0:this.getAttribute(`aria-label`)||`Toggle`;return L`
+  `;constructor(){super(),this.checked=!1,this.disabled=!1,this.labelPosition=`right`,this.size=`md`}render(){let e=this.label?t.html`<span class="label-text">${this.label}</span>`:``,n=this.label?void 0:this.getAttribute(`aria-label`)||`Toggle`;return t.html`
       <label>
         ${this.labelPosition===`left`?e:``}
         <input
@@ -423,7 +423,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           name="${this.name||``}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${Q(t)}"
+          aria-label="${N(n)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -431,7 +431,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </span>
         ${this.labelPosition===`left`?``:e}
       </label>
-    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,ve);var ye=class extends J{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=s`
+    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,P);var F=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     .badge {
@@ -521,11 +521,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       background: currentColor;
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.dot=!1,this.max=99}render(){if(this.dot)return L`<span class="badge" role="status" part="badge" aria-label="${this.label||`indicator`}"></span>`;let e;return this.count!==void 0&&(e=this.count>this.max?`${this.max}+`:`${this.count}`),L`
+  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.dot=!1,this.max=99}render(){if(this.dot)return t.html`<span class="badge" role="status" part="badge" aria-label="${this.label||`indicator`}"></span>`;let e;return this.count!==void 0&&(e=this.count>this.max?`${this.max}+`:`${this.count}`),t.html`
       <span class="badge" part="badge">
-        ${e===void 0?L`<slot></slot>`:e}
+        ${e===void 0?t.html`<slot></slot>`:e}
       </span>
-    `}};customElements.define(`pastis-badge`,ye);var be=class extends J{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-badge`,F);var I=class extends t.LitElement{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=t.css`
     :host {
       display: inline-flex;
       position: relative;
@@ -598,12 +598,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([status="offline"]) .status-dot { background: var(--text-tertiary, #909498); }
 
     .icon { font-size: 1.2em; }
-  `;constructor(){super(),this.size=`md`,this.shape=`circle`,this.alt=``}_getInitials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}_getColorFromName(){if(this.color)return this.color;let e=[`var(--avatar-color-1)`,`var(--avatar-color-2)`,`var(--avatar-color-3)`,`var(--avatar-color-4)`,`var(--avatar-color-5)`,`var(--avatar-color-6)`,`var(--avatar-color-7)`,`var(--avatar-color-8)`];if(!this.name)return e[0];let t=0;for(let e=0;e<this.name.length;e++)t=this.name.charCodeAt(e)+((t<<5)-t);return e[Math.abs(t)%e.length]}render(){let e=this._getColorFromName();return L`
+  `;constructor(){super(),this.size=`md`,this.shape=`circle`,this.alt=``}_getInitials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}_getColorFromName(){if(this.color)return this.color;let e=[`var(--avatar-color-1)`,`var(--avatar-color-2)`,`var(--avatar-color-3)`,`var(--avatar-color-4)`,`var(--avatar-color-5)`,`var(--avatar-color-6)`,`var(--avatar-color-7)`,`var(--avatar-color-8)`];if(!this.name)return e[0];let t=0;for(let e=0;e<this.name.length;e++)t=this.name.charCodeAt(e)+((t<<5)-t);return e[Math.abs(t)%e.length]}render(){let e=this._getColorFromName();return t.html`
       <div class="avatar" part="avatar" style="background:${this.src?`transparent`:e}" role="img" aria-label="${this.alt||this.name||`Avatar`}${this.status?`, status: `+this.status:``}">
-        ${this.src?L`<img src="${this.src}" alt="${this.alt||this.name||`User avatar`}" />`:this.name?L`<span>${this._getInitials()}</span>`:L`<span class="icon">👤</span>`}
+        ${this.src?t.html`<img src="${this.src}" alt="${this.alt||this.name||`User avatar`}" />`:this.name?t.html`<span>${this._getInitials()}</span>`:t.html`<span class="icon">👤</span>`}
       </div>
-      ${this.status?L`<span class="status-dot" aria-hidden="true"></span>`:``}
-    `}};customElements.define(`pastis-avatar`,be);var xe=class extends J{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=s`
+      ${this.status?t.html`<span class="status-dot" aria-hidden="true"></span>`:``}
+    `}};customElements.define(`pastis-avatar`,I);var L=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=t.css`
     :host {
       display: block;
     }
@@ -808,7 +808,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       transform: translate(-2px, -2px);
       box-shadow: var(--shadow-md, 5px 5px 0 #231f20);
     }
-  `;constructor(){super(),this.variant=`default`,this.padding=`md`,this.hoverable=!1,this.clickable=!1,this.selected=!1}render(){if(this.variant===`cover`){let e=L`
+  `;constructor(){super(),this.variant=`default`,this.padding=`md`,this.hoverable=!1,this.clickable=!1,this.selected=!1}render(){if(this.variant===`cover`){let e=t.html`
         <div class="cover-bg"><slot name="media"></slot></div>
         <div class="cover-overlay"></div>
         <div class="cover-content">
@@ -816,15 +816,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <div class="card-body"><slot></slot></div>
           <slot name="footer" class="card-footer"></slot>
         </div>
-      `;return this.clickable?L`
+      `;return this.clickable?t.html`
           <button class="card" part="card" aria-pressed="${this.selected}" @click="${this._handleClick}">
             ${e}
           </button>
-        `:L`
+        `:t.html`
         <div class="card" part="card" aria-selected="${this.selected||void 0}">
           ${e}
         </div>
-      `}return this.clickable?L`
+      `}return this.clickable?t.html`
         <button
           class="card"
           part="card"
@@ -838,7 +838,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
           <slot name="footer" class="card-footer"></slot>
         </button>
-      `:L`
+      `:t.html`
       <div
         class="card"
         part="card"
@@ -851,7 +851,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </div>
         <slot name="footer" class="card-footer"></slot>
       </div>
-    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,xe);var Se=class extends J{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=s`
+    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,L);var R=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=t.css`
     :host { display: block; }
     :host([visible="false"]) { display: none; }
 
@@ -924,18 +924,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
     .dismiss-btn:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
-  `;constructor(){super(),this.variant=`info`,this.dismissible=!1,this.visible=!0}_getIcon(){return this.icon?this.icon:{success:`✓`,warning:`⚠`,error:`✕`,info:`ℹ`}[this.variant]||`ℹ`}render(){return this.visible?L`
+  `;constructor(){super(),this.variant=`info`,this.dismissible=!1,this.visible=!0}_getIcon(){return this.icon?this.icon:{success:`✓`,warning:`⚠`,error:`✕`,info:`ℹ`}[this.variant]||`ℹ`}render(){return this.visible?t.html`
       <div class="alert" role="alert" part="alert">
         <span class="alert-icon" aria-hidden="true">${this._getIcon()}</span>
         <div class="alert-content">
-          ${this.title?L`<p class="alert-title">${this.title}</p>`:``}
+          ${this.title?t.html`<p class="alert-title">${this.title}</p>`:``}
           <div class="alert-body"><slot></slot></div>
         </div>
-        ${this.dismissible?L`
+        ${this.dismissible?t.html`
           <button class="dismiss-btn" @click="${this._dismiss}" aria-label="Dismiss">✕</button>
         `:``}
       </div>
-    `:L``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,Se);var Ce=class extends J{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0}};static styles=s`
+    `:t.html``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,R);var z=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: contents; }
 
     .backdrop {
@@ -1031,7 +1031,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       justify-content: flex-end;
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown)}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);if(!e)return[];let t=[`a[href]`,`button:not([disabled])`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`,`[tabindex]:not([tabindex="-1"])`].join(`,`);return Array.from(e.querySelectorAll(t)).filter(e=>!e.closest(`[hidden]`)&&e.offsetParent!==null)}updated(e){e.has(`open`)&&(this.open?(this._previousFocus=document.activeElement,document.body.style.overflow=`hidden`,requestAnimationFrame(()=>{(this._getFocusableElements()[0]||this.shadowRoot?.querySelector(`.close-btn`))?.focus()})):(document.body.style.overflow=``,this._previousFocus?.focus(),this._previousFocus=null))}render(){return this.open?L`
+  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown)}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);if(!e)return[];let t=[`a[href]`,`button:not([disabled])`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`,`[tabindex]:not([tabindex="-1"])`].join(`,`);return Array.from(e.querySelectorAll(t)).filter(e=>!e.closest(`[hidden]`)&&e.offsetParent!==null)}updated(e){e.has(`open`)&&(this.open?(this._previousFocus=document.activeElement,document.body.style.overflow=`hidden`,requestAnimationFrame(()=>{(this._getFocusableElements()[0]||this.shadowRoot?.querySelector(`.close-btn`))?.focus()})):(document.body.style.overflow=``,this._previousFocus?.focus(),this._previousFocus=null))}render(){return this.open?t.html`
       <div
         class="backdrop"
         @click="${this._handleBackdropClick}"
@@ -1043,7 +1043,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <div class="dialog" part="dialog" @click="${e=>e.stopPropagation()}">
           <div class="modal-header">
             <h2 class="modal-title">${this.title||``}</h2>
-            ${this.closable?L`
+            ${this.closable?t.html`
               <button class="close-btn" @click="${this.close}" aria-label="Close dialog">✕</button>
             `:``}
           </div>
@@ -1053,7 +1053,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="modal-footer"></slot>
         </div>
       </div>
-    `:L``}_handleBackdropClick(){this.persistent||this.close()}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,Ce);var we=class extends J{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=s`
+    `:t.html``}_handleBackdropClick(){this.persistent||this.close()}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,z);var B=class extends t.LitElement{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     .toast-container {
@@ -1153,23 +1153,23 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       from { width: 100%; }
       to { width: 0%; }
     }
-  `;constructor(){super(),this.variant=`default`,this.duration=4e3,this.position=`top-right`,this.visible=!1,this.dismissible=!0,this._hiding=!1,this._timer=null,this._hideTimer=null}_getIcon(){return{success:`✓`,error:`✕`,warning:`⚠`,info:`ℹ`,default:`🔔`}[this.variant]||`🔔`}show(){this.visible=!0,this.duration>0&&(clearTimeout(this._timer),this._timer=setTimeout(()=>this.hide(),this.duration)),this.dispatchEvent(new CustomEvent(`pastis-show`,{bubbles:!0,composed:!0}))}hide(){clearTimeout(this._hideTimer),this._hiding=!0,this._hideTimer=setTimeout(()=>{this._hiding=!1,this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-hide`,{bubbles:!0,composed:!0}))},200)}disconnectedCallback(){super.disconnectedCallback(),clearTimeout(this._timer),clearTimeout(this._hideTimer)}render(){return this.visible?L`
+  `;constructor(){super(),this.variant=`default`,this.duration=4e3,this.position=`top-right`,this.visible=!1,this.dismissible=!0,this._hiding=!1,this._timer=null,this._hideTimer=null}_getIcon(){return{success:`✓`,error:`✕`,warning:`⚠`,info:`ℹ`,default:`🔔`}[this.variant]||`🔔`}show(){this.visible=!0,this.duration>0&&(clearTimeout(this._timer),this._timer=setTimeout(()=>this.hide(),this.duration)),this.dispatchEvent(new CustomEvent(`pastis-show`,{bubbles:!0,composed:!0}))}hide(){clearTimeout(this._hideTimer),this._hiding=!0,this._hideTimer=setTimeout(()=>{this._hiding=!1,this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-hide`,{bubbles:!0,composed:!0}))},200)}disconnectedCallback(){super.disconnectedCallback(),clearTimeout(this._timer),clearTimeout(this._hideTimer)}render(){return this.visible?t.html`
       <div class="toast-container" part="container">
         <div class="toast ${this._hiding?`hiding`:``}" role="alert" aria-live="${this.variant===`error`?`assertive`:`polite`}" part="toast">
           <span class="toast-icon" aria-hidden="true">${this._getIcon()}</span>
           <div class="toast-content">
-            ${this.title?L`<p class="toast-title">${this.title}</p>`:``}
+            ${this.title?t.html`<p class="toast-title">${this.title}</p>`:``}
             <p class="toast-message">${this.message||``}<slot></slot></p>
           </div>
-          ${this.dismissible?L`
+          ${this.dismissible?t.html`
             <button class="dismiss-btn" @click="${this.hide}" aria-label="Dismiss">✕</button>
           `:``}
-          ${this.duration>0?L`
+          ${this.duration>0?t.html`
             <div class="progress-bar" style="animation-duration:${this.duration}ms"></div>
           `:``}
         </div>
       </div>
-    `:L``}};customElements.define(`pastis-toast`,we);var Te=class extends J{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=s`
+    `:t.html``}};customElements.define(`pastis-toast`,B);var V=class extends t.LitElement{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; justify-content: center; }
 
     .spinner-wrap {
@@ -1248,7 +1248,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       letter-spacing: var(--letter-spacing-wide, 0.05em);
       color: var(--text-tertiary, #909498);
     }
-  `;constructor(){super(),this.size=`md`,this.variant=`ring`}render(){return L`
+  `;constructor(){super(),this.size=`md`,this.variant=`ring`}render(){return t.html`
       <div class="spinner-wrap" role="status" aria-label="${this.label||`Loading`}">
         <span class="ring" style="${this.color?`border-top-color:${this.color}`:``}"></span>
         <span class="dots">
@@ -1256,10 +1256,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <span class="dot" style="${this.color?`background:${this.color}`:``}"></span>
           <span class="dot" style="${this.color?`background:${this.color}`:``}"></span>
         </span>
-        ${this.label?L`<span class="label">${this.label}</span>`:``}
+        ${this.label?t.html`<span class="label">${this.label}</span>`:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-spinner`,Te);var Ee=class extends J{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=s`
+    `}};customElements.define(`pastis-spinner`,V);var H=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=t.css`
     :host { display: block; }
 
     .skeleton {
@@ -1300,16 +1300,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     .line { height: 14px; border-radius: var(--radius-sm, 4px); border: var(--border-width, 1px) solid var(--border-subtle, #383c44); background: var(--bg-elevated, #383c44); }
     .line:last-child { width: 70% !important; }
-  `;constructor(){super(),this.variant=`rect`,this.animated=!0,this.lines=3}render(){if(this.variant===`lines`)return L`
+  `;constructor(){super(),this.variant=`rect`,this.animated=!0,this.lines=3}render(){if(this.variant===`lines`)return t.html`
         <div class="lines-wrap" part="skeleton">
-          ${Array.from({length:this.lines},(e,t)=>L`
+          ${Array.from({length:this.lines},(e,n)=>t.html`
             <div
               class="skeleton line"
-              style="width:${t===this.lines-1?`70%`:`100%`}"
+              style="width:${n===this.lines-1?`70%`:`100%`}"
             ></div>
           `)}
         </div>
-      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return L`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return L`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,Ee);var De=class extends J{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=s`
+      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return t.html`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return t.html`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,H);var U=class extends t.LitElement{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: inline-flex; position: relative; }
 
     .trigger { display: contents; }
@@ -1373,7 +1373,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([visible]) .tooltip {
       opacity: 1;
     }
-  `;constructor(){super(),this.position=`top`,this.visible=!1,this.delay=300,this._showTimer=null,this._hideTimer=null}render(){return L`
+  `;constructor(){super(),this.position=`top`,this.visible=!1,this.delay=300,this._showTimer=null,this._hideTimer=null}render(){return t.html`
       <span
         class="trigger"
         @mouseenter="${this._show}"
@@ -1393,7 +1393,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.content||``}
         <slot name="content"></slot>
       </div>
-    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,De);var Oe=class extends J{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=s`
+    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,U);var W=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=t.css`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -1545,9 +1545,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       text-transform: uppercase;
       letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
-  `;constructor(){super(),this.options=[],this.open=!1,this.disabled=!1,this.searchable=!1,this.multiple=!1,this.size=`md`,this._search=``,this._selectedValues=[],this._boundClose=this._handleOutsideClick.bind(this),this._focusedIndex=-1,this._labelId=`pastis-dropdown-label-${Math.random().toString(36).slice(2,9)}`,this._listboxId=`pastis-dropdown-listbox-${Math.random().toString(36).slice(2,9)}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_toggle(){this.disabled||(this.open=!this.open,this.open&&(this._focusedIndex=-1,this.searchable?requestAnimationFrame(()=>this.shadowRoot?.querySelector(`.search-input`)?.focus()):requestAnimationFrame(()=>this._focusOptionAt(0))))}_getOptionElements(){return Array.from(this.shadowRoot?.querySelectorAll(`.option`)||[])}_focusOptionAt(e){let t=this._getOptionElements();if(!t.length)return;let n=Math.max(0,Math.min(e,t.length-1));this._focusedIndex=n,t[n]?.focus()}_handleTriggerKeydown(e){e.key===`ArrowDown`?(e.preventDefault(),this.open?this._focusOptionAt(this._focusedIndex+1):(this.open=!0,this._focusedIndex=-1,requestAnimationFrame(()=>this._focusOptionAt(0)))):e.key===`ArrowUp`?(e.preventDefault(),this.open&&this._focusOptionAt(this._focusedIndex-1)):e.key===`Escape`?this.open&&(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&this._toggle()}_handleOptionKeydown(e,t,n){e.key===`ArrowDown`?(e.preventDefault(),this._focusOptionAt(n+1)):e.key===`ArrowUp`?(e.preventDefault(),n===0?this.shadowRoot?.querySelector(`.trigger`)?.focus():this._focusOptionAt(n-1)):e.key===`Escape`?(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),this._selectOption(t))}_selectOption(e){e.disabled||(this.multiple?(this._selectedValues.indexOf(e.value)>-1?this._selectedValues=this._selectedValues.filter(t=>t!==e.value):this._selectedValues=[...this._selectedValues,e.value],this.requestUpdate()):(this.value=e.value,this.open=!1,this._search=``),this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.multiple?this._selectedValues:e.value,option:e},bubbles:!0,composed:!0})))}_getLabel(){return this.multiple?this._selectedValues.length?this._selectedValues.map(e=>this.options.find(t=>t.value===e)?.label||e).join(`, `):null:this.options.find(e=>e.value===this.value)?.label||null}_isSelected(e){return this.multiple?this._selectedValues.includes(e.value):e.value===this.value}_getFilteredOptions(){return this._search?this.options.filter(e=>e.label.toLowerCase().includes(this._search.toLowerCase())):this.options}render(){let e=this._getLabel(),t=this._getFilteredOptions();return L`
+  `;constructor(){super(),this.options=[],this.open=!1,this.disabled=!1,this.searchable=!1,this.multiple=!1,this.size=`md`,this._search=``,this._selectedValues=[],this._boundClose=this._handleOutsideClick.bind(this),this._focusedIndex=-1,this._labelId=`pastis-dropdown-label-${Math.random().toString(36).slice(2,9)}`,this._listboxId=`pastis-dropdown-listbox-${Math.random().toString(36).slice(2,9)}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_toggle(){this.disabled||(this.open=!this.open,this.open&&(this._focusedIndex=-1,this.searchable?requestAnimationFrame(()=>this.shadowRoot?.querySelector(`.search-input`)?.focus()):requestAnimationFrame(()=>this._focusOptionAt(0))))}_getOptionElements(){return Array.from(this.shadowRoot?.querySelectorAll(`.option`)||[])}_focusOptionAt(e){let t=this._getOptionElements();if(!t.length)return;let n=Math.max(0,Math.min(e,t.length-1));this._focusedIndex=n,t[n]?.focus()}_handleTriggerKeydown(e){e.key===`ArrowDown`?(e.preventDefault(),this.open?this._focusOptionAt(this._focusedIndex+1):(this.open=!0,this._focusedIndex=-1,requestAnimationFrame(()=>this._focusOptionAt(0)))):e.key===`ArrowUp`?(e.preventDefault(),this.open&&this._focusOptionAt(this._focusedIndex-1)):e.key===`Escape`?this.open&&(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&this._toggle()}_handleOptionKeydown(e,t,n){e.key===`ArrowDown`?(e.preventDefault(),this._focusOptionAt(n+1)):e.key===`ArrowUp`?(e.preventDefault(),n===0?this.shadowRoot?.querySelector(`.trigger`)?.focus():this._focusOptionAt(n-1)):e.key===`Escape`?(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),this._selectOption(t))}_selectOption(e){e.disabled||(this.multiple?(this._selectedValues.indexOf(e.value)>-1?this._selectedValues=this._selectedValues.filter(t=>t!==e.value):this._selectedValues=[...this._selectedValues,e.value],this.requestUpdate()):(this.value=e.value,this.open=!1,this._search=``),this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.multiple?this._selectedValues:e.value,option:e},bubbles:!0,composed:!0})))}_getLabel(){return this.multiple?this._selectedValues.length?this._selectedValues.map(e=>this.options.find(t=>t.value===e)?.label||e).join(`, `):null:this.options.find(e=>e.value===this.value)?.label||null}_isSelected(e){return this.multiple?this._selectedValues.includes(e.value):e.value===this.value}_getFilteredOptions(){return this._search?this.options.filter(e=>e.label.toLowerCase().includes(this._search.toLowerCase())):this.options}render(){let e=this._getLabel(),n=this._getFilteredOptions();return t.html`
       <div class="field">
-        ${this.label?L`<label id="${this._labelId}">${this.label}</label>`:``}
+        ${this.label?t.html`<label id="${this._labelId}">${this.label}</label>`:``}
         <div class="wrap">
           <div
             class="trigger"
@@ -1562,14 +1562,14 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             part="trigger"
           >
             <span class="trigger-text">
-              ${e?L`${e}`:L`<span class="placeholder">${this.placeholder||`Select an option`}</span>`}
+              ${e?t.html`${e}`:t.html`<span class="placeholder">${this.placeholder||`Select an option`}</span>`}
             </span>
             <span class="chevron">▾</span>
           </div>
 
-          ${this.open?L`
+          ${this.open?t.html`
             <div class="dropdown" part="dropdown">
-              ${this.searchable?L`
+              ${this.searchable?t.html`
                 <div class="search-wrap">
                   <input
                     class="search-input"
@@ -1582,28 +1582,28 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                 </div>
               `:``}
               <div class="options-list" role="listbox" id="${this._listboxId}" aria-label="${this.label||`Options`}">
-                ${t.length?t.map((e,t)=>L`
+                ${n.length?n.map((e,n)=>t.html`
                   <div
                     class="option ${this._isSelected(e)?`selected`:``} ${e.disabled?`disabled`:``}"
                     role="option"
                     aria-selected="${this._isSelected(e)?`true`:`false`}"
                     aria-disabled="${e.disabled?`true`:`false`}"
                     @click="${t=>{t.stopPropagation(),this._selectOption(e)}}"
-                    @keydown="${n=>this._handleOptionKeydown(n,e,t)}"
+                    @keydown="${t=>this._handleOptionKeydown(t,e,n)}"
                     tabindex="${e.disabled?-1:0}"
                   >
-                    ${e.icon?L`<span>${e.icon}</span>`:``}
+                    ${e.icon?t.html`<span>${e.icon}</span>`:``}
                     ${e.label}
-                    ${this._isSelected(e)?L`<span class="check">✓</span>`:``}
+                    ${this._isSelected(e)?t.html`<span class="check">✓</span>`:``}
                   </div>
-                `):L`<div class="no-options">No options found</div>`}
+                `):t.html`<div class="no-options">No options found</div>`}
               </div>
             </div>
           `:``}
         </div>
-        ${this.error?L`<span class="error-text">⚠ ${this.error}</span>`:``}
+        ${this.error?t.html`<span class="error-text">⚠ ${this.error}</span>`:``}
       </div>
-    `}};customElements.define(`pastis-dropdown`,Oe);var ke=class extends J{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-dropdown`,W);var le=class extends t.LitElement{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .tabs-container { display: flex; flex-direction: column; }
@@ -1717,10 +1717,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-secondary, #fff);
       font-size: 14px;
     }
-  `;constructor(){super(),this.tabs=[],this.variant=`default`,this.size=`md`,this.fullWidth=!1}updated(e){if(e.has(`tabs`)&&this.tabs.length&&!this.active){let e=this.tabs.find(e=>!e.disabled);e&&(this.active=e.id)}}_selectTab(e){e.disabled||(this.active=e.id,this.dispatchEvent(new CustomEvent(`pastis-tab-change`,{detail:{tab:e.id},bubbles:!0,composed:!0})))}_handleKeydown(e,t){if(e.key===`Enter`||e.key===` `)e.preventDefault(),this._selectTab(t);else if(e.key===`ArrowRight`){let e=this.tabs.indexOf(t),n=this.tabs.find((t,n)=>n>e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}else if(e.key===`ArrowLeft`){let e=this.tabs.indexOf(t),n=[...this.tabs].reverse().find((t,n)=>this.tabs.length-1-n<e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}}render(){let e=this.tabs.find(e=>e.id===this.active);return L`
+  `;constructor(){super(),this.tabs=[],this.variant=`default`,this.size=`md`,this.fullWidth=!1}updated(e){if(e.has(`tabs`)&&this.tabs.length&&!this.active){let e=this.tabs.find(e=>!e.disabled);e&&(this.active=e.id)}}_selectTab(e){e.disabled||(this.active=e.id,this.dispatchEvent(new CustomEvent(`pastis-tab-change`,{detail:{tab:e.id},bubbles:!0,composed:!0})))}_handleKeydown(e,t){if(e.key===`Enter`||e.key===` `)e.preventDefault(),this._selectTab(t);else if(e.key===`ArrowRight`){let e=this.tabs.indexOf(t),n=this.tabs.find((t,n)=>n>e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}else if(e.key===`ArrowLeft`){let e=this.tabs.indexOf(t),n=[...this.tabs].reverse().find((t,n)=>this.tabs.length-1-n<e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}}render(){let e=this.tabs.find(e=>e.id===this.active);return t.html`
       <div class="tabs-container">
         <div class="tab-list" role="tablist" part="tablist">
-          ${this.tabs.map(e=>L`
+          ${this.tabs.map(e=>t.html`
             <button
               class="tab-btn ${e.id===this.active?`active`:``}"
               role="tab"
@@ -1733,9 +1733,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               tabindex="${e.id===this.active?0:-1}"
               part="tab"
             >
-              ${e.icon?L`<span aria-hidden="true">${e.icon}</span>`:``}
+              ${e.icon?t.html`<span aria-hidden="true">${e.icon}</span>`:``}
               ${e.label}
-              ${e.badge===void 0?``:L`<span class="badge">${e.badge}</span>`}
+              ${e.badge===void 0?``:t.html`<span class="badge">${e.badge}</span>`}
             </button>
           `)}
         </div>
@@ -1745,10 +1745,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           role="tabpanel"
           part="panel"
         >
-          ${e?.content?L`${e.content}`:L`<slot name="${this.active}"></slot>`}
+          ${e?.content?t.html`${e.content}`:t.html`<slot name="${this.active}"></slot>`}
         </div>
       </div>
-    `}};customElements.define(`pastis-tabs`,ke);var Ae=class extends J{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-tabs`,le);var G=class extends t.LitElement{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=t.css`
     :host { display: block; }
 
     .accordion {
@@ -1860,9 +1860,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       font-family: var(--font-family-mono, 'Fira Code', monospace);
       padding: 1px 6px;
     }
-  `;constructor(){super(),this.items=[],this.multiple=!1,this.openItems=[],this.variant=`default`}_isOpen(e){return this.openItems.includes(e)}_toggle(e){this.multiple?this.openItems=this._isOpen(e)?this.openItems.filter(t=>t!==e):[...this.openItems,e]:this.openItems=this._isOpen(e)?[]:[e],this.requestUpdate(),this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{id:e,open:this._isOpen(e)},bubbles:!0,composed:!0}))}updated(e){!e.has(`openItems`)&&!e.has(`items`)||this.shadowRoot?.querySelectorAll(`.body`).forEach(e=>{let t=e.closest(`.item`),n=e.querySelector(`.body-inner`);t?.classList.contains(`open`)?e.style.height=n.scrollHeight+`px`:e.style.height=`0px`})}render(){return L`
+  `;constructor(){super(),this.items=[],this.multiple=!1,this.openItems=[],this.variant=`default`}_isOpen(e){return this.openItems.includes(e)}_toggle(e){this.multiple?this.openItems=this._isOpen(e)?this.openItems.filter(t=>t!==e):[...this.openItems,e]:this.openItems=this._isOpen(e)?[]:[e],this.requestUpdate(),this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{id:e,open:this._isOpen(e)},bubbles:!0,composed:!0}))}updated(e){!e.has(`openItems`)&&!e.has(`items`)||this.shadowRoot?.querySelectorAll(`.body`).forEach(e=>{let t=e.closest(`.item`),n=e.querySelector(`.body-inner`);t?.classList.contains(`open`)?e.style.height=n.scrollHeight+`px`:e.style.height=`0px`})}render(){return t.html`
       <div class="accordion" part="accordion">
-        ${this.items.map(e=>L`
+        ${this.items.map(e=>t.html`
           <div class="item ${this._isOpen(e.id)?`open`:``}" part="item">
             <button
               id="header-${e.id}"
@@ -1873,9 +1873,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               part="header"
             >
               <span class="header-content">
-                ${e.icon?L`<span class="icon" aria-hidden="true">${e.icon}</span>`:``}
+                ${e.icon?t.html`<span class="icon" aria-hidden="true">${e.icon}</span>`:``}
                 <span>${e.title}</span>
-                ${e.badge===void 0?``:L`<span class="badge">${e.badge}</span>`}
+                ${e.badge===void 0?``:t.html`<span class="badge">${e.badge}</span>`}
               </span>
               <span class="chevron" aria-hidden="true">▾</span>
             </button>
@@ -1885,7 +1885,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `)}
       </div>
-    `}};customElements.define(`pastis-accordion`,Ae);var je=class extends J{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=s`
+    `}};customElements.define(`pastis-accordion`,G);var K=class extends t.LitElement{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=t.css`
     :host { display: block; }
 
     nav {
@@ -1966,20 +1966,20 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
-  `;constructor(){super(),this.items=[],this.separator=`/`,this._expanded=!1}_getVisibleItems(){return!this.maxItems||this.items.length<=this.maxItems||this._expanded?this.items:[this.items[0],{id:`__ellipsis__`,label:`…`},...this.items.slice(-Math.min(2,this.maxItems-1))]}render(){let e=this._getVisibleItems();return L`
+  `;constructor(){super(),this.items=[],this.separator=`/`,this._expanded=!1}_getVisibleItems(){return!this.maxItems||this.items.length<=this.maxItems||this._expanded?this.items:[this.items[0],{id:`__ellipsis__`,label:`…`},...this.items.slice(-Math.min(2,this.maxItems-1))]}render(){let e=this._getVisibleItems();return t.html`
       <nav aria-label="Breadcrumb">
         <ol>
-          ${e.map((t,n)=>{let r=n===e.length-1;return L`
+          ${e.map((n,r)=>{let i=r===e.length-1;return t.html`
               <li>
-                ${t.id===`__ellipsis__`?L`
+                ${n.id===`__ellipsis__`?t.html`
                     <button class="ellipsis" @click="${()=>{this._expanded=!0,this.requestUpdate()}}" aria-label="Show all breadcrumb items" aria-expanded="false">…</button>
-                  `:r?L`<span class="crumb active" aria-current="page">${t.icon?L`<span class="crumb-icon">${t.icon}</span>`:``}${t.label}</span>`:L`<a class="crumb" href="${t.href||`#`}">${t.icon?L`<span class="crumb-icon">${t.icon}</span>`:``}${t.label}</a>`}
-                ${r?``:L`<span class="separator" aria-hidden="true">${this.separator}</span>`}
+                  `:i?t.html`<span class="crumb active" aria-current="page">${n.icon?t.html`<span class="crumb-icon">${n.icon}</span>`:``}${n.label}</span>`:t.html`<a class="crumb" href="${n.href||`#`}">${n.icon?t.html`<span class="crumb-icon">${n.icon}</span>`:``}${n.label}</a>`}
+                ${i?``:t.html`<span class="separator" aria-hidden="true">${this.separator}</span>`}
               </li>
             `})}
         </ol>
       </nav>
-    `}};customElements.define(`pastis-breadcrumb`,je);var Me=class extends J{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=s`
+    `}};customElements.define(`pastis-breadcrumb`,K);var q=class extends t.LitElement{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=t.css`
     :host { display: block; }
 
     .pagination {
@@ -2089,7 +2089,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.page=1,this.pageSize=10,this.total=0,this.siblingCount=1,this.variant=`default`,this.showInfo=!1}get totalPages(){return Math.max(1,Math.ceil(this.total/this.pageSize))}_getPages(){let e=this.totalPages,t=this.page,n=this.siblingCount;if(e<=7)return Array.from({length:e},(e,t)=>t+1);let r=Math.max(2,t-n),i=Math.min(e-1,t+n),a=[1];r>2&&a.push(`...`);for(let e=r;e<=i;e++)a.push(e);return i<e-1&&a.push(`...`),a.push(e),a}_goTo(e){e<1||e>this.totalPages||e===this.page||(this.page=e,this.dispatchEvent(new CustomEvent(`pastis-page-change`,{detail:{page:this.page,pageSize:this.pageSize},bubbles:!0,composed:!0})))}render(){let e=this._getPages(),t=(this.page-1)*this.pageSize+1,n=Math.min(this.page*this.pageSize,this.total);return L`
+  `;constructor(){super(),this.page=1,this.pageSize=10,this.total=0,this.siblingCount=1,this.variant=`default`,this.showInfo=!1}get totalPages(){return Math.max(1,Math.ceil(this.total/this.pageSize))}_getPages(){let e=this.totalPages,t=this.page,n=this.siblingCount;if(e<=7)return Array.from({length:e},(e,t)=>t+1);let r=Math.max(2,t-n),i=Math.min(e-1,t+n),a=[1];r>2&&a.push(`...`);for(let e=r;e<=i;e++)a.push(e);return i<e-1&&a.push(`...`),a.push(e),a}_goTo(e){e<1||e>this.totalPages||e===this.page||(this.page=e,this.dispatchEvent(new CustomEvent(`pastis-page-change`,{detail:{page:this.page,pageSize:this.pageSize},bubbles:!0,composed:!0})))}render(){let e=this._getPages(),n=(this.page-1)*this.pageSize+1,r=Math.min(this.page*this.pageSize,this.total);return t.html`
       <nav aria-label="Pagination">
         <span class="sr-only" aria-live="polite" aria-atomic="true">Page ${this.page} of ${this.totalPages}</span>
         <div class="pagination">
@@ -2100,7 +2100,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-label="Previous page"
           >←</button>
 
-          ${e.map(e=>e===`...`?L`<span class="ellipsis">…</span>`:L`
+          ${e.map(e=>e===`...`?t.html`<span class="ellipsis">…</span>`:t.html`
                 <button
                   class="btn ${e===this.page?`active`:``}"
                   @click="${()=>this._goTo(e)}"
@@ -2116,12 +2116,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-label="Next page"
           >→</button>
 
-          ${this.showInfo?L`
-            <span class="info">${t}–${n} of ${this.total}</span>
+          ${this.showInfo?t.html`
+            <span class="info">${n}–${r} of ${this.total}</span>
           `:``}
         </div>
       </nav>
-    `}};customElements.define(`pastis-pagination`,Me);var Ne=class extends J{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=s`
+    `}};customElements.define(`pastis-pagination`,q);var J=class extends t.LitElement{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=t.css`
     :host { display: block; }
 
     .progress-wrap {
@@ -2249,28 +2249,28 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         transition: none;
       }
     }
-  `;constructor(){super(),this.value=0,this.max=100,this.variant=`bar`,this.size=`md`,this.animated=!1,this.indeterminate=!1,this.showValue=!1,this.radius=36,this.strokeWidth=6}_getPercentage(){return Math.min(100,Math.max(0,this.value/this.max*100))}_renderRing(){let e=this.radius,t=this.strokeWidth,n=(e+t)*2,r=2*Math.PI*e,i=this._getPercentage(),a=r-i/100*r;return L`
-      <div class="ring-wrap" part="ring" role="progressbar" aria-valuenow="${this.indeterminate?void 0:Math.round(i)}" aria-valuemin="0" aria-valuemax="100" aria-label="${this.label||`Progress`}">
-        <svg class="ring-svg" width="${n}" height="${n}" viewBox="0 0 ${n} ${n}" aria-hidden="true">
-          <circle class="ring-track" cx="${n/2}" cy="${n/2}" r="${e}" stroke-width="${t}" />
+  `;constructor(){super(),this.value=0,this.max=100,this.variant=`bar`,this.size=`md`,this.animated=!1,this.indeterminate=!1,this.showValue=!1,this.radius=36,this.strokeWidth=6}_getPercentage(){return Math.min(100,Math.max(0,this.value/this.max*100))}_renderRing(){let e=this.radius,n=this.strokeWidth,r=(e+n)*2,i=2*Math.PI*e,a=this._getPercentage(),o=i-a/100*i;return t.html`
+      <div class="ring-wrap" part="ring" role="progressbar" aria-valuenow="${this.indeterminate?void 0:Math.round(a)}" aria-valuemin="0" aria-valuemax="100" aria-label="${this.label||`Progress`}">
+        <svg class="ring-svg" width="${r}" height="${r}" viewBox="0 0 ${r} ${r}" aria-hidden="true">
+          <circle class="ring-track" cx="${r/2}" cy="${r/2}" r="${e}" stroke-width="${n}" />
           <circle
             class="ring-fill"
-            cx="${n/2}" cy="${n/2}" r="${e}"
-            stroke-width="${t}"
-            stroke-dasharray="${r}"
-            stroke-dashoffset="${this.indeterminate?r*.6:a}"
+            cx="${r/2}" cy="${r/2}" r="${e}"
+            stroke-width="${n}"
+            stroke-dasharray="${i}"
+            stroke-dashoffset="${this.indeterminate?i*.6:o}"
             style="${this.color?`stroke:${this.color}`:``}"
           />
         </svg>
-        ${this.showValue&&!this.indeterminate?L`<span class="ring-value">${Math.round(i)}%</span>`:``}
+        ${this.showValue&&!this.indeterminate?t.html`<span class="ring-value">${Math.round(a)}%</span>`:``}
       </div>
-      ${this.label?L`<div class="progress-header"><span class="label">${this.label}</span></div>`:``}
-    `}render(){if(this.variant===`ring`)return this._renderRing();let e=this._getPercentage();return L`
+      ${this.label?t.html`<div class="progress-header"><span class="label">${this.label}</span></div>`:``}
+    `}render(){if(this.variant===`ring`)return this._renderRing();let e=this._getPercentage();return t.html`
       <div class="progress-wrap" part="progress">
-        ${this.label||this.showValue?L`
+        ${this.label||this.showValue?t.html`
           <div class="progress-header">
-            ${this.label?L`<span class="label">${this.label}</span>`:``}
-            ${this.showValue&&!this.indeterminate?L`<span>${Math.round(e)}%</span>`:``}
+            ${this.label?t.html`<span class="label">${this.label}</span>`:``}
+            ${this.showValue&&!this.indeterminate?t.html`<span>${Math.round(e)}%</span>`:``}
           </div>
         `:``}
         <div class="track" role="progressbar" aria-valuenow="${this.indeterminate?void 0:this.value}" aria-valuemin="0" aria-valuemax="${this.max}" aria-label="${this.label||`Progress`}" part="track">
@@ -2281,7 +2281,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ></div>
         </div>
       </div>
-    `}};customElements.define(`pastis-progress`,Ne);var Pe=class extends J{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-progress`,J);var Y=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     .tag {
@@ -2371,15 +2371,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .tag-icon { font-size: 11px; }
-  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.removable=!1,this.disabled=!1}render(){return L`
+  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.removable=!1,this.disabled=!1}render(){return t.html`
       <span
         class="tag"
         part="tag"
         style="${this.color?`background:${this.color}20;color:${this.color};border:1.5px solid ${this.color}40`:``}"
       >
-        ${this.icon?L`<span class="tag-icon" aria-hidden="true">${this.icon}</span>`:``}
+        ${this.icon?t.html`<span class="tag-icon" aria-hidden="true">${this.icon}</span>`:``}
         <slot></slot>
-        ${this.removable?L`
+        ${this.removable?t.html`
           <button
             class="remove-btn"
             @click="${this._remove}"
@@ -2388,7 +2388,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           >✕</button>
         `:``}
       </span>
-    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Pe);var Fe=class extends J{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=s`
+    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Y);var X=class extends t.LitElement{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=t.css`
     :host { display: block; }
 
     :host([orientation="vertical"]) {
@@ -2479,13 +2479,13 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-tertiary, #909498);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.orientation=`horizontal`,this.variant=`solid`}_hasSlottedContent(){return this.querySelector(`*`)?!0:Array.from(this.childNodes).some(e=>e.nodeType===Node.TEXT_NODE&&e.textContent.trim().length>0)}render(){let e=[this.color?`background:${this.color};border-color:${this.color}`:``,this.thickness?`height:${this.thickness};width:${this.thickness}`:``].filter(Boolean).join(`;`),t=this.label||this._hasSlottedContent();return L`
+  `;constructor(){super(),this.orientation=`horizontal`,this.variant=`solid`}_hasSlottedContent(){return this.querySelector(`*`)?!0:Array.from(this.childNodes).some(e=>e.nodeType===Node.TEXT_NODE&&e.textContent.trim().length>0)}render(){let e=[this.color?`background:${this.color};border-color:${this.color}`:``,this.thickness?`height:${this.thickness};width:${this.thickness}`:``].filter(Boolean).join(`;`),n=this.label||this._hasSlottedContent();return t.html`
       <div class="divider" role="separator" aria-orientation="${this.orientation||`horizontal`}" part="divider">
         <span class="line" style="${e}"></span>
-        ${this.label?L`<span class="label">${this.label}</span>`:L`<slot></slot>`}
-        ${t?L`<span class="line" style="${e}"></span>`:``}
+        ${this.label?t.html`<span class="label">${this.label}</span>`:t.html`<slot></slot>`}
+        ${n?t.html`<span class="line" style="${e}"></span>`:``}
       </div>
-    `}};customElements.define(`pastis-divider`,Fe);var Ie=class extends J{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-divider`,X);var Z=class extends t.LitElement{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .hero {
@@ -2637,31 +2637,31 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       .content { flex-direction: column !important; }
       .image-col { display: none; }
     }
-  `;constructor(){super(),this.align=`left`,this.variant=`light`,this.gradient=!1,this.fullHeight=!1}render(){return L`
+  `;constructor(){super(),this.align=`left`,this.variant=`light`,this.gradient=!1,this.fullHeight=!1}render(){return t.html`
       <section class="hero" part="hero" style="${this.bgColor?`background:${this.bgColor}`:``}">
         <div class="content">
           <div class="text-col">
-            ${this.badge?L`
+            ${this.badge?t.html`
               <div class="badge-wrap">
                 <span class="badge">✨ ${this.badge}</span>
               </div>
             `:``}
             <h1>${this.heading||``}<slot name="heading"></slot></h1>
-            ${this.subheading?L`<p>${this.subheading}</p>`:L`<slot name="subheading"></slot>`}
+            ${this.subheading?t.html`<p>${this.subheading}</p>`:t.html`<slot name="subheading"></slot>`}
             <div class="cta-group">
-              ${this.cta?L`<button class="cta-btn primary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}">${this.cta} <span aria-hidden="true">→</span></button>`:``}
-              ${this.ctaSecondary?L`<button class="cta-btn secondary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}">${this.ctaSecondary}</button>`:``}
+              ${this.cta?t.html`<button class="cta-btn primary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}">${this.cta} <span aria-hidden="true">→</span></button>`:``}
+              ${this.ctaSecondary?t.html`<button class="cta-btn secondary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}">${this.ctaSecondary}</button>`:``}
               <slot name="cta"></slot>
             </div>
           </div>
-          ${this.image?L`
+          ${this.image?t.html`
             <div class="image-col">
               <img class="hero-image" src="${this.image}" alt="${this.imageAlt||this.heading||`Hero image`}" part="image" />
             </div>
-          `:L`<slot name="image"></slot>`}
+          `:t.html`<slot name="image"></slot>`}
         </div>
       </section>
-    `}};customElements.define(`pastis-hero`,Ie);var Le=class extends J{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=s`
+    `}};customElements.define(`pastis-hero`,Z);var Q=class extends t.LitElement{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=t.css`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -2819,9 +2819,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       padding: 0 2px;
       font-weight: 700;
     }
-  `;constructor(){super(),this.value=``,this.suggestions=[],this.open=!1,this.loading=!1,this.disabled=!1,this.size=`md`,this.minChars=1,this.noResultsText=`No results found`,this._focusedIndex=-1,this._boundClose=this._handleOutsideClick.bind(this),this._listboxId=`pastis-search-listbox-${Math.random().toString(36).slice(2,9)}`}_optionId(e){return`${this._listboxId}-option-${e}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_handleInput(e){this.value=e.target.value,this._focusedIndex=-1,this.open=this.value.length>=this.minChars,this.dispatchEvent(new CustomEvent(`pastis-search`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleKeydown(e){let t=this.suggestions;e.key===`ArrowDown`?(e.preventDefault(),this._focusedIndex=Math.min(this._focusedIndex+1,t.length-1),this.requestUpdate()):e.key===`ArrowUp`?(e.preventDefault(),this._focusedIndex=Math.max(this._focusedIndex-1,-1),this.requestUpdate()):e.key===`Enter`?this._focusedIndex>=0&&t[this._focusedIndex]?this._select(t[this._focusedIndex]):(this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0})),this.open=!1):e.key===`Escape`&&(this.open=!1)}_select(e){this.value=e.label||e.value||e,this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{item:e},bubbles:!0,composed:!0}))}_clear(){this.value=``,this.open=!1,this.shadowRoot?.querySelector(`.search-input`)?.focus(),this.dispatchEvent(new CustomEvent(`pastis-clear`,{bubbles:!0,composed:!0}))}_highlight(e){if(!this.value)return L`${e}`;let t=e.toLowerCase().indexOf(this.value.toLowerCase());return t===-1?L`${e}`:L`${e.slice(0,t)}<mark>${e.slice(t,t+this.value.length)}</mark>${e.slice(t+this.value.length)}`}render(){return L`
+  `;constructor(){super(),this.value=``,this.suggestions=[],this.open=!1,this.loading=!1,this.disabled=!1,this.size=`md`,this.minChars=1,this.noResultsText=`No results found`,this._focusedIndex=-1,this._boundClose=this._handleOutsideClick.bind(this),this._listboxId=`pastis-search-listbox-${Math.random().toString(36).slice(2,9)}`}_optionId(e){return`${this._listboxId}-option-${e}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_handleInput(e){this.value=e.target.value,this._focusedIndex=-1,this.open=this.value.length>=this.minChars,this.dispatchEvent(new CustomEvent(`pastis-search`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleKeydown(e){let t=this.suggestions;e.key===`ArrowDown`?(e.preventDefault(),this._focusedIndex=Math.min(this._focusedIndex+1,t.length-1),this.requestUpdate()):e.key===`ArrowUp`?(e.preventDefault(),this._focusedIndex=Math.max(this._focusedIndex-1,-1),this.requestUpdate()):e.key===`Enter`?this._focusedIndex>=0&&t[this._focusedIndex]?this._select(t[this._focusedIndex]):(this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0})),this.open=!1):e.key===`Escape`&&(this.open=!1)}_select(e){this.value=e.label||e.value||e,this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{item:e},bubbles:!0,composed:!0}))}_clear(){this.value=``,this.open=!1,this.shadowRoot?.querySelector(`.search-input`)?.focus(),this.dispatchEvent(new CustomEvent(`pastis-clear`,{bubbles:!0,composed:!0}))}_highlight(e){if(!this.value)return t.html`${e}`;let n=e.toLowerCase().indexOf(this.value.toLowerCase());return n===-1?t.html`${e}`:t.html`${e.slice(0,n)}<mark>${e.slice(n,n+this.value.length)}</mark>${e.slice(n+this.value.length)}`}render(){return t.html`
       <div class="field">
-        ${this.label?L`<label>${this.label}</label>`:``}
+        ${this.label?t.html`<label>${this.label}</label>`:``}
         <div class="wrap" @click="${e=>e.stopPropagation()}">
           <span class="icon-wrap search-icon" aria-hidden="true">🔍</span>
           <input
@@ -2835,39 +2835,39 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${Q(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
+            aria-activedescendant="${N(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
             @input="${this._handleInput}"
             @focus="${()=>{this.value.length>=this.minChars&&(this.open=!0)}}"
             @keydown="${this._handleKeydown}"
             part="input"
           />
-          ${this.loading?L`<span class="spinner-icon"></span>`:``}
-          ${this.value&&!this.loading?L`
+          ${this.loading?t.html`<span class="spinner-icon"></span>`:``}
+          ${this.value&&!this.loading?t.html`
             <button class="clear-btn" @click="${this._clear}" aria-label="Clear search">✕</button>
           `:``}
 
-          ${this.open?L`
+          ${this.open?t.html`
             <div class="dropdown" role="listbox" id="${this._listboxId}" part="dropdown">
-              ${this.suggestions.length?this.suggestions.map((e,t)=>L`
+              ${this.suggestions.length?this.suggestions.map((e,n)=>t.html`
                 <div
-                  id="${this._optionId(t)}"
-                  class="suggestion ${t===this._focusedIndex?`focused`:``}"
+                  id="${this._optionId(n)}"
+                  class="suggestion ${n===this._focusedIndex?`focused`:``}"
                   role="option"
-                  aria-selected="${t===this._focusedIndex}"
+                  aria-selected="${n===this._focusedIndex}"
                   @click="${()=>this._select(e)}"
                 >
-                  ${e.icon?L`<span class="suggestion-icon">${e.icon}</span>`:``}
+                  ${e.icon?t.html`<span class="suggestion-icon">${e.icon}</span>`:``}
                   <span class="suggestion-label">${this._highlight(e.label||e)}</span>
-                  ${e.sub?L`<span class="suggestion-sub">${e.sub}</span>`:``}
+                  ${e.sub?t.html`<span class="suggestion-sub">${e.sub}</span>`:``}
                 </div>
-              `):L`
+              `):t.html`
                 <div class="no-results">${this.noResultsText}</div>
               `}
             </div>
           `:``}
         </div>
       </div>
-    `}};customElements.define(`pastis-search`,Le);var Re=class extends J{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-search`,Q);var ue=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: contents; }
 
     .backdrop {
@@ -3000,16 +3000,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       border-top: var(--border-width, 1px) solid var(--border-default, #383c44);
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.open=!1,this.position=`right`,this.closable=!0,this.persistent=!1,this.overlay=!0,this.size=`md`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown)}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.drawer`);if(!e)return[];let t=[`a[href]`,`button:not([disabled])`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`,`[tabindex]:not([tabindex="-1"])`].join(`,`);return Array.from(e.querySelectorAll(t)).filter(e=>!e.closest(`[hidden]`)&&e.offsetParent!==null)}updated(e){e.has(`open`)&&(this.open?(this._previousFocus=document.activeElement,document.body.style.overflow=`hidden`,requestAnimationFrame(()=>{(this._getFocusableElements()[0]||this.shadowRoot?.querySelector(`.close-btn`))?.focus()})):(document.body.style.overflow=``,this._previousFocus?.focus(),this._previousFocus=null))}close(){this.open=!1,document.body.style.overflow=``,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}render(){return this.open?L`
+  `;constructor(){super(),this.open=!1,this.position=`right`,this.closable=!0,this.persistent=!1,this.overlay=!0,this.size=`md`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown)}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.drawer`);if(!e)return[];let t=[`a[href]`,`button:not([disabled])`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`,`[tabindex]:not([tabindex="-1"])`].join(`,`);return Array.from(e.querySelectorAll(t)).filter(e=>!e.closest(`[hidden]`)&&e.offsetParent!==null)}updated(e){e.has(`open`)&&(this.open?(this._previousFocus=document.activeElement,document.body.style.overflow=`hidden`,requestAnimationFrame(()=>{(this._getFocusableElements()[0]||this.shadowRoot?.querySelector(`.close-btn`))?.focus()})):(document.body.style.overflow=``,this._previousFocus?.focus(),this._previousFocus=null))}close(){this.open=!1,document.body.style.overflow=``,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}render(){return this.open?t.html`
       <div class="backdrop" part="backdrop">
-        ${this.overlay?L`
+        ${this.overlay?t.html`
           <div class="overlay" @click="${()=>!this.persistent&&this.close()}"></div>
         `:``}
         <div class="drawer" role="dialog" aria-modal="true" aria-label="${this.title||`Drawer`}" part="drawer">
-          ${this.position===`bottom`||this.position===`top`?L`<div class="handle"></div>`:``}
+          ${this.position===`bottom`||this.position===`top`?t.html`<div class="handle"></div>`:``}
           <div class="drawer-header">
             <h2 class="drawer-title">${this.title||``}</h2>
-            ${this.closable?L`
+            ${this.closable?t.html`
               <button class="close-btn" @click="${this.close}" aria-label="Close">✕</button>
             `:``}
           </div>
@@ -3019,7 +3019,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="drawer-footer"></slot>
         </div>
       </div>
-    `:L``}};customElements.define(`pastis-drawer`,Re);var ze=class extends J{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=s`
+    `:t.html``}};customElements.define(`pastis-drawer`,ue);var de=class extends t.LitElement{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=t.css`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3174,9 +3174,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       border-radius: 0;
       transition: width 100ms steps(10);
     }
-  `;constructor(){super(),this.files=[],this.multiple=!1,this.disabled=!1,this.dragover=!1,this.maxSize=10,this.maxFiles=10,this.error=``}_formatSize(e){return e<1024?e+` B`:e<1024*1024?(e/1024).toFixed(1)+` KB`:(e/(1024*1024)).toFixed(1)+` MB`}_getFileIcon(e){let t=e.type;return t.startsWith(`image/`)?`🖼`:t.startsWith(`video/`)?`🎬`:t.startsWith(`audio/`)?`🎵`:t.includes(`pdf`)?`📄`:t.includes(`zip`)||t.includes(`rar`)?`📦`:t.includes(`spreadsheet`)||t.includes(`excel`)||t.name?.endsWith(`.xlsx`)?`📊`:`📎`}_processFiles(e){this.error=``;let t=Array.from(e);for(let e of t)if(e.size>this.maxSize*1024*1024){this.error=`File "${e.name}" exceeds the ${this.maxSize}MB limit.`;return}if(!this.multiple)this.files=t.slice(0,1);else{let e=[...this.files,...t];if(e.length>this.maxFiles){this.error=`Maximum ${this.maxFiles} files allowed.`;return}this.files=e}this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_handleDrop(e){e.preventDefault(),this.dragover=!1,!this.disabled&&this._processFiles(e.dataTransfer.files)}_handleFileInput(e){this._processFiles(e.target.files),e.target.value=``}_removeFile(e){this.files=this.files.filter((t,n)=>n!==e),this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_openPicker(){this.disabled||this.shadowRoot?.querySelector(`input[type="file"]`)?.click()}render(){return L`
+  `;constructor(){super(),this.files=[],this.multiple=!1,this.disabled=!1,this.dragover=!1,this.maxSize=10,this.maxFiles=10,this.error=``}_formatSize(e){return e<1024?e+` B`:e<1024*1024?(e/1024).toFixed(1)+` KB`:(e/(1024*1024)).toFixed(1)+` MB`}_getFileIcon(e){let t=e.type;return t.startsWith(`image/`)?`🖼`:t.startsWith(`video/`)?`🎬`:t.startsWith(`audio/`)?`🎵`:t.includes(`pdf`)?`📄`:t.includes(`zip`)||t.includes(`rar`)?`📦`:t.includes(`spreadsheet`)||t.includes(`excel`)||t.name?.endsWith(`.xlsx`)?`📊`:`📎`}_processFiles(e){this.error=``;let t=Array.from(e);for(let e of t)if(e.size>this.maxSize*1024*1024){this.error=`File "${e.name}" exceeds the ${this.maxSize}MB limit.`;return}if(!this.multiple)this.files=t.slice(0,1);else{let e=[...this.files,...t];if(e.length>this.maxFiles){this.error=`Maximum ${this.maxFiles} files allowed.`;return}this.files=e}this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_handleDrop(e){e.preventDefault(),this.dragover=!1,!this.disabled&&this._processFiles(e.dataTransfer.files)}_handleFileInput(e){this._processFiles(e.target.files),e.target.value=``}_removeFile(e){this.files=this.files.filter((t,n)=>n!==e),this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_openPicker(){this.disabled||this.shadowRoot?.querySelector(`input[type="file"]`)?.click()}render(){return t.html`
       <div class="field ${this.error?`has-error`:``}">
-        ${this.label?L`<span class="field-label">${this.label}</span>`:``}
+        ${this.label?t.html`<span class="field-label">${this.label}</span>`:``}
 
         <div
           class="dropzone"
@@ -3207,9 +3207,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           @change="${this._handleFileInput}"
         />
 
-        ${this.files.length?L`
+        ${this.files.length?t.html`
           <div class="file-list">
-            ${this.files.map((e,t)=>L`
+            ${this.files.map((e,n)=>t.html`
               <div class="file-item" part="file-item">
                 <span class="file-icon">${this._getFileIcon(e)}</span>
                 <div class="file-info">
@@ -3218,7 +3218,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                 </div>
                 <button
                   class="remove-file"
-                  @click="${e=>{e.stopPropagation(),this._removeFile(t)}}"
+                  @click="${e=>{e.stopPropagation(),this._removeFile(n)}}"
                   aria-label="Remove ${e.name}"
                 >✕</button>
               </div>
@@ -3226,10 +3226,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
 
-        ${this.error?L`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
-        ${this.helper&&!this.error?L`<p class="helper-text">${this.helper}</p>`:``}
+        ${this.error?t.html`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
+        ${this.helper&&!this.error?t.html`<p class="helper-text">${this.helper}</p>`:``}
       </div>
-    `}};customElements.define(`pastis-file-upload`,ze);var Be=class extends J{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-file-upload`,de);var fe=class extends t.LitElement{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=t.css`
     :host { display: block; }
     :host(:not([visible])) { display: none; }
 
@@ -3402,24 +3402,24 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       margin-bottom: 8px;
       display: block;
     }
-  `;constructor(){super(),this.visible=!0,this.position=`bottom-left`,this.title=`We use cookies 🍪`,this.message=`We use cookies to improve your experience and analyze site traffic. By clicking "Accept All", you consent to our use of cookies.`,this.acceptText=`Accept All`,this.rejectText=`Reject All`,this.settingsText=`Manage Preferences`,this.showSettings=!1,this._showDetails=!1,this._titleId=`pastis-cookie-banner-title-${Math.random().toString(36).slice(2,9)}`,this.categories=[{id:`necessary`,name:`Necessary`,description:`Required for the site to function.`,required:!0,enabled:!0},{id:`analytics`,name:`Analytics`,description:`Help us understand how visitors use the site.`,required:!1,enabled:!1},{id:`marketing`,name:`Marketing`,description:`Used for personalized advertisements.`,required:!1,enabled:!1}]}_accept(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-accept`,{detail:{categories:this.categories.map(e=>({...e,enabled:!0}))},bubbles:!0,composed:!0}))}_reject(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-reject`,{detail:{categories:this.categories.map(e=>({...e,enabled:e.required}))},bubbles:!0,composed:!0}))}_savePreferences(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-save`,{detail:{categories:this.categories},bubbles:!0,composed:!0}))}_toggleCategory(e){this.categories=this.categories.map(t=>t.id===e?{...t,enabled:!t.enabled}:t),this.requestUpdate()}render(){return L`
+  `;constructor(){super(),this.visible=!0,this.position=`bottom-left`,this.title=`We use cookies 🍪`,this.message=`We use cookies to improve your experience and analyze site traffic. By clicking "Accept All", you consent to our use of cookies.`,this.acceptText=`Accept All`,this.rejectText=`Reject All`,this.settingsText=`Manage Preferences`,this.showSettings=!1,this._showDetails=!1,this._titleId=`pastis-cookie-banner-title-${Math.random().toString(36).slice(2,9)}`,this.categories=[{id:`necessary`,name:`Necessary`,description:`Required for the site to function.`,required:!0,enabled:!0},{id:`analytics`,name:`Analytics`,description:`Help us understand how visitors use the site.`,required:!1,enabled:!1},{id:`marketing`,name:`Marketing`,description:`Used for personalized advertisements.`,required:!1,enabled:!1}]}_accept(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-accept`,{detail:{categories:this.categories.map(e=>({...e,enabled:!0}))},bubbles:!0,composed:!0}))}_reject(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-reject`,{detail:{categories:this.categories.map(e=>({...e,enabled:e.required}))},bubbles:!0,composed:!0}))}_savePreferences(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-save`,{detail:{categories:this.categories},bubbles:!0,composed:!0}))}_toggleCategory(e){this.categories=this.categories.map(t=>t.id===e?{...t,enabled:!t.enabled}:t),this.requestUpdate()}render(){return t.html`
       <div class="banner" role="region" aria-live="polite" aria-labelledby="${this._titleId}" part="banner">
         <span class="cookie-icon" aria-hidden="true">🍪</span>
         <h2 class="banner-title" id="${this._titleId}">${this.title}</h2>
         <p class="banner-message">
           ${this.message}
-          ${this.privacyUrl?L` <a class="privacy-link" href="${this.privacyUrl}" target="_blank">Privacy Policy</a>`:``}
+          ${this.privacyUrl?t.html` <a class="privacy-link" href="${this.privacyUrl}" target="_blank">Privacy Policy</a>`:``}
         </p>
 
-        ${this._showDetails?L`
+        ${this._showDetails?t.html`
           <div class="categories">
-            ${this.categories.map(e=>L`
+            ${this.categories.map(e=>t.html`
               <div class="category">
                 <div class="category-info">
                   <p class="category-name">${e.name}</p>
                   <p class="category-desc">${e.description}</p>
                 </div>
-                ${e.required?L`<span class="required-badge">Required</span>`:L`
+                ${e.required?t.html`<span class="required-badge">Required</span>`:t.html`
                     <pastis-toggle
                       size="sm"
                       aria-label="${e.name}"
@@ -3435,19 +3435,19 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               <button class="btn btn-primary" @click="${this._savePreferences}">Save Preferences</button>
             </div>
           </div>
-        `:L`
+        `:t.html`
           <div class="actions">
             <div class="btn-row">
               <button class="btn btn-secondary" @click="${this._reject}">${this.rejectText}</button>
               <button class="btn btn-primary" @click="${this._accept}">${this.acceptText}</button>
             </div>
-            ${this.showSettings?L`
+            ${this.showSettings?t.html`
               <button class="btn btn-ghost" @click="${()=>{this._showDetails=!0,this.requestUpdate()}}">${this.settingsText}</button>
             `:``}
           </div>
         `}
       </div>
-    `}};customElements.define(`pastis-cookie-banner`,Be);var Ve=class extends J{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-cookie-banner`,fe);var pe=class extends t.LitElement{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=t.css`
     :host { display: block; }
 
     label {
@@ -3505,7 +3505,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     .label-wrap { display: flex; flex-direction: column; gap: 2px; }
     .label-text { line-height: 1.4; }
     .helper { font-size: 12px; color: var(--text-tertiary, #909498); margin: 0; }
-  `;constructor(){super(),this.checked=!1,this.disabled=!1}render(){return L`
+  `;constructor(){super(),this.checked=!1,this.disabled=!1}render(){return t.html`
       <label @keydown="${this._handleKey}">
         <input
           type="radio"
@@ -3516,14 +3516,14 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           @change=${this._handleChange}
         />
         <span class="radio-visual" aria-hidden="true"></span>
-        ${this.label||this.helper?L`
+        ${this.label||this.helper?t.html`
           <span class="label-wrap">
-            ${this.label?L`<span class="label-text">${this.label}</span>`:``}
-            ${this.helper?L`<span class="helper">${this.helper}</span>`:``}
+            ${this.label?t.html`<span class="label-text">${this.label}</span>`:``}
+            ${this.helper?t.html`<span class="helper">${this.helper}</span>`:``}
           </span>
         `:``}
       </label>
-    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Ve);var He=class extends J{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,pe);var me=class extends t.LitElement{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .stat-card {
@@ -3590,21 +3590,21 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     .trend-neutral { color: var(--text-tertiary, #909498); }
 
     .delta-label { color: var(--text-tertiary, #909498); }
-  `;constructor(){super(),this.variant=`default`,this.trend=`neutral`}render(){let e=this.trend===`up`?`▲`:this.trend===`down`?`▼`:`─`,t=`delta trend-${this.trend}`,n=this.delta?`${this.trend===`up`?`up`:this.trend===`down`?`down`:`no change`} ${this.delta} vs last period`:``;return L`
-      <div class="stat-card" part="stat-card" role="region" aria-label="${[this.label||`Metric`,this.value||`0`,n].filter(Boolean).join(`, `)}">
+  `;constructor(){super(),this.variant=`default`,this.trend=`neutral`}render(){let e=this.trend===`up`?`▲`:this.trend===`down`?`▼`:`─`,n=`delta trend-${this.trend}`,r=this.delta?`${this.trend===`up`?`up`:this.trend===`down`?`down`:`no change`} ${this.delta} vs last period`:``;return t.html`
+      <div class="stat-card" part="stat-card" role="region" aria-label="${[this.label||`Metric`,this.value||`0`,r].filter(Boolean).join(`, `)}">
         <div class="header">
           <span class="label" aria-hidden="true">${this.label||`Metric`}</span>
-          ${this.icon?L`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
+          ${this.icon?t.html`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
         </div>
         <div class="value" aria-hidden="true">${this.value||`0`}</div>
-        ${this.delta?L`
+        ${this.delta?t.html`
           <div class="footer">
-            <span class=${t} aria-hidden="true">${e} ${this.delta}</span>
+            <span class=${n} aria-hidden="true">${e} ${this.delta}</span>
             <span class="delta-label" aria-hidden="true">vs last period</span>
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-stat-card`,He);var Ue=class extends J{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-stat-card`,me);var he=class extends t.LitElement{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=t.css`
     :host { display: block; overflow-x: auto; }
 
     table {
@@ -3707,11 +3707,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       0%, 100% { opacity: 0.4; }
       50% { opacity: 1; }
     }
-  `;constructor(){super(),this.columns=[],this.rows=[],this.selected=[],this.striped=!1,this.hoverable=!1,this.loading=!1,this.emptyText=`No data found.`}_isSelected(e){return this.selected.includes(e)}_toggleRow(e){let t=this._isSelected(e)?this.selected.filter(t=>t!==e):[...this.selected,e];this.selected=t,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:t},bubbles:!0,composed:!0}))}_toggleAll(){let e=this.rows.map(e=>e.id);this.selected=e.every(e=>this.selected.includes(e))?[]:e,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:this.selected},bubbles:!0,composed:!0}))}render(){let e=this.rows.length>0&&this.rows.every(e=>this._isSelected(e.id));return L`
+  `;constructor(){super(),this.columns=[],this.rows=[],this.selected=[],this.striped=!1,this.hoverable=!1,this.loading=!1,this.emptyText=`No data found.`}_isSelected(e){return this.selected.includes(e)}_toggleRow(e){let t=this._isSelected(e)?this.selected.filter(t=>t!==e):[...this.selected,e];this.selected=t,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:t},bubbles:!0,composed:!0}))}_toggleAll(){let e=this.rows.map(e=>e.id);this.selected=e.every(e=>this.selected.includes(e))?[]:e,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:this.selected},bubbles:!0,composed:!0}))}render(){let e=this.rows.length>0&&this.rows.every(e=>this._isSelected(e.id));return t.html`
       <table part="table">
         <thead>
           <tr>
-            ${this.selectable?L`
+            ${this.selectable?t.html`
               <th class="checkbox-cell">
                 <label class="checkbox-wrapper">
                   <input
@@ -3725,22 +3725,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                 </label>
               </th>
             `:``}
-            ${this.columns.map(e=>L`<th>${e.label||e.key}</th>`)}
+            ${this.columns.map(e=>t.html`<th>${e.label||e.key}</th>`)}
           </tr>
         </thead>
         <tbody>
-          ${this.loading?[,,,,].fill(0).map(()=>L`
+          ${this.loading?[,,,,].fill(0).map(()=>t.html`
             <tr>
-              ${this.selectable?L`<td class="checkbox-cell"></td>`:``}
-              ${this.columns.map(()=>L`<td><div class="skeleton-cell"></div></td>`)}
+              ${this.selectable?t.html`<td class="checkbox-cell"></td>`:``}
+              ${this.columns.map(()=>t.html`<td><div class="skeleton-cell"></div></td>`)}
             </tr>
-          `):this.rows.length===0?L`
+          `):this.rows.length===0?t.html`
             <tr class="empty-row">
               <td colspan=${this.columns.length+(this.selectable?1:0)}>${this.emptyText}</td>
             </tr>
-          `:this.rows.map(e=>L`
+          `:this.rows.map(e=>t.html`
             <tr class=${this._isSelected(e.id)?`row-selected`:``}>
-              ${this.selectable?L`
+              ${this.selectable?t.html`
                 <td class="checkbox-cell">
                   <label class="checkbox-wrapper">
                     <input
@@ -3754,12 +3754,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                   </label>
                 </td>
               `:``}
-              ${this.columns.map(t=>L`<td>${e[t.key]??`—`}</td>`)}
+              ${this.columns.map(n=>t.html`<td>${e[n.key]??`—`}</td>`)}
             </tr>
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-table`,Ue);var We=class extends J{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
+    `}};customElements.define(`pastis-table`,he);var ge=class extends t.LitElement{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=t.css`
     :host { display: block; }
 
     .code-block {
@@ -3851,15 +3851,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     code { white-space: pre; flex: 1; }
   `;constructor(){super(),this.code=``,this.language=`text`,this.copyable=!0,this.lineNumbers=!1,this._copied=!1}async _copy(){try{await navigator.clipboard.writeText(this.code),this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}catch(e){console.warn(`Copy failed`,e)}}render(){let e=(this.code||``).split(`
-`);return L`
+`);return t.html`
       <div class="code-block" part="code-block">
-        ${this.filename||this.language!==`text`||this.copyable?L`
+        ${this.filename||this.language!==`text`||this.copyable?t.html`
           <div class="code-header">
             <div class="code-meta">
-              ${this.filename?L`<span class="filename">${this.filename}</span>`:``}
-              ${this.language&&this.language!==`text`?L`<span class="lang-badge">${this.language}</span>`:``}
+              ${this.filename?t.html`<span class="filename">${this.filename}</span>`:``}
+              ${this.language&&this.language!==`text`?t.html`<span class="lang-badge">${this.language}</span>`:``}
             </div>
-            ${this.copyable?L`
+            ${this.copyable?t.html`
               <button
                 class="copy-btn ${this._copied?`copied`:``}"
                 @click=${this._copy}
@@ -3875,16 +3875,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         `:``}
         <div class="code-scroll">
           <pre part="pre"><slot>
-            ${this.lineNumbers?L`
+            ${this.lineNumbers?t.html`
               <span class="line-numbers">
-                ${e.map((e,t)=>L`${t+1}\n`)}
+                ${e.map((e,n)=>t.html`${n+1}\n`)}
               </span>
             `:``}
             <code>${this.code}</code>
           </slot></pre>
         </div>
       </div>
-    `}};customElements.define(`pastis-code-block`,We);var Ge=class extends J{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-code-block`,ge);var _e=class extends t.LitElement{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .empty-state {
@@ -3977,21 +3977,21 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       background: var(--border-default, #383c44);
       opacity: 0.3;
     }
-  `;constructor(){super(),this.variant=`default`}_getDefaultIcon(){let e={search:`🔍`,error:`✕`,loading:`⟳`,default:`□`};return e[this.variant]||e.default}render(){return L`
+  `;constructor(){super(),this.variant=`default`}_getDefaultIcon(){let e={search:`🔍`,error:`✕`,loading:`⟳`,default:`□`};return e[this.variant]||e.default}render(){return t.html`
       <div class="empty-state" part="empty-state">
         <span class="icon-wrap" aria-hidden="true">${this.icon||this._getDefaultIcon()}</span>
         <div class="pixel-deco"></div>
-        ${this.heading?L`<h3 class="heading">${this.heading}</h3>`:``}
-        ${this.body?L`<p class="body">${this.body}</p>`:``}
-        ${this.cta||this.ctaSecondary?L`
+        ${this.heading?t.html`<h3 class="heading">${this.heading}</h3>`:``}
+        ${this.body?t.html`<p class="body">${this.body}</p>`:``}
+        ${this.cta||this.ctaSecondary?t.html`
           <div class="actions">
-            ${this.cta?L`<button class="cta-primary" aria-label="${this.cta||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}>${this.cta}</button>`:``}
-            ${this.ctaSecondary?L`<button class="cta-secondary" aria-label="${this.ctaSecondary||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}>${this.ctaSecondary}</button>`:``}
+            ${this.cta?t.html`<button class="cta-primary" aria-label="${this.cta||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}>${this.cta}</button>`:``}
+            ${this.ctaSecondary?t.html`<button class="cta-secondary" aria-label="${this.ctaSecondary||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}>${this.ctaSecondary}</button>`:``}
           </div>
         `:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-empty-state`,Ge);var Ke=class extends J{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=s`
+    `}};customElements.define(`pastis-empty-state`,_e);var ve=class extends t.LitElement{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=t.css`
     :host { display: inline-block; }
 
     .chip {
@@ -4087,18 +4087,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     .chip:focus-visible,
     .remove:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
-  `;constructor(){super(),this.selected=!1,this.disabled=!1,this.removable=!1}_toggle(){this.disabled||(this.selected=!this.selected,this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{selected:this.selected,value:this.value},bubbles:!0,composed:!0})))}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{detail:{value:this.value},bubbles:!0,composed:!0}))}render(){let e=this.label||this.value||``;return L`
+  `;constructor(){super(),this.selected=!1,this.disabled=!1,this.removable=!1}_toggle(){this.disabled||(this.selected=!this.selected,this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{selected:this.selected,value:this.value},bubbles:!0,composed:!0})))}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{detail:{value:this.value},bubbles:!0,composed:!0}))}render(){let e=this.label||this.value||``;return t.html`
       <span part="filter-chip">
         <button class="chip" @click=${this._toggle} aria-pressed="${this.selected}" ?disabled=${this.disabled}>
-          ${this.icon?L`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
+          ${this.icon?t.html`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
           ${e}
-          ${this.count==null?``:L`<span class="count">${this.count}</span>`}
+          ${this.count==null?``:t.html`<span class="count">${this.count}</span>`}
         </button>
-        ${this.removable?L`
+        ${this.removable?t.html`
           <button class="remove" @click=${this._remove} aria-label="Remove ${e}" ?disabled=${this.disabled}>✕</button>
         `:``}
       </span>
-    `}};customElements.define(`pastis-filter-chip`,Ke);var qe=class extends J{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-chip`,ve);var ye=class extends t.LitElement{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=t.css`
     :host { display: block; }
 
     .filter-bar {
@@ -4136,10 +4136,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .clear-btn:hover { border-color: var(--status-error, #f0505e); color: var(--status-error, #f0505e); }
-  `;constructor(){super(),this.filters=[],this.active=[],this.label=`Filter`}_isActive(e){return this.active.includes(e)}_handleToggle(e){let{value:t,selected:n}=e.detail;this.active=n?[...this.active,t]:this.active.filter(e=>e!==t),this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:this.active},bubbles:!0,composed:!0}))}_clearAll(){this.active=[],this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:[]},bubbles:!0,composed:!0}))}render(){return L`
+  `;constructor(){super(),this.filters=[],this.active=[],this.label=`Filter`}_isActive(e){return this.active.includes(e)}_handleToggle(e){let{value:t,selected:n}=e.detail;this.active=n?[...this.active,t]:this.active.filter(e=>e!==t),this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:this.active},bubbles:!0,composed:!0}))}_clearAll(){this.active=[],this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:[]},bubbles:!0,composed:!0}))}render(){return t.html`
       <div class="filter-bar" part="filter-bar">
-        ${this.label?L`<span class="filter-label">${this.label}:</span>`:``}
-        ${this.filters.map(e=>L`
+        ${this.label?t.html`<span class="filter-label">${this.label}:</span>`:``}
+        ${this.filters.map(e=>t.html`
           <pastis-filter-chip
             .label=${e.label}
             .value=${e.value}
@@ -4149,11 +4149,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             @pastis-toggle=${this._handleToggle}
           ></pastis-filter-chip>
         `)}
-        ${this.active.length>0?L`
+        ${this.active.length>0?t.html`
           <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
         `:``}
       </div>
-    `}};customElements.define(`pastis-filter-bar`,qe);var Je=class extends J{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-bar`,ye);var be=class extends t.LitElement{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=t.css`
     :host { display: inline-block; }
 
     button {
@@ -4190,12 +4190,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([size="lg"]) .icon { font-size: 20px; }
 
     .label-text { }
-  `;constructor(){super(),this.theme=`dark`,this.size=`md`,this.label=!0}connectedCallback(){super.connectedCallback();let e=this._getTarget();e&&(this.theme=e.getAttribute(`data-theme`)||`dark`),this._observer=new MutationObserver(()=>{let e=this._getTarget()?.getAttribute(`data-theme`)||`dark`;e!==this.theme&&(this.theme=e)}),this._observer.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect()}_getTarget(){return this.target?document.querySelector(this.target):document.documentElement}_toggle(){let e=this.theme===`dark`?`light`:`dark`,t=()=>{this.theme=e;let t=this._getTarget();t&&t.setAttribute(`data-theme`,e),this.dispatchEvent(new CustomEvent(`pastis-theme-change`,{detail:{theme:e},bubbles:!0,composed:!0}))};if(!document.startViewTransition){t();return}let n=this.getBoundingClientRect(),r=n.left+n.width/2,i=n.top+n.height/2,a=Math.hypot(Math.max(r,window.innerWidth-r),Math.max(i,window.innerHeight-i));document.startViewTransition(t).ready.then(()=>{document.documentElement.animate({clipPath:[`circle(0px at ${r}px ${i}px)`,`circle(${a}px at ${r}px ${i}px)`]},{duration:500,easing:`ease-in-out`,pseudoElement:`::view-transition-new(root)`})})}render(){let e=this.theme===`dark`,t=e?`☀`:`◑`,n=e?`Light`:`Dark`;return L`
-      <button @click=${this._toggle} aria-label="Toggle theme: switch to ${n} mode" part="theme-toggle">
-        <span class="icon" aria-hidden="true">${t}</span>
-        ${this.label?L`<span class="label-text">${n} Mode</span>`:``}
+  `;constructor(){super(),this.theme=`dark`,this.size=`md`,this.label=!0}connectedCallback(){super.connectedCallback();let e=this._getTarget();e&&(this.theme=e.getAttribute(`data-theme`)||`dark`),this._observer=new MutationObserver(()=>{let e=this._getTarget()?.getAttribute(`data-theme`)||`dark`;e!==this.theme&&(this.theme=e)}),this._observer.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect()}_getTarget(){return this.target?document.querySelector(this.target):document.documentElement}_toggle(){let e=this.theme===`dark`?`light`:`dark`,t=()=>{this.theme=e;let t=this._getTarget();t&&t.setAttribute(`data-theme`,e),this.dispatchEvent(new CustomEvent(`pastis-theme-change`,{detail:{theme:e},bubbles:!0,composed:!0}))};if(!document.startViewTransition){t();return}let n=this.getBoundingClientRect(),r=n.left+n.width/2,i=n.top+n.height/2,a=Math.hypot(Math.max(r,window.innerWidth-r),Math.max(i,window.innerHeight-i));document.startViewTransition(t).ready.then(()=>{document.documentElement.animate({clipPath:[`circle(0px at ${r}px ${i}px)`,`circle(${a}px at ${r}px ${i}px)`]},{duration:500,easing:`ease-in-out`,pseudoElement:`::view-transition-new(root)`})})}render(){let e=this.theme===`dark`,n=e?`☀`:`◑`,r=e?`Light`:`Dark`;return t.html`
+      <button @click=${this._toggle} aria-label="Toggle theme: switch to ${r} mode" part="theme-toggle">
+        <span class="icon" aria-hidden="true">${n}</span>
+        ${this.label?t.html`<span class="label-text">${r} Mode</span>`:``}
       </button>
-    `}};customElements.define(`pastis-theme-toggle`,Je);var $=class extends J{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-theme-toggle`,be);var $=class extends t.LitElement{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     .carousel {
@@ -4383,7 +4383,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         transition: none;
       }
     }
-  `;constructor(){super(),this.slides=[],this.active=0,this.autoplay=0,this.loop=!0,this.showDots=!0,this.showArrows=!0,this.variant=`default`,this._paused=!1}connectedCallback(){super.connectedCallback();let e=window.matchMedia?.(`(prefers-reduced-motion: reduce)`).matches;this.autoplay>0&&!e&&this._startAutoplay()}disconnectedCallback(){super.disconnectedCallback(),this._stopAutoplay()}_startAutoplay(){this._stopAutoplay(),this._timer=setInterval(()=>this._next(),this.autoplay)}_stopAutoplay(){this._timer&&=(clearInterval(this._timer),null)}_togglePause(){this._paused=!this._paused,this._paused?this._stopAutoplay():this.autoplay>0&&this._startAutoplay()}_handlePointerEnter(){this.autoplay>0&&!this._paused&&this._stopAutoplay()}_handlePointerLeave(){this.autoplay>0&&!this._paused&&this._startAutoplay()}_goTo(e){let t=this.slides.length;t&&(this.active=(e%t+t)%t,this.dispatchEvent(new CustomEvent(`pastis-slide-change`,{detail:{index:this.active},bubbles:!0,composed:!0})))}_prev(){this._goTo(this.active-1)}_next(){this._goTo(this.active+1)}render(){let e=this.slides.length,t=this.loop||this.active>0,n=this.loop||this.active<e-1;return L`
+  `;constructor(){super(),this.slides=[],this.active=0,this.autoplay=0,this.loop=!0,this.showDots=!0,this.showArrows=!0,this.variant=`default`,this._paused=!1}connectedCallback(){super.connectedCallback();let e=window.matchMedia?.(`(prefers-reduced-motion: reduce)`).matches;this.autoplay>0&&!e&&this._startAutoplay()}disconnectedCallback(){super.disconnectedCallback(),this._stopAutoplay()}_startAutoplay(){this._stopAutoplay(),this._timer=setInterval(()=>this._next(),this.autoplay)}_stopAutoplay(){this._timer&&=(clearInterval(this._timer),null)}_togglePause(){this._paused=!this._paused,this._paused?this._stopAutoplay():this.autoplay>0&&this._startAutoplay()}_handlePointerEnter(){this.autoplay>0&&!this._paused&&this._stopAutoplay()}_handlePointerLeave(){this.autoplay>0&&!this._paused&&this._startAutoplay()}_goTo(e){let t=this.slides.length;t&&(this.active=(e%t+t)%t,this.dispatchEvent(new CustomEvent(`pastis-slide-change`,{detail:{index:this.active},bubbles:!0,composed:!0})))}_prev(){this._goTo(this.active-1)}_next(){this._goTo(this.active+1)}render(){let e=this.slides.length,n=this.loop||this.active>0,r=this.loop||this.active<e-1;return t.html`
       <div
         class="carousel"
         part="carousel"
@@ -4396,22 +4396,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           class="slides-track"
           style=${this.variant===`fade`?``:`transform: translateX(-${this.active*100}%)`}
         >
-          ${this.slides.map((e,t)=>L`
-            <div class="slide ${t===this.active?`active-slide`:``}" part="slide">
-              ${e.image?L`<img class="slide-image" src=${e.image} alt=${e.title||`Slide `+(t+1)} />`:``}
-              ${e.title||e.body?L`
+          ${this.slides.map((e,n)=>t.html`
+            <div class="slide ${n===this.active?`active-slide`:``}" part="slide">
+              ${e.image?t.html`<img class="slide-image" src=${e.image} alt=${e.title||`Slide `+(n+1)} />`:``}
+              ${e.title||e.body?t.html`
                 <div class="slide-caption">
-                  ${e.title?L`<p class="slide-title">${e.title}</p>`:``}
-                  ${e.body?L`<p class="slide-body">${e.body}</p>`:``}
+                  ${e.title?t.html`<p class="slide-title">${e.title}</p>`:``}
+                  ${e.body?t.html`<p class="slide-body">${e.body}</p>`:``}
                 </div>
-              `:L`<div class="slide-content"><slot name="slide-${t}"></slot></div>`}
+              `:t.html`<div class="slide-content"><slot name="slide-${n}"></slot></div>`}
             </div>
           `)}
         </div>
 
         <span class="counter" aria-live="polite" aria-atomic="true">${this.active+1} / ${e}</span>
 
-        ${this.autoplay>0?L`
+        ${this.autoplay>0?t.html`
           <button
             class="play-pause"
             @click=${this._togglePause}
@@ -4420,25 +4420,25 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           >${this._paused?`▶`:`❚❚`}</button>
         `:``}
 
-        ${this.showArrows?L`
-          <button class="arrow prev" ?disabled=${!t} @click=${this._prev} aria-label="Previous">◀</button>
-          <button class="arrow next" ?disabled=${!n} @click=${this._next} aria-label="Next">▶</button>
+        ${this.showArrows?t.html`
+          <button class="arrow prev" ?disabled=${!n} @click=${this._prev} aria-label="Previous">◀</button>
+          <button class="arrow next" ?disabled=${!r} @click=${this._next} aria-label="Next">▶</button>
         `:``}
 
-        ${this.showDots?L`
+        ${this.showDots?t.html`
           <div class="dots">
-            ${this.slides.map((e,t)=>L`
+            ${this.slides.map((e,n)=>t.html`
               <button
-                class="dot ${t===this.active?`active-dot`:``}"
-                aria-label="Go to slide ${t+1}"
-                aria-pressed=${t===this.active}
-                @click=${()=>this._goTo(t)}
+                class="dot ${n===this.active?`active-dot`:``}"
+                aria-label="Go to slide ${n+1}"
+                aria-pressed=${n===this.active}
+                @click=${()=>this._goTo(n)}
               ></button>
             `)}
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-carousel`,$);var Ye=class extends J{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-carousel`,$);var xe=class extends t.LitElement{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .timeline {
@@ -4566,24 +4566,24 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       box-shadow: none;
       transform: none;
     }
-  `;constructor(){super(),this.items=[],this.variant=`default`}render(){return L`
+  `;constructor(){super(),this.items=[],this.variant=`default`}render(){return t.html`
       <ol class="timeline" part="timeline">
-        ${this.items.map(e=>L`
+        ${this.items.map(e=>t.html`
           <li class="item" part="item">
             <div class="dot" aria-hidden="true">${e.icon||`◆`}</div>
             <div class="card" part="card">
               <div class="meta">
-                ${e.date?L`<span class="date">${e.date}</span>`:``}
-                ${e.tag?L`<span class="tag">${e.tag}</span>`:``}
+                ${e.date?t.html`<span class="date">${e.date}</span>`:``}
+                ${e.tag?t.html`<span class="tag">${e.tag}</span>`:``}
               </div>
               <p class="title">${e.title}</p>
-              ${e.body?L`<p class="body">${e.body}</p>`:``}
+              ${e.body?t.html`<p class="body">${e.body}</p>`:``}
               <slot name="item-${e.title}"></slot>
             </div>
           </li>
         `)}
       </ol>
-    `}};customElements.define(`pastis-timeline`,Ye);var Xe=class extends J{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-timeline`,xe);var Se=class extends t.LitElement{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .testimonial {
@@ -4698,13 +4698,13 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       font-size: 12px;
       color: var(--text-tertiary, #909498);
     }
-  `;constructor(){super(),this.rating=0,this.variant=`default`}_initials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}render(){let e=[this.role,this.company].filter(Boolean);return L`
+  `;constructor(){super(),this.rating=0,this.variant=`default`}_initials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}render(){let e=[this.role,this.company].filter(Boolean);return t.html`
       <figure class="testimonial" part="testimonial">
         <span class="mark" aria-hidden="true">"</span>
 
-        ${this.rating>0?L`
+        ${this.rating>0?t.html`
           <div class="rating" role="img" aria-label="Rating: ${this.rating} out of 5 stars">
-            ${[1,2,3,4,5].map(e=>L`
+            ${[1,2,3,4,5].map(e=>t.html`
               <span class="star ${e<=this.rating?`filled`:``}" aria-hidden="true">★</span>
             `)}
           </div>
@@ -4718,15 +4718,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
         <figcaption class="author">
           <div class="avatar" aria-hidden="true">
-            ${this.src?L`<img src="${this.src}" alt="${this.name||`Author`}" />`:this._initials()}
+            ${this.src?t.html`<img src="${this.src}" alt="${this.name||`Author`}" />`:this._initials()}
           </div>
           <div class="author-info">
             <span class="author-name">${this.name||``}</span>
-            ${e.length?L`<span class="author-meta">${e.join(` · `)}</span>`:``}
+            ${e.length?t.html`<span class="author-meta">${e.join(` · `)}</span>`:``}
           </div>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-testimonial`,Xe);var Ze=class extends J{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=s`
+    `}};customElements.define(`pastis-testimonial`,Se);var Ce=class extends t.LitElement{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=t.css`
     :host { display: block; }
 
     section {
@@ -4808,20 +4808,20 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (max-width: 768px) {
       section { padding: var(--space-3xl, 64px) var(--grid-margin-mobile, 16px); }
     }
-  `;constructor(){super(),this.align=`left`,this.padding=`md`,this.background=`primary`,this.hasDivider=!1}render(){let e=this.label||this.heading||this.subheading;return L`
+  `;constructor(){super(),this.align=`left`,this.padding=`md`,this.background=`primary`,this.hasDivider=!1}render(){let e=this.label||this.heading||this.subheading;return t.html`
       <section part="section" style="${this.maxWidth?`--section-max-width:${this.maxWidth}`:``}">
         <div class="container" part="container">
-          ${e?L`
+          ${e?t.html`
             <header class="header" part="header">
-              ${this.label?L`<div class="label">${this.label}</div>`:``}
-              ${this.heading?L`<h2>${this.heading}</h2>`:L`<slot name="heading"></slot>`}
-              ${this.subheading?L`<p>${this.subheading}</p>`:L`<slot name="subheading"></slot>`}
+              ${this.label?t.html`<div class="label">${this.label}</div>`:``}
+              ${this.heading?t.html`<h2>${this.heading}</h2>`:t.html`<slot name="heading"></slot>`}
+              ${this.subheading?t.html`<p>${this.subheading}</p>`:t.html`<slot name="subheading"></slot>`}
             </header>
           `:``}
           <slot></slot>
         </div>
       </section>
-    `}};customElements.define(`pastis-section`,Ze);var Qe=class extends J{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-section`,Ce);var we=class extends t.LitElement{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     footer {
@@ -4985,7 +4985,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       .main { grid-template-columns: 1fr; }
       .link-columns { flex-wrap: wrap; gap: var(--space-xl, 32px); }
     }
-  `;constructor(){super(),this.links=[],this.socials=[],this.variant=`default`}render(){return L`
+  `;constructor(){super(),this.links=[],this.socials=[],this.variant=`default`}render(){return t.html`
       <footer part="footer">
         <div class="inner">
           <div class="main" part="main">
@@ -4993,32 +4993,32 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               <slot name="brand">
                 <p class="brand-name">${this.brand||``}</p>
               </slot>
-              ${this.tagline?L`<p class="tagline">${this.tagline}</p>`:``}
-              ${this.socials.length?L`
+              ${this.tagline?t.html`<p class="tagline">${this.tagline}</p>`:``}
+              ${this.socials.length?t.html`
                 <nav class="socials" aria-label="Social links">
-                  ${this.socials.map(e=>L`
+                  ${this.socials.map(e=>t.html`
                     <a class="social-link" href="${e.href}" aria-label="${e.label}" target="_blank" rel="noopener noreferrer">
                       ${e.icon}
                     </a>
                   `)}
                 </nav>
-              `:L`<slot name="socials"></slot>`}
+              `:t.html`<slot name="socials"></slot>`}
             </div>
 
-            ${this.links.length?L`
+            ${this.links.length?t.html`
               <nav class="link-columns" aria-label="Footer navigation">
-                ${this.links.map(e=>L`
+                ${this.links.map(e=>t.html`
                   <div class="link-col">
                     <h3 class="col-heading">${e.heading}</h3>
                     <ul class="col-links">
-                      ${e.items.map(e=>L`
+                      ${e.items.map(e=>t.html`
                         <li><a href="${e.href}">${e.label}</a></li>
                       `)}
                     </ul>
                   </div>
                 `)}
               </nav>
-            `:L`<slot name="links"></slot>`}
+            `:t.html`<slot name="links"></slot>`}
           </div>
 
           <div class="bottom" part="bottom">
@@ -5029,7 +5029,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         </div>
       </footer>
-    `}};customElements.define(`pastis-footer`,Qe);var $e=class extends J{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-footer`,we);var Te=class extends t.LitElement{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     nav {
@@ -5328,76 +5328,76 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (min-width: 769px) {
       .mobile-menu { display: none !important; }
     }
-  `;constructor(){super(),this.items=[],this.variant=`default`,this.sticky=!1,this._mobileOpen=!1,this._openDropdown=null,this._boundClose=this._handleOutsideClick.bind(this)}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this._openDropdown=null)}_toggleMobile(){this._mobileOpen=!this._mobileOpen}_toggleDropdown(e){this._openDropdown=this._openDropdown===e?null:e}_handleNavClick(e,t){if(e.children?.length){t.preventDefault(),this._toggleDropdown(e.id);return}this._mobileOpen=!1,this._openDropdown=null,this.dispatchEvent(new CustomEvent(`pastis-nav-click`,{detail:{item:e},bubbles:!0,composed:!0}))}_renderDropdownLink(e){return L`
+  `;constructor(){super(),this.items=[],this.variant=`default`,this.sticky=!1,this._mobileOpen=!1,this._openDropdown=null,this._boundClose=this._handleOutsideClick.bind(this)}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this._openDropdown=null)}_toggleMobile(){this._mobileOpen=!this._mobileOpen}_toggleDropdown(e){this._openDropdown=this._openDropdown===e?null:e}_handleNavClick(e,t){if(e.children?.length){t.preventDefault(),this._toggleDropdown(e.id);return}this._mobileOpen=!1,this._openDropdown=null,this.dispatchEvent(new CustomEvent(`pastis-nav-click`,{detail:{item:e},bubbles:!0,composed:!0}))}_renderDropdownLink(e){return t.html`
       <a
         class="dropdown-link ${this.active===e.id?`active`:``}"
         href=${e.href||`#`}
         @click=${t=>this._handleNavClick(e,t)}
       >
-        ${e.icon?L`<span aria-hidden="true">${e.icon}</span>`:``}
+        ${e.icon?t.html`<span aria-hidden="true">${e.icon}</span>`:``}
         ${e.label}
       </a>
-    `}_renderDesktopItem(e){let t=this.active===e.id||e.children?.some(e=>e.id===this.active),n=e.children?.length>0,r=this._openDropdown===e.id;return L`
-      <div class="nav-item ${r?`dropdown-open`:``}">
-        ${n?L`
+    `}_renderDesktopItem(e){let n=this.active===e.id||e.children?.some(e=>e.id===this.active),r=e.children?.length>0,i=this._openDropdown===e.id;return t.html`
+      <div class="nav-item ${i?`dropdown-open`:``}">
+        ${r?t.html`
           <div class="nav-link-wrap">
             <a
-              class="nav-link ${t?`active`:``}"
+              class="nav-link ${n?`active`:``}"
               href=${e.href||`#`}
               @click=${t=>this._handleNavClick(e,t)}
             >
-              ${e.icon?L`<span aria-hidden="true">${e.icon}</span>`:``}
+              ${e.icon?t.html`<span aria-hidden="true">${e.icon}</span>`:``}
               ${e.label}
             </a>
             <button
               class="chevron-btn"
               aria-haspopup="true"
-              aria-expanded=${String(r)}
+              aria-expanded=${String(i)}
               aria-label="Toggle ${e.label} submenu"
               @click=${t=>{t.preventDefault(),this._toggleDropdown(e.id)}}
             ><span class="chevron" aria-hidden="true">▼</span></button>
           </div>
-        `:L`
+        `:t.html`
           <a
-            class="nav-link ${t?`active`:``}"
+            class="nav-link ${n?`active`:``}"
             href=${e.href||`#`}
             @click=${t=>this._handleNavClick(e,t)}
           >
-            ${e.icon?L`<span aria-hidden="true">${e.icon}</span>`:``}
+            ${e.icon?t.html`<span aria-hidden="true">${e.icon}</span>`:``}
             ${e.label}
           </a>
         `}
-        ${n?L`
+        ${r?t.html`
           <div class="dropdown" role="menu">
             ${e.children.map(e=>this._renderDropdownLink(e))}
           </div>
         `:``}
       </div>
-    `}_renderMobileItem(e){return L`
+    `}_renderMobileItem(e){return t.html`
       <a
         class="mobile-link ${this.active===e.id?`active`:``}"
         href=${e.href||`#`}
         @click=${t=>this._handleNavClick(e,t)}
       >
-        ${e.icon?L`<span aria-hidden="true">${e.icon}</span>`:``}
+        ${e.icon?t.html`<span aria-hidden="true">${e.icon}</span>`:``}
         ${e.label}
       </a>
-      ${e.children?.map(e=>L`
+      ${e.children?.map(e=>t.html`
         <a
           class="mobile-link mobile-sub-link ${this.active===e.id?`active`:``}"
           href=${e.href||`#`}
           @click=${t=>this._handleNavClick(e,t)}
         >
-          ${e.icon?L`<span aria-hidden="true">${e.icon}</span>`:``}
+          ${e.icon?t.html`<span aria-hidden="true">${e.icon}</span>`:``}
           ${e.label}
         </a>
       `)}
-    `}render(){return L`
+    `}render(){return t.html`
       <nav part="nav" role="navigation" aria-label="Main navigation">
         <!-- Brand -->
         <a class="brand" href="/" part="brand">
           <slot name="brand-icon">
-            ${this.brand?L`<span class="brand-icon">▶</span>`:``}
+            ${this.brand?t.html`<span class="brand-icon">▶</span>`:``}
           </slot>
           <slot name="brand">${this.brand||``}</slot>
         </a>
@@ -5439,7 +5439,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};customElements.define(`pastis-nav`,$e);var et=class extends J{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-nav`,Te);var Ee=class extends t.LitElement{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=t.css`
     :host {
       display: block;
       --_ratio: 1 / 1;
@@ -5616,29 +5616,29 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (hover: none) {
       .tags { opacity: 1; transform: none; }
     }
-  `;constructor(){super(),this.tags=[],this.size=`square`}willUpdate(){if(typeof this.tags==`string`)try{this.tags=JSON.parse(this.tags)}catch{this.tags=[]}}updated(e){e.has(`reveal`)&&this.reveal&&!this.revealed&&!this._observer&&(this._observer=new IntersectionObserver(e=>{if(!e.some(e=>e.isIntersecting))return;this._observer.disconnect();let t=parseFloat(getComputedStyle(this).getPropertyValue(`--pastis-reveal-delay`))||0;setTimeout(()=>{this.revealed=!0},t)},{threshold:.2}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}_renderMedia(){return this.video?L`<video src=${this.video} poster=${this.image||``} autoplay muted loop playsinline aria-hidden="true"></video>`:this.image?L`<img src=${this.image} alt=${this.imageAlt||``} loading="lazy" decoding="async" />`:``}render(){return L`
+  `;constructor(){super(),this.tags=[],this.size=`square`}willUpdate(){if(typeof this.tags==`string`)try{this.tags=JSON.parse(this.tags)}catch{this.tags=[]}}updated(e){e.has(`reveal`)&&this.reveal&&!this.revealed&&!this._observer&&(this._observer=new IntersectionObserver(e=>{if(!e.some(e=>e.isIntersecting))return;this._observer.disconnect();let t=parseFloat(getComputedStyle(this).getPropertyValue(`--pastis-reveal-delay`))||0;setTimeout(()=>{this.revealed=!0},t)},{threshold:.2}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}_renderMedia(){return this.video?t.html`<video src=${this.video} poster=${this.image||``} autoplay muted loop playsinline aria-hidden="true"></video>`:this.image?t.html`<img src=${this.image} alt=${this.imageAlt||``} loading="lazy" decoding="async" />`:``}render(){return t.html`
       <a href=${this.href||`#`} part="link">
         <div class="stage">
           <div class="media" part="media">
             <slot name="media">${this._renderMedia()}</slot>
-            ${this.tags?.length?L`
+            ${this.tags?.length?t.html`
               <div class="tags" aria-hidden="true">
-                ${this.tags.map(e=>L`<span class="tag">${e}</span>`)}
+                ${this.tags.map(e=>t.html`<span class="tag">${e}</span>`)}
               </div>
             `:``}
           </div>
         </div>
         <div class="info">
           <div class="meta">
-            ${this.index?L`<span class="index">${this.index}</span>`:L`<span></span>`}
+            ${this.index?t.html`<span class="index">${this.index}</span>`:t.html`<span></span>`}
             <span class="client">${this.client||``}</span>
-            ${this.year?L`<span class="year">${this.year}</span>`:``}
+            ${this.year?t.html`<span class="year">${this.year}</span>`:``}
           </div>
           <h3 class="title">${this.heading||``} <span class="arrow" aria-hidden="true">→</span></h3>
-          ${this.summary?L`<p class="summary">${this.summary}</p>`:``}
+          ${this.summary?t.html`<p class="summary">${this.summary}</p>`:``}
         </div>
       </a>
-    `}};customElements.define(`pastis-project-card`,et);var tt=class extends J{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-project-card`,Ee);var De=class extends t.LitElement{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=t.css`
     :host {
       display: block;
       --_size: var(--font-size-statement-lg, clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem));
@@ -5705,10 +5705,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         transform: none;
       }
     }
-  `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return L`
-      ${this.eyebrow?L`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
+  `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return t.html`
+      ${this.eyebrow?t.html`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
       <div class="body ${e}" part="body"><slot></slot></div>
-    `}};customElements.define(`pastis-statement`,tt);var nt=class extends J{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-statement`,De);var Oe=class extends t.LitElement{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     figure {
@@ -5747,7 +5747,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-tertiary, #909498);
       overflow-wrap: anywhere;
     }
-  `;connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`token`)&&this._read()}_read(){this.token&&(this._value=getComputedStyle(document.documentElement).getPropertyValue(this.token).trim())}render(){return L`
+  `;connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`token`)&&this._read()}_read(){this.token&&(this._value=getComputedStyle(document.documentElement).getPropertyValue(this.token).trim())}render(){return t.html`
       <figure part="swatch">
         <div class="chip" style="background: var(${this.token})" aria-hidden="true"></div>
         <figcaption>
@@ -5756,7 +5756,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <code class="value">${this._value||`—`}</code>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-token-swatch`,nt);var rt=class extends J{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-token-swatch`,Oe);var ke=class extends t.LitElement{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     table {
@@ -5851,9 +5851,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       td.value { display: none; }
       th.value { display: none; }
     }
-  `;constructor(){super(),this.tokens=[],this.kind=`space`,this.sample=`Design systems, Figma ↔ code`,this._values={}}willUpdate(){if(typeof this.tokens==`string`)try{this.tokens=JSON.parse(this.tokens)}catch{this.tokens=[]}}connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`tokens`)&&this._read()}_read(){let e=getComputedStyle(document.documentElement);this._values=Object.fromEntries((Array.isArray(this.tokens)?this.tokens:[]).map(t=>[t,e.getPropertyValue(t).trim()]))}_renderPreview(e){switch(this.kind){case`type`:return L`<div class="type-sample" style="font-size: var(${e})">${this.sample}</div>`;case`radius`:return L`<div class="radius" style="border-radius: var(${e})"></div>`;case`motion`:return L`<div class="motion" style="--_d: var(${e})"></div>`;case`color`:return L`<div class="color" style="background: var(${e})"></div>`;default:return L`<div class="bar" style="width: var(${e})"></div>`}}render(){return L`
+  `;constructor(){super(),this.tokens=[],this.kind=`space`,this.sample=`Design systems, Figma ↔ code`,this._values={}}willUpdate(){if(typeof this.tokens==`string`)try{this.tokens=JSON.parse(this.tokens)}catch{this.tokens=[]}}connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`tokens`)&&this._read()}_read(){let e=getComputedStyle(document.documentElement);this._values=Object.fromEntries((Array.isArray(this.tokens)?this.tokens:[]).map(t=>[t,e.getPropertyValue(t).trim()]))}_renderPreview(e){switch(this.kind){case`type`:return t.html`<div class="type-sample" style="font-size: var(${e})">${this.sample}</div>`;case`radius`:return t.html`<div class="radius" style="border-radius: var(${e})"></div>`;case`motion`:return t.html`<div class="motion" style="--_d: var(${e})"></div>`;case`color`:return t.html`<div class="color" style="background: var(${e})"></div>`;default:return t.html`<div class="bar" style="width: var(${e})"></div>`}}render(){return t.html`
       <table part="table">
-        ${this.caption?L`<caption>${this.caption}</caption>`:``}
+        ${this.caption?t.html`<caption>${this.caption}</caption>`:``}
         <thead>
           <tr>
             <th scope="col">Token</th>
@@ -5862,7 +5862,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </tr>
         </thead>
         <tbody>
-          ${(this.tokens||[]).map(e=>L`
+          ${(this.tokens||[]).map(e=>t.html`
             <tr>
               <td><code>${e}</code></td>
               <td class="value"><code>${this._values[e]||`—`}</code></td>
@@ -5871,7 +5871,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-spec-table`,rt);var it=class extends J{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-spec-table`,ke);var Ae=class extends t.LitElement{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=t.css`
     :host {
       display: block;
       --_inset: var(--pastis-shelf-inset, var(--layout-gutter, 24px));
@@ -5964,7 +5964,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (hover: none) {
       .track { cursor: auto; }
     }
-  `;constructor(){super(),this.label=`Carousel`,this.stagger=90,this._progress=0,this._atStart=!0,this._atEnd=!1,this._dragging=!1,this._drag=null,this._suppressClick=!1}get _track(){return this.renderRoot?.querySelector(`.track`)}firstUpdated(){this._resizeObserver=new ResizeObserver(()=>this._updateScrollState()),this._resizeObserver.observe(this._track)}disconnectedCallback(){super.disconnectedCallback(),this._resizeObserver?.disconnect()}_onSlotChange(e){e.target.assignedElements().forEach((e,t)=>e.style.setProperty(`--pastis-reveal-delay`,`${t*this.stagger}ms`)),this._updateScrollState()}_updateScrollState(){let e=this._track;if(!e)return;let t=e.scrollWidth-e.clientWidth;this._progress=t>0?e.scrollLeft/t:1,this._atStart=e.scrollLeft<=1,this._atEnd=e.scrollLeft>=t-1}_scrollByPage(e){let t=this._track,n=this.querySelector(`:scope > *`),r=n?n.getBoundingClientRect().width+parseFloat(getComputedStyle(t).columnGap||0):t.clientWidth,i=Math.max(1,Math.floor((t.clientWidth-1)/r)),a=!window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;t.scrollBy({left:e*i*r,behavior:a?`smooth`:`auto`})}_onPointerDown(e){e.pointerType!==`mouse`||e.button!==0||(this._drag={x:e.clientX,scrollLeft:this._track.scrollLeft,moved:!1})}_onPointerMove(e){if(!this._drag)return;let t=e.clientX-this._drag.x;!this._drag.moved&&Math.abs(t)<5||(this._drag.moved||(this._drag.moved=!0,this._dragging=!0,this._track.setPointerCapture(e.pointerId)),this._track.scrollLeft=this._drag.scrollLeft-t)}_onPointerUp(){if(!this._drag)return;let{moved:e,scrollLeft:t}=this._drag;if(this._drag=null,!e)return;this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),this._snapToNearest(this._track.scrollLeft>t?1:-1);let n=()=>{this._dragging=!1};this._track.addEventListener(`scrollend`,n,{once:!0}),setTimeout(n,700)}_snapToNearest(e){let t=this._track,n=parseFloat(getComputedStyle(t).scrollPaddingInlineStart)||0,r=t.getBoundingClientRect().left,i=[...this.children].map(e=>e.getBoundingClientRect().left-r-n),a=e>0?i.find(e=>e>8)??i.at(-1):[...i].reverse().find(e=>e<-8)??i[0];a!==void 0&&t.scrollBy({left:a,behavior:`smooth`})}_onClickCapture(e){this._suppressClick&&(e.preventDefault(),e.stopPropagation())}render(){return L`
+  `;constructor(){super(),this.label=`Carousel`,this.stagger=90,this._progress=0,this._atStart=!0,this._atEnd=!1,this._dragging=!1,this._drag=null,this._suppressClick=!1}get _track(){return this.renderRoot?.querySelector(`.track`)}firstUpdated(){this._resizeObserver=new ResizeObserver(()=>this._updateScrollState()),this._resizeObserver.observe(this._track)}disconnectedCallback(){super.disconnectedCallback(),this._resizeObserver?.disconnect()}_onSlotChange(e){e.target.assignedElements().forEach((e,t)=>e.style.setProperty(`--pastis-reveal-delay`,`${t*this.stagger}ms`)),this._updateScrollState()}_updateScrollState(){let e=this._track;if(!e)return;let t=e.scrollWidth-e.clientWidth;this._progress=t>0?e.scrollLeft/t:1,this._atStart=e.scrollLeft<=1,this._atEnd=e.scrollLeft>=t-1}_scrollByPage(e){let t=this._track,n=this.querySelector(`:scope > *`),r=n?n.getBoundingClientRect().width+parseFloat(getComputedStyle(t).columnGap||0):t.clientWidth,i=Math.max(1,Math.floor((t.clientWidth-1)/r)),a=!window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;t.scrollBy({left:e*i*r,behavior:a?`smooth`:`auto`})}_onPointerDown(e){e.pointerType!==`mouse`||e.button!==0||(this._drag={x:e.clientX,scrollLeft:this._track.scrollLeft,moved:!1})}_onPointerMove(e){if(!this._drag)return;let t=e.clientX-this._drag.x;!this._drag.moved&&Math.abs(t)<5||(this._drag.moved||(this._drag.moved=!0,this._dragging=!0,this._track.setPointerCapture(e.pointerId)),this._track.scrollLeft=this._drag.scrollLeft-t)}_onPointerUp(){if(!this._drag)return;let{moved:e,scrollLeft:t}=this._drag;if(this._drag=null,!e)return;this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),this._snapToNearest(this._track.scrollLeft>t?1:-1);let n=()=>{this._dragging=!1};this._track.addEventListener(`scrollend`,n,{once:!0}),setTimeout(n,700)}_snapToNearest(e){let t=this._track,n=parseFloat(getComputedStyle(t).scrollPaddingInlineStart)||0,r=t.getBoundingClientRect().left,i=[...this.children].map(e=>e.getBoundingClientRect().left-r-n),a=e>0?i.find(e=>e>8)??i.at(-1):[...i].reverse().find(e=>e<-8)??i[0];a!==void 0&&t.scrollBy({left:a,behavior:`smooth`})}_onClickCapture(e){this._suppressClick&&(e.preventDefault(),e.stopPropagation())}render(){return t.html`
       <div
         class="track ${this._dragging?`dragging`:``}"
         part="track"
@@ -5987,4 +5987,4 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <button aria-label="Previous" ?disabled=${this._atStart} @click=${()=>this._scrollByPage(-1)}>←</button>
         <button aria-label="Next" ?disabled=${this._atEnd} @click=${()=>this._scrollByPage(1)}>→</button>
       </div>
-    `}};return customElements.define(`pastis-shelf`,it),e.PastisAccordion=Ae,e.PastisAlert=Se,e.PastisAvatar=be,e.PastisBadge=ye,e.PastisBreadcrumb=je,e.PastisButton=Y,e.PastisCard=xe,e.PastisCarousel=$,e.PastisCheckbox=Z,e.PastisCodeBlock=We,e.PastisCookieBanner=Be,e.PastisDivider=Fe,e.PastisDrawer=Re,e.PastisDropdown=Oe,e.PastisEmptyState=Ge,e.PastisFileUpload=ze,e.PastisFilterBar=qe,e.PastisFilterChip=Ke,e.PastisFooter=Qe,e.PastisHero=Ie,e.PastisInput=X,e.PastisModal=Ce,e.PastisNav=$e,e.PastisPagination=Me,e.PastisProgress=Ne,e.PastisProjectCard=et,e.PastisRadio=Ve,e.PastisSearch=Le,e.PastisSection=Ze,e.PastisShelf=it,e.PastisSkeleton=Ee,e.PastisSpecTable=rt,e.PastisSpinner=Te,e.PastisStatCard=He,e.PastisStatement=tt,e.PastisTable=Ue,e.PastisTabs=ke,e.PastisTag=Pe,e.PastisTestimonial=Xe,e.PastisThemeToggle=Je,e.PastisTimeline=Ye,e.PastisToast=we,e.PastisToggle=ve,e.PastisTokenSwatch=nt,e.PastisTooltip=De,e})({});
+    `}};customElements.define(`pastis-shelf`,Ae),e.PastisAccordion=G,e.PastisAlert=R,e.PastisAvatar=I,e.PastisBadge=F,e.PastisBreadcrumb=K,e.PastisButton=n,e.PastisCard=L,e.PastisCarousel=$,e.PastisCheckbox=i,e.PastisCodeBlock=ge,e.PastisCookieBanner=fe,e.PastisDivider=X,e.PastisDrawer=ue,e.PastisDropdown=W,e.PastisEmptyState=_e,e.PastisFileUpload=de,e.PastisFilterBar=ye,e.PastisFilterChip=ve,e.PastisFooter=we,e.PastisHero=Z,e.PastisInput=r,e.PastisModal=z,e.PastisNav=Te,e.PastisPagination=q,e.PastisProgress=J,e.PastisProjectCard=Ee,e.PastisRadio=pe,e.PastisSearch=Q,e.PastisSection=Ce,e.PastisShelf=Ae,e.PastisSkeleton=H,e.PastisSpecTable=ke,e.PastisSpinner=V,e.PastisStatCard=me,e.PastisStatement=De,e.PastisTable=he,e.PastisTabs=le,e.PastisTag=Y,e.PastisTestimonial=Se,e.PastisThemeToggle=be,e.PastisTimeline=xe,e.PastisToast=B,e.PastisToggle=P,e.PastisTokenSwatch=Oe,e.PastisTooltip=U});

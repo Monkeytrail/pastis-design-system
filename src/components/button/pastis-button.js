@@ -7,6 +7,8 @@ export class PastisButton extends LitElement {
     disabled: { type: Boolean, reflect: true },
     loading: { type: Boolean, reflect: true },
     href: { type: String },
+    copy: { type: String },       // value to copy to clipboard on click
+    _copied: { type: Boolean, state: true },
   };
 
   static styles = css`
@@ -103,6 +105,7 @@ export class PastisButton extends LitElement {
     this.size = 'md';
     this.disabled = false;
     this.loading = false;
+    this._copied = false;
   }
 
   render() {
@@ -114,13 +117,18 @@ export class PastisButton extends LitElement {
         part="button"
       >
         ${this.loading ? html`<span class="spinner" aria-hidden="true"></span>` : ''}
-        <slot></slot>
+        ${this.copy ? (this._copied ? '✓ Copied' : html`<slot></slot>`) : html`<slot></slot>`}
       </button>
     `;
   }
 
-  _handleClick(e) {
+  async _handleClick(e) {
     if (this.disabled || this.loading) { e.preventDefault(); e.stopPropagation(); return; }
+    if (this.copy) {
+      try { await navigator.clipboard.writeText(this.copy); } catch { /* ignore */ }
+      this._copied = true;
+      setTimeout(() => { this._copied = false; }, 2000);
+    }
     this.dispatchEvent(new CustomEvent('pastis-click', { bubbles: true, composed: true }));
   }
 }
