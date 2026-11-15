@@ -75,6 +75,7 @@ export class PastisButton extends LitElement {
       background: var(--text-primary, #f9f4da);
       color: var(--bg-primary, #0d0d0d);
       border-color: var(--text-primary, #f9f4da);
+      box-shadow: none;
     }
 
     :host([variant="destructive"]) button {
