@@ -112,6 +112,7 @@ export class PastisDropdown extends LitElement {
     .search-input:focus { border-color: var(--border-focus, #fcba28); }
 
     .options-list {
+      min-height: 0;
       overflow-y: auto;
       padding: 4px;
     }

@@ -1583,6 +1583,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     .search-input:focus { border-color: var(--border-focus, #fcba28); }
 
     .options-list {
+      min-height: 0;
       overflow-y: auto;
       padding: 4px;
     }
