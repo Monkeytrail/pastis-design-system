@@ -1,33 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-@import './colors.css';
-@import './typography.css';
-@import './spacing.css';
-@import './motion.css';
-
-*, *::before, *::after { box-sizing: border-box; }
-
-body {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Accent emphasis inside <pastis-statement>; lives in light DOM CSS because
-   ::slotted() can't style descendants of slotted nodes. */
-pastis-statement em {
-  font-style: italic;
-  color: var(--text-accent);
-}
-
-[data-surface="inverse"] {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-}
 :root {
   /* ── Pastis Brand Palette ── */
   --color-black:    #0d0d0d;
@@ -154,59 +124,69 @@ pastis-statement em {
   --shadow-lg:  5px 5px 0 #fcba28;
   --shadow-xl:  5px 5px 0 #fc7428;
 }
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+@import './motion.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accent emphasis inside <pastis-statement>; lives in light DOM CSS because
+   ::slotted() can't style descendants of slotted nodes. */
+pastis-statement em {
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+[data-surface="inverse"] {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
 :root {
-  /* ── Fonts ── */
-  --font-family-display: 'Instrument Serif', 'Times New Roman', Georgia, serif;
-  --font-family-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-family-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-family:         var(--font-family-mono); /* component default */
+  /* ── Durations ── */
+  --duration-instant: 80ms;
+  --duration-fast:    120ms;
+  --duration-base:    200ms;
+  --duration-slow:    400ms;
+  --duration-reveal:  700ms;
+  --duration-tilt:    800ms;
 
-  /* ── Fluid Statement Scale (editorial headlines, 375px → 1440px) ── */
-  --font-size-statement-xl: clamp(3rem, 1.5rem + 6.4vw, 8.5rem);
-  --font-size-statement-lg: clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem);
-  --font-size-statement-md: clamp(1.75rem, 1.3rem + 1.9vw, 3.25rem);
-  --line-height-statement:  1;
-  --letter-spacing-statement: -0.02em;
-  --font-weight-display:    400;  /* Instrument Serif ships one weight */
+  /* ── Easing ── */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
-  /* ── Size Scale (Pastis) ── */
-  --font-size-display: 56px;
-  --font-size-h1:      38px;
-  --font-size-h2:      34px;
-  --font-size-h3:      26px;
-  --font-size-h4:      23px;
-  --font-size-h5:      19px;
-  --font-size-h6:      18px;
-  --font-size-body-lg: 18px;
-  --font-size-body:    16px;
-  --font-size-body-sm: 14px;
-  --font-size-caption: 12px;
-  --font-size-micro:   11px;
+  /* ── Composite ── */
+  --transition-fast: var(--duration-fast) var(--ease-standard);
+  --transition-base: var(--duration-base) var(--ease-standard);
 
-  /* ── Line Heights ── */
-  --line-height-display: 1.1;
-  --line-height-h1:      1.15;
-  --line-height-h2:      1.2;
-  --line-height-h3:      1.25;
-  --line-height-h4:      1.3;
-  --line-height-h5:      1.4;
-  --line-height-body-lg: 1.55;
-  --line-height-body:    1.55;
-  --line-height-body-sm: 1.55;
-  --line-height-caption: 1.4;
+  /* ── Reveal distance for scroll-in motion ── */
+  --motion-reveal-offset: 24px;
+}
 
-  /* ── Weights ── */
-  --font-weight-regular:   400;
-  --font-weight-medium:    500;
-  --font-weight-semibold:  600;
-  --font-weight-bold:      700;
-  --font-weight-extrabold: 800;
-
-  /* ── Letter Spacing ── */
-  --letter-spacing-tight:   -0.02em;
-  --letter-spacing-normal:  0em;
-  --letter-spacing-wide:    0.05em;
-  --letter-spacing-display: 0em;
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0ms;
+    --duration-fast:    0ms;
+    --duration-base:    0ms;
+    --duration-slow:    0ms;
+    --duration-reveal:  0ms;
+    --duration-tilt:    0ms;
+    --motion-reveal-offset: 0px;
+  }
 }
 :root {
   /* ── 8px Base Grid ── */
@@ -264,36 +244,56 @@ pastis-statement em {
   --section-gap:      clamp(64px, 10vw, 160px);
 }
 :root {
-  /* ── Durations ── */
-  --duration-instant: 80ms;
-  --duration-fast:    120ms;
-  --duration-base:    200ms;
-  --duration-slow:    400ms;
-  --duration-reveal:  700ms;
-  --duration-tilt:    800ms;
+  /* ── Fonts ── */
+  --font-family-display: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+  --font-family-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-family:         var(--font-family-mono); /* component default */
 
-  /* ── Easing ── */
-  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --ease-enter:    cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-exit:     cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  /* ── Fluid Statement Scale (editorial headlines, 375px → 1440px) ── */
+  --font-size-statement-xl: clamp(3rem, 1.5rem + 6.4vw, 8.5rem);
+  --font-size-statement-lg: clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem);
+  --font-size-statement-md: clamp(1.75rem, 1.3rem + 1.9vw, 3.25rem);
+  --line-height-statement:  1;
+  --letter-spacing-statement: -0.02em;
+  --font-weight-display:    400;  /* Instrument Serif ships one weight */
 
-  /* ── Composite ── */
-  --transition-fast: var(--duration-fast) var(--ease-standard);
-  --transition-base: var(--duration-base) var(--ease-standard);
+  /* ── Size Scale (Pastis) ── */
+  --font-size-display: 56px;
+  --font-size-h1:      38px;
+  --font-size-h2:      34px;
+  --font-size-h3:      26px;
+  --font-size-h4:      23px;
+  --font-size-h5:      19px;
+  --font-size-h6:      18px;
+  --font-size-body-lg: 18px;
+  --font-size-body:    16px;
+  --font-size-body-sm: 14px;
+  --font-size-caption: 12px;
+  --font-size-micro:   11px;
 
-  /* ── Reveal distance for scroll-in motion ── */
-  --motion-reveal-offset: 24px;
-}
+  /* ── Line Heights ── */
+  --line-height-display: 1.1;
+  --line-height-h1:      1.15;
+  --line-height-h2:      1.2;
+  --line-height-h3:      1.25;
+  --line-height-h4:      1.3;
+  --line-height-h5:      1.4;
+  --line-height-body-lg: 1.55;
+  --line-height-body:    1.55;
+  --line-height-body-sm: 1.55;
+  --line-height-caption: 1.4;
 
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --duration-instant: 0ms;
-    --duration-fast:    0ms;
-    --duration-base:    0ms;
-    --duration-slow:    0ms;
-    --duration-reveal:  0ms;
-    --duration-tilt:    0ms;
-    --motion-reveal-offset: 0px;
-  }
+  /* ── Weights ── */
+  --font-weight-regular:   400;
+  --font-weight-medium:    500;
+  --font-weight-semibold:  600;
+  --font-weight-bold:      700;
+  --font-weight-extrabold: 800;
+
+  /* ── Letter Spacing ── */
+  --letter-spacing-tight:   -0.02em;
+  --letter-spacing-normal:  0em;
+  --letter-spacing-wide:    0.05em;
+  --letter-spacing-display: 0em;
 }

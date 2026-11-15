@@ -27,7 +27,10 @@ export class PastisButton extends LitElement {
       border-radius: var(--radius-2xl, 24px);
       cursor: pointer;
       text-decoration: none;
-      transition: box-shadow 120ms ease, transform 80ms ease;
+      transition: box-shadow 120ms ease, transform 80ms ease,
+                  background var(--duration-fast, 120ms) var(--ease-standard, ease),
+                  color      var(--duration-fast, 120ms) var(--ease-standard, ease),
+                  border-color var(--duration-fast, 120ms) var(--ease-standard, ease);
       white-space: nowrap;
       background: var(--bg-primary, #0d0d0d);
       color: var(--action-primary, #fcba28);
@@ -68,7 +71,11 @@ export class PastisButton extends LitElement {
       color: var(--text-primary, #f9f4da);
       border-color: var(--action-ghost-border, #383c44);
     }
-    :host([variant="ghost"]) button:hover { box-shadow: var(--shadow-md, 5px 5px 0 #231f20); }
+    :host([variant="ghost"]) button:hover {
+      background: var(--text-primary, #f9f4da);
+      color: var(--bg-primary, #0d0d0d);
+      border-color: var(--text-primary, #f9f4da);
+    }
 
     :host([variant="destructive"]) button {
       background: var(--action-destructive, #ed203d);
