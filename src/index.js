@@ -1,4 +1,5 @@
 export * from './components/button/pastis-button.js';
+export * from './components/button/pastis-button-split.js';
 export * from './components/input/pastis-input.js';
 export * from './components/checkbox/pastis-checkbox.js';
 export * from './components/toggle/pastis-toggle.js';

@@ -95,7 +95,84 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.loading?L`<span class="spinner" aria-hidden="true"></span>`:``}
         ${this.copy&&this._copied?`✓ Copied`:L`<slot></slot>`}
       </button>
-    `}async _handleClick(e){if(this.disabled||this.loading){e.preventDefault(),e.stopPropagation();return}if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-button`,Y);var X=class extends J{static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String}};static styles=s`
+    `}async _handleClick(e){if(this.disabled||this.loading){e.preventDefault(),e.stopPropagation();return}if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-button`,Y);var X=class extends J{static properties={href:{type:String},copy:{type:String},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
+    :host { display: inline-flex; }
+
+    .split {
+      display: inline-flex;
+      align-items: stretch;
+      border: var(--border-width, 1px) solid var(--action-ghost-border, #383c44);
+      border-radius: var(--radius-2xl, 24px);
+      overflow: hidden;
+      font-family: var(--font-family-mono, monospace);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      transition: box-shadow 120ms ease;
+    }
+
+    .split:focus-within {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 3px;
+    }
+
+    .split:hover { box-shadow: var(--shadow-md, 5px 5px 0 #231f20); }
+
+    .main, .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      height: 40px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-primary, #f9f4da);
+      border: none;
+      text-decoration: none;
+      transition: background 120ms ease, color 120ms ease;
+    }
+
+    :host([size="sm"]) .main,
+    :host([size="sm"]) .action { font-size: 12px; padding: 0 12px; height: 32px; }
+
+    :host([size="lg"]) .main,
+    :host([size="lg"]) .action { font-size: 18px; padding: 0 24px; height: 56px; }
+
+    .main:hover, .action:hover {
+      background: var(--text-primary, #f9f4da);
+      color: var(--bg-primary, #0d0d0d);
+    }
+
+    .action:active { transform: translate(1px, 1px); }
+
+    .divider {
+      width: 1px;
+      background: var(--action-ghost-border, #383c44);
+      flex-shrink: 0;
+    }
+
+    .main:focus-visible, .action:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+  `;constructor(){super(),this.variant=`ghost`,this._copied=!1}async _handleCopy(){if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-copy`,{bubbles:!0,composed:!0}))}render(){return L`
+      <div class="split" role="group">
+        ${this.href?L`
+          <a class="main" href=${this.href} part="main">
+            <slot></slot>
+          </a>
+        `:L`
+          <span class="main" part="main"><slot></slot></span>
+        `}
+        <div class="divider" aria-hidden="true"></div>
+        <button class="action" part="action" @click=${this._handleCopy}
+          aria-label=${this._copied?`Copied`:`Copy to clipboard`}>
+          ${this._copied?`✓`:L`<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="4" y="1" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M1 5v8h8" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
+        </button>
+      </div>
+    `}};customElements.define(`pastis-button-split`,X);var Z=class extends J{static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String}};static styles=s`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -245,7 +322,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </div>
         ${e?L`<p class="error-text" id="error" role="alert">⚠ ${this.error}</p>`:this.helper?L`<p class="helper-text" id="helper">${this.helper}</p>`:``}
       </div>
-    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-input`,X);var Z=class extends J{static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String}};static styles=s`
+    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-input`,Z);var Q=class extends J{static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: flex-start; }
 
     label {
@@ -345,7 +422,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </span>
         `:``}
       </label>
-    `}_handleClick(e){if(this.disabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,Z);var Q=e=>e??z,ve=class extends J{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=s`
+    `}_handleClick(e){if(this.disabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,Q);var ve=e=>e??z,ye=class extends J{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; }
 
     label {
@@ -423,7 +500,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           name="${this.name||``}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${Q(t)}"
+          aria-label="${ve(t)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -431,7 +508,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </span>
         ${this.labelPosition===`left`?``:e}
       </label>
-    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,ve);var ye=class extends J{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=s`
+    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,ye);var be=class extends J{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; }
 
     .badge {
@@ -525,7 +602,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       <span class="badge" part="badge">
         ${e===void 0?L`<slot></slot>`:e}
       </span>
-    `}};customElements.define(`pastis-badge`,ye);var be=class extends J{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-badge`,be);var xe=class extends J{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=s`
     :host {
       display: inline-flex;
       position: relative;
@@ -603,7 +680,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.src?L`<img src="${this.src}" alt="${this.alt||this.name||`User avatar`}" />`:this.name?L`<span>${this._getInitials()}</span>`:L`<span class="icon">👤</span>`}
       </div>
       ${this.status?L`<span class="status-dot" aria-hidden="true"></span>`:``}
-    `}};customElements.define(`pastis-avatar`,be);var xe=class extends J{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-avatar`,xe);var Se=class extends J{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=s`
     :host {
       display: block;
     }
@@ -851,7 +928,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </div>
         <slot name="footer" class="card-footer"></slot>
       </div>
-    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,xe);var Se=class extends J{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=s`
+    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,Se);var Ce=class extends J{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=s`
     :host { display: block; }
     :host([visible="false"]) { display: none; }
 
@@ -935,7 +1012,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="dismiss-btn" @click="${this._dismiss}" aria-label="Dismiss">✕</button>
         `:``}
       </div>
-    `:L``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,Se);var Ce=class extends J{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0}};static styles=s`
+    `:L``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,Ce);var we=class extends J{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: contents; }
 
     .backdrop {
@@ -1053,7 +1130,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="modal-footer"></slot>
         </div>
       </div>
-    `:L``}_handleBackdropClick(){this.persistent||this.close()}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,Ce);var we=class extends J{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=s`
+    `:L``}_handleBackdropClick(){this.persistent||this.close()}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,we);var Te=class extends J{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=s`
     :host { display: block; }
 
     .toast-container {
@@ -1169,7 +1246,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:``}
         </div>
       </div>
-    `:L``}};customElements.define(`pastis-toast`,we);var Te=class extends J{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=s`
+    `:L``}};customElements.define(`pastis-toast`,Te);var Ee=class extends J{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; justify-content: center; }
 
     .spinner-wrap {
@@ -1259,7 +1336,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.label?L`<span class="label">${this.label}</span>`:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-spinner`,Te);var Ee=class extends J{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=s`
+    `}};customElements.define(`pastis-spinner`,Ee);var De=class extends J{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=s`
     :host { display: block; }
 
     .skeleton {
@@ -1309,7 +1386,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             ></div>
           `)}
         </div>
-      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return L`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return L`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,Ee);var De=class extends J{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=s`
+      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return L`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return L`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,De);var Oe=class extends J{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: inline-flex; position: relative; }
 
     .trigger { display: contents; }
@@ -1393,7 +1470,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.content||``}
         <slot name="content"></slot>
       </div>
-    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,De);var Oe=class extends J{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=s`
+    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,Oe);var ke=class extends J{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=s`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -1603,7 +1680,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </div>
         ${this.error?L`<span class="error-text">⚠ ${this.error}</span>`:``}
       </div>
-    `}};customElements.define(`pastis-dropdown`,Oe);var ke=class extends J{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-dropdown`,ke);var Ae=class extends J{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .tabs-container { display: flex; flex-direction: column; }
@@ -1748,7 +1825,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ${e?.content?L`${e.content}`:L`<slot name="${this.active}"></slot>`}
         </div>
       </div>
-    `}};customElements.define(`pastis-tabs`,ke);var Ae=class extends J{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-tabs`,Ae);var je=class extends J{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=s`
     :host { display: block; }
 
     .accordion {
@@ -1885,7 +1962,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `)}
       </div>
-    `}};customElements.define(`pastis-accordion`,Ae);var je=class extends J{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=s`
+    `}};customElements.define(`pastis-accordion`,je);var Me=class extends J{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=s`
     :host { display: block; }
 
     nav {
@@ -1979,7 +2056,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             `})}
         </ol>
       </nav>
-    `}};customElements.define(`pastis-breadcrumb`,je);var Me=class extends J{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=s`
+    `}};customElements.define(`pastis-breadcrumb`,Me);var Ne=class extends J{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=s`
     :host { display: block; }
 
     .pagination {
@@ -2121,7 +2198,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:``}
         </div>
       </nav>
-    `}};customElements.define(`pastis-pagination`,Me);var Ne=class extends J{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=s`
+    `}};customElements.define(`pastis-pagination`,Ne);var Pe=class extends J{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=s`
     :host { display: block; }
 
     .progress-wrap {
@@ -2281,7 +2358,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ></div>
         </div>
       </div>
-    `}};customElements.define(`pastis-progress`,Ne);var Pe=class extends J{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-progress`,Pe);var Fe=class extends J{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; }
 
     .tag {
@@ -2388,7 +2465,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           >✕</button>
         `:``}
       </span>
-    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Pe);var Fe=class extends J{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=s`
+    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Fe);var Ie=class extends J{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=s`
     :host { display: block; }
 
     :host([orientation="vertical"]) {
@@ -2485,7 +2562,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.label?L`<span class="label">${this.label}</span>`:L`<slot></slot>`}
         ${t?L`<span class="line" style="${e}"></span>`:``}
       </div>
-    `}};customElements.define(`pastis-divider`,Fe);var Ie=class extends J{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-divider`,Ie);var Le=class extends J{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .hero {
@@ -2661,7 +2738,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:L`<slot name="image"></slot>`}
         </div>
       </section>
-    `}};customElements.define(`pastis-hero`,Ie);var Le=class extends J{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=s`
+    `}};customElements.define(`pastis-hero`,Le);var Re=class extends J{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=s`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -2835,7 +2912,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${Q(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
+            aria-activedescendant="${ve(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
             @input="${this._handleInput}"
             @focus="${()=>{this.value.length>=this.minChars&&(this.open=!0)}}"
             @keydown="${this._handleKeydown}"
@@ -2867,7 +2944,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:``}
         </div>
       </div>
-    `}};customElements.define(`pastis-search`,Le);var Re=class extends J{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-search`,Re);var ze=class extends J{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: contents; }
 
     .backdrop {
@@ -3019,7 +3096,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="drawer-footer"></slot>
         </div>
       </div>
-    `:L``}};customElements.define(`pastis-drawer`,Re);var ze=class extends J{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=s`
+    `:L``}};customElements.define(`pastis-drawer`,ze);var Be=class extends J{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=s`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3229,7 +3306,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.error?L`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
         ${this.helper&&!this.error?L`<p class="helper-text">${this.helper}</p>`:``}
       </div>
-    `}};customElements.define(`pastis-file-upload`,ze);var Be=class extends J{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-file-upload`,Be);var Ve=class extends J{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=s`
     :host { display: block; }
     :host(:not([visible])) { display: none; }
 
@@ -3447,7 +3524,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `}
       </div>
-    `}};customElements.define(`pastis-cookie-banner`,Be);var Ve=class extends J{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-cookie-banner`,Ve);var He=class extends J{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=s`
     :host { display: block; }
 
     label {
@@ -3523,7 +3600,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </span>
         `:``}
       </label>
-    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Ve);var He=class extends J{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,He);var Ue=class extends J{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .stat-card {
@@ -3604,7 +3681,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-stat-card`,He);var Ue=class extends J{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-stat-card`,Ue);var We=class extends J{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
     :host { display: block; overflow-x: auto; }
 
     table {
@@ -3759,7 +3836,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-table`,Ue);var We=class extends J{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
+    `}};customElements.define(`pastis-table`,We);var Ge=class extends J{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
     :host { display: block; }
 
     .code-block {
@@ -3884,7 +3961,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </slot></pre>
         </div>
       </div>
-    `}};customElements.define(`pastis-code-block`,We);var Ge=class extends J{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-code-block`,Ge);var Ke=class extends J{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .empty-state {
@@ -3991,7 +4068,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         `:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-empty-state`,Ge);var Ke=class extends J{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=s`
+    `}};customElements.define(`pastis-empty-state`,Ke);var qe=class extends J{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=s`
     :host { display: inline-block; }
 
     .chip {
@@ -4098,7 +4175,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="remove" @click=${this._remove} aria-label="Remove ${e}" ?disabled=${this.disabled}>✕</button>
         `:``}
       </span>
-    `}};customElements.define(`pastis-filter-chip`,Ke);var qe=class extends J{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-chip`,qe);var Je=class extends J{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
     :host { display: block; }
 
     .filter-bar {
@@ -4153,7 +4230,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
         `:``}
       </div>
-    `}};customElements.define(`pastis-filter-bar`,qe);var Je=class extends J{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-bar`,Je);var $=class extends J{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
     :host { display: inline-block; }
 
     button {
@@ -4195,7 +4272,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <span class="icon" aria-hidden="true">${t}</span>
         ${this.label?L`<span class="label-text">${n} Mode</span>`:``}
       </button>
-    `}};customElements.define(`pastis-theme-toggle`,Je);var $=class extends J{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-theme-toggle`,$);var Ye=class extends J{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
     :host { display: block; }
 
     .carousel {
@@ -4438,7 +4515,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-carousel`,$);var Ye=class extends J{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-carousel`,Ye);var Xe=class extends J{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .timeline {
@@ -4583,7 +4660,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </li>
         `)}
       </ol>
-    `}};customElements.define(`pastis-timeline`,Ye);var Xe=class extends J{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-timeline`,Xe);var Ze=class extends J{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .testimonial {
@@ -4726,7 +4803,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-testimonial`,Xe);var Ze=class extends J{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=s`
+    `}};customElements.define(`pastis-testimonial`,Ze);var Qe=class extends J{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=s`
     :host { display: block; }
 
     section {
@@ -4821,7 +4898,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot></slot>
         </div>
       </section>
-    `}};customElements.define(`pastis-section`,Ze);var Qe=class extends J{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-section`,Qe);var $e=class extends J{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     footer {
@@ -5029,7 +5106,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         </div>
       </footer>
-    `}};customElements.define(`pastis-footer`,Qe);var $e=class extends J{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-footer`,$e);var et=class extends J{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=s`
     :host { display: block; }
 
     nav {
@@ -5439,7 +5516,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};customElements.define(`pastis-nav`,$e);var et=class extends J{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-nav`,et);var tt=class extends J{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
     :host {
       display: block;
       --_ratio: 1 / 1;
@@ -5638,7 +5715,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ${this.summary?L`<p class="summary">${this.summary}</p>`:``}
         </div>
       </a>
-    `}};customElements.define(`pastis-project-card`,et);var tt=class extends J{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-project-card`,tt);var nt=class extends J{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
     :host {
       display: block;
       --_size: var(--font-size-statement-lg, clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem));
@@ -5708,7 +5785,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
   `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return L`
       ${this.eyebrow?L`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
       <div class="body ${e}" part="body"><slot></slot></div>
-    `}};customElements.define(`pastis-statement`,tt);var nt=class extends J{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-statement`,nt);var rt=class extends J{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
     :host { display: block; }
 
     figure {
@@ -5756,7 +5833,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <code class="value">${this._value||`—`}</code>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-token-swatch`,nt);var rt=class extends J{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-token-swatch`,rt);var it=class extends J{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
     :host { display: block; }
 
     table {
@@ -5871,7 +5948,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-spec-table`,rt);var it=class extends J{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-spec-table`,it);var at=class extends J{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
     :host {
       display: block;
       --_inset: var(--pastis-shelf-inset, var(--layout-gutter, 24px));
@@ -5987,4 +6064,4 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <button aria-label="Previous" ?disabled=${this._atStart} @click=${()=>this._scrollByPage(-1)}>←</button>
         <button aria-label="Next" ?disabled=${this._atEnd} @click=${()=>this._scrollByPage(1)}>→</button>
       </div>
-    `}};return customElements.define(`pastis-shelf`,it),e.PastisAccordion=Ae,e.PastisAlert=Se,e.PastisAvatar=be,e.PastisBadge=ye,e.PastisBreadcrumb=je,e.PastisButton=Y,e.PastisCard=xe,e.PastisCarousel=$,e.PastisCheckbox=Z,e.PastisCodeBlock=We,e.PastisCookieBanner=Be,e.PastisDivider=Fe,e.PastisDrawer=Re,e.PastisDropdown=Oe,e.PastisEmptyState=Ge,e.PastisFileUpload=ze,e.PastisFilterBar=qe,e.PastisFilterChip=Ke,e.PastisFooter=Qe,e.PastisHero=Ie,e.PastisInput=X,e.PastisModal=Ce,e.PastisNav=$e,e.PastisPagination=Me,e.PastisProgress=Ne,e.PastisProjectCard=et,e.PastisRadio=Ve,e.PastisSearch=Le,e.PastisSection=Ze,e.PastisShelf=it,e.PastisSkeleton=Ee,e.PastisSpecTable=rt,e.PastisSpinner=Te,e.PastisStatCard=He,e.PastisStatement=tt,e.PastisTable=Ue,e.PastisTabs=ke,e.PastisTag=Pe,e.PastisTestimonial=Xe,e.PastisThemeToggle=Je,e.PastisTimeline=Ye,e.PastisToast=we,e.PastisToggle=ve,e.PastisTokenSwatch=nt,e.PastisTooltip=De,e})({});
+    `}};return customElements.define(`pastis-shelf`,at),e.PastisAccordion=je,e.PastisAlert=Ce,e.PastisAvatar=xe,e.PastisBadge=be,e.PastisBreadcrumb=Me,e.PastisButton=Y,e.PastisButtonSplit=X,e.PastisCard=Se,e.PastisCarousel=Ye,e.PastisCheckbox=Q,e.PastisCodeBlock=Ge,e.PastisCookieBanner=Ve,e.PastisDivider=Ie,e.PastisDrawer=ze,e.PastisDropdown=ke,e.PastisEmptyState=Ke,e.PastisFileUpload=Be,e.PastisFilterBar=Je,e.PastisFilterChip=qe,e.PastisFooter=$e,e.PastisHero=Le,e.PastisInput=Z,e.PastisModal=we,e.PastisNav=et,e.PastisPagination=Ne,e.PastisProgress=Pe,e.PastisProjectCard=tt,e.PastisRadio=He,e.PastisSearch=Re,e.PastisSection=Qe,e.PastisShelf=at,e.PastisSkeleton=De,e.PastisSpecTable=it,e.PastisSpinner=Ee,e.PastisStatCard=Ue,e.PastisStatement=nt,e.PastisTable=We,e.PastisTabs=Ae,e.PastisTag=Fe,e.PastisTestimonial=Ze,e.PastisThemeToggle=$,e.PastisTimeline=Xe,e.PastisToast=Te,e.PastisToggle=ye,e.PastisTokenSwatch=rt,e.PastisTooltip=Oe,e})({});
