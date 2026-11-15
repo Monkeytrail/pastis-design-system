@@ -32,7 +32,10 @@ export class PastisButtonSplit extends LitElement {
       outline-offset: 3px;
     }
 
-    .split:hover { box-shadow: var(--shadow-md, 5px 5px 0 #231f20); }
+    /* whole pill border brightens on any hover */
+    .split:hover {
+      border-color: var(--text-primary, #f9f4da);
+    }
 
     .main, .action {
       display: inline-flex;
@@ -45,7 +48,8 @@ export class PastisButtonSplit extends LitElement {
       color: var(--text-primary, #f9f4da);
       border: none;
       text-decoration: none;
-      transition: background 120ms ease, color 120ms ease;
+      transition: background var(--duration-fast, 120ms) var(--ease-standard, ease),
+                  color      var(--duration-fast, 120ms) var(--ease-standard, ease);
     }
 
     :host([size="sm"]) .main,
@@ -54,18 +58,21 @@ export class PastisButtonSplit extends LitElement {
     :host([size="lg"]) .main,
     :host([size="lg"]) .action { font-size: 18px; padding: 0 24px; height: 56px; }
 
-    .main:hover, .action:hover {
-      background: var(--text-primary, #f9f4da);
-      color: var(--bg-primary, #0d0d0d);
-    }
+    /* each half inverts independently */
+    .main:hover { background: var(--text-primary, #f9f4da); color: var(--bg-primary, #0d0d0d); }
+    .action:hover { background: var(--text-primary, #f9f4da); color: var(--bg-primary, #0d0d0d); }
 
-    .action:active { transform: translate(1px, 1px); }
+    .main:active, .action:active { opacity: 0.8; }
 
     .divider {
       width: 1px;
       background: var(--action-ghost-border, #383c44);
       flex-shrink: 0;
+      transition: background var(--duration-fast, 120ms) var(--ease-standard, ease);
     }
+
+    /* divider brightens with the border on hover */
+    .split:hover .divider { background: var(--text-primary, #f9f4da); }
 
     .main:focus-visible, .action:focus-visible {
       outline: 2px solid var(--border-focus, #fcba28);
