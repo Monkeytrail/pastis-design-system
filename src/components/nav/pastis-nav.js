@@ -454,7 +454,7 @@ export class PastisNav extends LitElement {
         </a>
 
         <!-- Desktop links -->
-        <div class="nav-links" role="list">
+        <div class="nav-links">
           ${this.items.map(item => this._renderDesktopItem(item))}
           <slot name="links"></slot>
         </div>

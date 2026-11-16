@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 
 export class PastisButton extends LitElement {
   static properties = {
@@ -6,7 +6,8 @@ export class PastisButton extends LitElement {
     size: { type: String, reflect: true },
     disabled: { type: Boolean, reflect: true },
     loading: { type: Boolean, reflect: true },
-    href: { type: String },
+    href: { type: String },       // renders a link instead of a button
+    target: { type: String },
     copy: { type: String },       // value to copy to clipboard on click
     _copied: { type: Boolean, state: true },
   };
@@ -43,49 +44,49 @@ export class PastisButton extends LitElement {
     :host([size="lg"]) button, :host([size="lg"]) a { font-size: 18px; padding: 0 24px; height: 56px; }
     button, a { font-size: 14px; padding: 0 16px; height: 40px; }
 
-    :host([variant="primary"]) button,
-    :host(:not([variant])) button {
+    :host([variant="primary"]) :is(button, a),
+    :host(:not([variant])) :is(button, a) {
       background: var(--action-primary, #fcba28);
       color: var(--action-primary-text, #0d0d0d);
       border-color: var(--action-primary, #fcba28);
     }
-    :host([variant="primary"]) button:hover,
-    :host(:not([variant])) button:hover {
+    :host([variant="primary"]) :is(button, a):hover,
+    :host(:not([variant])) :is(button, a):hover {
       box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428);
     }
-    :host([variant="primary"]) button:active,
-    :host(:not([variant])) button:active {
+    :host([variant="primary"]) :is(button, a):active,
+    :host(:not([variant])) :is(button, a):active {
       transform: translate(2px, 2px);
       box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28);
     }
 
-    :host([variant="secondary"]) button {
+    :host([variant="secondary"]) :is(button, a) {
       background: var(--bg-primary, #0d0d0d);
       color: var(--action-secondary, #fc7428);
       border-color: var(--action-secondary, #fc7428);
     }
-    :host([variant="secondary"]) button:hover { box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428); }
+    :host([variant="secondary"]) :is(button, a):hover { box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428); }
 
-    :host([variant="ghost"]) button {
+    :host([variant="ghost"]) :is(button, a) {
       background: transparent;
       color: var(--text-primary, #f9f4da);
       border-color: var(--action-ghost-border, #383c44);
     }
-    :host([variant="ghost"]) button:hover {
+    :host([variant="ghost"]) :is(button, a):hover {
       background: var(--text-primary, #f9f4da);
       color: var(--bg-primary, #0d0d0d);
       border-color: var(--text-primary, #f9f4da);
       box-shadow: none;
     }
 
-    :host([variant="destructive"]) button {
+    :host([variant="destructive"]) :is(button, a) {
       background: var(--action-destructive, #ed203d);
       color: var(--action-destructive-text, #000000);
       border-color: var(--action-destructive, #ed203d);
     }
-    :host([variant="destructive"]) button:hover { box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28); }
+    :host([variant="destructive"]) :is(button, a):hover { box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28); }
 
-    :host([disabled]) button {
+    :host([disabled]) :is(button, a) {
       opacity: 0.4;
       cursor: not-allowed;
       pointer-events: none;
@@ -117,16 +118,34 @@ export class PastisButton extends LitElement {
   }
 
   render() {
+    const content = html`
+      ${this.loading ? html`<span class="spinner" aria-hidden="true"></span>` : ''}
+      ${this.copy ? (this._copied ? '✓ Copied' : html`<slot></slot>`) : html`<slot></slot>`}
+    `;
+
+    // A link when href is set (and it isn't a copy button), so it never has to be nested in an <a>
+    if (this.href && !this.copy) {
+      const unavailable = this.disabled || this.loading;
+      return html`
+        <a
+          href=${unavailable ? nothing : this.href}
+          target=${this.target || nothing}
+          rel=${this.target === '_blank' ? 'noopener noreferrer' : nothing}
+          aria-disabled=${unavailable ? 'true' : nothing}
+          aria-busy=${this.loading ? 'true' : nothing}
+          @click=${this._handleClick}
+          part="button"
+        >${content}</a>
+      `;
+    }
+
     return html`
       <button
         ?disabled=${this.disabled || this.loading}
         @click=${this._handleClick}
         aria-busy=${this.loading}
         part="button"
-      >
-        ${this.loading ? html`<span class="spinner" aria-hidden="true"></span>` : ''}
-        ${this.copy ? (this._copied ? '✓ Copied' : html`<slot></slot>`) : html`<slot></slot>`}
-      </button>
+      >${content}</button>
     `;
   }
 

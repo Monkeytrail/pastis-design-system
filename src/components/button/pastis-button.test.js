@@ -136,3 +136,53 @@ describe('pastis-button', () => {
     expect(results.violations).toHaveLength(0);
   });
 });
+
+describe('pastis-button with href', () => {
+  let el;
+
+  beforeEach(async () => {
+    el = document.createElement('pastis-button');
+    el.href = 'https://example.com';
+    el.target = '_blank';
+    el.textContent = 'Open';
+    document.body.appendChild(el);
+    await el.updateComplete;
+  });
+
+  afterEach(() => {
+    el.remove();
+  });
+
+  it('renders a link instead of a button', () => {
+    const link = el.shadowRoot.querySelector('a');
+    expect(link).toBeTruthy();
+    expect(el.shadowRoot.querySelector('button')).toBeNull();
+    expect(link.getAttribute('href')).toBe('https://example.com');
+  });
+
+  it('adds rel="noopener noreferrer" for target="_blank"', () => {
+    const link = el.shadowRoot.querySelector('a');
+    expect(link.getAttribute('target')).toBe('_blank');
+    expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+  });
+
+  it('removes href and sets aria-disabled when disabled', async () => {
+    el.disabled = true;
+    await el.updateComplete;
+    const link = el.shadowRoot.querySelector('a');
+    expect(link.hasAttribute('href')).toBe(false);
+    expect(link.getAttribute('aria-disabled')).toBe('true');
+  });
+
+  it('stays a button when copy is set', async () => {
+    el.copy = 'hello';
+    await el.updateComplete;
+    expect(el.shadowRoot.querySelector('button')).toBeTruthy();
+    expect(el.shadowRoot.querySelector('a')).toBeNull();
+  });
+
+  it('passes axe-core', async () => {
+    const results = await axe.run(el);
+    expect(results.violations).toEqual([]);
+  });
+});
