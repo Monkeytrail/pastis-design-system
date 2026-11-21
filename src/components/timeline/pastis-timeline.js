@@ -1,140 +1,80 @@
 import { LitElement, html, css } from 'lit';
 
+/**
+ * Two-column list of roles or milestones: title in the display serif on the left,
+ * meta line (tag · date) and optional body on the right, separated by hairlines.
+ * Hovering a row dims the others.
+ */
 export class PastisTimeline extends LitElement {
   static properties = {
-    /** @type {{ date: string, title: string, body: string, tag?: string, icon?: string }[]} */
+    /** @type {{ date?: string, title: string, body?: string, tag?: string }[]} */
     items:   { type: Array },
     /** 'default' | 'compact' */
     variant: { type: String, reflect: true },
   };
 
   static styles = css`
-    :host { display: block; }
+    :host {
+      display: block;
+      container-type: inline-size;
+    }
 
     .timeline {
-      position: relative;
       padding: 0;
       margin: 0;
       list-style: none;
     }
 
-    /* vertical rule */
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 11px;
-      top: 0;
-      bottom: 0;
-      width: var(--border-width, 1px);
-      background: var(--border-default, #383c44);
-    }
-
     .item {
-      position: relative;
-      padding: 0 0 var(--space-2xl, 48px) 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: baseline;
+      gap: var(--space-lg, 24px);
+      padding: var(--space-lg, 24px) 0;
+      border-top: var(--border-width, 1px) solid var(--border-default, #383c44);
+      transition: opacity var(--duration-base, 200ms) var(--ease-standard, ease);
     }
 
     .item:last-child {
-      padding-bottom: 0;
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
     }
 
-    /* dot */
-    .dot {
-      position: absolute;
-      left: 0;
-      top: 4px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: var(--action-primary, #fcba28);
-      flex-shrink: 0;
-      z-index: 1;
-    }
-
-    .card {
-      background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #383c44);
-      border-radius: var(--radius-md, 6px);
-      padding: var(--space-md, 16px);
-      transition: box-shadow 120ms ease, transform 120ms ease;
-    }
-
-    .card:hover {
-      box-shadow: var(--shadow-md, 5px 5px 0 #231f20);
-      transform: translate(-2px, -2px);
-    }
-
-    .meta {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm, 8px);
-      margin-bottom: var(--space-xs, 4px);
-    }
-
-    .date {
-      font-family: var(--font-family-mono, 'Fira Code', monospace);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wide, 0.05em);
-      color: var(--text-tertiary, #909498);
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full, 9999px);
-      background: var(--bg-primary, #0d0d0d);
-      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
-      font-family: var(--font-family-mono, 'Fira Code', monospace);
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wide, 0.05em);
-      color: var(--action-primary, #fcba28);
-    }
+    /* Dim the other rows while one is hovered */
+    .timeline:has(.item:hover) .item { opacity: 0.35; }
+    .timeline:has(.item:hover) .item:hover { opacity: 1; }
 
     .title {
-      font-family: var(--font-family-mono, 'Fira Code', monospace);
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
+      font-size: clamp(var(--font-size-h5, 19px), 2.5vw, var(--font-size-h3, 26px));
+      font-weight: var(--font-weight-display, 400);
+      line-height: var(--line-height-h3, 1.25);
       color: var(--text-primary, #f9f4da);
-      margin: 0 0 var(--space-xs, 4px);
-    }
-
-    .body {
-      font-family: var(--font-family-body, 'Outfit', sans-serif);
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text-secondary, #f9f4da);
       margin: 0;
     }
 
-    /* compact: tighter spacing, no card chrome */
+    .detail {
+      font-family: var(--font-family-body, 'Inter', sans-serif);
+      font-size: var(--font-size-body-sm, 14px);
+      line-height: var(--line-height-body-sm, 1.55);
+      color: var(--text-tertiary, #909498);
+    }
+
+    .meta { margin: 0; }
+
+    .body {
+      margin: var(--space-xs, 4px) 0 0;
+      color: var(--text-secondary, #f9f4da);
+    }
+
     :host([variant="compact"]) .item {
-      padding-bottom: var(--space-lg, 24px);
+      padding: var(--space-md, 16px) 0;
     }
 
-    :host([variant="compact"]) .card {
-      background: transparent;
-      border: none;
-      padding: 0;
-      box-shadow: none;
-      transform: none;
-    }
-
-    :host([variant="compact"]) .card:hover {
-      box-shadow: none;
-      transform: none;
+    @container (max-width: 560px) {
+      .item {
+        grid-template-columns: 1fr;
+        gap: var(--space-xs, 4px);
+      }
     }
   `;
 
@@ -147,20 +87,19 @@ export class PastisTimeline extends LitElement {
   render() {
     return html`
       <ol class="timeline" part="timeline">
-        ${this.items.map((item) => html`
-          <li class="item" part="item">
-            <div class="dot" aria-hidden="true">${item.icon || '◆'}</div>
-            <div class="card" part="card">
-              <div class="meta">
-                ${item.date ? html`<span class="date">${item.date}</span>` : ''}
-                ${item.tag  ? html`<span class="tag">${item.tag}</span>`   : ''}
-              </div>
+        ${this.items.map((item) => {
+          const meta = [item.tag, item.date].filter(Boolean).join(' · ');
+          return html`
+            <li class="item" part="item">
               <p class="title">${item.title}</p>
-              ${item.body ? html`<p class="body">${item.body}</p>` : ''}
-              <slot name="item-${item.title}"></slot>
-            </div>
-          </li>
-        `)}
+              <div class="detail" part="detail">
+                ${meta ? html`<p class="meta">${meta}</p>` : ''}
+                ${item.body ? html`<p class="body">${item.body}</p>` : ''}
+                <slot name="item-${item.title}"></slot>
+              </div>
+            </li>
+          `;
+        })}
       </ol>
     `;
   }
