@@ -4,6 +4,7 @@ export const parameters = {
   backgrounds: { disable: true },
   actions: { argTypesRegex: '^on.*' },
   controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
+  options: { storySort: { order: ['Introduction', 'Foundations', 'Basics'] } },
 };
 
 export const globalTypes = {

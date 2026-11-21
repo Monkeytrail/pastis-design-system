@@ -1,5 +1,5 @@
 export default {
-  stories: ['../src/**/*.stories.js'],
+  stories: ['../src/docs/**/*.mdx', '../src/**/*.stories.js'],
 
   framework: {
     name: '@storybook/web-components-vite',
