@@ -1,15 +1,86 @@
 import { LitElement, html, css, nothing } from 'lit';
 
+/**
+ * ARIA attributes set on the host that are forwarded to the inner <button>/<a>.
+ * Maps the host attribute to the Lit property that stores it.
+ */
+const FORWARDED_ARIA = {
+  'aria-label': 'ariaLabel',
+  'aria-labelledby': 'ariaLabelledby',
+  'aria-describedby': 'ariaDescribedby',
+  'aria-pressed': 'ariaPressed',
+  'aria-expanded': 'ariaExpanded',
+  'aria-controls': 'ariaControls',
+  'aria-haspopup': 'ariaHasPopup',
+  'aria-current': 'ariaCurrent',
+};
+
+/** ID-reference attributes: resolved in the host's tree and set as element references. */
+const ID_REFS = {
+  ariaLabelledby: 'ariaLabelledByElements',
+  ariaDescribedby: 'ariaDescribedByElements',
+  ariaControls: 'ariaControlsElements',
+};
+
+/**
+ * Button (or link when `href` is set).
+ *
+ * Form-associated: inside a <form>, `type="submit"` submits it and `type="reset"` resets it.
+ * Unlike a native <button>, the default `type` is `button`, so a Pastis button never submits a
+ * form unless it says so.
+ *
+ * ARIA set on the host (aria-label, aria-labelledby, aria-describedby, aria-pressed,
+ * aria-expanded, aria-controls, aria-haspopup, aria-current) is forwarded to the inner
+ * <button>/<a>; the host itself has no role.
+ *
+ * @slot - Button label
+ * @csspart button - The inner <button> or <a>
+ * @fires pastis-click - On activation (not when disabled or loading)
+ */
 export class PastisButton extends LitElement {
+  static formAssociated = true;
+
+  static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
+
   static properties = {
+    /** primary | secondary | ghost | destructive */
     variant: { type: String, reflect: true },
+    /** sm | md | lg */
     size: { type: String, reflect: true },
+    /** Disables the button (also disabled by a disabled <fieldset>). */
     disabled: { type: Boolean, reflect: true },
+    /** Shows a spinner and blocks activation. */
     loading: { type: Boolean, reflect: true },
-    href: { type: String },       // renders a link instead of a button
+    /** Renders a link instead of a button. */
+    href: { type: String },
+    /** Link target (with `href`). */
     target: { type: String },
-    copy: { type: String },       // value to copy to clipboard on click
+    /** Value to copy to the clipboard on click. */
+    copy: { type: String },
+    /** button (default) | submit | reset. The default differs from native <button> (submit). */
+    type: { type: String },
+    /** Name sent with the form data when this button submits the form. */
+    name: { type: String },
+    /** Value sent with the form data when this button submits the form. */
+    value: { type: String },
+    /** Accessible name (e.g. for an icon-only button). Forwarded to the inner element. */
+    ariaLabel: { type: String, attribute: 'aria-label' },
+    /** IDs of elements (in the host's tree) that name the button. Forwarded as references. */
+    ariaLabelledby: { type: String, attribute: 'aria-labelledby' },
+    /** IDs of elements (in the host's tree) that describe the button. Forwarded as references. */
+    ariaDescribedby: { type: String, attribute: 'aria-describedby' },
+    /** Toggle state: "true", "false" or "mixed". Forwarded to the inner <button>. */
+    ariaPressed: { type: String, attribute: 'aria-pressed' },
+    /** Whether what it controls is expanded: "true" or "false". Forwarded. */
+    ariaExpanded: { type: String, attribute: 'aria-expanded' },
+    /** IDs of the elements it controls (in the host's tree). Forwarded as references. */
+    ariaControls: { type: String, attribute: 'aria-controls' },
+    /** Popup it opens: "menu", "listbox", "dialog", "true", … Forwarded. */
+    ariaHasPopup: { type: String, attribute: 'aria-haspopup' },
+    /** Current item in a set: "page", "step", "true", … Forwarded. */
+    ariaCurrent: { type: String, attribute: 'aria-current' },
     _copied: { type: Boolean, state: true },
+    _formDisabled: { type: Boolean, state: true },
   };
 
   static styles = css`
@@ -86,7 +157,8 @@ export class PastisButton extends LitElement {
     }
     :host([variant="destructive"]) :is(button, a):hover { box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28); }
 
-    :host([disabled]) :is(button, a) {
+    :host([disabled]) :is(button, a),
+    :host(:disabled) :is(button, a) {
       opacity: 0.4;
       cursor: not-allowed;
       pointer-events: none;
@@ -115,6 +187,70 @@ export class PastisButton extends LitElement {
     this.disabled = false;
     this.loading = false;
     this._copied = false;
+    this._formDisabled = false;
+    this.type = 'button';
+    this._internals = this.attachInternals();
+  }
+
+  /** The form this button belongs to, if any. */
+  get form() { return this._internals.form; }
+
+  /** Clicking the host activates the inner element, as for a native button. */
+  click() {
+    const inner = this._inner;
+    if (inner) inner.click();
+    else super.click();
+  }
+
+  formDisabledCallback(disabled) {
+    this._formDisabled = disabled;
+  }
+
+  /** The element that carries the semantics (inner <button> or <a>). */
+  get _inner() { return this.shadowRoot?.querySelector('[part="button"]') ?? null; }
+
+  updated() {
+    this._syncIdRefs();
+  }
+
+  /**
+   * aria-labelledby/-describedby/-controls on the host name elements in the host's tree, which an
+   * ID attribute inside the shadow root cannot reach. They are set as element references (ARIA
+   * element reflection), and the referenced text is also mirrored as aria-label (labelledby,
+   * unless aria-label is set) and aria-description (describedby), for browsers and test tools
+   * that do not follow element references. The mirrored text is refreshed on every update.
+   */
+  _syncIdRefs() {
+    const inner = this._inner;
+    if (!inner) return;
+    const root = this.getRootNode();
+    const resolve = ids => (ids || '').split(/\s+/).filter(Boolean)
+      .map(id => (root.getElementById ? root.getElementById(id) : document.getElementById(id)))
+      .filter(Boolean);
+    const textOf = elements => elements.map(e => e.textContent.trim()).join(' ');
+
+    for (const [prop, reflected] of Object.entries(ID_REFS)) {
+      const elements = resolve(this[prop]);
+      if (reflected in inner) inner[reflected] = elements.length ? elements : null;
+    }
+    if (!this.ariaLabel) {
+      const label = textOf(resolve(this.ariaLabelledby));
+      if (label) inner.setAttribute('aria-label', label);
+      else inner.removeAttribute('aria-label');
+    }
+    const description = textOf(resolve(this.ariaDescribedby));
+    if (description) inner.setAttribute('aria-description', description);
+    else inner.removeAttribute('aria-description');
+  }
+
+  _aria() {
+    return {
+      label: this.ariaLabel || nothing,
+      pressed: this.ariaPressed || nothing,
+      expanded: this.ariaExpanded || nothing,
+      haspopup: this.ariaHasPopup || nothing,
+      current: this.ariaCurrent || nothing,
+    };
   }
 
   render() {
@@ -124,8 +260,9 @@ export class PastisButton extends LitElement {
     `;
 
     // A link when href is set (and it isn't a copy button), so it never has to be nested in an <a>
+    const aria = this._aria();
     if (this.href && !this.copy) {
-      const unavailable = this.disabled || this.loading;
+      const unavailable = this.disabled || this._formDisabled || this.loading;
       return html`
         <a
           href=${unavailable ? nothing : this.href}
@@ -133,6 +270,10 @@ export class PastisButton extends LitElement {
           rel=${this.target === '_blank' ? 'noopener noreferrer' : nothing}
           aria-disabled=${unavailable ? 'true' : nothing}
           aria-busy=${this.loading ? 'true' : nothing}
+          aria-label=${aria.label}
+          aria-expanded=${aria.expanded}
+          aria-haspopup=${aria.haspopup}
+          aria-current=${aria.current}
           @click=${this._handleClick}
           part="button"
         >${content}</a>
@@ -141,22 +282,80 @@ export class PastisButton extends LitElement {
 
     return html`
       <button
-        ?disabled=${this.disabled || this.loading}
+        type="button"
+        ?disabled=${this.disabled || this._formDisabled || this.loading}
         @click=${this._handleClick}
         aria-busy=${this.loading}
+        aria-label=${aria.label}
+        aria-pressed=${aria.pressed}
+        aria-expanded=${aria.expanded}
+        aria-haspopup=${aria.haspopup}
+        aria-current=${aria.current}
         part="button"
       >${content}</button>
     `;
   }
 
-  async _handleClick(e) {
-    if (this.disabled || this.loading) { e.preventDefault(); e.stopPropagation(); return; }
+  _handleClick(e) {
+    if (this.disabled || this._formDisabled || this.loading) { e.preventDefault(); e.stopPropagation(); return; }
+    const isLink = this.href && !this.copy;
+    if (!isLink && (this.type === 'submit' || this.type === 'reset')) this._activateAfterDispatch(e);
     if (this.copy) {
-      try { await navigator.clipboard.writeText(this.copy); } catch { /* ignore */ }
-      this._copied = true;
-      setTimeout(() => { this._copied = false; }, 2000);
+      this._copyThenNotify();
+      return;
     }
     this.dispatchEvent(new CustomEvent('pastis-click', { bubbles: true, composed: true }));
+  }
+
+  async _copyThenNotify() {
+    try { await navigator.clipboard.writeText(this.copy); } catch { /* ignore */ }
+    this._copied = true;
+    setTimeout(() => { this._copied = false; }, 2000);
+    this.dispatchEvent(new CustomEvent('pastis-click', { bubbles: true, composed: true }));
+  }
+
+  /**
+   * Submit/reset is the click's default action, as for a native button: it runs once the click
+   * has gone through every listener, and not at all when one of them called preventDefault().
+   * A window listener added now runs last in the click's path; if propagation was stopped before
+   * it, a task fallback runs the activation instead (stopPropagation does not cancel it natively).
+   */
+  _activateAfterDispatch(event) {
+    let done = false;
+    const activate = () => {
+      if (done) return;
+      done = true;
+      window.removeEventListener('click', onWindowClick);
+      clearTimeout(fallback);
+      if (event.defaultPrevented) return;
+      if (this.type === 'submit') this._submit();
+      else if (this.type === 'reset') this.form?.reset();
+    };
+    const onWindowClick = (e) => { if (e === event) activate(); };
+    window.addEventListener('click', onWindowClick);
+    const fallback = setTimeout(activate);
+  }
+
+  /**
+   * Submits the owning form like a native submit button: validation runs, `submit` fires once
+   * and the form data includes this button's name/value. `requestSubmit()` only accepts native
+   * submit buttons as submitter, so a hidden native button stands in for the host for the
+   * duration of the call (it is the event's `submitter`).
+   */
+  _submit() {
+    const form = this.form;
+    if (!form) return;
+    const proxy = document.createElement('button');
+    proxy.type = 'submit';
+    proxy.hidden = true;
+    if (this.name) proxy.name = this.name;
+    if (this.value != null) proxy.value = this.value;
+    form.append(proxy);
+    try {
+      form.requestSubmit(proxy);
+    } finally {
+      proxy.remove();
+    }
   }
 }
 
