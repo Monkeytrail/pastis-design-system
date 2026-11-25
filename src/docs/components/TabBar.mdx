@@ -1,0 +1,58 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as TabBarStories from '../../components/tab-bar/pastis-tab-bar.stories.js';
+
+<Meta of={TabBarStories} name="Usage" />
+
+# Tab bar
+
+`<pastis-tab-bar>` is the bottom navigation of an installed (phone) app: a few top-level
+destinations, each a `<pastis-tab-bar-item>` with an icon above its label. It is fixed to the
+bottom of the viewport and clears the iPhone home indicator.
+
+<Canvas of={TabBarStories.Default} />
+
+## Usage
+
+- `label` names the navigation landmark (“Main”).
+- Each item is a link: give it an `href`, an `icon` (a `pastis-icon` name) and a `label`. Mark the
+  page the user is on with `current` (`aria-current="page"`, accent colour).
+- **Badges.** `badge` shows a count; `badge-label` says what it means and is added to the link's
+  name (“3 items” makes “Today, 3 items”).
+- **Routing.** A plain click fires a cancelable `pastis-navigate` with `detail.href`. A
+  client-side router cancels it and navigates itself; otherwise the link is followed. Clicks with
+  a modifier key (open in a new tab) are left to the browser.
+- `hidden` removes an item entirely (not shown, not focusable).
+- **Layout.** Pad the page with `var(--pastis-tab-bar-height)`, the bar's full height including
+  the safe area, so the last content is not under the bar. The page needs
+  `<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">`.
+
+## Do
+
+```html
+<main style="padding-bottom: var(--pastis-tab-bar-height)">…</main>
+<pastis-tab-bar label="Main">
+  <pastis-tab-bar-item href="/today" icon="today" label="Today" badge="3" badge-label="3 items" current></pastis-tab-bar-item>
+  <pastis-tab-bar-item href="/scheduled" icon="calendar" label="Scheduled"></pastis-tab-bar-item>
+  <pastis-tab-bar-item href="/lists" icon="list" label="Lists"></pastis-tab-bar-item>
+</pastis-tab-bar>
+```
+
+```js
+// Client-side routing
+document.addEventListener('pastis-navigate', (e) => {
+  e.preventDefault();
+  router.navigate(e.detail.href);
+});
+```
+
+## Don't
+
+```html
+<!-- Don't leave out href: the item is not a real link (Pastis warns) -->
+<pastis-tab-bar-item icon="today" label="Today"></pastis-tab-bar-item>
+
+<!-- Don't use more than five items, or actions (Add, Delete) as items: it is for destinations -->
+
+<!-- Don't leave the badge unexplained: screen readers would hear only “Today, 3” -->
+<pastis-tab-bar-item href="/today" icon="today" label="Today" badge="3"></pastis-tab-bar-item>
+```

@@ -1,0 +1,65 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TaskRowStories from '../../components/task-row/pastis-task-row.stories.js';
+
+<Meta of={TaskRowStories} name="Usage" />
+
+# Task row
+
+`<pastis-task-row>` is one task in a list: a round completion toggle, the title, a meta line
+(due date, repeat, flag, priority, subtasks, tags) and optional actions. It is the row of a
+Reminders-style list, not a form control; use `<pastis-checkbox>` in forms.
+
+<Canvas of={TaskRowStories.List} />
+
+## Usage
+
+- **Put rows in a list.** The host has `role="listitem"`; render the rows inside an element with
+  `role="list"` (or a `<ul>`).
+- **The title is `task-title`** (property `taskTitle`), not `title`: `title` is the browser's
+  tooltip attribute. An empty title is named “Untitled task”.
+- **Completion.** The toggle is a checkbox named “Complete” plus the title (`toggle-label` overrides
+  it); click or Space toggles it. It fires a cancelable `pastis-toggle` with the new `done`. To
+  keep the row controlled (for example until a save succeeds), call `preventDefault()` and set
+  `done` yourself.
+- **Opening.** The title is a button firing `pastis-open`; its hit area covers the meta line.
+- **Meta.** Set `due` and `subtasks` as text the app has formatted (“Today 14:00”, “2/5”),
+  `overdue`, `repeats` and `flagged` as booleans, `priority` 0–3, `tags` as an array (a
+  property, or a JSON array attribute). Screen readers hear the meta as the title's
+  description: “Buy oat milk, button, Today 14:00, Flagged”.
+- `indent` shows a subtask one level in; `disabled` disables the toggle and the title.
+- **Actions.** Put buttons in the `actions` slot; they come after the title in the Tab order.
+
+<Controls of={TaskRowStories.Plain} />
+
+## Do
+
+```html
+<div role="list" aria-label="Personal">
+  <pastis-task-row task-title="Buy oat milk" due="Today 14:00" flagged></pastis-task-row>
+  <pastis-task-row task-title="Renew passport" due="Yesterday" overdue priority="3">
+    <pastis-button slot="actions" variant="ghost" size="sm" aria-label="Delete Renew passport">Delete</pastis-button>
+  </pastis-task-row>
+</div>
+```
+
+```js
+// Controlled: only mark done once the change is saved
+row.addEventListener('pastis-toggle', async (e) => {
+  e.preventDefault();
+  await save({ done: e.detail.done });
+  row.done = e.detail.done;
+});
+```
+
+## Don't
+
+```html
+<!-- Don't use title for the text: it is a tooltip and the row shows nothing -->
+<pastis-task-row title="Buy oat milk"></pastis-task-row>
+
+<!-- Don't render rows outside a list -->
+<div><pastis-task-row task-title="Buy oat milk"></pastis-task-row></div>
+
+<!-- Don't pass raw dates: format them for people first -->
+<pastis-task-row task-title="Buy oat milk" due="2026-11-25T14:00:00Z"></pastis-task-row>
+```

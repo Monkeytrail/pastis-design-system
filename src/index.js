@@ -43,3 +43,6 @@ export * from './components/statement/pastis-statement.js';
 export * from './components/token-swatch/pastis-token-swatch.js';
 export * from './components/spec-table/pastis-spec-table.js';
 export * from './components/shelf/pastis-shelf.js';
+export * from './components/icon/pastis-icon.js';
+export * from './components/task-row/pastis-task-row.js';
+export * from './components/tab-bar/pastis-tab-bar.js';
