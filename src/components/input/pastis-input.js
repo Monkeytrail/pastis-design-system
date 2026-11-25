@@ -27,7 +27,8 @@ const isNativeControl = el => el instanceof HTMLButtonElement || el instanceof H
  * managers and passkey autofill (`autocomplete="username webauthn"`) only see light-DOM inputs,
  * so use this for credentials. The slotted input is then the form control (set `name`, `type`,
  * `autocomplete`, `required` … on it); the host labels it (`aria-label` from `label`) and
- * describes it (`aria-description` from `error` or `helper`).
+ * describes it (`aria-description` from `error` or `helper`). The host's `required`, `disabled`
+ * and `readonly` are mirrored onto it, unless it sets them itself.
  *
  * @slot input - Optional native <input> used instead of the built-in one (slotted mode)
  * @csspart input - The built-in <input> (not in slotted mode)
@@ -204,15 +205,6 @@ export class PastisInput extends LitElement {
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-    }
   `;
 
   constructor() {
@@ -228,6 +220,8 @@ export class PastisInput extends LitElement {
     this._slotted = null;
     /** Attributes this component set on the slotted input, with the value it set. */
     this._owned = {};
+    /** Re-renders when the slotted input's own state changes (the marker, owned attributes). */
+    this._slottedObserver = new MutationObserver(() => this.requestUpdate());
     this._formDisabled = false;
     this._inputId = `pastis-input-${++nextId}`;
     this._internals = this.attachInternals();
@@ -288,6 +282,10 @@ export class PastisInput extends LitElement {
   willUpdate(changed) {
     if (this._slotted === null) this._adoptSlotted();
     if (!this.hasUpdated) this._defaultValue = this.value;
+    // Reflect `disabled` before render rather than in Lit's update(): the reflection makes the
+    // browser call formDisabledCallback synchronously, and a property change made during
+    // update() (after render) is dropped, which left the input disabled after re-enabling.
+    if (changed.has('disabled')) this.toggleAttribute('disabled', this.disabled);
     if (changed.has('value') && this._slotted && this._slotted.value !== (this.value ?? '')) {
       this._slotted.value = this.value ?? '';
     }
@@ -309,23 +307,46 @@ export class PastisInput extends LitElement {
     else this._internals.setValidity(input.validity, input.validationMessage, input);
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    if (this._slotted) this._observeSlotted();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._slottedObserver.disconnect();
+  }
+
   /** Picks up (or drops) a native `<input slot="input">` child. */
   _adoptSlotted() {
     const input = this.querySelector(':scope > input[slot="input"]') || false;
     if (input === this._slotted) return;
+    this._slottedObserver.disconnect();
     this._slotted = input;
     this._owned = {};
     if (input) {
       this.value = input.value;
       this._internals.setFormValue(null);
+      this._observeSlotted();
     }
+  }
+
+  /** Watches the slotted input's attributes that the marker or the owned attributes depend on. */
+  _observeSlotted() {
+    this._slottedObserver.observe(this._slotted, {
+      attributes: true,
+      attributeFilter: [
+        'required', 'disabled', 'readonly',
+        'aria-label', 'aria-labelledby', 'aria-description', 'aria-invalid',
+      ],
+    });
   }
 
   /**
    * Labels, describes and disables the slotted input: ID references cannot cross the shadow
    * boundary. Only attributes the component set itself are ever changed or removed; an author's
-   * own aria-label (or <label>, aria-labelledby), aria-description, aria-invalid, disabled or
-   * readonly on the slotted input are left alone.
+   * own aria-label (or <label>, aria-labelledby), aria-description, aria-invalid, required,
+   * disabled or readonly on the slotted input are left alone.
    */
   _syncSlotted() {
     const input = this._slotted;
@@ -333,8 +354,10 @@ export class PastisInput extends LitElement {
     this._setOwned(input, 'aria-label', hasOwnName ? null : (this.label || this.ariaLabel || null));
     this._setOwned(input, 'aria-description', this.error || this.helper || null);
     this._setOwned(input, 'aria-invalid', this.error ? 'true' : null);
+    this._setOwned(input, 'required', this.required ? '' : null);
     this._setOwned(input, 'disabled', this.disabled ? '' : null);
     this._setOwned(input, 'readonly', this.readonly ? '' : null);
+    this._slottedObserver.takeRecords(); // its own changes need no re-render
   }
 
   /** Sets (value) or removes (null) an attribute the component owns on the slotted input. */
@@ -342,6 +365,7 @@ export class PastisInput extends LitElement {
     const current = input.getAttribute(name);
     const owned = Object.hasOwn(this._owned, name);
     if (current !== null && !(owned && current === this._owned[name])) return; // the author's
+    if (current === value) return;
     if (value === null) {
       if (owned) input.removeAttribute(name);
       delete this._owned[name];
@@ -386,7 +410,7 @@ export class PastisInput extends LitElement {
             @click=${this._focusSlotted}
           >
             ${this.label}
-            ${required ? html`<span class="required-dot" aria-hidden="true">*</span><span class="sr-only">required</span>` : ''}
+            ${required ? html`<span class="required-dot" aria-hidden="true">*</span>` : ''}
           </label>
         ` : ''}
         <div class="${wrapClasses}">

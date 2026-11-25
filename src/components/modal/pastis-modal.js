@@ -7,6 +7,14 @@ function deepActiveElement() {
   return active;
 }
 
+/** Whether focus is on `el` or inside it (its shadow trees included, e.g. delegatesFocus). */
+function holdsFocus(el) {
+  for (let node = deepActiveElement(); node; node = node.getRootNode().host) {
+    if (node === el || el.contains(node)) return true;
+  }
+  return false;
+}
+
 function isTabbable(el) {
   if (el.tabIndex < 0 || el.localName === 'slot') return false;
   // <a> without href is not focusable, though its tabIndex reports 0
@@ -63,8 +71,9 @@ function* tabbables(nodes) {
  * open, Tab and Shift+Tab cycle through everything in it (slotted content included), Escape
  * closes it unless `persistent`, and focus returns to where it was when it closes.
  *
- * Initial focus goes to an element with `autofocus` in the slotted content, else the first
- * focusable slotted element, else the close button.
+ * Initial focus goes to the first focusable element with `autofocus` in the slotted content, else
+ * the first focusable slotted element, else the close button, else (without a close button) the
+ * body.
  *
  * @slot - Body content (the dialog's description)
  * @slot footer - Actions
@@ -213,6 +222,9 @@ export class PastisModal extends LitElement {
     this.role = 'dialog';
     this._boundKeydown = this._handleKeydown.bind(this);
     this._previousFocus = null;
+    this._dialogFocus = null;
+    /** Counts opens and closes, so a focus step still waiting from an earlier open can bail out. */
+    this._openGeneration = 0;
   }
 
   connectedCallback() {
@@ -272,11 +284,15 @@ export class PastisModal extends LitElement {
 
   updated(changed) {
     if (changed.has('open')) {
+      this._openGeneration++;
       if (this.open) {
         this._previousFocus = deepActiveElement();
         document.body.style.overflow = 'hidden';
         const dialog = this._dialog;
         if (dialog && !dialog.open && dialog.isConnected) dialog.showModal();
+        // showModal() focused the dialog's first focusable element itself: the close button, or
+        // without one the tabbable body (it comes before the slotted content). Not a user choice.
+        this._dialogFocus = deepActiveElement();
         this._focusInitialWhenReady();
       } else if (changed.get('open')) {
         document.body.style.overflow = '';
@@ -284,6 +300,7 @@ export class PastisModal extends LitElement {
           this._previousFocus.focus();
         }
         this._previousFocus = null;
+        this._dialogFocus = null;
       }
     }
   }
@@ -293,27 +310,38 @@ export class PastisModal extends LitElement {
    * modal opens in the same pass as its content: wait for them before picking the target.
    */
   async _focusInitialWhenReady() {
+    const generation = this._openGeneration;
     const pending = [...this.querySelectorAll('*')]
       .map(el => el.updateComplete)
       .filter(p => p && typeof p.then === 'function');
     if (pending.length) await Promise.all(pending);
-    if (!this.open || !this.isConnected) return;
+    // Closed (or closed and reopened, which runs its own focus step) in the meantime
+    if (generation !== this._openGeneration || !this.open || !this.isConnected) return;
     // The user (or the content itself) may already have moved focus into the dialog
     const active = deepActiveElement();
     const inDialog = active && (this.contains(active) || this.shadowRoot.contains(active)
       || this.contains(active.getRootNode().host));
-    if (inDialog && active !== this.shadowRoot.querySelector('.close-btn') && active !== this._dialog) return;
+    if (inDialog && active !== this._dialogFocus && active !== this._dialog) return;
     this._focusInitial();
   }
 
+  /**
+   * Focuses the first candidate that actually takes focus: an [autofocus] element can be disabled,
+   * hidden or in a disabled fieldset, where focus() does nothing.
+   */
   _focusInitial() {
-    const auto = this.querySelector('[autofocus]');
     const slotted = this._getFocusableElements().filter(el => el.getRootNode() !== this.shadowRoot);
-    const target = auto
-      || slotted[0]
-      || this.shadowRoot.querySelector('.close-btn')
-      || this.shadowRoot.querySelector('.modal-body');
-    target?.focus();
+    const candidates = [
+      ...this.querySelectorAll('[autofocus]'),
+      ...slotted,
+      this.shadowRoot.querySelector('.close-btn'),
+      this.shadowRoot.querySelector('.modal-body'),
+    ];
+    for (const el of candidates) {
+      if (!el) continue;
+      el.focus();
+      if (holdsFocus(el)) return;
+    }
   }
 
   render() {

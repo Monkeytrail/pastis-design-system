@@ -557,3 +557,98 @@ describe('pastis-button axe-core', () => {
     expect(results.violations).toHaveLength(0);
   });
 });
+
+describe('pastis-button re-enabled after being disabled', () => {
+  let container;
+  afterEach(() => container?.remove());
+
+  const contexts = [
+    ['on its own', '<pastis-button>Save</pastis-button>'],
+    ['in a form', '<form><pastis-button type="submit">Save</pastis-button></form>'],
+    ['in an enabled fieldset', '<form><fieldset><pastis-button>Save</pastis-button></fieldset></form>'],
+  ];
+  const toggles = [
+    ['property', (b, on) => { b.disabled = on; }],
+    ['attribute', (b, on) => b.toggleAttribute('disabled', on)],
+  ];
+
+  /** The inner button is enabled, and a real click activates the host. */
+  async function expectUsable(button) {
+    const inner = button.shadowRoot.querySelector('button');
+    expect(button.matches(':disabled')).toBe(false);
+    expect(inner.disabled).toBe(false);
+    const handler = vi.fn();
+    button.addEventListener('pastis-click', handler);
+    await userEvent.click(inner);
+    expect(handler).toHaveBeenCalledTimes(1);
+  }
+
+  for (const [where, markup] of contexts) {
+    for (const [how, setDisabled] of toggles) {
+      it(`${where}, by ${how}: the inner button is enabled and clickable again`, async () => {
+        container = await mount(markup);
+        container.querySelector('form')?.addEventListener('submit', e => e.preventDefault());
+        const button = container.querySelector('pastis-button');
+        setDisabled(button, true);
+        await button.updateComplete;
+        expect(button.shadowRoot.querySelector('button').disabled).toBe(true);
+        setDisabled(button, false);
+        await button.updateComplete;
+        await expectUsable(button);
+      });
+    }
+  }
+
+  it('disabled from the start, then enabled', async () => {
+    container = await mount('<pastis-button disabled>Save</pastis-button>');
+    const button = container.querySelector('pastis-button');
+    button.disabled = false;
+    await button.updateComplete;
+    await expectUsable(button);
+  });
+
+  it('fieldset disabled, then enabled', async () => {
+    container = await mount('<form><fieldset disabled><pastis-button>Save</pastis-button></fieldset></form>');
+    const button = container.querySelector('pastis-button');
+    const fieldset = container.querySelector('fieldset');
+    fieldset.disabled = false;
+    await button.updateComplete;
+    await expectUsable(button);
+    fieldset.disabled = true;
+    await button.updateComplete;
+    expect(button.shadowRoot.querySelector('button').disabled).toBe(true);
+    fieldset.disabled = false;
+    await button.updateComplete;
+    await expectUsable(button);
+  });
+
+  it('stays disabled while either its own disabled or the fieldset still applies', async () => {
+    container = await mount('<form><fieldset disabled><pastis-button disabled>Save</pastis-button></fieldset></form>');
+    const button = container.querySelector('pastis-button');
+    const inner = () => button.shadowRoot.querySelector('button');
+    const fieldset = container.querySelector('fieldset');
+    button.disabled = false; // the fieldset still disables it
+    await button.updateComplete;
+    expect(inner().disabled).toBe(true);
+    button.disabled = true;
+    await button.updateComplete;
+    fieldset.disabled = false; // its own disabled still applies
+    await button.updateComplete;
+    expect(inner().disabled).toBe(true);
+    button.disabled = false;
+    await button.updateComplete;
+    await expectUsable(button);
+  });
+
+  it('as a link: href and aria-disabled come back', async () => {
+    container = await mount('<pastis-button href="#lists">All lists</pastis-button>');
+    const button = container.querySelector('pastis-button');
+    button.disabled = true;
+    await button.updateComplete;
+    button.disabled = false;
+    await button.updateComplete;
+    const link = button.shadowRoot.querySelector('a');
+    expect(link.getAttribute('href')).toBe('#lists');
+    expect(link.hasAttribute('aria-disabled')).toBe(false);
+  });
+});

@@ -209,6 +209,14 @@ export class PastisButton extends LitElement {
   /** The element that carries the semantics (inner <button> or <a>). */
   get _inner() { return this.shadowRoot?.querySelector('[part="button"]') ?? null; }
 
+  willUpdate(changed) {
+    // Reflect `disabled` before render rather than in Lit's update(): the reflection makes the
+    // browser call formDisabledCallback synchronously, and a property change made during
+    // update() (after render) is dropped, which left `_formDisabled` stale and the inner
+    // <button> disabled after re-enabling. Made here, the change is part of this render.
+    if (changed.has('disabled')) this.toggleAttribute('disabled', this.disabled);
+  }
+
   updated() {
     this._syncIdRefs();
   }

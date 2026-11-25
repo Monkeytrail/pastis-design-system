@@ -94,7 +94,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 3px;
     }
-  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1,this._copied=!1,this._formDisabled=!1,this.type=`button`,this._internals=this.attachInternals()}get form(){return this._internals.form}click(){let e=this._inner;e?e.click():super.click()}formDisabledCallback(e){this._formDisabled=e}get _inner(){return this.shadowRoot?.querySelector(`[part="button"]`)??null}updated(){this._syncIdRefs()}_syncIdRefs(){let e=this._inner;if(!e)return;let t=this.getRootNode(),n=e=>(e||``).split(/\s+/).filter(Boolean).map(e=>t.getElementById?t.getElementById(e):document.getElementById(e)).filter(Boolean),r=e=>e.map(e=>e.textContent.trim()).join(` `);for(let[t,r]of Object.entries(ye)){let i=n(this[t]);r in e&&(e[r]=i.length?i:null)}if(!this.ariaLabel){let t=r(n(this.ariaLabelledby));t?e.setAttribute(`aria-label`,t):e.removeAttribute(`aria-label`)}let i=r(n(this.ariaDescribedby));i?e.setAttribute(`aria-description`,i):e.removeAttribute(`aria-description`)}_aria(){return{label:this.ariaLabel||R,pressed:this.ariaPressed||R,expanded:this.ariaExpanded||R,haspopup:this.ariaHasPopup||R,current:this.ariaCurrent||R}}render(){let e=I`
+  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1,this._copied=!1,this._formDisabled=!1,this.type=`button`,this._internals=this.attachInternals()}get form(){return this._internals.form}click(){let e=this._inner;e?e.click():super.click()}formDisabledCallback(e){this._formDisabled=e}get _inner(){return this.shadowRoot?.querySelector(`[part="button"]`)??null}willUpdate(e){e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){this._syncIdRefs()}_syncIdRefs(){let e=this._inner;if(!e)return;let t=this.getRootNode(),n=e=>(e||``).split(/\s+/).filter(Boolean).map(e=>t.getElementById?t.getElementById(e):document.getElementById(e)).filter(Boolean),r=e=>e.map(e=>e.textContent.trim()).join(` `);for(let[t,r]of Object.entries(ye)){let i=n(this[t]);r in e&&(e[r]=i.length?i:null)}if(!this.ariaLabel){let t=r(n(this.ariaLabelledby));t?e.setAttribute(`aria-label`,t):e.removeAttribute(`aria-label`)}let i=r(n(this.ariaDescribedby));i?e.setAttribute(`aria-description`,i):e.removeAttribute(`aria-description`)}_aria(){return{label:this.ariaLabel||R,pressed:this.ariaPressed||R,expanded:this.ariaExpanded||R,haspopup:this.ariaHasPopup||R,current:this.ariaCurrent||R}}render(){let e=I`
       ${this.loading?I`<span class="spinner" aria-hidden="true"></span>`:``}
       ${this.copy&&this._copied?`✓ Copied`:I`<slot></slot>`}
     `,t=this._aria();if(this.href&&!this.copy){let n=this.disabled||this._formDisabled||this.loading;return I`
@@ -322,16 +322,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-    }
-  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this.autofocus=!1,this._slotted=null,this._owned={},this._formDisabled=!1,this._inputId=`pastis-input-${++be}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._slotted?this._slotted.checkValidity():this._internals.checkValidity()}reportValidity(){return this._slotted?this._slotted.reportValidity():this._internals.reportValidity()}formResetCallback(){if(this._slotted){queueMicrotask(()=>{this._slotted&&(this.value=this._slotted.value)});return}this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._slotted?this._slotted.focus(e):super.focus(e)}get _control(){return this._slotted||this.shadowRoot?.querySelector(`input`)||null}willUpdate(e){this._slotted===null&&this._adoptSlotted(),this.hasUpdated||(this._defaultValue=this.value),e.has(`value`)&&this._slotted&&this._slotted.value!==(this.value??``)&&(this._slotted.value=this.value??``)}firstUpdated(){this.autofocus&&this.focus()}updated(){if(this._slotted){this._syncSlotted(),this._internals.setValidity({});return}let e=this.shadowRoot.querySelector(`input`);this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e)}_adoptSlotted(){let e=this.querySelector(`:scope > input[slot="input"]`)||!1;e!==this._slotted&&(this._slotted=e,this._owned={},e&&(this.value=e.value,this._internals.setFormValue(null)))}_syncSlotted(){let e=this._slotted,t=e.labels?.length>0||e.hasAttribute(`aria-labelledby`);this._setOwned(e,`aria-label`,t?null:this.label||this.ariaLabel||null),this._setOwned(e,`aria-description`,this.error||this.helper||null),this._setOwned(e,`aria-invalid`,this.error?`true`:null),this._setOwned(e,`disabled`,this.disabled?``:null),this._setOwned(e,`readonly`,this.readonly?``:null)}_setOwned(e,t,n){let r=e.getAttribute(t),i=Object.hasOwn(this._owned,t);r!==null&&!(i&&r===this._owned[t])||(n===null?(i&&e.removeAttribute(t),delete this._owned[t]):(e.setAttribute(t,n),this._owned[t]=n))}_focusSlotted(){this._slotted&&this._slotted.focus()}render(){let e=!!this.error,t=!!this.leadingIcon,n=!!this.trailingIcon,r=!!this._slotted,i=[`input-wrap`,e?`has-error`:``,t?`has-leading`:``,n?`has-trailing`:``].filter(Boolean).join(` `),a=this._inputId,o=`${a}-error`,s=`${a}-helper`,c=this.required||r&&this._slotted.required;return I`
+  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this.autofocus=!1,this._slotted=null,this._owned={},this._slottedObserver=new MutationObserver(()=>this.requestUpdate()),this._formDisabled=!1,this._inputId=`pastis-input-${++be}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._slotted?this._slotted.checkValidity():this._internals.checkValidity()}reportValidity(){return this._slotted?this._slotted.reportValidity():this._internals.reportValidity()}formResetCallback(){if(this._slotted){queueMicrotask(()=>{this._slotted&&(this.value=this._slotted.value)});return}this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._slotted?this._slotted.focus(e):super.focus(e)}get _control(){return this._slotted||this.shadowRoot?.querySelector(`input`)||null}willUpdate(e){this._slotted===null&&this._adoptSlotted(),this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled),e.has(`value`)&&this._slotted&&this._slotted.value!==(this.value??``)&&(this._slotted.value=this.value??``)}firstUpdated(){this.autofocus&&this.focus()}updated(){if(this._slotted){this._syncSlotted(),this._internals.setValidity({});return}let e=this.shadowRoot.querySelector(`input`);this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e)}connectedCallback(){super.connectedCallback(),this._slotted&&this._observeSlotted()}disconnectedCallback(){super.disconnectedCallback(),this._slottedObserver.disconnect()}_adoptSlotted(){let e=this.querySelector(`:scope > input[slot="input"]`)||!1;e!==this._slotted&&(this._slottedObserver.disconnect(),this._slotted=e,this._owned={},e&&(this.value=e.value,this._internals.setFormValue(null),this._observeSlotted()))}_observeSlotted(){this._slottedObserver.observe(this._slotted,{attributes:!0,attributeFilter:[`required`,`disabled`,`readonly`,`aria-label`,`aria-labelledby`,`aria-description`,`aria-invalid`]})}_syncSlotted(){let e=this._slotted,t=e.labels?.length>0||e.hasAttribute(`aria-labelledby`);this._setOwned(e,`aria-label`,t?null:this.label||this.ariaLabel||null),this._setOwned(e,`aria-description`,this.error||this.helper||null),this._setOwned(e,`aria-invalid`,this.error?`true`:null),this._setOwned(e,`required`,this.required?``:null),this._setOwned(e,`disabled`,this.disabled?``:null),this._setOwned(e,`readonly`,this.readonly?``:null),this._slottedObserver.takeRecords()}_setOwned(e,t,n){let r=e.getAttribute(t),i=Object.hasOwn(this._owned,t);r!==null&&!(i&&r===this._owned[t])||r!==n&&(n===null?(i&&e.removeAttribute(t),delete this._owned[t]):(e.setAttribute(t,n),this._owned[t]=n))}_focusSlotted(){this._slotted&&this._slotted.focus()}render(){let e=!!this.error,t=!!this.leadingIcon,n=!!this.trailingIcon,r=!!this._slotted,i=[`input-wrap`,e?`has-error`:``,t?`has-leading`:``,n?`has-trailing`:``].filter(Boolean).join(` `),a=this._inputId,o=`${a}-error`,s=`${a}-helper`,c=this.required||r&&this._slotted.required;return I`
       <div class="field">
         ${this.label?I`
           <label
@@ -340,7 +331,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             @click=${this._focusSlotted}
           >
             ${this.label}
-            ${c?I`<span class="required-dot" aria-hidden="true">*</span><span class="sr-only">required</span>`:``}
+            ${c?I`<span class="required-dot" aria-hidden="true">*</span>`:``}
           </label>
         `:``}
         <div class="${i}">
@@ -479,7 +470,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-tertiary, #909498);
       text-transform: none;
     }
-  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``,this.required=!1,this.labelCase=`upper`,this._formDisabled=!1,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.checked=this._defaultChecked,this.indeterminate=!1}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){this.checked=e===`true`}willUpdate(){this.hasUpdated||(this._defaultChecked=this.checked)}updated(e){let t=this.shadowRoot.querySelector(`input`);e.has(`indeterminate`)&&(t.indeterminate=this.indeterminate),this._internals.setFormValue(this.checked?this.value||`on`:null,String(this.checked)),t.validity.valid?this._internals.setValidity({}):this._internals.setValidity(t.validity,t.validationMessage,t)}render(){return I`
+  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``,this.required=!1,this.labelCase=`upper`,this._formDisabled=!1,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.checked=this._defaultChecked,this.indeterminate=!1}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){this.checked=e===`true`}willUpdate(e){this.hasUpdated||(this._defaultChecked=this.checked),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(e){let t=this.shadowRoot.querySelector(`input`);e.has(`indeterminate`)&&(t.indeterminate=this.indeterminate),this._internals.setFormValue(this.checked?this.value||`on`:null,String(this.checked)),t.validity.valid?this._internals.setValidity({}):this._internals.setValidity(t.validity,t.validationMessage,t)}render(){return I`
       <label class=${this.labelCase===`none`?`case-none`:``} @click="${this._handleClick}">
         <input
           type="checkbox"
@@ -1093,7 +1084,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="dismiss-btn" @click="${this._dismiss}" aria-label="Dismiss">✕</button>
         `:``}
       </div>
-    `:I``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,ke);function Z(){let e=document.activeElement;for(;e?.shadowRoot?.activeElement;)e=e.shadowRoot.activeElement;return e}function Ae(e){return e.tabIndex<0||e.localName===`slot`||e.localName===`a`&&!e.hasAttribute(`href`)&&!e.hasAttribute(`tabindex`)||e.disabled||e.matches(`:disabled`)||e.inert||e.closest(`[inert]`)?!1:typeof e.checkVisibility==`function`?e.checkVisibility({visibilityProperty:!0}):e.getClientRects().length>0}function je(e){let t=e=>e instanceof HTMLInputElement&&e.type===`radio`&&e.name?e.name:null,n=new Map;for(let r of e){let e=t(r);if(!e)continue;let i=r.form??r.getRootNode(),a=n.get(i)??new Map;n.set(i,a);let o=a.get(e)??[];a.set(e,o),o.push(r)}let r=new Set;for(let e of n.values())for(let t of e.values())r.add(t.find(e=>e.checked)??t[0]);return e.filter(e=>!t(e)||r.has(e))}function*Q(e){for(let t of e)if(t instanceof HTMLElement)if(Ae(t)&&(yield t),t.localName===`slot`){let e=t.assignedElements({flatten:!0});yield*Q(e.length?e:t.children)}else t.shadowRoot?yield*Q(t.shadowRoot.children):yield*Q(t.children)}var Me=class extends q{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},role:{type:String}};static styles=s`
+    `:I``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,ke);function Z(){let e=document.activeElement;for(;e?.shadowRoot?.activeElement;)e=e.shadowRoot.activeElement;return e}function Ae(e){for(let t=Z();t;t=t.getRootNode().host)if(t===e||e.contains(t))return!0;return!1}function je(e){return e.tabIndex<0||e.localName===`slot`||e.localName===`a`&&!e.hasAttribute(`href`)&&!e.hasAttribute(`tabindex`)||e.disabled||e.matches(`:disabled`)||e.inert||e.closest(`[inert]`)?!1:typeof e.checkVisibility==`function`?e.checkVisibility({visibilityProperty:!0}):e.getClientRects().length>0}function Me(e){let t=e=>e instanceof HTMLInputElement&&e.type===`radio`&&e.name?e.name:null,n=new Map;for(let r of e){let e=t(r);if(!e)continue;let i=r.form??r.getRootNode(),a=n.get(i)??new Map;n.set(i,a);let o=a.get(e)??[];a.set(e,o),o.push(r)}let r=new Set;for(let e of n.values())for(let t of e.values())r.add(t.find(e=>e.checked)??t[0]);return e.filter(e=>!t(e)||r.has(e))}function*Q(e){for(let t of e)if(t instanceof HTMLElement)if(je(t)&&(yield t),t.localName===`slot`){let e=t.assignedElements({flatten:!0});yield*Q(e.length?e:t.children)}else t.shadowRoot?yield*Q(t.shadowRoot.children):yield*Q(t.children)}var Ne=class extends q{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},role:{type:String}};static styles=s`
     :host { display: contents; }
     :host(:not([open])) { display: none; }
 
@@ -1203,7 +1194,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       justify-content: flex-end;
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this.role=`dialog`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown),this.open&&this.hasUpdated&&this.updateComplete.then(()=>{if(!this.open||!this.isConnected)return;let e=this._dialog;e&&!e.matches(`:modal`)&&(e.removeAttribute(`open`),e.showModal()),document.body.style.overflow=`hidden`,this._focusInitial()})}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown),this.open&&(document.body.style.overflow=``)}attributeChangedCallback(e,t,n){if(e!==`role`){super.attributeChangedCallback(e,t,n);return}this._consumingRole||(this.role=n??`dialog`,n!==null&&(this._consumingRole=!0,this.removeAttribute(`role`),this._consumingRole=!1))}get _dialog(){return this.shadowRoot?.querySelector(`dialog`)??null}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);return e?je([...Q(e.children)]):[]}willUpdate(e){e.has(`open`)&&!this.open&&this._dialog?.close()}updated(e){if(e.has(`open`))if(this.open){this._previousFocus=Z(),document.body.style.overflow=`hidden`;let e=this._dialog;e&&!e.open&&e.isConnected&&e.showModal(),this._focusInitialWhenReady()}else e.get(`open`)&&(document.body.style.overflow=``,this._previousFocus?.isConnected&&Z()!==this._previousFocus&&this._previousFocus.focus(),this._previousFocus=null)}async _focusInitialWhenReady(){let e=[...this.querySelectorAll(`*`)].map(e=>e.updateComplete).filter(e=>e&&typeof e.then==`function`);if(e.length&&await Promise.all(e),!this.open||!this.isConnected)return;let t=Z();t&&(this.contains(t)||this.shadowRoot.contains(t)||this.contains(t.getRootNode().host))&&t!==this.shadowRoot.querySelector(`.close-btn`)&&t!==this._dialog||this._focusInitial()}_focusInitial(){let e=this.querySelector(`[autofocus]`),t=this._getFocusableElements().filter(e=>e.getRootNode()!==this.shadowRoot);(e||t[0]||this.shadowRoot.querySelector(`.close-btn`)||this.shadowRoot.querySelector(`.modal-body`))?.focus()}render(){if(!this.open)return I``;let e=this.role===`alertdialog`?`alertdialog`:`dialog`;return I`
+  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this.role=`dialog`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null,this._dialogFocus=null,this._openGeneration=0}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown),this.open&&this.hasUpdated&&this.updateComplete.then(()=>{if(!this.open||!this.isConnected)return;let e=this._dialog;e&&!e.matches(`:modal`)&&(e.removeAttribute(`open`),e.showModal()),document.body.style.overflow=`hidden`,this._focusInitial()})}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown),this.open&&(document.body.style.overflow=``)}attributeChangedCallback(e,t,n){if(e!==`role`){super.attributeChangedCallback(e,t,n);return}this._consumingRole||(this.role=n??`dialog`,n!==null&&(this._consumingRole=!0,this.removeAttribute(`role`),this._consumingRole=!1))}get _dialog(){return this.shadowRoot?.querySelector(`dialog`)??null}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);return e?Me([...Q(e.children)]):[]}willUpdate(e){e.has(`open`)&&!this.open&&this._dialog?.close()}updated(e){if(e.has(`open`))if(this._openGeneration++,this.open){this._previousFocus=Z(),document.body.style.overflow=`hidden`;let e=this._dialog;e&&!e.open&&e.isConnected&&e.showModal(),this._dialogFocus=Z(),this._focusInitialWhenReady()}else e.get(`open`)&&(document.body.style.overflow=``,this._previousFocus?.isConnected&&Z()!==this._previousFocus&&this._previousFocus.focus(),this._previousFocus=null,this._dialogFocus=null)}async _focusInitialWhenReady(){let e=this._openGeneration,t=[...this.querySelectorAll(`*`)].map(e=>e.updateComplete).filter(e=>e&&typeof e.then==`function`);if(t.length&&await Promise.all(t),e!==this._openGeneration||!this.open||!this.isConnected)return;let n=Z();n&&(this.contains(n)||this.shadowRoot.contains(n)||this.contains(n.getRootNode().host))&&n!==this._dialogFocus&&n!==this._dialog||this._focusInitial()}_focusInitial(){let e=this._getFocusableElements().filter(e=>e.getRootNode()!==this.shadowRoot),t=[...this.querySelectorAll(`[autofocus]`),...e,this.shadowRoot.querySelector(`.close-btn`),this.shadowRoot.querySelector(`.modal-body`)];for(let e of t)if(e&&(e.focus(),Ae(e)))return}render(){if(!this.open)return I``;let e=this.role===`alertdialog`?`alertdialog`:`dialog`;return I`
       <dialog
         class="backdrop"
         @click="${this._handleBackdropClick}"
@@ -1229,7 +1220,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="modal-footer"></slot>
         </div>
       </dialog>
-    `}_handleBackdropClick(e){e.target===e.currentTarget&&(this.persistent||this.close())}_handleKeydown(e){!this.open||e.key!==`Escape`||e.defaultPrevented||(e.preventDefault(),this.persistent||this.close())}_handleCancel(e){e.preventDefault(),this.persistent||this.close()}_handleNativeClose(e){e.target!==this._dialog||e.target.open||this.open&&this.close()}_handleTab(e){if(e.key!==`Tab`||e.altKey||e.ctrlKey||e.metaKey)return;let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1],i=Z(),a=t.includes(i);e.shiftKey&&(i===n||!a)?(e.preventDefault(),r.focus()):!e.shiftKey&&(i===r||!a)&&(e.preventDefault(),n.focus())}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,Me);var Ne=class extends q{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=s`
+    `}_handleBackdropClick(e){e.target===e.currentTarget&&(this.persistent||this.close())}_handleKeydown(e){!this.open||e.key!==`Escape`||e.defaultPrevented||(e.preventDefault(),this.persistent||this.close())}_handleCancel(e){e.preventDefault(),this.persistent||this.close()}_handleNativeClose(e){e.target!==this._dialog||e.target.open||this.open&&this.close()}_handleTab(e){if(e.key!==`Tab`||e.altKey||e.ctrlKey||e.metaKey)return;let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1],i=Z(),a=t.includes(i);e.shiftKey&&(i===n||!a)?(e.preventDefault(),r.focus()):!e.shiftKey&&(i===r||!a)&&(e.preventDefault(),n.focus())}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,Ne);var Pe=class extends q{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=s`
     :host { display: block; }
 
     .toast-container {
@@ -1345,7 +1336,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:``}
         </div>
       </div>
-    `:I``}};customElements.define(`pastis-toast`,Ne);var Pe=class extends q{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=s`
+    `:I``}};customElements.define(`pastis-toast`,Pe);var Fe=class extends q{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; justify-content: center; }
 
     .spinner-wrap {
@@ -1435,7 +1426,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.label?I`<span class="label">${this.label}</span>`:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-spinner`,Pe);var Fe=class extends q{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=s`
+    `}};customElements.define(`pastis-spinner`,Fe);var Ie=class extends q{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=s`
     :host { display: block; }
 
     .skeleton {
@@ -1485,7 +1476,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             ></div>
           `)}
         </div>
-      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return I`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return I`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,Fe);var Ie=class extends q{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=s`
+      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return I`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return I`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,Ie);var Le=class extends q{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: inline-flex; position: relative; }
 
     .trigger { display: contents; }
@@ -1569,7 +1560,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.content||``}
         <slot name="content"></slot>
       </div>
-    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,Ie);var Le=class extends q{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=s`
+    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,Le);var Re=class extends q{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=s`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -1780,7 +1771,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </div>
         ${this.error?I`<span class="error-text">⚠ ${this.error}</span>`:``}
       </div>
-    `}};customElements.define(`pastis-dropdown`,Le);var Re=class extends q{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-dropdown`,Re);var ze=class extends q{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .tabs-container { display: flex; flex-direction: column; }
@@ -1925,7 +1916,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ${e?.content?I`${e.content}`:I`<slot name="${this.active}"></slot>`}
         </div>
       </div>
-    `}};customElements.define(`pastis-tabs`,Re);var ze=class extends q{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-tabs`,ze);var Be=class extends q{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=s`
     :host { display: block; }
 
     .accordion {
@@ -2062,7 +2053,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `)}
       </div>
-    `}};customElements.define(`pastis-accordion`,ze);var Be=class extends q{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=s`
+    `}};customElements.define(`pastis-accordion`,Be);var Ve=class extends q{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=s`
     :host { display: block; }
 
     nav {
@@ -2156,7 +2147,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             `})}
         </ol>
       </nav>
-    `}};customElements.define(`pastis-breadcrumb`,Be);var Ve=class extends q{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=s`
+    `}};customElements.define(`pastis-breadcrumb`,Ve);var He=class extends q{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=s`
     :host { display: block; }
 
     .pagination {
@@ -2298,7 +2289,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:``}
         </div>
       </nav>
-    `}};customElements.define(`pastis-pagination`,Ve);var He=class extends q{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=s`
+    `}};customElements.define(`pastis-pagination`,He);var Ue=class extends q{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=s`
     :host { display: block; }
 
     .progress-wrap {
@@ -2458,7 +2449,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ></div>
         </div>
       </div>
-    `}};customElements.define(`pastis-progress`,He);var Ue=class extends q{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-progress`,Ue);var We=class extends q{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; }
 
     .tag {
@@ -2565,7 +2556,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           >✕</button>
         `:``}
       </span>
-    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Ue);var We=class extends q{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=s`
+    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,We);var Ge=class extends q{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=s`
     :host { display: block; }
 
     :host([orientation="vertical"]) {
@@ -2662,7 +2653,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.label?I`<span class="label">${this.label}</span>`:I`<slot></slot>`}
         ${t?I`<span class="line" style="${e}"></span>`:``}
       </div>
-    `}};customElements.define(`pastis-divider`,We);var Ge=class extends q{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-divider`,Ge);var Ke=class extends q{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .hero {
@@ -2838,7 +2829,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:I`<slot name="image"></slot>`}
         </div>
       </section>
-    `}};customElements.define(`pastis-hero`,Ge);var Ke=class extends q{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=s`
+    `}};customElements.define(`pastis-hero`,Ke);var qe=class extends q{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=s`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3044,7 +3035,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `:``}
         </div>
       </div>
-    `}};customElements.define(`pastis-search`,Ke);var qe=class extends q{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-search`,qe);var Je=class extends q{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: contents; }
 
     .backdrop {
@@ -3196,7 +3187,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="drawer-footer"></slot>
         </div>
       </div>
-    `:I``}};customElements.define(`pastis-drawer`,qe);var Je=class extends q{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=s`
+    `:I``}};customElements.define(`pastis-drawer`,Je);var Ye=class extends q{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=s`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3406,7 +3397,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.error?I`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
         ${this.helper&&!this.error?I`<p class="helper-text">${this.helper}</p>`:``}
       </div>
-    `}};customElements.define(`pastis-file-upload`,Je);var Ye=class extends q{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-file-upload`,Ye);var Xe=class extends q{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=s`
     :host { display: block; }
     :host(:not([visible])) { display: none; }
 
@@ -3624,7 +3615,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `}
       </div>
-    `}};customElements.define(`pastis-cookie-banner`,Ye);var Xe=class extends q{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-cookie-banner`,Xe);var Ze=class extends q{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=s`
     :host { display: block; }
 
     label {
@@ -3700,7 +3691,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </span>
         `:``}
       </label>
-    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Xe);var Ze=class extends q{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Ze);var Qe=class extends q{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .stat-card {
@@ -3781,7 +3772,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-stat-card`,Ze);var Qe=class extends q{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-stat-card`,Qe);var $e=class extends q{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
     :host { display: block; overflow-x: auto; }
 
     table {
@@ -3936,7 +3927,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-table`,Qe);var $e=class extends q{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
+    `}};customElements.define(`pastis-table`,$e);var et=class extends q{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
     :host { display: block; }
 
     .code-block {
@@ -4061,7 +4052,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </slot></pre>
         </div>
       </div>
-    `}};customElements.define(`pastis-code-block`,$e);var et=class extends q{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-code-block`,et);var tt=class extends q{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .empty-state {
@@ -4168,7 +4159,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         `:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-empty-state`,et);var tt=class extends q{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=s`
+    `}};customElements.define(`pastis-empty-state`,tt);var $=class extends q{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=s`
     :host { display: inline-block; }
 
     .chip {
@@ -4275,7 +4266,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="remove" @click=${this._remove} aria-label="Remove ${e}" ?disabled=${this.disabled}>✕</button>
         `:``}
       </span>
-    `}};customElements.define(`pastis-filter-chip`,tt);var $=class extends q{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-chip`,$);var nt=class extends q{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
     :host { display: block; }
 
     .filter-bar {
@@ -4330,7 +4321,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
         `:``}
       </div>
-    `}};customElements.define(`pastis-filter-bar`,$);var nt=class extends q{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-bar`,nt);var rt=class extends q{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
     :host { display: inline-block; }
 
     button {
@@ -4372,7 +4363,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <span class="icon" aria-hidden="true">${t}</span>
         ${this.label?I`<span class="label-text">${n} Mode</span>`:``}
       </button>
-    `}};customElements.define(`pastis-theme-toggle`,nt);var rt=class extends q{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-theme-toggle`,rt);var it=class extends q{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
     :host { display: block; }
 
     .carousel {
@@ -4615,7 +4606,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-carousel`,rt);var it=class extends q{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-carousel`,it);var at=class extends q{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
     :host {
       display: block;
       container-type: inline-size;
@@ -4691,7 +4682,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             </li>
           `})}
       </ol>
-    `}};customElements.define(`pastis-timeline`,it);var at=class extends q{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-timeline`,at);var ot=class extends q{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .testimonial {
@@ -4834,7 +4825,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-testimonial`,at);var ot=class extends q{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=s`
+    `}};customElements.define(`pastis-testimonial`,ot);var st=class extends q{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=s`
     :host { display: block; }
 
     section {
@@ -4929,7 +4920,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot></slot>
         </div>
       </section>
-    `}};customElements.define(`pastis-section`,ot);var st=class extends q{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-section`,st);var ct=class extends q{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     footer {
@@ -5137,7 +5128,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         </div>
       </footer>
-    `}};customElements.define(`pastis-footer`,st);var ct=class extends q{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-footer`,ct);var lt=class extends q{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=s`
     :host { display: block; }
 
     nav {
@@ -5547,7 +5538,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};customElements.define(`pastis-nav`,ct);var lt=class extends q{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-nav`,lt);var ut=class extends q{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
     :host {
       display: block;
       --_ratio: 1 / 1;
@@ -5746,7 +5737,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ${this.summary?I`<p class="summary">${this.summary}</p>`:``}
         </div>
       </a>
-    `}};customElements.define(`pastis-project-card`,lt);var ut=class extends q{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-project-card`,ut);var dt=class extends q{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
     :host {
       display: block;
       --_size: var(--font-size-statement-lg, clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem));
@@ -5816,7 +5807,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
   `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return I`
       ${this.eyebrow?I`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
       <div class="body ${e}" part="body"><slot></slot></div>
-    `}};customElements.define(`pastis-statement`,ut);var dt=class extends q{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-statement`,dt);var ft=class extends q{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
     :host { display: block; }
 
     figure {
@@ -5864,7 +5855,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <code class="value">${this._value||`—`}</code>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-token-swatch`,dt);var ft=class extends q{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-token-swatch`,ft);var pt=class extends q{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
     :host { display: block; }
 
     table {
@@ -5979,7 +5970,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-spec-table`,ft);var pt=class extends q{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-spec-table`,pt);var mt=class extends q{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
     :host {
       display: block;
       --_inset: var(--pastis-shelf-inset, var(--layout-gutter, 24px));
@@ -6095,4 +6086,4 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <button aria-label="Previous" ?disabled=${this._atStart} @click=${()=>this._scrollByPage(-1)}>←</button>
         <button aria-label="Next" ?disabled=${this._atEnd} @click=${()=>this._scrollByPage(1)}>→</button>
       </div>
-    `}};return customElements.define(`pastis-shelf`,pt),e.PastisAccordion=ze,e.PastisAlert=ke,e.PastisAvatar=De,e.PastisBadge=Ee,e.PastisBreadcrumb=Be,e.PastisButton=J,e.PastisButtonSplit=Y,e.PastisCard=Oe,e.PastisCarousel=rt,e.PastisCheckbox=Ce,e.PastisCodeBlock=$e,e.PastisCookieBanner=Ye,e.PastisDivider=We,e.PastisDrawer=qe,e.PastisDropdown=Le,e.PastisEmptyState=et,e.PastisFileUpload=Je,e.PastisFilterBar=$,e.PastisFilterChip=tt,e.PastisFooter=st,e.PastisHero=Ge,e.PastisInput=X,e.PastisModal=Me,e.PastisNav=ct,e.PastisPagination=Ve,e.PastisProgress=He,e.PastisProjectCard=lt,e.PastisRadio=Xe,e.PastisSearch=Ke,e.PastisSection=ot,e.PastisShelf=pt,e.PastisSkeleton=Fe,e.PastisSpecTable=ft,e.PastisSpinner=Pe,e.PastisStatCard=Ze,e.PastisStatement=ut,e.PastisTable=Qe,e.PastisTabs=Re,e.PastisTag=Ue,e.PastisTestimonial=at,e.PastisThemeToggle=nt,e.PastisTimeline=it,e.PastisToast=Ne,e.PastisToggle=Te,e.PastisTokenSwatch=dt,e.PastisTooltip=Ie,e})({});
+    `}};return customElements.define(`pastis-shelf`,mt),e.PastisAccordion=Be,e.PastisAlert=ke,e.PastisAvatar=De,e.PastisBadge=Ee,e.PastisBreadcrumb=Ve,e.PastisButton=J,e.PastisButtonSplit=Y,e.PastisCard=Oe,e.PastisCarousel=it,e.PastisCheckbox=Ce,e.PastisCodeBlock=et,e.PastisCookieBanner=Xe,e.PastisDivider=Ge,e.PastisDrawer=Je,e.PastisDropdown=Re,e.PastisEmptyState=tt,e.PastisFileUpload=Ye,e.PastisFilterBar=nt,e.PastisFilterChip=$,e.PastisFooter=ct,e.PastisHero=Ke,e.PastisInput=X,e.PastisModal=Ne,e.PastisNav=lt,e.PastisPagination=He,e.PastisProgress=Ue,e.PastisProjectCard=ut,e.PastisRadio=Ze,e.PastisSearch=qe,e.PastisSection=st,e.PastisShelf=mt,e.PastisSkeleton=Ie,e.PastisSpecTable=pt,e.PastisSpinner=Fe,e.PastisStatCard=Qe,e.PastisStatement=dt,e.PastisTable=$e,e.PastisTabs=ze,e.PastisTag=We,e.PastisTestimonial=ot,e.PastisThemeToggle=rt,e.PastisTimeline=at,e.PastisToast=Pe,e.PastisToggle=Te,e.PastisTokenSwatch=ft,e.PastisTooltip=Le,e})({});
