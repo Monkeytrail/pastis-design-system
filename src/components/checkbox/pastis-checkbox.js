@@ -1,18 +1,48 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 
+/**
+ * Checkbox with label and helper text.
+ *
+ * Form-associated like a native checkbox: when checked, the owning form's data has `name`
+ * with `value` (`on` when `value` is empty); `required` makes it invalid until checked; it resets
+ * with the form and is disabled by a disabled <fieldset>.
+ *
+ * The label is uppercase by default (the Pastis look); `label-case="none"` keeps the text as
+ * written (for user content such as task titles).
+ *
+ * @fires pastis-change - When the user toggles it, detail { checked, value }
+ */
 export class PastisCheckbox extends LitElement {
+  static formAssociated = true;
+
+  static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
+
   static properties = {
+    /** Visible label. */
     label: { type: String },
+    /** Checked state. */
     checked: { type: Boolean, reflect: true },
+    /** Mixed state (cleared when the user toggles). */
     indeterminate: { type: Boolean, reflect: true },
+    /** Disables the checkbox (a disabled <fieldset> disables it too). */
     disabled: { type: Boolean, reflect: true },
+    /** Requires the checkbox to be checked for the form to be valid. */
+    required: { type: Boolean, reflect: true },
+    /** Name in the form data. */
     name: { type: String },
+    /** Value in the form data when checked (`on` when empty). */
     value: { type: String },
+    /** Helper text below the label. */
     helper: { type: String },
+    /** Label case: `upper` (default) or `none` (text as written). */
+    labelCase: { type: String, attribute: 'label-case' },
+    /** Accessible name when there is no visible label. Forwarded to the input. */
+    ariaLabel: { type: String, attribute: 'aria-label' },
+    _formDisabled: { state: true },
   };
 
   static styles = css`
-    :host { display: inline-flex; align-items: flex-start; }
+    :host { display: inline-flex; align-items: flex-start; position: relative; }
 
     label {
       display: inline-flex;
@@ -28,9 +58,28 @@ export class PastisCheckbox extends LitElement {
       user-select: none;
     }
 
-    :host([disabled]) label { cursor: not-allowed; opacity: 0.3; }
+    label.case-none {
+      text-transform: none;
+      letter-spacing: normal;
+    }
 
-    input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    :host([disabled]) label, :host(:disabled) label { cursor: not-allowed; opacity: 0.3; }
+
+    /* Visually hidden but still rendered (1 px clip), so touch exploration and tools find it */
+    input[type="checkbox"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
 
     .box {
       width: 20px;
@@ -43,7 +92,8 @@ export class PastisCheckbox extends LitElement {
       align-items: center;
       justify-content: center;
       transition: border-color 120ms ease, background 120ms ease;
-      margin-top: 1px;
+      /* 20 px box plus 2 px each side: a 24 × 24 px target (WCAG 2.5.8) */
+      margin: 2px;
     }
 
     :host([checked]) .box,
@@ -97,24 +147,61 @@ export class PastisCheckbox extends LitElement {
     this.indeterminate = false;
     this.disabled = false;
     this.value = '';
+    this.required = false;
+    this.labelCase = 'upper';
+    this._formDisabled = false;
+    this._internals = this.attachInternals();
+  }
+
+  /** The owning form, if any. */
+  get form() { return this._internals.form; }
+  /** Validity state. */
+  get validity() { return this._internals.validity; }
+  /** The browser's validation message. */
+  get validationMessage() { return this._internals.validationMessage; }
+  /** Whether it takes part in constraint validation. */
+  get willValidate() { return this._internals.willValidate; }
+  /** Checks validity; fires `invalid` when invalid. */
+  checkValidity() { return this._internals.checkValidity(); }
+  /** Checks validity and shows the browser's message when invalid. */
+  reportValidity() { return this._internals.reportValidity(); }
+
+  formResetCallback() {
+    this.checked = this._defaultChecked;
+    this.indeterminate = false;
+  }
+
+  formDisabledCallback(disabled) {
+    this._formDisabled = disabled;
+  }
+
+  formStateRestoreCallback(state) {
+    this.checked = state === 'true';
+  }
+
+  willUpdate() {
+    if (!this.hasUpdated) this._defaultChecked = this.checked;
   }
 
   updated(changed) {
-    if (changed.has('indeterminate')) {
-      const input = this.shadowRoot?.querySelector('input');
-      if (input) input.indeterminate = this.indeterminate;
-    }
+    const input = this.shadowRoot.querySelector('input');
+    if (changed.has('indeterminate')) input.indeterminate = this.indeterminate;
+    this._internals.setFormValue(this.checked ? (this.value || 'on') : null, String(this.checked));
+    if (input.validity.valid) this._internals.setValidity({});
+    else this._internals.setValidity(input.validity, input.validationMessage, input);
   }
 
   render() {
     return html`
-      <label @click="${this._handleClick}">
+      <label class=${this.labelCase === 'none' ? 'case-none' : ''} @click="${this._handleClick}">
         <input
           type="checkbox"
           .checked="${this.checked}"
-          ?disabled="${this.disabled}"
+          ?disabled="${this.disabled || this._formDisabled}"
+          ?required="${this.required}"
           name="${this.name || ''}"
           value="${this.value || ''}"
+          aria-label=${!this.label && this.ariaLabel ? this.ariaLabel : nothing}
           aria-checked="${this.indeterminate ? 'mixed' : this.checked}"
           @change="${this._handleChange}"
         />
@@ -133,7 +220,7 @@ export class PastisCheckbox extends LitElement {
   }
 
   _handleClick(e) {
-    if (this.disabled) { e.preventDefault(); return; }
+    if (this.disabled || this._formDisabled) { e.preventDefault(); return; }
   }
 
   _handleChange(e) {

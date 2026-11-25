@@ -1,4 +1,4 @@
-(function(e,t){typeof exports==`object`&&typeof module<`u`?t(exports,require(`lit`)):typeof define==`function`&&define.amd?define([`exports`,`lit`],t):(e=typeof globalThis<`u`?globalThis:e||self,t(e.Pastis={},e.Lit))})(this,function(e,t){Object.defineProperty(e,Symbol.toStringTag,{value:`Module`});var n=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},disabled:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},href:{type:String},copy:{type:String},_copied:{type:Boolean,state:!0}};static styles=t.css`
+(function(e,t){typeof exports==`object`&&typeof module<`u`?t(exports,require(`lit`)):typeof define==`function`&&define.amd?define([`exports`,`lit`],t):(e=typeof globalThis<`u`?globalThis:e||self,t(e.Pastis={},e.Lit))})(this,function(e,t){Object.defineProperty(e,Symbol.toStringTag,{value:`Module`});var n={ariaLabelledby:`ariaLabelledByElements`,ariaDescribedby:`ariaDescribedByElements`,ariaControls:`ariaControlsElements`},r=class extends t.LitElement{static formAssociated=!0;static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},disabled:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},href:{type:String},target:{type:String},copy:{type:String},type:{type:String},name:{type:String},value:{type:String},ariaLabel:{type:String,attribute:`aria-label`},ariaLabelledby:{type:String,attribute:`aria-labelledby`},ariaDescribedby:{type:String,attribute:`aria-describedby`},ariaPressed:{type:String,attribute:`aria-pressed`},ariaExpanded:{type:String,attribute:`aria-expanded`},ariaControls:{type:String,attribute:`aria-controls`},ariaHasPopup:{type:String,attribute:`aria-haspopup`},ariaCurrent:{type:String,attribute:`aria-current`},_copied:{type:Boolean,state:!0},_formDisabled:{type:Boolean,state:!0}};static styles=t.css`
     :host { display: inline-block; }
 
     button, a {
@@ -14,7 +14,10 @@
       border-radius: var(--radius-2xl, 24px);
       cursor: pointer;
       text-decoration: none;
-      transition: box-shadow 120ms ease, transform 80ms ease;
+      transition: box-shadow 120ms ease, transform 80ms ease,
+                  background var(--duration-fast, 120ms) var(--ease-standard, ease),
+                  color      var(--duration-fast, 120ms) var(--ease-standard, ease),
+                  border-color var(--duration-fast, 120ms) var(--ease-standard, ease);
       white-space: nowrap;
       background: var(--bg-primary, #0d0d0d);
       color: var(--action-primary, #fcba28);
@@ -27,44 +30,50 @@
     :host([size="lg"]) button, :host([size="lg"]) a { font-size: 18px; padding: 0 24px; height: 56px; }
     button, a { font-size: 14px; padding: 0 16px; height: 40px; }
 
-    :host([variant="primary"]) button,
-    :host(:not([variant])) button {
+    :host([variant="primary"]) :is(button, a),
+    :host(:not([variant])) :is(button, a) {
       background: var(--action-primary, #fcba28);
       color: var(--action-primary-text, #0d0d0d);
       border-color: var(--action-primary, #fcba28);
     }
-    :host([variant="primary"]) button:hover,
-    :host(:not([variant])) button:hover {
+    :host([variant="primary"]) :is(button, a):hover,
+    :host(:not([variant])) :is(button, a):hover {
       box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428);
     }
-    :host([variant="primary"]) button:active,
-    :host(:not([variant])) button:active {
+    :host([variant="primary"]) :is(button, a):active,
+    :host(:not([variant])) :is(button, a):active {
       transform: translate(2px, 2px);
       box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28);
     }
 
-    :host([variant="secondary"]) button {
+    :host([variant="secondary"]) :is(button, a) {
       background: var(--bg-primary, #0d0d0d);
       color: var(--action-secondary, #fc7428);
       border-color: var(--action-secondary, #fc7428);
     }
-    :host([variant="secondary"]) button:hover { box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428); }
+    :host([variant="secondary"]) :is(button, a):hover { box-shadow: var(--shadow-xl, 5px 5px 0 #fc7428); }
 
-    :host([variant="ghost"]) button {
+    :host([variant="ghost"]) :is(button, a) {
       background: transparent;
       color: var(--text-primary, #f9f4da);
       border-color: var(--action-ghost-border, #383c44);
     }
-    :host([variant="ghost"]) button:hover { box-shadow: var(--shadow-md, 5px 5px 0 #231f20); }
+    :host([variant="ghost"]) :is(button, a):hover {
+      background: var(--text-primary, #f9f4da);
+      color: var(--bg-primary, #0d0d0d);
+      border-color: var(--text-primary, #f9f4da);
+      box-shadow: none;
+    }
 
-    :host([variant="destructive"]) button {
+    :host([variant="destructive"]) :is(button, a) {
       background: var(--action-destructive, #ed203d);
       color: var(--action-destructive-text, #000000);
       border-color: var(--action-destructive, #ed203d);
     }
-    :host([variant="destructive"]) button:hover { box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28); }
+    :host([variant="destructive"]) :is(button, a):hover { box-shadow: var(--shadow-lg, 5px 5px 0 #fcba28); }
 
-    :host([disabled]) button {
+    :host([disabled]) :is(button, a),
+    :host(:disabled) :is(button, a) {
       opacity: 0.4;
       cursor: not-allowed;
       pointer-events: none;
@@ -84,17 +93,121 @@
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 3px;
     }
-  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1,this._copied=!1}render(){return t.html`
+  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1,this._copied=!1,this._formDisabled=!1,this.type=`button`,this._internals=this.attachInternals()}get form(){return this._internals.form}click(){let e=this._inner;e?e.click():super.click()}formDisabledCallback(e){this._formDisabled=e}get _inner(){return this.shadowRoot?.querySelector(`[part="button"]`)??null}updated(){this._syncIdRefs()}_syncIdRefs(){let e=this._inner;if(!e)return;let t=this.getRootNode(),r=e=>(e||``).split(/\s+/).filter(Boolean).map(e=>t.getElementById?t.getElementById(e):document.getElementById(e)).filter(Boolean),i=e=>e.map(e=>e.textContent.trim()).join(` `);for(let[t,i]of Object.entries(n)){let n=r(this[t]);i in e&&(e[i]=n.length?n:null)}if(!this.ariaLabel){let t=i(r(this.ariaLabelledby));t?e.setAttribute(`aria-label`,t):e.removeAttribute(`aria-label`)}let a=i(r(this.ariaDescribedby));a?e.setAttribute(`aria-description`,a):e.removeAttribute(`aria-description`)}_aria(){return{label:this.ariaLabel||t.nothing,pressed:this.ariaPressed||t.nothing,expanded:this.ariaExpanded||t.nothing,haspopup:this.ariaHasPopup||t.nothing,current:this.ariaCurrent||t.nothing}}render(){let e=t.html`
+      ${this.loading?t.html`<span class="spinner" aria-hidden="true"></span>`:``}
+      ${this.copy&&this._copied?`✓ Copied`:t.html`<slot></slot>`}
+    `,n=this._aria();if(this.href&&!this.copy){let r=this.disabled||this._formDisabled||this.loading;return t.html`
+        <a
+          href=${r?t.nothing:this.href}
+          target=${this.target||t.nothing}
+          rel=${this.target===`_blank`?`noopener noreferrer`:t.nothing}
+          aria-disabled=${r?`true`:t.nothing}
+          aria-busy=${this.loading?`true`:t.nothing}
+          aria-label=${n.label}
+          aria-expanded=${n.expanded}
+          aria-haspopup=${n.haspopup}
+          aria-current=${n.current}
+          @click=${this._handleClick}
+          part="button"
+        >${e}</a>
+      `}return t.html`
       <button
-        ?disabled=${this.disabled||this.loading}
+        type="button"
+        ?disabled=${this.disabled||this._formDisabled||this.loading}
         @click=${this._handleClick}
         aria-busy=${this.loading}
+        aria-label=${n.label}
+        aria-pressed=${n.pressed}
+        aria-expanded=${n.expanded}
+        aria-haspopup=${n.haspopup}
+        aria-current=${n.current}
         part="button"
-      >
-        ${this.loading?t.html`<span class="spinner" aria-hidden="true"></span>`:``}
-        ${this.copy&&this._copied?`✓ Copied`:t.html`<slot></slot>`}
-      </button>
-    `}async _handleClick(e){if(this.disabled||this.loading){e.preventDefault(),e.stopPropagation();return}if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-button`,n);var r=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String}};static styles=t.css`
+      >${e}</button>
+    `}_handleClick(e){if(this.disabled||this._formDisabled||this.loading){e.preventDefault(),e.stopPropagation();return}if(!(this.href&&!this.copy)&&(this.type===`submit`||this.type===`reset`)&&this._activateAfterDispatch(e),this.copy){this._copyThenNotify();return}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}async _copyThenNotify(){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3),this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}_activateAfterDispatch(e){let t=!1,n=()=>{t||(t=!0,window.removeEventListener(`click`,r),clearTimeout(i),!e.defaultPrevented&&(this.type===`submit`?this._submit():this.type===`reset`&&this.form?.reset()))},r=t=>{t===e&&n()};window.addEventListener(`click`,r);let i=setTimeout(n)}_submit(){let e=this.form;if(!e)return;let t=document.createElement(`button`);t.type=`submit`,t.hidden=!0,this.name&&(t.name=this.name),this.value!=null&&(t.value=this.value),e.append(t);try{e.requestSubmit(t)}finally{t.remove()}}};customElements.define(`pastis-button`,r);var i=class extends t.LitElement{static properties={href:{type:String},copy:{type:String},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=t.css`
+    :host { display: inline-flex; }
+
+    .split {
+      display: inline-flex;
+      align-items: stretch;
+      border: var(--border-width, 1px) solid var(--action-ghost-border, #383c44);
+      border-radius: var(--radius-2xl, 24px);
+      overflow: hidden;
+      font-family: var(--font-family-mono, monospace);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      transition: box-shadow 120ms ease;
+    }
+
+    .split:focus-within {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 3px;
+    }
+
+    /* whole pill border brightens on any hover */
+    .split:hover {
+      border-color: var(--text-primary, #f9f4da);
+    }
+
+    .main, .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      height: 40px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-primary, #f9f4da);
+      border: none;
+      text-decoration: none;
+      transition: background var(--duration-fast, 120ms) var(--ease-standard, ease),
+                  color      var(--duration-fast, 120ms) var(--ease-standard, ease);
+    }
+
+    :host([size="sm"]) .main,
+    :host([size="sm"]) .action { font-size: 12px; padding: 0 12px; height: 32px; }
+
+    :host([size="lg"]) .main,
+    :host([size="lg"]) .action { font-size: 18px; padding: 0 24px; height: 56px; }
+
+    /* each half inverts independently */
+    .main:hover { background: var(--text-primary, #f9f4da); color: var(--bg-primary, #0d0d0d); }
+    .action:hover { background: var(--text-primary, #f9f4da); color: var(--bg-primary, #0d0d0d); }
+
+    .main:active, .action:active { opacity: 0.8; }
+
+    .divider {
+      width: 1px;
+      background: var(--action-ghost-border, #383c44);
+      flex-shrink: 0;
+      transition: background var(--duration-fast, 120ms) var(--ease-standard, ease);
+    }
+
+    /* divider brightens with the border on hover */
+    .split:hover .divider { background: var(--text-primary, #f9f4da); }
+
+    .main:focus-visible, .action:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+  `;constructor(){super(),this.variant=`ghost`,this._copied=!1}async _handleCopy(){if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-copy`,{bubbles:!0,composed:!0}))}render(){return t.html`
+      <div class="split" role="group">
+        ${this.href?t.html`
+          <a class="main" href=${this.href} part="main">
+            <slot></slot>
+          </a>
+        `:t.html`
+          <span class="main" part="main"><slot></slot></span>
+        `}
+        <div class="divider" aria-hidden="true"></div>
+        <button class="action" part="action" @click=${this._handleCopy}
+          aria-label=${this._copied?`Copied`:`Copy to clipboard`}>
+          ${this._copied?`✓`:t.html`<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="4" y="1" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M1 5v8h8" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
+        </button>
+      </div>
+    `}};customElements.define(`pastis-button-split`,i);var a=0;function o(e){return Array.from(e.elements).find(e=>e.type===`submit`||e instanceof HTMLInputElement&&e.type===`image`)}var s=e=>e instanceof HTMLButtonElement||e instanceof HTMLInputElement,c=class extends t.LitElement{static formAssociated=!0;static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String},maxlength:{type:Number},minlength:{type:Number},pattern:{type:String},autocomplete:{type:String},inputmode:{type:String},enterkeyhint:{type:String},autofocus:{type:Boolean},spellcheck:{type:String},autocapitalize:{type:String},ariaLabel:{type:String,attribute:`aria-label`},_slotted:{state:!0},_formDisabled:{state:!0}};static styles=t.css`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -123,7 +236,7 @@
       align-items: center;
     }
 
-    input {
+    input, ::slotted(input) {
       width: 100%;
       font-family: var(--font-family-mono, 'Fira Code', monospace);
       font-size: 14px;
@@ -134,38 +247,40 @@
       border-radius: var(--radius-md, 6px);
       padding: 10px 12px;
       height: auto;
+      margin: 0;
       outline: none;
       transition: border-color 120ms ease;
       box-sizing: border-box;
     }
 
-    :host([size="sm"]) input { font-size: 12px; padding: 8px 10px; }
-    :host([size="lg"]) input { font-size: 16px; padding: 12px 16px; }
+    :host([size="sm"]) input, :host([size="sm"]) ::slotted(input) { font-size: 12px; padding: 8px 10px; }
+    :host([size="lg"]) input, :host([size="lg"]) ::slotted(input) { font-size: 16px; padding: 12px 16px; }
 
-    input:hover { border-color: var(--text-tertiary, #909498); }
+    input:hover, ::slotted(input:hover) { border-color: var(--text-tertiary, #909498); }
 
-    input:focus {
+    input:focus, ::slotted(input:focus) {
       border-color: var(--border-focus, #fcba28);
       box-shadow: 4px 4px 0 var(--border-focus, #fcba28);
     }
 
     input::placeholder { color: var(--text-tertiary, #909498); }
 
-    :host([disabled]) input {
+    :host([disabled]) input, :host(:disabled) input,
+    :host([disabled]) ::slotted(input), ::slotted(input:disabled) {
       opacity: 0.3;
       cursor: not-allowed;
     }
 
-    :host([readonly]) input {
+    :host([readonly]) input, :host([readonly]) ::slotted(input), ::slotted(input[readonly]) {
       opacity: 0.6;
       cursor: default;
     }
 
-    .has-error input {
+    .has-error input, .has-error ::slotted(input) {
       border-color: var(--status-error, #f0505e);
     }
 
-    .has-error input:focus {
+    .has-error input:focus, .has-error ::slotted(input:focus) {
       box-shadow: 4px 4px 0 var(--status-error, #f0505e);
     }
 
@@ -182,8 +297,8 @@
     .leading-icon { left: 10px; }
     .trailing-icon { right: 10px; }
 
-    .has-leading input { padding-left: 34px; }
-    .has-trailing input { padding-right: 34px; }
+    .has-leading input, .has-leading ::slotted(input) { padding-left: 34px; }
+    .has-trailing input, .has-trailing ::slotted(input) { padding-right: 34px; }
 
     .helper-text {
       font-family: var(--font-family-mono, 'Fira Code', monospace);
@@ -202,7 +317,7 @@
       gap: 4px;
     }
 
-    input:focus-visible {
+    input:focus-visible, ::slotted(input:focus-visible) {
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
@@ -215,37 +330,58 @@
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this._inputId=`pastis-input-${Math.random().toString(36).slice(2,9)}`}render(){let e=!!this.error,n=!!this.leadingIcon,r=!!this.trailingIcon,i=[`input-wrap`,e?`has-error`:``,n?`has-leading`:``,r?`has-trailing`:``].filter(Boolean).join(` `),a=this._inputId;return t.html`
+  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this.autofocus=!1,this._slotted=null,this._owned={},this._formDisabled=!1,this._inputId=`pastis-input-${++a}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._slotted?this._slotted.checkValidity():this._internals.checkValidity()}reportValidity(){return this._slotted?this._slotted.reportValidity():this._internals.reportValidity()}formResetCallback(){if(this._slotted){queueMicrotask(()=>{this._slotted&&(this.value=this._slotted.value)});return}this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._slotted?this._slotted.focus(e):super.focus(e)}get _control(){return this._slotted||this.shadowRoot?.querySelector(`input`)||null}willUpdate(e){this._slotted===null&&this._adoptSlotted(),this.hasUpdated||(this._defaultValue=this.value),e.has(`value`)&&this._slotted&&this._slotted.value!==(this.value??``)&&(this._slotted.value=this.value??``)}firstUpdated(){this.autofocus&&this.focus()}updated(){if(this._slotted){this._syncSlotted(),this._internals.setValidity({});return}let e=this.shadowRoot.querySelector(`input`);this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e)}_adoptSlotted(){let e=this.querySelector(`:scope > input[slot="input"]`)||!1;e!==this._slotted&&(this._slotted=e,this._owned={},e&&(this.value=e.value,this._internals.setFormValue(null)))}_syncSlotted(){let e=this._slotted,t=e.labels?.length>0||e.hasAttribute(`aria-labelledby`);this._setOwned(e,`aria-label`,t?null:this.label||this.ariaLabel||null),this._setOwned(e,`aria-description`,this.error||this.helper||null),this._setOwned(e,`aria-invalid`,this.error?`true`:null),this._setOwned(e,`disabled`,this.disabled?``:null),this._setOwned(e,`readonly`,this.readonly?``:null)}_setOwned(e,t,n){let r=e.getAttribute(t),i=Object.hasOwn(this._owned,t);r!==null&&!(i&&r===this._owned[t])||(n===null?(i&&e.removeAttribute(t),delete this._owned[t]):(e.setAttribute(t,n),this._owned[t]=n))}_focusSlotted(){this._slotted&&this._slotted.focus()}render(){let e=!!this.error,n=!!this.leadingIcon,r=!!this.trailingIcon,i=!!this._slotted,a=[`input-wrap`,e?`has-error`:``,n?`has-leading`:``,r?`has-trailing`:``].filter(Boolean).join(` `),o=this._inputId,s=`${o}-error`,c=`${o}-helper`,l=this.required||i&&this._slotted.required;return t.html`
       <div class="field">
         ${this.label?t.html`
-          <label for="${a}">
+          <label
+            for=${i?t.nothing:o}
+            aria-hidden=${i?`true`:t.nothing}
+            @click=${this._focusSlotted}
+          >
             ${this.label}
-            ${this.required?t.html`<span class="required-dot" aria-hidden="true">*</span><span class="sr-only">required</span>`:``}
+            ${l?t.html`<span class="required-dot" aria-hidden="true">*</span><span class="sr-only">required</span>`:``}
           </label>
         `:``}
-        <div class="${i}">
+        <div class="${a}">
           ${n?t.html`<span class="leading-icon" aria-hidden="true">${this.leadingIcon}</span>`:``}
-          <input
-            id="${a}"
-            type="${this.type}"
-            .value="${this.value}"
-            placeholder="${this.placeholder||``}"
-            ?disabled="${this.disabled}"
-            ?readonly="${this.readonly}"
-            ?required="${this.required}"
-            name="${this.name||``}"
-            aria-invalid="${e}"
-            aria-describedby="${e?`error`:this.helper?`helper`:``}"
-            @input="${this._handleInput}"
-            @change="${this._handleChange}"
-            part="input"
-          />
+          <slot
+            name="input"
+            @slotchange=${this._adoptSlotted}
+            @input=${this._handleSlottedInput}
+            @change=${this._handleSlottedChange}
+          ></slot>
+          ${i?``:t.html`
+            <input
+              id="${o}"
+              type="${this.type}"
+              .value="${this.value??``}"
+              placeholder="${this.placeholder||``}"
+              ?disabled="${this.disabled||this._formDisabled}"
+              ?readonly="${this.readonly}"
+              ?required="${this.required}"
+              name="${this.name||``}"
+              maxlength=${this.maxlength??t.nothing}
+              minlength=${this.minlength??t.nothing}
+              pattern=${this.pattern||t.nothing}
+              autocomplete=${this.autocomplete||t.nothing}
+              inputmode=${this.inputmode||t.nothing}
+              enterkeyhint=${this.enterkeyhint||t.nothing}
+              spellcheck=${this.spellcheck??t.nothing}
+              autocapitalize=${this.autocapitalize||t.nothing}
+              aria-label=${!this.label&&this.ariaLabel?this.ariaLabel:t.nothing}
+              aria-invalid="${e}"
+              aria-describedby="${e?s:this.helper?c:``}"
+              @input="${this._handleInput}"
+              @change="${this._handleChange}"
+              part="input"
+            />
+          `}
           ${r?t.html`<span class="trailing-icon" aria-hidden="true">${this.trailingIcon}</span>`:``}
         </div>
-        ${e?t.html`<p class="error-text" id="error" role="alert">⚠ ${this.error}</p>`:this.helper?t.html`<p class="helper-text" id="helper">${this.helper}</p>`:``}
+        ${e?t.html`<p class="error-text" id="${s}" role="alert">⚠ ${this.error}</p>`:this.helper?t.html`<p class="helper-text" id="${c}" aria-hidden=${i?`true`:t.nothing}>${this.helper}</p>`:``}
       </div>
-    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-input`,r);var i=class extends t.LitElement{static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String}};static styles=t.css`
-    :host { display: inline-flex; align-items: flex-start; }
+    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleSlottedInput(e){e.target===this._slotted&&this._handleInput(e)}_handleSlottedChange(e){e.target===this._slotted&&this._handleChange(e)}_onKeydown(e){if(e.key!==`Enter`||e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;let t=this._control;if(!t||e.composedPath()[0]!==t)return;let n=this._slotted?this._slotted.form:this.form;if(!n)return;let r=o(n);if(this._slotted){if(e.defaultPrevented||r&&s(r))return;e.preventDefault(),this._submitVia(n,r);return}setTimeout(()=>{e.defaultPrevented||this._submitVia(n,r)})}_submitVia(e,t){if(!t){e.requestSubmit();return}t.disabled||t.matches(`:disabled`)||t.click()}};customElements.define(`pastis-input`,c);var l=class extends t.LitElement{static formAssociated=!0;static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String},labelCase:{type:String,attribute:`label-case`},ariaLabel:{type:String,attribute:`aria-label`},_formDisabled:{state:!0}};static styles=t.css`
+    :host { display: inline-flex; align-items: flex-start; position: relative; }
 
     label {
       display: inline-flex;
@@ -261,9 +397,28 @@
       user-select: none;
     }
 
-    :host([disabled]) label { cursor: not-allowed; opacity: 0.3; }
+    label.case-none {
+      text-transform: none;
+      letter-spacing: normal;
+    }
 
-    input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    :host([disabled]) label, :host(:disabled) label { cursor: not-allowed; opacity: 0.3; }
+
+    /* Visually hidden but still rendered (1 px clip), so touch exploration and tools find it */
+    input[type="checkbox"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
 
     .box {
       width: 20px;
@@ -276,7 +431,8 @@
       align-items: center;
       justify-content: center;
       transition: border-color 120ms ease, background 120ms ease;
-      margin-top: 1px;
+      /* 20 px box plus 2 px each side: a 24 × 24 px target (WCAG 2.5.8) */
+      margin: 2px;
     }
 
     :host([checked]) .box,
@@ -322,14 +478,16 @@
       color: var(--text-tertiary, #909498);
       text-transform: none;
     }
-  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``}updated(e){if(e.has(`indeterminate`)){let e=this.shadowRoot?.querySelector(`input`);e&&(e.indeterminate=this.indeterminate)}}render(){return t.html`
-      <label @click="${this._handleClick}">
+  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``,this.required=!1,this.labelCase=`upper`,this._formDisabled=!1,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.checked=this._defaultChecked,this.indeterminate=!1}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){this.checked=e===`true`}willUpdate(){this.hasUpdated||(this._defaultChecked=this.checked)}updated(e){let t=this.shadowRoot.querySelector(`input`);e.has(`indeterminate`)&&(t.indeterminate=this.indeterminate),this._internals.setFormValue(this.checked?this.value||`on`:null,String(this.checked)),t.validity.valid?this._internals.setValidity({}):this._internals.setValidity(t.validity,t.validationMessage,t)}render(){return t.html`
+      <label class=${this.labelCase===`none`?`case-none`:``} @click="${this._handleClick}">
         <input
           type="checkbox"
           .checked="${this.checked}"
-          ?disabled="${this.disabled}"
+          ?disabled="${this.disabled||this._formDisabled}"
+          ?required="${this.required}"
           name="${this.name||``}"
           value="${this.value||``}"
+          aria-label=${!this.label&&this.ariaLabel?this.ariaLabel:t.nothing}
           aria-checked="${this.indeterminate?`mixed`:this.checked}"
           @change="${this._handleChange}"
         />
@@ -344,8 +502,8 @@
           </span>
         `:``}
       </label>
-    `}_handleClick(e){if(this.disabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,i);var a=globalThis,o=e=>e,s=a.trustedTypes,c=s?s.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,l=`$lit$`,u=`lit$${Math.random().toFixed(9).slice(2)}$`,d=`?`+u,f=`<${d}>`,p=document,m=()=>p.createComment(``),h=e=>e===null||typeof e!=`object`&&typeof e!=`function`,g=Array.isArray,ee=e=>g(e)||typeof e?.[Symbol.iterator]==`function`,_=`[ 	
-\f\r]`,v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,y=/-->/g,b=/>/g,x=RegExp(`>|${_}(?:([^\\s"'>=/]+)(${_}*=${_}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),S=/'/g,C=/"/g,te=/^(?:script|style|textarea|title)$/i,w=Symbol.for(`lit-noChange`),T=Symbol.for(`lit-nothing`),E=new WeakMap,D=p.createTreeWalker(p,129);function O(e,t){if(!g(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return c===void 0?t:c.createHTML(t)}var ne=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=v;for(let t=0;t<n;t++){let n=e[t],s,c,d=-1,p=0;for(;p<n.length&&(o.lastIndex=p,c=o.exec(n),c!==null);)p=o.lastIndex,o===v?c[1]===`!--`?o=y:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=x):(te.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=x):o=b:o===x?c[0]===`>`?(o=i??v,d=-1):c[1]===void 0?d=-2:(d=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?x:c[3]===`"`?C:S):o===C||o===S?o=x:o===y||o===b?o=v:(o=x,i=void 0);let m=o===x&&e[t+1].startsWith(`/>`)?` `:``;a+=o===v?n+f:d>=0?(r.push(s),n.slice(0,d)+l+n.slice(d)+u+m):n+u+(d===-2?t:m)}return[O(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},k=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,c=t.length-1,f=this.parts,[p,h]=ne(t,n);if(this.el=e.createElement(p,r),D.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=D.nextNode())!==null&&f.length<c;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(l)){let t=h[o++],n=i.getAttribute(e).split(u),r=/([.?@])?(.*)/.exec(t);f.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?ie:r[1]===`?`?ae:r[1]===`@`?oe:M}),i.removeAttribute(e)}else e.startsWith(u)&&(f.push({type:6,index:a}),i.removeAttribute(e));if(te.test(i.tagName)){let e=i.textContent.split(u),t=e.length-1;if(t>0){i.textContent=s?s.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],m()),D.nextNode(),f.push({type:2,index:++a});i.append(e[t],m())}}}else if(i.nodeType===8)if(i.data===d)f.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(u,e+1))!==-1;)f.push({type:7,index:a}),e+=u.length-1}a++}}static createElement(e,t){let n=p.createElement(`template`);return n.innerHTML=e,n}};function A(e,t,n=e,r){if(t===w)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=h(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=A(e,i._$AS(e,t.values),i,r)),t}var re=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??p).importNode(t,!0);D.currentNode=r;let i=D.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new j(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new se(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=D.nextNode(),a++)}return D.currentNode=p,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},j=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=T,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=A(this,e,t),h(e)?e===T||e==null||e===``?(this._$AH!==T&&this._$AR(),this._$AH=T):e!==this._$AH&&e!==w&&this._(e):e._$litType$===void 0?e.nodeType===void 0?ee(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==T&&h(this._$AH)?this._$AA.nextSibling.data=e:this.T(p.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=k.createElement(O(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new re(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=E.get(e.strings);return t===void 0&&E.set(e.strings,t=new k(e)),t}k(t){g(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(m()),this.O(m()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=o(e).nextSibling;o(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},M=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=T,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=T}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=A(this,e,t,0),a=!h(e)||e!==this._$AH&&e!==w,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=A(this,r[n+o],t,o),s===w&&(s=this._$AH[o]),a||=!h(s)||s!==this._$AH[o],s===T?e=T:e!==T&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===T?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},ie=class extends M{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===T?void 0:e}},ae=class extends M{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==T)}},oe=class extends M{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=A(this,e,t,0)??T)===w)return;let n=this._$AH,r=e===T&&n!==T||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==T&&(n===T||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},se=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){A(this,e)}},ce=a.litHtmlPolyfillSupport;ce?.(k,j),(a.litHtmlVersions??=[]).push(`3.3.2`);var N=e=>e??T,P=class extends t.LitElement{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=t.css`
+    `}_handleClick(e){if(this.disabled||this._formDisabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,l);var u=globalThis,d=e=>e,f=u.trustedTypes,p=f?f.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,m=`$lit$`,h=`lit$${Math.random().toFixed(9).slice(2)}$`,g=`?`+h,ee=`<${g}>`,_=document,v=()=>_.createComment(``),y=e=>e===null||typeof e!=`object`&&typeof e!=`function`,b=Array.isArray,te=e=>b(e)||typeof e?.[Symbol.iterator]==`function`,x=`[ 	
+\f\r]`,S=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,C=/-->/g,w=/>/g,T=RegExp(`>|${x}(?:([^\\s"'>=/]+)(${x}*=${x}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),E=/'/g,ne=/"/g,re=/^(?:script|style|textarea|title)$/i,D=Symbol.for(`lit-noChange`),O=Symbol.for(`lit-nothing`),k=new WeakMap,A=_.createTreeWalker(_,129);function j(e,t){if(!b(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return p===void 0?t:p.createHTML(t)}var ie=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=S;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===S?c[1]===`!--`?o=C:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=T):(re.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=T):o=w:o===T?c[0]===`>`?(o=i??S,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?T:c[3]===`"`?ne:E):o===ne||o===E?o=T:o===C||o===w?o=S:(o=T,i=void 0);let d=o===T&&e[t+1].startsWith(`/>`)?` `:``;a+=o===S?n+ee:l>=0?(r.push(s),n.slice(0,l)+m+n.slice(l)+h+d):n+h+(l===-2?t:d)}return[j(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},M=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=ie(t,n);if(this.el=e.createElement(l,r),A.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=A.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(m)){let t=u[o++],n=i.getAttribute(e).split(h),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?oe:r[1]===`?`?se:r[1]===`@`?ce:F}),i.removeAttribute(e)}else e.startsWith(h)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(re.test(i.tagName)){let e=i.textContent.split(h),t=e.length-1;if(t>0){i.textContent=f?f.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],v()),A.nextNode(),c.push({type:2,index:++a});i.append(e[t],v())}}}else if(i.nodeType===8)if(i.data===g)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(h,e+1))!==-1;)c.push({type:7,index:a}),e+=h.length-1}a++}}static createElement(e,t){let n=_.createElement(`template`);return n.innerHTML=e,n}};function N(e,t,n=e,r){if(t===D)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=y(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=N(e,i._$AS(e,t.values),i,r)),t}var ae=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??_).importNode(t,!0);A.currentNode=r;let i=A.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new P(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new le(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=A.nextNode(),a++)}return A.currentNode=_,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},P=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=O,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=N(this,e,t),y(e)?e===O||e==null||e===``?(this._$AH!==O&&this._$AR(),this._$AH=O):e!==this._$AH&&e!==D&&this._(e):e._$litType$===void 0?e.nodeType===void 0?te(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==O&&y(this._$AH)?this._$AA.nextSibling.data=e:this.T(_.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=M.createElement(j(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new ae(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=k.get(e.strings);return t===void 0&&k.set(e.strings,t=new M(e)),t}k(t){b(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(v()),this.O(v()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=d(e).nextSibling;d(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},F=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=O,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=O}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=N(this,e,t,0),a=!y(e)||e!==this._$AH&&e!==D,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=N(this,r[n+o],t,o),s===D&&(s=this._$AH[o]),a||=!y(s)||s!==this._$AH[o],s===O?e=O:e!==O&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===O?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},oe=class extends F{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===O?void 0:e}},se=class extends F{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==O)}},ce=class extends F{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=N(this,e,t,0)??O)===D)return;let n=this._$AH,r=e===O&&n!==O||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==O&&(n===O||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},le=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){N(this,e)}},ue=u.litHtmlPolyfillSupport;ue?.(M,P),(u.litHtmlVersions??=[]).push(`3.3.2`);var I=e=>e??O,L=class extends t.LitElement{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     label {
@@ -423,7 +581,7 @@
           name="${this.name||``}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${N(n)}"
+          aria-label="${I(n)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -431,7 +589,7 @@
         </span>
         ${this.labelPosition===`left`?``:e}
       </label>
-    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,P);var F=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=t.css`
+    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,L);var R=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     .badge {
@@ -525,7 +683,7 @@
       <span class="badge" part="badge">
         ${e===void 0?t.html`<slot></slot>`:e}
       </span>
-    `}};customElements.define(`pastis-badge`,F);var I=class extends t.LitElement{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-badge`,R);var z=class extends t.LitElement{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=t.css`
     :host {
       display: inline-flex;
       position: relative;
@@ -603,7 +761,7 @@
         ${this.src?t.html`<img src="${this.src}" alt="${this.alt||this.name||`User avatar`}" />`:this.name?t.html`<span>${this._getInitials()}</span>`:t.html`<span class="icon">👤</span>`}
       </div>
       ${this.status?t.html`<span class="status-dot" aria-hidden="true"></span>`:``}
-    `}};customElements.define(`pastis-avatar`,I);var L=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-avatar`,z);var B=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=t.css`
     :host {
       display: block;
     }
@@ -851,7 +1009,7 @@
         </div>
         <slot name="footer" class="card-footer"></slot>
       </div>
-    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,L);var R=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=t.css`
+    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,B);var V=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=t.css`
     :host { display: block; }
     :host([visible="false"]) { display: none; }
 
@@ -935,19 +1093,33 @@
           <button class="dismiss-btn" @click="${this._dismiss}" aria-label="Dismiss">✕</button>
         `:``}
       </div>
-    `:t.html``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,R);var z=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0}};static styles=t.css`
+    `:t.html``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,V);function H(){let e=document.activeElement;for(;e?.shadowRoot?.activeElement;)e=e.shadowRoot.activeElement;return e}function de(e){return e.tabIndex<0||e.localName===`slot`||e.localName===`a`&&!e.hasAttribute(`href`)&&!e.hasAttribute(`tabindex`)||e.disabled||e.matches(`:disabled`)||e.inert||e.closest(`[inert]`)?!1:typeof e.checkVisibility==`function`?e.checkVisibility({visibilityProperty:!0}):e.getClientRects().length>0}function fe(e){let t=e=>e instanceof HTMLInputElement&&e.type===`radio`&&e.name?e.name:null,n=new Map;for(let r of e){let e=t(r);if(!e)continue;let i=r.form??r.getRootNode(),a=n.get(i)??new Map;n.set(i,a);let o=a.get(e)??[];a.set(e,o),o.push(r)}let r=new Set;for(let e of n.values())for(let t of e.values())r.add(t.find(e=>e.checked)??t[0]);return e.filter(e=>!t(e)||r.has(e))}function*U(e){for(let t of e)if(t instanceof HTMLElement)if(de(t)&&(yield t),t.localName===`slot`){let e=t.assignedElements({flatten:!0});yield*U(e.length?e:t.children)}else t.shadowRoot?yield*U(t.shadowRoot.children):yield*U(t.children)}var W=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},role:{type:String}};static styles=t.css`
     :host { display: contents; }
+    :host(:not([open])) { display: none; }
 
+    /* The <dialog> covers the viewport and is the dimmed backdrop; the panel sits inside it */
     .backdrop {
       position: fixed;
       inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      margin: 0;
+      border: 0;
+      box-sizing: border-box;
       background: rgba(0, 0, 0, 0.85);
       z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 16px;
+      color: inherit;
     }
+
+    .backdrop:not([open]) { display: none; }
+    .backdrop::backdrop { background: transparent; }
+    .backdrop:focus-visible { outline: none; }
 
     .dialog {
       background: var(--bg-card, #1e1e1e);
@@ -1031,29 +1203,33 @@
       justify-content: flex-end;
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown)}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);if(!e)return[];let t=[`a[href]`,`button:not([disabled])`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`,`[tabindex]:not([tabindex="-1"])`].join(`,`);return Array.from(e.querySelectorAll(t)).filter(e=>!e.closest(`[hidden]`)&&e.offsetParent!==null)}updated(e){e.has(`open`)&&(this.open?(this._previousFocus=document.activeElement,document.body.style.overflow=`hidden`,requestAnimationFrame(()=>{(this._getFocusableElements()[0]||this.shadowRoot?.querySelector(`.close-btn`))?.focus()})):(document.body.style.overflow=``,this._previousFocus?.focus(),this._previousFocus=null))}render(){return this.open?t.html`
-      <div
+  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this.role=`dialog`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown),this.open&&this.hasUpdated&&this.updateComplete.then(()=>{if(!this.open||!this.isConnected)return;let e=this._dialog;e&&!e.matches(`:modal`)&&(e.removeAttribute(`open`),e.showModal()),document.body.style.overflow=`hidden`,this._focusInitial()})}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown),this.open&&(document.body.style.overflow=``)}attributeChangedCallback(e,t,n){if(e!==`role`){super.attributeChangedCallback(e,t,n);return}this._consumingRole||(this.role=n??`dialog`,n!==null&&(this._consumingRole=!0,this.removeAttribute(`role`),this._consumingRole=!1))}get _dialog(){return this.shadowRoot?.querySelector(`dialog`)??null}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);return e?fe([...U(e.children)]):[]}willUpdate(e){e.has(`open`)&&!this.open&&this._dialog?.close()}updated(e){if(e.has(`open`))if(this.open){this._previousFocus=H(),document.body.style.overflow=`hidden`;let e=this._dialog;e&&!e.open&&e.isConnected&&e.showModal(),this._focusInitialWhenReady()}else e.get(`open`)&&(document.body.style.overflow=``,this._previousFocus?.isConnected&&H()!==this._previousFocus&&this._previousFocus.focus(),this._previousFocus=null)}async _focusInitialWhenReady(){let e=[...this.querySelectorAll(`*`)].map(e=>e.updateComplete).filter(e=>e&&typeof e.then==`function`);if(e.length&&await Promise.all(e),!this.open||!this.isConnected)return;let t=H();t&&(this.contains(t)||this.shadowRoot.contains(t)||this.contains(t.getRootNode().host))&&t!==this.shadowRoot.querySelector(`.close-btn`)&&t!==this._dialog||this._focusInitial()}_focusInitial(){let e=this.querySelector(`[autofocus]`),t=this._getFocusableElements().filter(e=>e.getRootNode()!==this.shadowRoot);(e||t[0]||this.shadowRoot.querySelector(`.close-btn`)||this.shadowRoot.querySelector(`.modal-body`))?.focus()}render(){if(!this.open)return t.html``;let e=this.role===`alertdialog`?`alertdialog`:`dialog`;return t.html`
+      <dialog
         class="backdrop"
         @click="${this._handleBackdropClick}"
-        role="dialog"
+        @cancel="${this._handleCancel}"
+        @close="${this._handleNativeClose}"
+        @keydown="${this._handleTab}"
+        role="${e}"
         aria-modal="true"
         aria-label="${this.title||`Dialog`}"
+        aria-describedby="modal-body"
         part="backdrop"
       >
-        <div class="dialog" part="dialog" @click="${e=>e.stopPropagation()}">
+        <div class="dialog" part="dialog">
           <div class="modal-header">
             <h2 class="modal-title">${this.title||``}</h2>
             ${this.closable?t.html`
               <button class="close-btn" @click="${this.close}" aria-label="Close dialog">✕</button>
             `:``}
           </div>
-          <div class="modal-body" tabindex="0">
+          <div class="modal-body" id="modal-body" tabindex="0">
             <slot></slot>
           </div>
           <slot name="footer" class="modal-footer"></slot>
         </div>
-      </div>
-    `:t.html``}_handleBackdropClick(){this.persistent||this.close()}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,z);var B=class extends t.LitElement{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=t.css`
+      </dialog>
+    `}_handleBackdropClick(e){e.target===e.currentTarget&&(this.persistent||this.close())}_handleKeydown(e){!this.open||e.key!==`Escape`||e.defaultPrevented||(e.preventDefault(),this.persistent||this.close())}_handleCancel(e){e.preventDefault(),this.persistent||this.close()}_handleNativeClose(e){e.target!==this._dialog||e.target.open||this.open&&this.close()}_handleTab(e){if(e.key!==`Tab`||e.altKey||e.ctrlKey||e.metaKey)return;let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1],i=H(),a=t.includes(i);e.shiftKey&&(i===n||!a)?(e.preventDefault(),r.focus()):!e.shiftKey&&(i===r||!a)&&(e.preventDefault(),n.focus())}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,W);var G=class extends t.LitElement{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     .toast-container {
@@ -1169,7 +1345,7 @@
           `:``}
         </div>
       </div>
-    `:t.html``}};customElements.define(`pastis-toast`,B);var V=class extends t.LitElement{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=t.css`
+    `:t.html``}};customElements.define(`pastis-toast`,G);var K=class extends t.LitElement{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; justify-content: center; }
 
     .spinner-wrap {
@@ -1259,7 +1435,7 @@
         ${this.label?t.html`<span class="label">${this.label}</span>`:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-spinner`,V);var H=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=t.css`
+    `}};customElements.define(`pastis-spinner`,K);var q=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=t.css`
     :host { display: block; }
 
     .skeleton {
@@ -1309,7 +1485,7 @@
             ></div>
           `)}
         </div>
-      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return t.html`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return t.html`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,H);var U=class extends t.LitElement{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=t.css`
+      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return t.html`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return t.html`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,q);var J=class extends t.LitElement{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: inline-flex; position: relative; }
 
     .trigger { display: contents; }
@@ -1393,7 +1569,7 @@
         ${this.content||``}
         <slot name="content"></slot>
       </div>
-    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,U);var W=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=t.css`
+    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,J);var Y=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=t.css`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -1491,6 +1667,7 @@
     .search-input:focus { border-color: var(--border-focus, #fcba28); }
 
     .options-list {
+      min-height: 0;
       overflow-y: auto;
       padding: 4px;
     }
@@ -1603,7 +1780,7 @@
         </div>
         ${this.error?t.html`<span class="error-text">⚠ ${this.error}</span>`:``}
       </div>
-    `}};customElements.define(`pastis-dropdown`,W);var le=class extends t.LitElement{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-dropdown`,Y);var X=class extends t.LitElement{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .tabs-container { display: flex; flex-direction: column; }
@@ -1748,7 +1925,7 @@
           ${e?.content?t.html`${e.content}`:t.html`<slot name="${this.active}"></slot>`}
         </div>
       </div>
-    `}};customElements.define(`pastis-tabs`,le);var G=class extends t.LitElement{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=t.css`
+    `}};customElements.define(`pastis-tabs`,X);var Z=class extends t.LitElement{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=t.css`
     :host { display: block; }
 
     .accordion {
@@ -1885,7 +2062,7 @@
           </div>
         `)}
       </div>
-    `}};customElements.define(`pastis-accordion`,G);var K=class extends t.LitElement{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=t.css`
+    `}};customElements.define(`pastis-accordion`,Z);var pe=class extends t.LitElement{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=t.css`
     :host { display: block; }
 
     nav {
@@ -1979,7 +2156,7 @@
             `})}
         </ol>
       </nav>
-    `}};customElements.define(`pastis-breadcrumb`,K);var q=class extends t.LitElement{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=t.css`
+    `}};customElements.define(`pastis-breadcrumb`,pe);var me=class extends t.LitElement{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=t.css`
     :host { display: block; }
 
     .pagination {
@@ -2121,7 +2298,7 @@
           `:``}
         </div>
       </nav>
-    `}};customElements.define(`pastis-pagination`,q);var J=class extends t.LitElement{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=t.css`
+    `}};customElements.define(`pastis-pagination`,me);var he=class extends t.LitElement{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=t.css`
     :host { display: block; }
 
     .progress-wrap {
@@ -2281,7 +2458,7 @@
           ></div>
         </div>
       </div>
-    `}};customElements.define(`pastis-progress`,J);var Y=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-progress`,he);var ge=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     .tag {
@@ -2388,7 +2565,7 @@
           >✕</button>
         `:``}
       </span>
-    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Y);var X=class extends t.LitElement{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=t.css`
+    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,ge);var _e=class extends t.LitElement{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=t.css`
     :host { display: block; }
 
     :host([orientation="vertical"]) {
@@ -2485,7 +2662,7 @@
         ${this.label?t.html`<span class="label">${this.label}</span>`:t.html`<slot></slot>`}
         ${n?t.html`<span class="line" style="${e}"></span>`:``}
       </div>
-    `}};customElements.define(`pastis-divider`,X);var Z=class extends t.LitElement{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-divider`,_e);var ve=class extends t.LitElement{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .hero {
@@ -2661,7 +2838,7 @@
           `:t.html`<slot name="image"></slot>`}
         </div>
       </section>
-    `}};customElements.define(`pastis-hero`,Z);var Q=class extends t.LitElement{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=t.css`
+    `}};customElements.define(`pastis-hero`,ve);var ye=class extends t.LitElement{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=t.css`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -2835,7 +3012,7 @@
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${N(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
+            aria-activedescendant="${I(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
             @input="${this._handleInput}"
             @focus="${()=>{this.value.length>=this.minChars&&(this.open=!0)}}"
             @keydown="${this._handleKeydown}"
@@ -2867,7 +3044,7 @@
           `:``}
         </div>
       </div>
-    `}};customElements.define(`pastis-search`,Q);var ue=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-search`,ye);var be=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: contents; }
 
     .backdrop {
@@ -3019,7 +3196,7 @@
           <slot name="footer" class="drawer-footer"></slot>
         </div>
       </div>
-    `:t.html``}};customElements.define(`pastis-drawer`,ue);var de=class extends t.LitElement{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=t.css`
+    `:t.html``}};customElements.define(`pastis-drawer`,be);var xe=class extends t.LitElement{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=t.css`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3229,7 +3406,7 @@
         ${this.error?t.html`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
         ${this.helper&&!this.error?t.html`<p class="helper-text">${this.helper}</p>`:``}
       </div>
-    `}};customElements.define(`pastis-file-upload`,de);var fe=class extends t.LitElement{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=t.css`
+    `}};customElements.define(`pastis-file-upload`,xe);var Se=class extends t.LitElement{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=t.css`
     :host { display: block; }
     :host(:not([visible])) { display: none; }
 
@@ -3447,7 +3624,7 @@
           </div>
         `}
       </div>
-    `}};customElements.define(`pastis-cookie-banner`,fe);var pe=class extends t.LitElement{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-cookie-banner`,Se);var Ce=class extends t.LitElement{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=t.css`
     :host { display: block; }
 
     label {
@@ -3523,7 +3700,7 @@
           </span>
         `:``}
       </label>
-    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,pe);var me=class extends t.LitElement{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Ce);var we=class extends t.LitElement{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .stat-card {
@@ -3604,7 +3781,7 @@
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-stat-card`,me);var he=class extends t.LitElement{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-stat-card`,we);var Te=class extends t.LitElement{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=t.css`
     :host { display: block; overflow-x: auto; }
 
     table {
@@ -3759,7 +3936,7 @@
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-table`,he);var ge=class extends t.LitElement{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-table`,Te);var Ee=class extends t.LitElement{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=t.css`
     :host { display: block; }
 
     .code-block {
@@ -3884,7 +4061,7 @@
           </slot></pre>
         </div>
       </div>
-    `}};customElements.define(`pastis-code-block`,ge);var _e=class extends t.LitElement{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-code-block`,Ee);var De=class extends t.LitElement{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .empty-state {
@@ -3991,7 +4168,7 @@
         `:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-empty-state`,_e);var ve=class extends t.LitElement{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=t.css`
+    `}};customElements.define(`pastis-empty-state`,De);var Oe=class extends t.LitElement{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number}};static styles=t.css`
     :host { display: inline-block; }
 
     .chip {
@@ -4098,7 +4275,7 @@
           <button class="remove" @click=${this._remove} aria-label="Remove ${e}" ?disabled=${this.disabled}>✕</button>
         `:``}
       </span>
-    `}};customElements.define(`pastis-filter-chip`,ve);var ye=class extends t.LitElement{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-filter-chip`,Oe);var Q=class extends t.LitElement{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=t.css`
     :host { display: block; }
 
     .filter-bar {
@@ -4153,7 +4330,7 @@
           <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
         `:``}
       </div>
-    `}};customElements.define(`pastis-filter-bar`,ye);var be=class extends t.LitElement{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-filter-bar`,Q);var ke=class extends t.LitElement{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=t.css`
     :host { display: inline-block; }
 
     button {
@@ -4195,7 +4372,7 @@
         <span class="icon" aria-hidden="true">${n}</span>
         ${this.label?t.html`<span class="label-text">${r} Mode</span>`:``}
       </button>
-    `}};customElements.define(`pastis-theme-toggle`,be);var $=class extends t.LitElement{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-theme-toggle`,ke);var Ae=class extends t.LitElement{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     .carousel {
@@ -4438,152 +4615,83 @@
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-carousel`,$);var xe=class extends t.LitElement{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
-    :host { display: block; }
+    `}};customElements.define(`pastis-carousel`,Ae);var je=class extends t.LitElement{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
+    :host {
+      display: block;
+      container-type: inline-size;
+    }
 
     .timeline {
-      position: relative;
       padding: 0;
       margin: 0;
       list-style: none;
     }
 
-    /* vertical rule */
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 11px;
-      top: 0;
-      bottom: 0;
-      width: var(--border-width, 1px);
-      background: var(--border-default, #383c44);
-    }
-
     .item {
-      position: relative;
-      padding: 0 0 var(--space-2xl, 48px) 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: baseline;
+      gap: var(--space-lg, 24px);
+      padding: var(--space-lg, 24px) 0;
+      border-top: var(--border-width, 1px) solid var(--border-default, #383c44);
+      transition: opacity var(--duration-base, 200ms) var(--ease-standard, ease);
     }
 
     .item:last-child {
-      padding-bottom: 0;
+      border-bottom: var(--border-width, 1px) solid var(--border-default, #383c44);
     }
 
-    /* dot */
-    .dot {
-      position: absolute;
-      left: 0;
-      top: 4px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: var(--action-primary, #fcba28);
-      flex-shrink: 0;
-      z-index: 1;
-    }
-
-    .card {
-      background: var(--bg-card, #1e1e1e);
-      border: var(--border-width, 1px) solid var(--border-default, #383c44);
-      border-radius: var(--radius-md, 6px);
-      padding: var(--space-md, 16px);
-      transition: box-shadow 120ms ease, transform 120ms ease;
-    }
-
-    .card:hover {
-      box-shadow: var(--shadow-md, 5px 5px 0 #231f20);
-      transform: translate(-2px, -2px);
-    }
-
-    .meta {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm, 8px);
-      margin-bottom: var(--space-xs, 4px);
-    }
-
-    .date {
-      font-family: var(--font-family-mono, 'Fira Code', monospace);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wide, 0.05em);
-      color: var(--text-tertiary, #909498);
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 2px 8px;
-      border-radius: var(--radius-full, 9999px);
-      background: var(--bg-primary, #0d0d0d);
-      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
-      font-family: var(--font-family-mono, 'Fira Code', monospace);
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wide, 0.05em);
-      color: var(--action-primary, #fcba28);
-    }
+    /* Dim the other rows while one is hovered */
+    .timeline:has(.item:hover) .item { opacity: 0.35; }
+    .timeline:has(.item:hover) .item:hover { opacity: 1; }
 
     .title {
-      font-family: var(--font-family-mono, 'Fira Code', monospace);
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      font-family: var(--font-family-display, 'Instrument Serif', serif);
+      font-size: clamp(var(--font-size-h5, 19px), 2.5vw, var(--font-size-h3, 26px));
+      font-weight: var(--font-weight-display, 400);
+      line-height: var(--line-height-h3, 1.25);
       color: var(--text-primary, #f9f4da);
-      margin: 0 0 var(--space-xs, 4px);
-    }
-
-    .body {
-      font-family: var(--font-family-body, 'Outfit', sans-serif);
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--text-secondary, #f9f4da);
       margin: 0;
     }
 
-    /* compact: tighter spacing, no card chrome */
+    .detail {
+      font-family: var(--font-family-body, 'Inter', sans-serif);
+      font-size: var(--font-size-body-sm, 14px);
+      line-height: var(--line-height-body-sm, 1.55);
+      color: var(--text-tertiary, #909498);
+    }
+
+    .meta { margin: 0; }
+
+    .body {
+      margin: var(--space-xs, 4px) 0 0;
+      color: var(--text-secondary, #f9f4da);
+    }
+
     :host([variant="compact"]) .item {
-      padding-bottom: var(--space-lg, 24px);
+      padding: var(--space-md, 16px) 0;
     }
 
-    :host([variant="compact"]) .card {
-      background: transparent;
-      border: none;
-      padding: 0;
-      box-shadow: none;
-      transform: none;
-    }
-
-    :host([variant="compact"]) .card:hover {
-      box-shadow: none;
-      transform: none;
+    @container (max-width: 560px) {
+      .item {
+        grid-template-columns: 1fr;
+        gap: var(--space-xs, 4px);
+      }
     }
   `;constructor(){super(),this.items=[],this.variant=`default`}render(){return t.html`
       <ol class="timeline" part="timeline">
-        ${this.items.map(e=>t.html`
-          <li class="item" part="item">
-            <div class="dot" aria-hidden="true">${e.icon||`◆`}</div>
-            <div class="card" part="card">
-              <div class="meta">
-                ${e.date?t.html`<span class="date">${e.date}</span>`:``}
-                ${e.tag?t.html`<span class="tag">${e.tag}</span>`:``}
-              </div>
+        ${this.items.map(e=>{let n=[e.tag,e.date].filter(Boolean).join(` · `);return t.html`
+            <li class="item" part="item">
               <p class="title">${e.title}</p>
-              ${e.body?t.html`<p class="body">${e.body}</p>`:``}
-              <slot name="item-${e.title}"></slot>
-            </div>
-          </li>
-        `)}
+              <div class="detail" part="detail">
+                ${n?t.html`<p class="meta">${n}</p>`:``}
+                ${e.body?t.html`<p class="body">${e.body}</p>`:``}
+                <slot name="item-${e.title}"></slot>
+              </div>
+            </li>
+          `})}
       </ol>
-    `}};customElements.define(`pastis-timeline`,xe);var Se=class extends t.LitElement{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-timeline`,je);var Me=class extends t.LitElement{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .testimonial {
@@ -4726,7 +4834,7 @@
           </div>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-testimonial`,Se);var Ce=class extends t.LitElement{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=t.css`
+    `}};customElements.define(`pastis-testimonial`,Me);var Ne=class extends t.LitElement{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=t.css`
     :host { display: block; }
 
     section {
@@ -4821,7 +4929,7 @@
           <slot></slot>
         </div>
       </section>
-    `}};customElements.define(`pastis-section`,Ce);var we=class extends t.LitElement{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-section`,Ne);var Pe=class extends t.LitElement{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     footer {
@@ -5029,7 +5137,7 @@
           </div>
         </div>
       </footer>
-    `}};customElements.define(`pastis-footer`,we);var Te=class extends t.LitElement{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-footer`,Pe);var Fe=class extends t.LitElement{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     nav {
@@ -5403,7 +5511,7 @@
         </a>
 
         <!-- Desktop links -->
-        <div class="nav-links" role="list">
+        <div class="nav-links">
           ${this.items.map(e=>this._renderDesktopItem(e))}
           <slot name="links"></slot>
         </div>
@@ -5439,7 +5547,7 @@
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};customElements.define(`pastis-nav`,Te);var Ee=class extends t.LitElement{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-nav`,Fe);var Ie=class extends t.LitElement{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=t.css`
     :host {
       display: block;
       --_ratio: 1 / 1;
@@ -5638,7 +5746,7 @@
           ${this.summary?t.html`<p class="summary">${this.summary}</p>`:``}
         </div>
       </a>
-    `}};customElements.define(`pastis-project-card`,Ee);var De=class extends t.LitElement{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-project-card`,Ie);var Le=class extends t.LitElement{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=t.css`
     :host {
       display: block;
       --_size: var(--font-size-statement-lg, clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem));
@@ -5708,7 +5816,7 @@
   `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return t.html`
       ${this.eyebrow?t.html`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
       <div class="body ${e}" part="body"><slot></slot></div>
-    `}};customElements.define(`pastis-statement`,De);var Oe=class extends t.LitElement{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-statement`,Le);var Re=class extends t.LitElement{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     figure {
@@ -5756,7 +5864,7 @@
           <code class="value">${this._value||`—`}</code>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-token-swatch`,Oe);var ke=class extends t.LitElement{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-token-swatch`,Re);var ze=class extends t.LitElement{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     table {
@@ -5871,7 +5979,7 @@
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-spec-table`,ke);var Ae=class extends t.LitElement{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-spec-table`,ze);var $=class extends t.LitElement{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=t.css`
     :host {
       display: block;
       --_inset: var(--pastis-shelf-inset, var(--layout-gutter, 24px));
@@ -5987,4 +6095,4 @@
         <button aria-label="Previous" ?disabled=${this._atStart} @click=${()=>this._scrollByPage(-1)}>←</button>
         <button aria-label="Next" ?disabled=${this._atEnd} @click=${()=>this._scrollByPage(1)}>→</button>
       </div>
-    `}};customElements.define(`pastis-shelf`,Ae),e.PastisAccordion=G,e.PastisAlert=R,e.PastisAvatar=I,e.PastisBadge=F,e.PastisBreadcrumb=K,e.PastisButton=n,e.PastisCard=L,e.PastisCarousel=$,e.PastisCheckbox=i,e.PastisCodeBlock=ge,e.PastisCookieBanner=fe,e.PastisDivider=X,e.PastisDrawer=ue,e.PastisDropdown=W,e.PastisEmptyState=_e,e.PastisFileUpload=de,e.PastisFilterBar=ye,e.PastisFilterChip=ve,e.PastisFooter=we,e.PastisHero=Z,e.PastisInput=r,e.PastisModal=z,e.PastisNav=Te,e.PastisPagination=q,e.PastisProgress=J,e.PastisProjectCard=Ee,e.PastisRadio=pe,e.PastisSearch=Q,e.PastisSection=Ce,e.PastisShelf=Ae,e.PastisSkeleton=H,e.PastisSpecTable=ke,e.PastisSpinner=V,e.PastisStatCard=me,e.PastisStatement=De,e.PastisTable=he,e.PastisTabs=le,e.PastisTag=Y,e.PastisTestimonial=Se,e.PastisThemeToggle=be,e.PastisTimeline=xe,e.PastisToast=B,e.PastisToggle=P,e.PastisTokenSwatch=Oe,e.PastisTooltip=U});
+    `}};customElements.define(`pastis-shelf`,$),e.PastisAccordion=Z,e.PastisAlert=V,e.PastisAvatar=z,e.PastisBadge=R,e.PastisBreadcrumb=pe,e.PastisButton=r,e.PastisButtonSplit=i,e.PastisCard=B,e.PastisCarousel=Ae,e.PastisCheckbox=l,e.PastisCodeBlock=Ee,e.PastisCookieBanner=Se,e.PastisDivider=_e,e.PastisDrawer=be,e.PastisDropdown=Y,e.PastisEmptyState=De,e.PastisFileUpload=xe,e.PastisFilterBar=Q,e.PastisFilterChip=Oe,e.PastisFooter=Pe,e.PastisHero=ve,e.PastisInput=c,e.PastisModal=W,e.PastisNav=Fe,e.PastisPagination=me,e.PastisProgress=he,e.PastisProjectCard=Ie,e.PastisRadio=Ce,e.PastisSearch=ye,e.PastisSection=Ne,e.PastisShelf=$,e.PastisSkeleton=q,e.PastisSpecTable=ze,e.PastisSpinner=K,e.PastisStatCard=we,e.PastisStatement=Le,e.PastisTable=Te,e.PastisTabs=X,e.PastisTag=ge,e.PastisTestimonial=Me,e.PastisThemeToggle=ke,e.PastisTimeline=je,e.PastisToast=G,e.PastisToggle=L,e.PastisTokenSwatch=Re,e.PastisTooltip=J});
