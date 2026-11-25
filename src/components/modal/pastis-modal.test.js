@@ -582,3 +582,132 @@ describe('pastis-modal focus, lifecycle and tab stops', () => {
     expect(results.violations).toHaveLength(0);
   });
 });
+
+describe('pastis-modal initial focus, with and without the close button', () => {
+  let container;
+  afterEach(async () => {
+    for (const m of container?.querySelectorAll('pastis-modal') ?? []) { m.open = false; await m.updateComplete; }
+    container?.remove();
+    document.body.style.overflow = '';
+  });
+
+  /**
+   * Mounts a modal titled "Unsynced changes". `oneShot` creates it already open, rendering with its
+   * Lit content in one pass; otherwise it renders closed and is opened from a focused opener.
+   */
+  async function mount(content, { closable, oneShot }) {
+    container = document.createElement('div');
+    container.innerHTML = `
+      <button id="opener">Sign out</button>
+      <pastis-modal title="Unsynced changes" role="alertdialog" persistent ${oneShot ? 'open' : ''}>${content}</pastis-modal>`;
+    const modal = container.querySelector('pastis-modal');
+    modal.closable = closable; // a boolean property that defaults to true: no attribute for false
+    document.body.appendChild(container);
+    if (!oneShot) {
+      await modal.updateComplete;
+      container.querySelector('#opener').focus();
+      modal.open = true;
+    }
+    await modal.updateComplete;
+    await frame();
+    await frame();
+    return modal;
+  }
+
+  const confirmation = (autofocus = '') => `
+    <p>3 changes have not synced yet. Signing out discards them.</p>
+    <pastis-button slot="footer" variant="ghost" id="stay">Stay signed in</pastis-button>
+    <pastis-button slot="footer" variant="destructive" id="leave" ${autofocus}>Sign out anyway</pastis-button>`;
+
+  const innerButton = (modal, id) => modal.querySelector(`#${id}`).shadowRoot.querySelector('button');
+
+  for (const closable of [true, false]) {
+    for (const oneShot of [false, true]) {
+      const when = `${closable ? 'with' : 'without'} a close button, ${oneShot ? 'rendered open in one pass' : 'opened later'}`;
+
+      it(`${when}: focuses the slotted [autofocus] pastis-button`, async () => {
+        const modal = await mount(confirmation('autofocus'), { closable, oneShot });
+        expect(deepActive()).toBe(innerButton(modal, 'leave'));
+      });
+
+      it(`${when}: focuses the first slotted focusable element without [autofocus]`, async () => {
+        const modal = await mount(confirmation(), { closable, oneShot });
+        expect(deepActive()).toBe(innerButton(modal, 'stay'));
+      });
+
+      it(`${when}: focuses a plain slotted [autofocus] button`, async () => {
+        const modal = await mount(`
+          <p>Your session has ended.</p>
+          <button slot="footer">Later</button>
+          <button slot="footer" autofocus>Sign in again</button>`, { closable, oneShot });
+        expect(deepActive()).toBe(modal.querySelector('[autofocus]'));
+      });
+
+      it(`${when}: with nothing focusable slotted, focuses the ${closable ? 'close button' : 'body'}`, async () => {
+        const modal = await mount('<p>Your session has ended.</p>', { closable, oneShot });
+        expect(deepActive()).toBe(modal.shadowRoot.querySelector(closable ? '.close-btn' : '.modal-body'));
+      });
+    }
+  }
+
+  it('without a close button, focus the user moved into the content is kept', async () => {
+    const modal = await mount(confirmation(), { closable: false, oneShot: false });
+    modal.querySelector('#leave').focus();
+    modal._focusInitialWhenReady();
+    await frame();
+    expect(deepActive()).toBe(innerButton(modal, 'leave'));
+  });
+
+  for (const closable of [true, false]) {
+    it(`${closable ? 'with' : 'without'} a close button: skips an [autofocus] element that cannot take focus`, async () => {
+      const modal = await mount(`
+        <p>3 changes have not synced yet.</p>
+        <fieldset disabled><pastis-button autofocus id="locked">Retry sync</pastis-button></fieldset>
+        <button slot="footer" autofocus disabled>Discard</button>
+        <button slot="footer" autofocus hidden>Hidden</button>
+        <pastis-button slot="footer" id="stay">Stay signed in</pastis-button>
+        <pastis-button slot="footer" variant="destructive" id="leave" autofocus>Sign out anyway</pastis-button>`, { closable, oneShot: false });
+      expect(deepActive()).toBe(innerButton(modal, 'leave'));
+    });
+
+    it(`${closable ? 'with' : 'without'} a close button: with no usable [autofocus], falls back to the first slotted control`, async () => {
+      const modal = await mount(`
+        <p>3 changes have not synced yet.</p>
+        <button slot="footer" autofocus disabled>Discard</button>
+        <pastis-button slot="footer" id="stay">Stay signed in</pastis-button>`, { closable, oneShot: false });
+      expect(deepActive()).toBe(innerButton(modal, 'stay'));
+    });
+  }
+
+  it('a focus step still waiting from an earlier open does not move focus after a reopen', async () => {
+    const modal = await mount(confirmation('autofocus'), { closable: true, oneShot: false });
+    modal.open = false;
+    await modal.updateComplete;
+    // Content that is slow to render keeps the next open's focus step waiting
+    const slow = modal.querySelector('p');
+    let finishRendering;
+    slow.updateComplete = new Promise(r => { finishRendering = r; });
+    modal.open = true;
+    await modal.updateComplete;
+    modal.open = false;
+    await modal.updateComplete;
+    delete slow.updateComplete;
+    modal.open = true;
+    await modal.updateComplete;
+    await frame();
+    expect(deepActive()).toBe(innerButton(modal, 'leave'));
+    // The user moves to the close button (what showModal() focused), then the slow content is done
+    modal.shadowRoot.querySelector('.close-btn').focus();
+    finishRendering();
+    await frame();
+    expect(deepActive()).toBe(modal.shadowRoot.querySelector('.close-btn'));
+  });
+
+  it('clears what showModal() focused once closed', async () => {
+    const modal = await mount(confirmation(), { closable: true, oneShot: false });
+    expect(modal._dialogFocus).toBe(modal.shadowRoot.querySelector('.close-btn'));
+    modal.open = false;
+    await modal.updateComplete;
+    expect(modal._dialogFocus).toBeNull();
+  });
+});

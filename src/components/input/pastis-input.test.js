@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { page, userEvent } from 'vitest/browser';
+import { cdp, page, userEvent } from 'vitest/browser';
 import axe from 'axe-core';
 import './pastis-input.js';
 import '../button/pastis-button.js';
@@ -65,13 +65,14 @@ describe('pastis-input', () => {
     expect(el.shadowRoot.querySelector('input').required).toBe(true);
   });
 
-  it('required — renders required indicator and sr-only text', async () => {
+  it('required — renders the required indicator and no "required" text in the label', async () => {
+    el.label = 'New item';
     el.required = true;
     await el.updateComplete;
     const dot = el.shadowRoot.querySelector('.required-dot');
-    const sr = el.shadowRoot.querySelector('.sr-only');
     expect(dot).toBeTruthy();
-    expect(sr.textContent).toContain('required');
+    // The input's own required state is announced; text would add "required" to its name
+    expect(el.shadowRoot.querySelector('label').textContent.replace('*', '').trim()).toBe('New item');
   });
 
   it('required dot is aria-hidden', async () => {
@@ -745,5 +746,205 @@ describe('pastis-input: aria-label stays on the host (React updates and removes 
     field.removeAttribute('aria-label');
     await field.updateComplete;
     expect(input.hasAttribute('aria-label')).toBe(false);
+  });
+});
+
+describe('pastis-input re-enabled after being disabled', () => {
+  let container;
+  afterEach(() => container?.remove());
+
+  const contexts = [
+    ['on its own', '<pastis-input label="New item"></pastis-input>'],
+    ['in a form', '<form><pastis-input label="New item" name="title"></pastis-input></form>'],
+    ['in an enabled fieldset', '<form><fieldset><pastis-input label="New item" name="title"></pastis-input></fieldset></form>'],
+  ];
+  const toggles = [
+    ['property', (f, on) => { f.disabled = on; }],
+    ['attribute', (f, on) => f.toggleAttribute('disabled', on)],
+  ];
+
+  /** The inner input is enabled and takes typing. */
+  async function expectUsable(field) {
+    const input = field.shadowRoot.querySelector('input');
+    expect(field.matches(':disabled')).toBe(false);
+    expect(input.disabled).toBe(false);
+    await userEvent.type(input, 'Oat milk');
+    expect(field.value).toBe('Oat milk');
+  }
+
+  for (const [where, markup] of contexts) {
+    for (const [how, setDisabled] of toggles) {
+      it(`${where}, by ${how}: the inner input is enabled and typable again`, async () => {
+        container = await mount(markup);
+        const field = container.querySelector('pastis-input');
+        setDisabled(field, true);
+        await field.updateComplete;
+        expect(field.shadowRoot.querySelector('input').disabled).toBe(true);
+        setDisabled(field, false);
+        await field.updateComplete;
+        await expectUsable(field);
+      });
+    }
+  }
+
+  it('fieldset disabled, then enabled', async () => {
+    container = await mount('<form><fieldset disabled><pastis-input label="New item"></pastis-input></fieldset></form>');
+    const field = container.querySelector('pastis-input');
+    expect(field.shadowRoot.querySelector('input').disabled).toBe(true);
+    container.querySelector('fieldset').disabled = false;
+    await field.updateComplete;
+    await expectUsable(field);
+  });
+
+  it('stays disabled while either its own disabled or the fieldset still applies', async () => {
+    container = await mount('<form><fieldset disabled><pastis-input label="New item" disabled></pastis-input></fieldset></form>');
+    const field = container.querySelector('pastis-input');
+    const input = () => field.shadowRoot.querySelector('input');
+    field.disabled = false;
+    await field.updateComplete;
+    expect(input().disabled).toBe(true);
+    field.disabled = true;
+    await field.updateComplete;
+    container.querySelector('fieldset').disabled = false;
+    await field.updateComplete;
+    expect(input().disabled).toBe(true);
+    field.disabled = false;
+    await field.updateComplete;
+    await expectUsable(field);
+  });
+
+  it('slotted mode: the slotted input is enabled and typable again', async () => {
+    container = await mount(`
+      <form><pastis-input label="Email" disabled>
+        <input slot="input" type="email" name="email">
+      </pastis-input></form>`);
+    const field = container.querySelector('pastis-input');
+    field.disabled = false;
+    await field.updateComplete;
+    const input = field.querySelector('input');
+    expect(input.disabled).toBe(false);
+    await userEvent.type(input, 'ada@example.com');
+    expect(field.value).toBe('ada@example.com');
+  });
+});
+
+/** Chrome's own accessibility-tree nodes for text fields on the test page. */
+async function axTextboxes() {
+  const session = cdp();
+  await session.send('Accessibility.enable');
+  const { frameTree } = await session.send('Page.getFrameTree');
+  const { nodes } = await session.send('Accessibility.getFullAXTree', { frameId: frameTree.childFrames[0].frame.id });
+  return nodes.filter(n => !n.ignored && n.role?.value === 'textbox');
+}
+
+const axRequired = node => node.properties?.find(p => p.name === 'required')?.value.value === true;
+
+describe('pastis-input: a required field is named by its label only', () => {
+  let container;
+  afterEach(() => container?.remove());
+
+  it('built-in input: the name is the label, and required is exposed as a state', async () => {
+    container = await mount('<pastis-input label="New item" required></pastis-input>');
+    const field = container.querySelector('pastis-input');
+    expect(field.shadowRoot.querySelector('.required-dot').getAttribute('aria-hidden')).toBe('true');
+    expect(page.getByRole('textbox', { name: 'New item', exact: true }).elements()).toHaveLength(1);
+    const [textbox] = await axTextboxes();
+    // Chrome applies the label's text-transform (uppercase) to the name
+    expect(textbox.name.value.toLowerCase()).toBe('new item');
+    expect(axRequired(textbox)).toBe(true);
+  });
+
+  it('slotted mode, required slotted input: the name is the label', async () => {
+    container = await mount(`
+      <pastis-input label="Email">
+        <input slot="input" type="email" name="email" required>
+      </pastis-input>`);
+    expect(container.querySelector('pastis-input').shadowRoot.querySelector('.required-dot')).toBeTruthy();
+    const [textbox] = await axTextboxes();
+    expect(textbox.name.value).toBe('Email');
+    expect(axRequired(textbox)).toBe(true);
+  });
+
+  it('slotted mode, required host: the slotted input is required, announced and enforced', async () => {
+    container = await mount(`
+      <form>
+        <pastis-input label="Email" required>
+          <input slot="input" type="email" name="email">
+        </pastis-input>
+        <pastis-button type="submit">Sign in</pastis-button>
+      </form>`);
+    const form = container.querySelector('form');
+    const field = container.querySelector('pastis-input');
+    const input = field.querySelector('input');
+    expect(input.required).toBe(true);
+    expect(input.hasAttribute('aria-required')).toBe(false);
+    const [textbox] = await axTextboxes();
+    expect(textbox.name.value).toBe('Email');
+    expect(axRequired(textbox)).toBe(true);
+    // Empty: submission is blocked and the browser reports it on the slotted input
+    const submits = captureSubmits(form);
+    container.querySelector('pastis-button').click();
+    await tick();
+    expect(submits).toHaveLength(0);
+    expect(input.validity.valueMissing).toBe(true);
+    expect(field.reportValidity()).toBe(false);
+    expect(document.activeElement).toBe(input);
+    field.required = false;
+    await field.updateComplete;
+    expect(input.required).toBe(false);
+    container.querySelector('pastis-button').click();
+    await tick();
+    expect(submits).toHaveLength(1);
+  });
+
+  it("slotted mode: the host never removes the author's own required", async () => {
+    container = await mount(`
+      <pastis-input label="Email" required>
+        <input slot="input" type="email" name="email" required>
+      </pastis-input>`);
+    const field = container.querySelector('pastis-input');
+    field.required = false;
+    await field.updateComplete;
+    expect(field.querySelector('input').required).toBe(true);
+  });
+
+  it("slotted mode: the marker follows the slotted input's own required", async () => {
+    container = await mount(`
+      <pastis-input label="Email">
+        <input slot="input" type="email" name="email">
+      </pastis-input>`);
+    const field = container.querySelector('pastis-input');
+    const input = field.querySelector('input');
+    const marker = () => field.shadowRoot.querySelector('.required-dot');
+    expect(marker()).toBeNull();
+    input.required = true;
+    await tick();
+    await field.updateComplete;
+    expect(marker()).toBeTruthy();
+    input.required = false;
+    await tick();
+    await field.updateComplete;
+    expect(marker()).toBeNull();
+  });
+
+  it("slotted mode: the label follows the slotted input's own aria-labelledby", async () => {
+    container = await mount(`
+      <p id="work-email">Work email</p>
+      <pastis-input label="Email">
+        <input slot="input" type="email" name="email">
+      </pastis-input>`);
+    const field = container.querySelector('pastis-input');
+    const input = field.querySelector('input');
+    expect(input.getAttribute('aria-label')).toBe('Email');
+    input.setAttribute('aria-labelledby', 'work-email');
+    await tick();
+    await field.updateComplete;
+    expect(input.hasAttribute('aria-label')).toBe(false);
+  });
+
+  it('passes axe-core when required', async () => {
+    container = await mount('<div style="background:#0d0d0d;padding:8px"><pastis-input label="New item" required></pastis-input></div>');
+    const results = await axe.run(container, { runOnly: ['wcag2a', 'wcag2aa', 'wcag22aa'] });
+    expect(results.violations).toHaveLength(0);
   });
 });

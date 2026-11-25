@@ -179,8 +179,12 @@ export class PastisCheckbox extends LitElement {
     this.checked = state === 'true';
   }
 
-  willUpdate() {
+  willUpdate(changed) {
     if (!this.hasUpdated) this._defaultChecked = this.checked;
+    // Reflect `disabled` before render rather than in Lit's update(): the reflection makes the
+    // browser call formDisabledCallback synchronously, and a property change made during
+    // update() (after render) is dropped, which left the input disabled after re-enabling.
+    if (changed.has('disabled')) this.toggleAttribute('disabled', this.disabled);
   }
 
   updated(changed) {

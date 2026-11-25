@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { page, userEvent } from 'vitest/browser';
+import { cdp, page, userEvent } from 'vitest/browser';
 import axe from 'axe-core';
 import './pastis-checkbox.js';
 import '../button/pastis-button.js';
@@ -332,5 +332,89 @@ describe('pastis-checkbox: aria-label stays on the host (React updates and remov
     box.removeAttribute('aria-label');
     await box.updateComplete;
     expect(input.hasAttribute('aria-label')).toBe(false);
+  });
+});
+
+describe('pastis-checkbox re-enabled after being disabled', () => {
+  let container;
+  afterEach(() => container?.remove());
+
+  const contexts = [
+    ['on its own', '<pastis-checkbox label="Buy oat milk" label-case="none"></pastis-checkbox>'],
+    ['in a form', '<form><pastis-checkbox label="Buy oat milk" label-case="none" name="done"></pastis-checkbox></form>'],
+    ['in an enabled fieldset', '<form><fieldset><pastis-checkbox label="Buy oat milk" label-case="none" name="done"></pastis-checkbox></fieldset></form>'],
+  ];
+  const toggles = [
+    ['property', (b, on) => { b.disabled = on; }],
+    ['attribute', (b, on) => b.toggleAttribute('disabled', on)],
+  ];
+
+  /** The inner input is enabled, and a real click toggles it. */
+  async function expectUsable(box) {
+    expect(box.matches(':disabled')).toBe(false);
+    expect(box.shadowRoot.querySelector('input').disabled).toBe(false);
+    await userEvent.click(box.shadowRoot.querySelector('label'));
+    expect(box.checked).toBe(true);
+  }
+
+  for (const [where, markup] of contexts) {
+    for (const [how, setDisabled] of toggles) {
+      it(`${where}, by ${how}: the inner input is enabled and clickable again`, async () => {
+        container = await mount(markup);
+        const box = container.querySelector('pastis-checkbox');
+        setDisabled(box, true);
+        await box.updateComplete;
+        expect(box.shadowRoot.querySelector('input').disabled).toBe(true);
+        setDisabled(box, false);
+        await box.updateComplete;
+        await expectUsable(box);
+      });
+    }
+  }
+
+  it('fieldset disabled, then enabled', async () => {
+    container = await mount('<form><fieldset disabled><pastis-checkbox label="Buy oat milk"></pastis-checkbox></fieldset></form>');
+    const box = container.querySelector('pastis-checkbox');
+    container.querySelector('fieldset').disabled = false;
+    await box.updateComplete;
+    await expectUsable(box);
+  });
+
+  it('stays disabled while either its own disabled or the fieldset still applies', async () => {
+    container = await mount('<form><fieldset disabled><pastis-checkbox label="Buy oat milk" disabled></pastis-checkbox></fieldset></form>');
+    const box = container.querySelector('pastis-checkbox');
+    const input = () => box.shadowRoot.querySelector('input');
+    box.disabled = false;
+    await box.updateComplete;
+    expect(input().disabled).toBe(true);
+    box.disabled = true;
+    await box.updateComplete;
+    container.querySelector('fieldset').disabled = false;
+    await box.updateComplete;
+    expect(input().disabled).toBe(true);
+    box.disabled = false;
+    await box.updateComplete;
+    await expectUsable(box);
+  });
+});
+
+describe('pastis-checkbox: a required checkbox is named by its label only', () => {
+  let container;
+  afterEach(() => container?.remove());
+
+  it('the name is the label, and the native input is required', async () => {
+    container = await mount('<pastis-checkbox label="I accept the terms" label-case="none" required></pastis-checkbox>');
+    expect(page.getByRole('checkbox', { name: 'I accept the terms', exact: true }).elements()).toHaveLength(1);
+    const session = cdp();
+    await session.send('Accessibility.enable');
+    const { frameTree } = await session.send('Page.getFrameTree');
+    const { nodes } = await session.send('Accessibility.getFullAXTree', { frameId: frameTree.childFrames[0].frame.id });
+    const [checkbox] = nodes.filter(n => !n.ignored && n.role?.value === 'checkbox');
+    expect(checkbox.name.value).toBe('I accept the terms');
+    // ARIA 1.2 allows aria-required on checkboxes, but Chrome's accessibility tree has no
+    // required property for any checkbox (native required, aria-required or role="checkbox"), so
+    // the native input's required, and its invalid state until checked, are asserted instead
+    expect(container.querySelector('pastis-checkbox').shadowRoot.querySelector('input').required).toBe(true);
+    expect(checkbox.properties.find(p => p.name === 'invalid')?.value.value).toBe('true');
   });
 });
