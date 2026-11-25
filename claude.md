@@ -12,7 +12,7 @@ system and WCAG 2.2.
 - Design tokens: /src/tokens
 - Storybook config: /.storybook
 - Naming: kebab-case files, PascalCase class names
-- Stack: Lit web components, vanilla custom elements
+- Stack: Lit web components, vanilla custom elements, plain JavaScript
 
 ## Commands
 - `npm run storybook` — start Storybook dev server at http://localhost:6006
@@ -67,8 +67,8 @@ system and WCAG 2.2.
 - All values must reference CSS custom properties from /src/tokens
 - Flag any var(--token) references to tokens that don't exist in the token file
 - Check that components respond correctly to token overrides (theming works)
-- Boolean props must use is/has/can prefix and default to false
-  (e.g. isDisabled, hasError, canCollapse)
+- Boolean props follow native HTML naming (`disabled`, `checked`, `open`, `done`),
+  without an is/has/can prefix, and default to false
 - Every public property must have a JSDoc comment
 - Spacing must use the 4pt/8pt grid — flag values that fall outside it
 
@@ -91,7 +91,7 @@ system and WCAG 2.2.
 
 ## TESTING & COVERAGE
 
-- Every component must have a *.test.ts file
+- Every component must have a *.test.js file next to it (plain JS, no TypeScript)
 - Required test cases per component:
   - Default render (snapshot or DOM assertion)
   - All boolean props toggled

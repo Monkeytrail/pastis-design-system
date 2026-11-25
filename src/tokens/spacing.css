@@ -52,4 +52,8 @@
   --container-full:   1600px;
   --layout-gutter:    clamp(16px, 4vw, 40px);
   --section-gap:      clamp(64px, 10vw, 160px);
+
+  /* ── Components ── */
+  /* Full height of <pastis-tab-bar>, home-indicator safe area included: pad page content with it */
+  --pastis-tab-bar-height: calc(56px + env(safe-area-inset-bottom, 0px));
 }

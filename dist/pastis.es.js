@@ -1,10 +1,10 @@
-import { LitElement as e, css as t, html as n, nothing as r } from "lit";
+import { LitElement as e, css as t, html as n, nothing as r, svg as i } from "lit";
 //#region src/components/button/pastis-button.js
-var i = {
+var a = {
 	ariaLabelledby: "ariaLabelledByElements",
 	ariaDescribedby: "ariaDescribedByElements",
 	ariaControls: "ariaControlsElements"
-}, a = class extends e {
+}, o = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -196,7 +196,7 @@ var i = {
 		let e = this._inner;
 		if (!e) return;
 		let t = this.getRootNode(), n = (e) => (e || "").split(/\s+/).filter(Boolean).map((e) => t.getElementById ? t.getElementById(e) : document.getElementById(e)).filter(Boolean), r = (e) => e.map((e) => e.textContent.trim()).join(" ");
-		for (let [t, r] of Object.entries(i)) {
+		for (let [t, r] of Object.entries(a)) {
 			let i = n(this[t]);
 			r in e && (e[r] = i.length ? i : null);
 		}
@@ -204,8 +204,8 @@ var i = {
 			let t = r(n(this.ariaLabelledby));
 			t ? e.setAttribute("aria-label", t) : e.removeAttribute("aria-label");
 		}
-		let a = r(n(this.ariaDescribedby));
-		a ? e.setAttribute("aria-description", a) : e.removeAttribute("aria-description");
+		let i = r(n(this.ariaDescribedby));
+		i ? e.setAttribute("aria-description", i) : e.removeAttribute("aria-description");
 	}
 	_aria() {
 		return {
@@ -300,10 +300,10 @@ var i = {
 		}
 	}
 };
-customElements.define("pastis-button", a);
+customElements.define("pastis-button", o);
 //#endregion
 //#region src/components/button/pastis-button-split.js
-var o = class extends e {
+var s = class extends e {
 	static properties = {
 		href: { type: String },
 		copy: { type: String },
@@ -426,14 +426,14 @@ var o = class extends e {
     `;
 	}
 };
-customElements.define("pastis-button-split", o);
+customElements.define("pastis-button-split", s);
 //#endregion
 //#region src/components/input/pastis-input.js
-var s = 0;
-function c(e) {
+var c = 0;
+function l(e) {
 	return Array.from(e.elements).find((e) => e.type === "submit" || e instanceof HTMLInputElement && e.type === "image");
 }
-var l = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, u = class extends e {
+var u = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, d = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -606,7 +606,7 @@ var l = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, 
     }
   `;
 	constructor() {
-		super(), this.type = "text", this.value = "", this.disabled = !1, this.readonly = !1, this.required = !1, this.size = "md", this.autofocus = !1, this._slotted = null, this._owned = {}, this._slottedObserver = new MutationObserver(() => this.requestUpdate()), this._formDisabled = !1, this._inputId = `pastis-input-${++s}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
+		super(), this.type = "text", this.value = "", this.disabled = !1, this.readonly = !1, this.required = !1, this.size = "md", this.autofocus = !1, this._slotted = null, this._owned = {}, this._slottedObserver = new MutationObserver(() => this.requestUpdate()), this._formDisabled = !1, this._inputId = `pastis-input-${++c}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
 	}
 	get form() {
 		return this._internals.form;
@@ -781,9 +781,9 @@ var l = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, 
 		if (!t || e.composedPath()[0] !== t) return;
 		let n = this._slotted ? this._slotted.form : this.form;
 		if (!n) return;
-		let r = c(n);
+		let r = l(n);
 		if (this._slotted) {
-			if (e.defaultPrevented || r && l(r)) return;
+			if (e.defaultPrevented || r && u(r)) return;
 			e.preventDefault(), this._submitVia(n, r);
 			return;
 		}
@@ -799,10 +799,10 @@ var l = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, 
 		t.disabled || t.matches(":disabled") || t.click();
 	}
 };
-customElements.define("pastis-input", u);
+customElements.define("pastis-input", d);
 //#endregion
 //#region src/components/checkbox/pastis-checkbox.js
-var d = class extends e {
+var ee = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -1019,28 +1019,28 @@ var d = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-checkbox", d);
+customElements.define("pastis-checkbox", ee);
 //#endregion
 //#region node_modules/lit-html/lit-html.js
-var f = globalThis, p = (e) => e, m = f.trustedTypes, h = m ? m.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, g = "$lit$", _ = `lit$${Math.random().toFixed(9).slice(2)}$`, v = "?" + _, ee = `<${v}>`, y = document, b = () => y.createComment(""), x = (e) => e === null || typeof e != "object" && typeof e != "function", S = Array.isArray, te = (e) => S(e) || typeof e?.[Symbol.iterator] == "function", C = "[ 	\n\f\r]", w = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, T = /-->/g, E = />/g, D = RegExp(`>|${C}(?:([^\\s"'>=/]+)(${C}*=${C}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), ne = /'/g, re = /"/g, O = /^(?:script|style|textarea|title)$/i, k = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), j = /* @__PURE__ */ new WeakMap(), M = y.createTreeWalker(y, 129);
+var f = globalThis, p = (e) => e, m = f.trustedTypes, h = m ? m.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, g = "$lit$", _ = `lit$${Math.random().toFixed(9).slice(2)}$`, v = "?" + _, te = `<${v}>`, y = document, b = () => y.createComment(""), x = (e) => e === null || typeof e != "object" && typeof e != "function", S = Array.isArray, ne = (e) => S(e) || typeof e?.[Symbol.iterator] == "function", C = "[ 	\n\f\r]", w = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, T = /-->/g, E = />/g, D = RegExp(`>|${C}(?:([^\\s"'>=/]+)(${C}*=${C}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), re = /'/g, ie = /"/g, O = /^(?:script|style|textarea|title)$/i, k = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), j = /* @__PURE__ */ new WeakMap(), M = y.createTreeWalker(y, 129);
 function N(e, t) {
 	if (!S(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
 	return h === void 0 ? t : h.createHTML(t);
 }
-var ie = (e, t) => {
+var ae = (e, t) => {
 	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = w;
 	for (let t = 0; t < n; t++) {
 		let n = e[t], s, c, l = -1, u = 0;
-		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === w ? c[1] === "!--" ? o = T : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = D) : (O.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = D) : o = E : o === D ? c[0] === ">" ? (o = i ?? w, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? D : c[3] === "\"" ? re : ne) : o === re || o === ne ? o = D : o === T || o === E ? o = w : (o = D, i = void 0);
+		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === w ? c[1] === "!--" ? o = T : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = D) : (O.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = D) : o = E : o === D ? c[0] === ">" ? (o = i ?? w, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? D : c[3] === "\"" ? ie : re) : o === ie || o === re ? o = D : o === T || o === E ? o = w : (o = D, i = void 0);
 		let d = o === D && e[t + 1].startsWith("/>") ? " " : "";
-		a += o === w ? n + ee : l >= 0 ? (r.push(s), n.slice(0, l) + g + n.slice(l) + _ + d) : n + _ + (l === -2 ? t : d);
+		a += o === w ? n + te : l >= 0 ? (r.push(s), n.slice(0, l) + g + n.slice(l) + _ + d) : n + _ + (l === -2 ? t : d);
 	}
 	return [N(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 }, P = class e {
 	constructor({ strings: t, _$litType$: n }, r) {
 		let i;
 		this.parts = [];
-		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = ie(t, n);
+		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = ae(t, n);
 		if (this.el = e.createElement(l, r), M.currentNode = this.el.content, n === 2 || n === 3) {
 			let e = this.el.content.firstChild;
 			e.replaceWith(...e.childNodes);
@@ -1054,7 +1054,7 @@ var ie = (e, t) => {
 						index: a,
 						name: r[2],
 						strings: n,
-						ctor: r[1] === "." ? oe : r[1] === "?" ? se : r[1] === "@" ? ce : L
+						ctor: r[1] === "." ? se : r[1] === "?" ? ce : r[1] === "@" ? le : L
 					}), i.removeAttribute(e);
 				} else e.startsWith(_) && (c.push({
 					type: 6,
@@ -1095,7 +1095,7 @@ function F(e, t, n = e, r) {
 	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = x(t) ? void 0 : t._$litDirective$;
 	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = F(e, i._$AS(e, t.values), i, r)), t;
 }
-var ae = class {
+var oe = class {
 	constructor(e, t) {
 		this._$AV = [], this._$AN = void 0, this._$AD = e, this._$AM = t;
 	}
@@ -1112,7 +1112,7 @@ var ae = class {
 		for (; s !== void 0;) {
 			if (a === s.index) {
 				let t;
-				s.type === 2 ? t = new I(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new le(i, this, e)), this._$AV.push(t), s = n[++o];
+				s.type === 2 ? t = new I(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new ue(i, this, e)), this._$AV.push(t), s = n[++o];
 			}
 			a !== s?.index && (i = M.nextNode(), a++);
 		}
@@ -1140,7 +1140,7 @@ var ae = class {
 		return this._$AB;
 	}
 	_$AI(e, t = this) {
-		e = F(this, e, t), x(e) ? e === A || e == null || e === "" ? (this._$AH !== A && this._$AR(), this._$AH = A) : e !== this._$AH && e !== k && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? te(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
+		e = F(this, e, t), x(e) ? e === A || e == null || e === "" ? (this._$AH !== A && this._$AR(), this._$AH = A) : e !== this._$AH && e !== k && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? ne(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
 	}
 	O(e) {
 		return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -1155,7 +1155,7 @@ var ae = class {
 		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = P.createElement(N(n.h, n.h[0]), this.options)), n);
 		if (this._$AH?._$AD === r) this._$AH.p(t);
 		else {
-			let e = new ae(r, this), n = e.u(this.options);
+			let e = new oe(r, this), n = e.u(this.options);
 			e.p(t), this.T(n), this._$AH = e;
 		}
 	}
@@ -1200,21 +1200,21 @@ var ae = class {
 	j(e) {
 		e === A ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
 	}
-}, oe = class extends L {
+}, se = class extends L {
 	constructor() {
 		super(...arguments), this.type = 3;
 	}
 	j(e) {
 		this.element[this.name] = e === A ? void 0 : e;
 	}
-}, se = class extends L {
+}, ce = class extends L {
 	constructor() {
 		super(...arguments), this.type = 4;
 	}
 	j(e) {
 		this.element.toggleAttribute(this.name, !!e && e !== A);
 	}
-}, ce = class extends L {
+}, le = class extends L {
 	constructor(e, t, n, r, i) {
 		super(e, t, n, r, i), this.type = 5;
 	}
@@ -1226,7 +1226,7 @@ var ae = class {
 	handleEvent(e) {
 		typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, e) : this._$AH.handleEvent(e);
 	}
-}, le = class {
+}, ue = class {
 	constructor(e, t, n) {
 		this.element = e, this.type = 6, this._$AN = void 0, this._$AM = t, this.options = n;
 	}
@@ -1236,8 +1236,8 @@ var ae = class {
 	_$AI(e) {
 		F(this, e);
 	}
-}, ue = f.litHtmlPolyfillSupport;
-ue?.(P, I), (f.litHtmlVersions ??= []).push("3.3.2");
+}, de = f.litHtmlPolyfillSupport;
+de?.(P, I), (f.litHtmlVersions ??= []).push("3.3.2");
 //#endregion
 //#region node_modules/lit-html/directives/if-defined.js
 var R = (e) => e ?? A, z = class extends e {
@@ -2045,14 +2045,14 @@ function W() {
 	for (; e?.shadowRoot?.activeElement;) e = e.shadowRoot.activeElement;
 	return e;
 }
-function de(e) {
+function fe(e) {
 	for (let t = W(); t; t = t.getRootNode().host) if (t === e || e.contains(t)) return !0;
 	return !1;
 }
-function fe(e) {
+function pe(e) {
 	return e.tabIndex < 0 || e.localName === "slot" || e.localName === "a" && !e.hasAttribute("href") && !e.hasAttribute("tabindex") || e.disabled || e.matches(":disabled") || e.inert || e.closest("[inert]") ? !1 : typeof e.checkVisibility == "function" ? e.checkVisibility({ visibilityProperty: !0 }) : e.getClientRects().length > 0;
 }
-function pe(e) {
+function me(e) {
 	let t = (e) => e instanceof HTMLInputElement && e.type === "radio" && e.name ? e.name : null, n = /* @__PURE__ */ new Map();
 	for (let r of e) {
 		let e = t(r);
@@ -2067,7 +2067,7 @@ function pe(e) {
 	return e.filter((e) => !t(e) || r.has(e));
 }
 function* G(e) {
-	for (let t of e) if (t instanceof HTMLElement) if (fe(t) && (yield t), t.localName === "slot") {
+	for (let t of e) if (t instanceof HTMLElement) if (pe(t) && (yield t), t.localName === "slot") {
 		let e = t.assignedElements({ flatten: !0 });
 		yield* G(e.length ? e : t.children);
 	} else t.shadowRoot ? yield* G(t.shadowRoot.children) : yield* G(t.children);
@@ -2229,7 +2229,7 @@ var K = class extends e {
 	}
 	_getFocusableElements() {
 		let e = this.shadowRoot?.querySelector(".dialog");
-		return e ? pe([...G(e.children)]) : [];
+		return e ? me([...G(e.children)]) : [];
 	}
 	willUpdate(e) {
 		e.has("open") && !this.open && this._dialog?.close();
@@ -2254,7 +2254,7 @@ var K = class extends e {
 			this.shadowRoot.querySelector(".close-btn"),
 			this.shadowRoot.querySelector(".modal-body")
 		];
-		for (let e of t) if (e && (e.focus(), de(e))) return;
+		for (let e of t) if (e && (e.focus(), fe(e))) return;
 	}
 	render() {
 		if (!this.open) return n``;
@@ -3134,7 +3134,7 @@ var Z = class extends e {
 customElements.define("pastis-dropdown", Z);
 //#endregion
 //#region src/components/tabs/pastis-tabs.js
-var Q = class extends e {
+var he = class extends e {
 	static properties = {
 		tabs: { type: Array },
 		active: {
@@ -3332,10 +3332,10 @@ var Q = class extends e {
     `;
 	}
 };
-customElements.define("pastis-tabs", Q);
+customElements.define("pastis-tabs", he);
 //#endregion
 //#region src/components/accordion/pastis-accordion.js
-var me = class extends e {
+var ge = class extends e {
 	static properties = {
 		items: { type: Array },
 		multiple: {
@@ -3515,10 +3515,10 @@ var me = class extends e {
     `;
 	}
 };
-customElements.define("pastis-accordion", me);
+customElements.define("pastis-accordion", ge);
 //#endregion
 //#region src/components/breadcrumb/pastis-breadcrumb.js
-var he = class extends e {
+var _e = class extends e {
 	static properties = {
 		items: { type: Array },
 		separator: { type: String },
@@ -3645,10 +3645,10 @@ var he = class extends e {
     `;
 	}
 };
-customElements.define("pastis-breadcrumb", he);
+customElements.define("pastis-breadcrumb", _e);
 //#endregion
 //#region src/components/pagination/pastis-pagination.js
-var ge = class extends e {
+var ve = class extends e {
 	static properties = {
 		total: { type: Number },
 		page: {
@@ -3844,10 +3844,10 @@ var ge = class extends e {
     `;
 	}
 };
-customElements.define("pastis-pagination", ge);
+customElements.define("pastis-pagination", ve);
 //#endregion
 //#region src/components/progress/pastis-progress.js
-var _e = class extends e {
+var ye = class extends e {
 	static properties = {
 		value: {
 			type: Number,
@@ -4060,10 +4060,10 @@ var _e = class extends e {
     `;
 	}
 };
-customElements.define("pastis-progress", _e);
+customElements.define("pastis-progress", ye);
 //#endregion
 //#region src/components/tag/pastis-tag.js
-var ve = class extends e {
+var be = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -4206,10 +4206,10 @@ var ve = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-tag", ve);
+customElements.define("pastis-tag", be);
 //#endregion
 //#region src/components/divider/pastis-divider.js
-var ye = class extends e {
+var xe = class extends e {
 	static properties = {
 		orientation: {
 			type: String,
@@ -4336,10 +4336,10 @@ var ye = class extends e {
     `;
 	}
 };
-customElements.define("pastis-divider", ye);
+customElements.define("pastis-divider", xe);
 //#endregion
 //#region src/components/hero/pastis-hero.js
-var be = class extends e {
+var Se = class extends e {
 	static properties = {
 		heading: { type: String },
 		subheading: { type: String },
@@ -4566,10 +4566,10 @@ var be = class extends e {
     `;
 	}
 };
-customElements.define("pastis-hero", be);
+customElements.define("pastis-hero", Se);
 //#endregion
 //#region src/components/search/pastis-search.js
-var xe = class extends e {
+var Ce = class extends e {
 	static properties = {
 		placeholder: { type: String },
 		value: {
@@ -4864,10 +4864,10 @@ var xe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-search", xe);
+customElements.define("pastis-search", Ce);
 //#endregion
 //#region src/components/drawer/pastis-drawer.js
-var Se = class extends e {
+var we = class extends e {
 	static properties = {
 		open: {
 			type: Boolean,
@@ -5102,10 +5102,10 @@ var Se = class extends e {
     ` : n``;
 	}
 };
-customElements.define("pastis-drawer", Se);
+customElements.define("pastis-drawer", we);
 //#endregion
 //#region src/components/file-upload/pastis-file-upload.js
-var Ce = class extends e {
+var Te = class extends e {
 	static properties = {
 		accept: { type: String },
 		multiple: {
@@ -5412,10 +5412,10 @@ var Ce = class extends e {
     `;
 	}
 };
-customElements.define("pastis-file-upload", Ce);
+customElements.define("pastis-file-upload", Te);
 //#endregion
 //#region src/components/cookie-banner/pastis-cookie-banner.js
-var we = class extends e {
+var Ee = class extends e {
 	static properties = {
 		visible: {
 			type: Boolean,
@@ -5737,10 +5737,10 @@ var we = class extends e {
     `;
 	}
 };
-customElements.define("pastis-cookie-banner", we);
+customElements.define("pastis-cookie-banner", Ee);
 //#endregion
 //#region src/components/radio/pastis-radio.js
-var Te = class extends e {
+var De = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5852,10 +5852,10 @@ var Te = class extends e {
 		(e.key === " " || e.key === "Enter") && (e.preventDefault(), this.disabled || (this.checked = !0, this._handleChange({ target: { checked: !0 } })));
 	}
 };
-customElements.define("pastis-radio", Te);
+customElements.define("pastis-radio", De);
 //#endregion
 //#region src/components/stat-card/pastis-stat-card.js
-var Ee = class extends e {
+var Oe = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5961,10 +5961,10 @@ var Ee = class extends e {
     `;
 	}
 };
-customElements.define("pastis-stat-card", Ee);
+customElements.define("pastis-stat-card", Oe);
 //#endregion
 //#region src/components/table-row/pastis-table-row.js
-var De = class extends e {
+var ke = class extends e {
 	static properties = {
 		columns: { type: Array },
 		rows: { type: Array },
@@ -6175,10 +6175,10 @@ var De = class extends e {
     `;
 	}
 };
-customElements.define("pastis-table", De);
+customElements.define("pastis-table", ke);
 //#endregion
 //#region src/components/code-block/pastis-code-block.js
-var Oe = class extends e {
+var Ae = class extends e {
 	static properties = {
 		code: { type: String },
 		language: { type: String },
@@ -6338,10 +6338,10 @@ var Oe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-code-block", Oe);
+customElements.define("pastis-code-block", Ae);
 //#endregion
 //#region src/components/empty-state/pastis-empty-state.js
-var ke = class extends e {
+var je = class extends e {
 	static properties = {
 		icon: { type: String },
 		heading: { type: String },
@@ -6483,10 +6483,10 @@ var ke = class extends e {
     `;
 	}
 };
-customElements.define("pastis-empty-state", ke);
+customElements.define("pastis-empty-state", je);
 //#endregion
 //#region src/components/filter-chip/pastis-filter-chip.js
-var Ae = class extends e {
+var Me = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -6638,8 +6638,8 @@ var Ae = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-chip", Ae);
-var je = class extends e {
+customElements.define("pastis-filter-chip", Me);
+var Ne = class extends e {
 	static properties = {
 		filters: { type: Array },
 		active: { type: Array },
@@ -6726,10 +6726,10 @@ var je = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-bar", je);
+customElements.define("pastis-filter-bar", Ne);
 //#endregion
 //#region src/components/theme-toggle/pastis-theme-toggle.js
-var Me = class extends e {
+var Pe = class extends e {
 	static properties = {
 		theme: {
 			type: String,
@@ -6836,10 +6836,10 @@ var Me = class extends e {
     `;
 	}
 };
-customElements.define("pastis-theme-toggle", Me);
+customElements.define("pastis-theme-toggle", Pe);
 //#endregion
 //#region src/components/carousel/pastis-carousel.js
-var Ne = class extends e {
+var Fe = class extends e {
 	static properties = {
 		slides: { type: Array },
 		active: {
@@ -7155,10 +7155,10 @@ var Ne = class extends e {
     `;
 	}
 };
-customElements.define("pastis-carousel", Ne);
+customElements.define("pastis-carousel", Fe);
 //#endregion
 //#region src/components/timeline/pastis-timeline.js
-var Pe = class extends e {
+var Ie = class extends e {
 	static properties = {
 		items: { type: Array },
 		variant: {
@@ -7253,10 +7253,10 @@ var Pe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-timeline", Pe);
+customElements.define("pastis-timeline", Ie);
 //#endregion
 //#region src/components/testimonial/pastis-testimonial.js
-var $ = class extends e {
+var Le = class extends e {
 	static properties = {
 		quote: { type: String },
 		name: { type: String },
@@ -7432,10 +7432,10 @@ var $ = class extends e {
     `;
 	}
 };
-customElements.define("pastis-testimonial", $);
+customElements.define("pastis-testimonial", Le);
 //#endregion
 //#region src/components/section/pastis-section.js
-var Fe = class extends e {
+var Re = class extends e {
 	static properties = {
 		label: { type: String },
 		heading: { type: String },
@@ -7566,10 +7566,10 @@ var Fe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-section", Fe);
+customElements.define("pastis-section", Re);
 //#endregion
 //#region src/components/footer/pastis-footer.js
-var Ie = class extends e {
+var ze = class extends e {
 	static properties = {
 		brand: { type: String },
 		tagline: { type: String },
@@ -7797,10 +7797,10 @@ var Ie = class extends e {
     `;
 	}
 };
-customElements.define("pastis-footer", Ie);
+customElements.define("pastis-footer", ze);
 //#endregion
 //#region src/components/nav/pastis-nav.js
-var Le = class extends e {
+var Be = class extends e {
 	static properties = {
 		brand: { type: String },
 		items: { type: Array },
@@ -8272,10 +8272,10 @@ var Le = class extends e {
     `;
 	}
 };
-customElements.define("pastis-nav", Le);
+customElements.define("pastis-nav", Be);
 //#endregion
 //#region src/components/project-card/pastis-project-card.js
-var Re = class extends e {
+var Ve = class extends e {
 	static properties = {
 		href: { type: String },
 		heading: { type: String },
@@ -8533,10 +8533,10 @@ var Re = class extends e {
     `;
 	}
 };
-customElements.define("pastis-project-card", Re);
+customElements.define("pastis-project-card", Ve);
 //#endregion
 //#region src/components/statement/pastis-statement.js
-var ze = class extends e {
+var He = class extends e {
 	static properties = {
 		eyebrow: { type: String },
 		size: {
@@ -8636,10 +8636,10 @@ var ze = class extends e {
     `;
 	}
 };
-customElements.define("pastis-statement", ze);
+customElements.define("pastis-statement", He);
 //#endregion
 //#region src/components/token-swatch/pastis-token-swatch.js
-var Be = class extends e {
+var Q = class extends e {
 	static properties = {
 		token: { type: String },
 		label: { type: String },
@@ -8713,10 +8713,10 @@ var Be = class extends e {
     `;
 	}
 };
-customElements.define("pastis-token-swatch", Be);
+customElements.define("pastis-token-swatch", Q);
 //#endregion
 //#region src/components/spec-table/pastis-spec-table.js
-var Ve = class extends e {
+var Ue = class extends e {
 	static properties = {
 		tokens: { type: Array },
 		kind: {
@@ -8882,10 +8882,10 @@ var Ve = class extends e {
     `;
 	}
 };
-customElements.define("pastis-spec-table", Ve);
+customElements.define("pastis-spec-table", Ue);
 //#endregion
 //#region src/components/shelf/pastis-shelf.js
-var He = class extends e {
+var We = class extends e {
 	static properties = {
 		label: { type: String },
 		stagger: { type: Number },
@@ -9080,6 +9080,539 @@ var He = class extends e {
     `;
 	}
 };
-customElements.define("pastis-shelf", He);
+customElements.define("pastis-shelf", We);
 //#endregion
-export { me as PastisAccordion, U as PastisAlert, V as PastisAvatar, B as PastisBadge, he as PastisBreadcrumb, a as PastisButton, o as PastisButtonSplit, H as PastisCard, Ne as PastisCarousel, d as PastisCheckbox, Oe as PastisCodeBlock, we as PastisCookieBanner, ye as PastisDivider, Se as PastisDrawer, Z as PastisDropdown, ke as PastisEmptyState, Ce as PastisFileUpload, je as PastisFilterBar, Ae as PastisFilterChip, Ie as PastisFooter, be as PastisHero, u as PastisInput, K as PastisModal, Le as PastisNav, ge as PastisPagination, _e as PastisProgress, Re as PastisProjectCard, Te as PastisRadio, xe as PastisSearch, Fe as PastisSection, He as PastisShelf, Y as PastisSkeleton, Ve as PastisSpecTable, J as PastisSpinner, Ee as PastisStatCard, ze as PastisStatement, De as PastisTable, Q as PastisTabs, ve as PastisTag, $ as PastisTestimonial, Me as PastisThemeToggle, Pe as PastisTimeline, q as PastisToast, z as PastisToggle, Be as PastisTokenSwatch, X as PastisTooltip };
+//#region src/components/icon/icons.js
+var $ = {
+	today: i`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,
+	calendar: i`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,
+	list: i`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,
+	search: i`<path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" />`,
+	flag: i`<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />`,
+	repeat: i`<path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" />`,
+	clock: i`<circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />`,
+	tag: i`<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />`,
+	subtasks: i`<path d="M8 5h13" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="M3 10a2 2 0 0 0 2 2h3" /><path d="M3 5v12a2 2 0 0 0 2 2h3" />`,
+	alert: i`<circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" />`,
+	plus: i`<path d="M5 12h14" /><path d="M12 5v14" />`,
+	check: i`<path d="M20 6 9 17l-5-5" />`,
+	close: i`<path d="M18 6 6 18" /><path d="m6 6 12 12" />`,
+	more: i`<circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />`,
+	edit: i`<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" />`,
+	trash: i`<path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />`,
+	"chevron-right": i`<path d="m9 18 6-6-6-6" />`,
+	"chevron-left": i`<path d="m15 18-6-6 6-6" />`,
+	inbox: i`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,
+	"trash-restore": i`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`
+}, Ge = Object.keys($), Ke = class extends e {
+	static properties = {
+		name: {
+			type: String,
+			reflect: !0
+		},
+		size: {
+			type: String,
+			reflect: !0
+		},
+		label: { type: String }
+	};
+	static styles = t`
+    :host {
+      --_size: calc(var(--space-md, 16px) + var(--space-xs, 4px));
+      display: inline-flex;
+      flex-shrink: 0;
+      width: var(--pastis-icon-size, var(--_size));
+      height: var(--pastis-icon-size, var(--_size));
+      vertical-align: middle;
+    }
+    :host([size="sm"]) { --_size: var(--space-md, 16px); }
+    :host([size="lg"]) { --_size: var(--space-lg, 24px); }
+    :host([hidden]) { display: none; }
+
+    svg { display: block; width: 100%; height: 100%; }
+  `;
+	constructor() {
+		super(), this.size = "md";
+	}
+	willUpdate(e) {
+		e.has("name") && !Object.hasOwn($, this.name ?? "") && console.warn(`pastis-icon: unknown icon name "${this.name ?? ""}"`), this.label ? (this.setAttribute("role", "img"), this.setAttribute("aria-label", this.label), this.removeAttribute("aria-hidden")) : (this.removeAttribute("role"), this.removeAttribute("aria-label"), this.setAttribute("aria-hidden", "true"));
+	}
+	render() {
+		let e = Object.hasOwn($, this.name ?? "") ? $[this.name] : null;
+		return e ? n`<svg
+      part="svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >${e}</svg>` : r;
+	}
+};
+customElements.define("pastis-icon", Ke);
+//#endregion
+//#region src/components/task-row/pastis-task-row.js
+var qe = [
+	"",
+	"low",
+	"medium",
+	"high"
+], Je = "Untitled task", Ye = class extends e {
+	static properties = {
+		taskTitle: {
+			type: String,
+			attribute: "task-title"
+		},
+		done: {
+			type: Boolean,
+			reflect: !0
+		},
+		toggleLabel: {
+			type: String,
+			attribute: "toggle-label"
+		},
+		due: { type: String },
+		overdue: {
+			type: Boolean,
+			reflect: !0
+		},
+		repeats: {
+			type: Boolean,
+			reflect: !0
+		},
+		flagged: {
+			type: Boolean,
+			reflect: !0
+		},
+		priority: {
+			type: Number,
+			reflect: !0
+		},
+		subtasks: { type: String },
+		tags: { type: Array },
+		indent: {
+			type: Boolean,
+			reflect: !0
+		},
+		disabled: {
+			type: Boolean,
+			reflect: !0
+		}
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-xs, 4px);
+      padding-block: var(--space-xs, 4px);
+      padding-inline-end: var(--space-sm, 8px);
+      border-bottom: var(--border-width, 1px) solid var(--border-subtle, #221c17);
+      font-family: var(--font-family-body, sans-serif);
+      color: var(--text-primary, #f4eee3);
+    }
+
+    :host([indent]) .row { padding-inline-start: var(--space-xl, 32px); }
+
+    /* ── Toggle: a 44 × 44 px target around a 20 px circle ── */
+    .toggle {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-full, 9999px);
+      background: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(var(--space-md, 16px) + var(--space-xs, 4px));
+      height: calc(var(--space-md, 16px) + var(--space-xs, 4px));
+      border: calc(var(--border-width, 1px) * 2) solid var(--text-tertiary, #a39b90);
+      border-radius: var(--radius-full, 9999px);
+      color: var(--action-primary-text, #0d0d0d);
+      transition: background var(--transition-fast, 120ms ease), border-color var(--transition-fast, 120ms ease);
+    }
+
+    .circle pastis-icon { --pastis-icon-size: calc(var(--space-sm, 8px) * 1.5); }
+
+    .toggle:hover .circle { border-color: var(--action-primary, #fcba28); }
+
+    :host([done]) .circle {
+      background: var(--action-primary, #fcba28);
+      border-color: var(--action-primary, #fcba28);
+    }
+
+    .toggle:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    /* ── Title and meta ── */
+    .body {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: var(--space-xs, 4px);
+    }
+
+    .title {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-xs, 2px);
+      background: none;
+      font: inherit;
+      font-size: var(--font-size-body, 16px);
+      line-height: var(--line-height-h4, 1.3);
+      text-align: start;
+      text-transform: none;
+      color: var(--text-primary, #f4eee3);
+      cursor: pointer;
+    }
+
+    /* The whole body (title and meta) is the title's click target */
+    .title::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    .title:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
+
+    .title-text {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+    }
+
+    :host([done]) .title { color: var(--text-tertiary, #a39b90); }
+    :host([done]) .title-text { text-decoration: line-through; }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs, 4px) var(--space-sm, 8px);
+      font-size: var(--font-size-caption, 12px);
+      line-height: var(--line-height-caption, 1.4);
+      color: var(--text-tertiary, #a39b90);
+    }
+
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs, 4px);
+    }
+
+    .meta-item.overdue { color: var(--text-error, #f45f6b); }
+    .meta-item.flagged,
+    .meta-item.priority { color: var(--text-accent, #fcba28); }
+    .meta-item.priority { font-weight: var(--font-weight-bold, 700); }
+    .meta-item.tags { flex-wrap: wrap; }
+
+    .tags pastis-tag::part(tag) {
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    /* ── Actions ── */
+    .actions {
+      flex: none;
+      display: flex;
+      align-items: center;
+      align-self: center;
+      gap: var(--space-xs, 4px);
+    }
+
+    /* ── Disabled ── */
+    button:disabled { cursor: not-allowed; }
+    :host([disabled]) .title { color: var(--text-disabled, #4a4139); }
+    :host([disabled]) .circle { border-color: var(--text-disabled, #4a4139); }
+    :host([disabled][done]) .circle { background: var(--text-disabled, #4a4139); }
+    :host([disabled]) .toggle:hover .circle { border-color: var(--text-disabled, #4a4139); }
+
+    @media (forced-colors: active) {
+      :host([done]) .circle { background: CanvasText; border-color: CanvasText; color: Canvas; }
+    }
+  `;
+	constructor() {
+		super(), this.taskTitle = "", this.done = !1, this.overdue = !1, this.repeats = !1, this.flagged = !1, this.priority = 0, this.tags = [], this.indent = !1, this.disabled = !1;
+	}
+	connectedCallback() {
+		super.connectedCallback(), this.hasAttribute("role") || this.setAttribute("role", "listitem");
+	}
+	_metaItems() {
+		let e = [];
+		(this.due || this.overdue) && e.push({
+			text: this.overdue ? this.due ? `Overdue: ${this.due}` : "Overdue" : this.due,
+			view: n`<span class="meta-item due ${this.overdue ? "overdue" : ""}">
+          <pastis-icon name=${this.overdue ? "alert" : "clock"} size="sm"></pastis-icon>
+          <span>${this.due || "Overdue"}</span>
+        </span>`
+		}), this.repeats && e.push({
+			text: "Repeats",
+			view: n`<span class="meta-item repeats"><pastis-icon name="repeat" size="sm"></pastis-icon></span>`
+		}), this.flagged && e.push({
+			text: "Flagged",
+			view: n`<span class="meta-item flagged"><pastis-icon name="flag" size="sm"></pastis-icon></span>`
+		});
+		let t = Math.trunc(Number(this.priority));
+		t >= 1 && t <= 3 && e.push({
+			text: `Priority ${qe[t]}`,
+			view: n`<span class="meta-item priority">${"!".repeat(t)}</span>`
+		}), this.subtasks && e.push({
+			text: `Subtasks ${this.subtasks}`,
+			view: n`<span class="meta-item subtasks">
+          <pastis-icon name="subtasks" size="sm"></pastis-icon><span>${this.subtasks}</span>
+        </span>`
+		});
+		let r = Array.isArray(this.tags) ? this.tags.filter(Boolean).map(String) : [];
+		return r.length && e.push({
+			text: `Tags: ${r.join(", ")}`,
+			view: n`<span class="meta-item tags">
+          ${r.map((e) => n`<pastis-tag size="sm">${e}</pastis-tag>`)}
+        </span>`
+		}), e;
+	}
+	render() {
+		let e = this._metaItems(), t = !!String(this.taskTitle ?? "").trim(), i = t ? this.taskTitle : Je;
+		return n`
+      <div class="row" part="row">
+        <button
+          class="toggle"
+          part="toggle"
+          type="button"
+          role="checkbox"
+          aria-checked=${this.done ? "true" : "false"}
+          aria-label=${this.toggleLabel || `Complete ${i}`}
+          ?disabled=${this.disabled}
+          @click=${this._onToggle}
+          @keydown=${this._onToggleKeydown}
+        >
+          <span class="circle" part="circle">
+            ${this.done ? n`<pastis-icon name="check"></pastis-icon>` : r}
+          </span>
+        </button>
+        <div class="body">
+          <button
+            class="title"
+            part="title"
+            type="button"
+            aria-label=${t ? r : Je}
+            aria-describedby=${e.length ? "description" : r}
+            ?disabled=${this.disabled}
+            @click=${this._onOpen}
+          ><span class="title-text">${this.taskTitle}</span></button>
+          ${e.length ? n`
+            <div class="meta" part="meta" aria-hidden="true">${e.map((e) => e.view)}</div>
+            <span id="description" hidden>${e.map((e) => e.text).join(", ")}</span>
+          ` : r}
+        </div>
+        <div class="actions" part="actions"><slot name="actions"></slot></div>
+      </div>
+    `;
+	}
+	_onToggleKeydown(e) {
+		e.key === "Enter" && e.preventDefault();
+	}
+	_onToggle() {
+		if (this.disabled) return;
+		let e = !this.done, t = new CustomEvent("pastis-toggle", {
+			detail: { done: e },
+			bubbles: !0,
+			composed: !0,
+			cancelable: !0
+		});
+		this.dispatchEvent(t) && (this.done = e);
+	}
+	_onOpen() {
+		this.disabled || this.dispatchEvent(new CustomEvent("pastis-open", {
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+};
+customElements.define("pastis-task-row", Ye);
+//#endregion
+//#region src/components/tab-bar/pastis-tab-bar.js
+var Xe = class extends e {
+	static properties = { label: { type: String } };
+	static styles = t`
+    :host {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 100;
+      display: block;
+    }
+    :host([hidden]) { display: none; }
+
+    nav {
+      display: flex;
+      align-items: stretch;
+      box-sizing: border-box;
+      height: var(--pastis-tab-bar-height, calc(56px + env(safe-area-inset-bottom, 0px)));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      padding-left: max(var(--space-xs, 4px), env(safe-area-inset-left, 0px));
+      padding-right: max(var(--space-xs, 4px), env(safe-area-inset-right, 0px));
+      background: var(--bg-secondary, #16110d);
+      border-top: var(--border-width, 1px) solid var(--border-default, #3a322b);
+    }
+
+    ::slotted(*) { flex: 1 1 0; min-width: 0; }
+  `;
+	render() {
+		return n`<nav part="nav" aria-label=${this.label || r}><slot></slot></nav>`;
+	}
+}, Ze = class extends e {
+	static properties = {
+		href: { type: String },
+		icon: { type: String },
+		label: { type: String },
+		current: {
+			type: Boolean,
+			reflect: !0
+		},
+		badge: { type: String },
+		badgeLabel: {
+			type: String,
+			attribute: "badge-label"
+		}
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    a {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      box-sizing: border-box;
+      height: 100%;
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      padding: var(--space-xs, 4px);
+      border-radius: var(--radius-md, 6px);
+      color: var(--text-tertiary, #a39b90);
+      font-family: var(--font-family-body, sans-serif);
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-medium, 500);
+      line-height: var(--line-height-caption, 1.4);
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a:not([href]) { cursor: pointer; }
+
+    a:hover { color: var(--text-primary, #f4eee3); }
+
+    :host([current]) a { color: var(--text-accent, #fcba28); }
+
+    a:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .icon-wrap { position: relative; display: inline-flex; }
+
+    .label {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .badge {
+      position: absolute;
+      top: calc(var(--space-xs, 4px) * -1);
+      left: calc(100% - var(--space-sm, 8px));
+      min-width: var(--space-md, 16px);
+      height: var(--space-md, 16px);
+      padding-inline: var(--space-xs, 4px);
+      box-sizing: border-box;
+      border-radius: var(--radius-full, 9999px);
+      background: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      line-height: var(--space-md, 16px);
+      text-align: center;
+      white-space: nowrap;
+    }
+  `;
+	constructor() {
+		super(), this.current = !1;
+	}
+	willUpdate(e) {
+		!this.href && (!this.hasUpdated || e.has("href")) && console.warn(`pastis-tab-bar-item: "${this.label ?? ""}" has no href; it is rendered as role="link" with tabindex="0"`);
+	}
+	get _hasBadge() {
+		return this.badge !== void 0 && this.badge !== null && String(this.badge) !== "";
+	}
+	render() {
+		let e = this._hasBadge;
+		return n`
+      <a
+        part="link"
+        href=${this.href || r}
+        role=${this.href ? r : "link"}
+        tabindex=${this.href ? r : "0"}
+        aria-current=${this.current ? "page" : r}
+        aria-label=${e ? `${this.label ?? ""}, ${this.badgeLabel || this.badge}` : r}
+        @click=${this._onClick}
+        @keydown=${this._onKeydown}
+      >
+        <span class="icon-wrap">
+          ${this.icon ? n`<pastis-icon part="icon" name=${this.icon} size="lg"></pastis-icon>` : r}
+          ${e ? n`<span class="badge" part="badge" aria-hidden="true">${this.badge}</span>` : r}
+        </span>
+        <span class="label" part="label">${this.label}</span>
+      </a>
+    `;
+	}
+	_onKeydown(e) {
+		e.key !== "Enter" || this.href || (e.preventDefault(), e.currentTarget.click());
+	}
+	_onClick(e) {
+		if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+		let t = new CustomEvent("pastis-navigate", {
+			detail: { href: this.href },
+			bubbles: !0,
+			composed: !0,
+			cancelable: !0
+		});
+		this.dispatchEvent(t) || e.preventDefault();
+	}
+};
+customElements.define("pastis-tab-bar", Xe), customElements.define("pastis-tab-bar-item", Ze);
+//#endregion
+export { ge as PastisAccordion, U as PastisAlert, V as PastisAvatar, B as PastisBadge, _e as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, H as PastisCard, Fe as PastisCarousel, ee as PastisCheckbox, Ae as PastisCodeBlock, Ee as PastisCookieBanner, xe as PastisDivider, we as PastisDrawer, Z as PastisDropdown, je as PastisEmptyState, Te as PastisFileUpload, Ne as PastisFilterBar, Me as PastisFilterChip, ze as PastisFooter, Se as PastisHero, Ke as PastisIcon, d as PastisInput, K as PastisModal, Be as PastisNav, ve as PastisPagination, ye as PastisProgress, Ve as PastisProjectCard, De as PastisRadio, Ce as PastisSearch, Re as PastisSection, We as PastisShelf, Y as PastisSkeleton, Ue as PastisSpecTable, J as PastisSpinner, Oe as PastisStatCard, He as PastisStatement, Xe as PastisTabBar, Ze as PastisTabBarItem, ke as PastisTable, he as PastisTabs, be as PastisTag, Ye as PastisTaskRow, Le as PastisTestimonial, Pe as PastisThemeToggle, Ie as PastisTimeline, q as PastisToast, z as PastisToggle, Q as PastisTokenSwatch, X as PastisTooltip, Ge as iconNames, $ as icons };

@@ -1,0 +1,54 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as IconStories from '../../components/icon/pastis-icon.stories.js';
+
+<Meta of={IconStories} name="Usage" />
+
+# Icon
+
+`<pastis-icon>` draws one icon from the Pastis set: 20 line icons copied from
+[Lucide](https://lucide.dev) v1.71.0 (ISC licence, in `src/components/icon/LICENSE-lucide`).
+Icons are drawn with `stroke="currentColor"`, so they follow the text colour and the theme.
+Pastis adds icons to the set as the apps need them; there is no runtime icon dependency.
+
+<Canvas of={IconStories.Gallery} />
+
+## Usage
+
+- `name` picks the icon (`iconNames`, exported from the package, lists them all). An unknown
+  name renders nothing and logs a warning.
+- `size` is `sm` (16 px), `md` (20 px, the default) or `lg` (24 px); `--pastis-icon-size`
+  overrides it.
+- Set the colour with `color` on the icon or any ancestor; use text tokens such as
+  `--text-error` or `--text-accent`.
+- **Decorative by default.** Without `label` the icon is hidden from assistive technology. Most
+  icons sit next to text that already says the same thing, so that is what you want.
+- **Labelled** with `label`: the icon becomes an image with that name. Use it only when the icon
+  is the only thing carrying the meaning.
+
+<Controls of={IconStories.Default} />
+
+## Do
+
+```html
+<!-- The text says it; the icon is decorative -->
+<span><pastis-icon name="repeat" size="sm"></pastis-icon> Repeats every week</span>
+
+<!-- The icon alone carries the meaning: label it -->
+<span>Water the plants <pastis-icon name="repeat" size="sm" label="Repeats"></pastis-icon></span>
+
+<!-- An icon-only button: the button carries the name, the icon stays decorative -->
+<pastis-button aria-label="Delete Buy oat milk"><pastis-icon name="trash"></pastis-icon></pastis-button>
+```
+
+## Don't
+
+```html
+<!-- Don't label an icon next to text that says the same: screen readers hear it twice -->
+<span><pastis-icon name="flag" label="Flagged"></pastis-icon> Flagged</span>
+
+<!-- Don't colour icons with raw hex values or fills: use currentColor and the text tokens -->
+<pastis-icon name="alert" style="fill: #ff0000"></pastis-icon>
+
+<!-- Don't use Lucide names: the set has its own names (today, close, more, edit…) -->
+<pastis-icon name="x"></pastis-icon>
+```
