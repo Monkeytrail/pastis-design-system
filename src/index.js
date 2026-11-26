@@ -51,3 +51,4 @@ export * from './components/time-field/pastis-time-field.js';
 export * from './components/quick-add/pastis-quick-add.js';
 export * from './components/recurrence-picker/pastis-recurrence-picker.js';
 export * from './components/sortable/pastis-sortable.js';
+export * from './components/editor/pastis-editor.js';

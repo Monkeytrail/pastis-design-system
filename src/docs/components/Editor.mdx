@@ -1,0 +1,46 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as EditorStories from '../../components/editor/pastis-editor.stories.js';
+
+<Meta of={EditorStories} name="Usage" />
+
+# Editor
+
+`<pastis-editor>` is the frame of a rich-text field: a label, a toolbar row, the bordered field
+with the focus ring of the other fields, and helper or error text. It is a shell: the app brings
+the editor (Tiptap, ProseMirror, a `contenteditable`) and its toolbar buttons.
+
+<Canvas of={EditorStories.Default} />
+
+## Usage
+
+- **Content.** Mount the editor into the default slot. Slotted content is light DOM, out of
+  reach of shadow styles: load `pastis-design-system/src/components/editor/prose.css` and give
+  the editable element the class `pastis-prose` (headings, marks, lists, task lists, code,
+  quotes, rules; both themes; Tiptap's placeholder).
+- **Name.** The visible label cannot name a slotted element: give the editable element
+  `role="textbox"`, `aria-multiline="true"` and an `aria-label` with the label's text.
+- **Toolbar.** Put buttons in the `toolbar` slot, with `aria-pressed` for marks that are on. The
+  row is hidden while the slot is empty.
+- **Disabled.** `disabled` dims the frame and makes the slotted editor and toolbar `inert` (no
+  focus, no input).
+- **Tapping.** A tap anywhere in the content area focuses the editable element; with
+  `prose.css` loaded it fills the field.
+- **Helper and error.** `helper` shows below the field; `error` replaces it and marks the frame.
+
+<Controls of={EditorStories.Default} />
+
+## Do
+
+```html
+<pastis-editor label="Notes">
+  <pastis-button slot="toolbar" size="sm" variant="ghost" aria-pressed="false">Bold</pastis-button>
+  <div class="pastis-prose" role="textbox" aria-multiline="true" aria-label="Notes"></div>
+</pastis-editor>
+```
+
+## Don't
+
+```html
+<!-- Don't leave the editable element unnamed: the label does not reach it -->
+<pastis-editor label="Notes"><div contenteditable="true"></div></pastis-editor>
+```
