@@ -37,6 +37,8 @@
 :root,
 [data-theme="dark"],
 [data-theme="light"] [data-surface="inverse"] {
+  --color-scheme: dark;  /* native controls (date and time pickers) */
+
   --bg-primary:  #110d0a;
   --bg-secondary: #16110d;
   --bg-card:     #1b1612;
@@ -85,6 +87,8 @@
 /* ── Light mode — warm paper ── */
 [data-theme="light"],
 [data-theme="dark"] [data-surface="inverse"] {
+  --color-scheme: light;
+
   --bg-primary:  #f4f1ea;
   --bg-secondary: #fffdf9;
   --bg-card:     #fffdf9;

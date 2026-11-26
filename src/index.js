@@ -46,3 +46,5 @@ export * from './components/shelf/pastis-shelf.js';
 export * from './components/icon/pastis-icon.js';
 export * from './components/task-row/pastis-task-row.js';
 export * from './components/tab-bar/pastis-tab-bar.js';
+export * from './components/date-field/pastis-date-field.js';
+export * from './components/time-field/pastis-time-field.js';

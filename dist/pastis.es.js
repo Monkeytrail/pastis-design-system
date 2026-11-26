@@ -802,7 +802,7 @@ var u = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, 
 customElements.define("pastis-input", d);
 //#endregion
 //#region src/components/checkbox/pastis-checkbox.js
-var ee = class extends e {
+var f = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -1019,83 +1019,83 @@ var ee = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-checkbox", ee);
+customElements.define("pastis-checkbox", f);
 //#endregion
 //#region node_modules/lit-html/lit-html.js
-var f = globalThis, p = (e) => e, m = f.trustedTypes, h = m ? m.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, g = "$lit$", _ = `lit$${Math.random().toFixed(9).slice(2)}$`, v = "?" + _, te = `<${v}>`, y = document, b = () => y.createComment(""), x = (e) => e === null || typeof e != "object" && typeof e != "function", S = Array.isArray, ne = (e) => S(e) || typeof e?.[Symbol.iterator] == "function", C = "[ 	\n\f\r]", w = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, T = /-->/g, E = />/g, D = RegExp(`>|${C}(?:([^\\s"'>=/]+)(${C}*=${C}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), re = /'/g, ie = /"/g, O = /^(?:script|style|textarea|title)$/i, k = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), j = /* @__PURE__ */ new WeakMap(), M = y.createTreeWalker(y, 129);
-function N(e, t) {
-	if (!S(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
-	return h === void 0 ? t : h.createHTML(t);
+var p = globalThis, m = (e) => e, h = p.trustedTypes, ee = h ? h.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, te = "$lit$", g = `lit$${Math.random().toFixed(9).slice(2)}$`, _ = "?" + g, ne = `<${_}>`, v = document, y = () => v.createComment(""), b = (e) => e === null || typeof e != "object" && typeof e != "function", x = Array.isArray, re = (e) => x(e) || typeof e?.[Symbol.iterator] == "function", S = "[ 	\n\f\r]", C = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, w = /-->/g, T = />/g, E = RegExp(`>|${S}(?:([^\\s"'>=/]+)(${S}*=${S}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), ie = /'/g, ae = /"/g, oe = /^(?:script|style|textarea|title)$/i, D = Symbol.for("lit-noChange"), O = Symbol.for("lit-nothing"), k = /* @__PURE__ */ new WeakMap(), A = v.createTreeWalker(v, 129);
+function j(e, t) {
+	if (!x(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
+	return ee === void 0 ? t : ee.createHTML(t);
 }
-var ae = (e, t) => {
-	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = w;
+var se = (e, t) => {
+	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = C;
 	for (let t = 0; t < n; t++) {
 		let n = e[t], s, c, l = -1, u = 0;
-		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === w ? c[1] === "!--" ? o = T : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = D) : (O.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = D) : o = E : o === D ? c[0] === ">" ? (o = i ?? w, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? D : c[3] === "\"" ? ie : re) : o === ie || o === re ? o = D : o === T || o === E ? o = w : (o = D, i = void 0);
-		let d = o === D && e[t + 1].startsWith("/>") ? " " : "";
-		a += o === w ? n + te : l >= 0 ? (r.push(s), n.slice(0, l) + g + n.slice(l) + _ + d) : n + _ + (l === -2 ? t : d);
+		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === C ? c[1] === "!--" ? o = w : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = E) : (oe.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = E) : o = T : o === E ? c[0] === ">" ? (o = i ?? C, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? E : c[3] === "\"" ? ae : ie) : o === ae || o === ie ? o = E : o === w || o === T ? o = C : (o = E, i = void 0);
+		let d = o === E && e[t + 1].startsWith("/>") ? " " : "";
+		a += o === C ? n + ne : l >= 0 ? (r.push(s), n.slice(0, l) + te + n.slice(l) + g + d) : n + g + (l === -2 ? t : d);
 	}
-	return [N(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
-}, P = class e {
+	return [j(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+}, M = class e {
 	constructor({ strings: t, _$litType$: n }, r) {
 		let i;
 		this.parts = [];
-		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = ae(t, n);
-		if (this.el = e.createElement(l, r), M.currentNode = this.el.content, n === 2 || n === 3) {
+		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = se(t, n);
+		if (this.el = e.createElement(l, r), A.currentNode = this.el.content, n === 2 || n === 3) {
 			let e = this.el.content.firstChild;
 			e.replaceWith(...e.childNodes);
 		}
-		for (; (i = M.nextNode()) !== null && c.length < s;) {
+		for (; (i = A.nextNode()) !== null && c.length < s;) {
 			if (i.nodeType === 1) {
-				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(g)) {
-					let t = u[o++], n = i.getAttribute(e).split(_), r = /([.?@])?(.*)/.exec(t);
+				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(te)) {
+					let t = u[o++], n = i.getAttribute(e).split(g), r = /([.?@])?(.*)/.exec(t);
 					c.push({
 						type: 1,
 						index: a,
 						name: r[2],
 						strings: n,
-						ctor: r[1] === "." ? se : r[1] === "?" ? ce : r[1] === "@" ? le : L
+						ctor: r[1] === "." ? le : r[1] === "?" ? ue : r[1] === "@" ? de : F
 					}), i.removeAttribute(e);
-				} else e.startsWith(_) && (c.push({
+				} else e.startsWith(g) && (c.push({
 					type: 6,
 					index: a
 				}), i.removeAttribute(e));
-				if (O.test(i.tagName)) {
-					let e = i.textContent.split(_), t = e.length - 1;
+				if (oe.test(i.tagName)) {
+					let e = i.textContent.split(g), t = e.length - 1;
 					if (t > 0) {
-						i.textContent = m ? m.emptyScript : "";
-						for (let n = 0; n < t; n++) i.append(e[n], b()), M.nextNode(), c.push({
+						i.textContent = h ? h.emptyScript : "";
+						for (let n = 0; n < t; n++) i.append(e[n], y()), A.nextNode(), c.push({
 							type: 2,
 							index: ++a
 						});
-						i.append(e[t], b());
+						i.append(e[t], y());
 					}
 				}
-			} else if (i.nodeType === 8) if (i.data === v) c.push({
+			} else if (i.nodeType === 8) if (i.data === _) c.push({
 				type: 2,
 				index: a
 			});
 			else {
 				let e = -1;
-				for (; (e = i.data.indexOf(_, e + 1)) !== -1;) c.push({
+				for (; (e = i.data.indexOf(g, e + 1)) !== -1;) c.push({
 					type: 7,
 					index: a
-				}), e += _.length - 1;
+				}), e += g.length - 1;
 			}
 			a++;
 		}
 	}
 	static createElement(e, t) {
-		let n = y.createElement("template");
+		let n = v.createElement("template");
 		return n.innerHTML = e, n;
 	}
 };
-function F(e, t, n = e, r) {
-	if (t === k) return t;
-	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = x(t) ? void 0 : t._$litDirective$;
-	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = F(e, i._$AS(e, t.values), i, r)), t;
+function N(e, t, n = e, r) {
+	if (t === D) return t;
+	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = b(t) ? void 0 : t._$litDirective$;
+	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = N(e, i._$AS(e, t.values), i, r)), t;
 }
-var oe = class {
+var ce = class {
 	constructor(e, t) {
 		this._$AV = [], this._$AN = void 0, this._$AD = e, this._$AM = t;
 	}
@@ -1106,28 +1106,28 @@ var oe = class {
 		return this._$AM._$AU;
 	}
 	u(e) {
-		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? y).importNode(t, !0);
-		M.currentNode = r;
-		let i = M.nextNode(), a = 0, o = 0, s = n[0];
+		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? v).importNode(t, !0);
+		A.currentNode = r;
+		let i = A.nextNode(), a = 0, o = 0, s = n[0];
 		for (; s !== void 0;) {
 			if (a === s.index) {
 				let t;
-				s.type === 2 ? t = new I(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new ue(i, this, e)), this._$AV.push(t), s = n[++o];
+				s.type === 2 ? t = new P(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new fe(i, this, e)), this._$AV.push(t), s = n[++o];
 			}
-			a !== s?.index && (i = M.nextNode(), a++);
+			a !== s?.index && (i = A.nextNode(), a++);
 		}
-		return M.currentNode = y, r;
+		return A.currentNode = v, r;
 	}
 	p(e) {
 		let t = 0;
 		for (let n of this._$AV) n !== void 0 && (n.strings === void 0 ? n._$AI(e[t]) : (n._$AI(e, n, t), t += n.strings.length - 2)), t++;
 	}
-}, I = class e {
+}, P = class e {
 	get _$AU() {
 		return this._$AM?._$AU ?? this._$Cv;
 	}
 	constructor(e, t, n, r) {
-		this.type = 2, this._$AH = A, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
+		this.type = 2, this._$AH = O, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
 	}
 	get parentNode() {
 		let e = this._$AA.parentNode, t = this._$AM;
@@ -1140,7 +1140,7 @@ var oe = class {
 		return this._$AB;
 	}
 	_$AI(e, t = this) {
-		e = F(this, e, t), x(e) ? e === A || e == null || e === "" ? (this._$AH !== A && this._$AR(), this._$AH = A) : e !== this._$AH && e !== k && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? ne(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
+		e = N(this, e, t), b(e) ? e === O || e == null || e === "" ? (this._$AH !== O && this._$AR(), this._$AH = O) : e !== this._$AH && e !== D && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? re(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
 	}
 	O(e) {
 		return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -1149,36 +1149,36 @@ var oe = class {
 		this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
 	}
 	_(e) {
-		this._$AH !== A && x(this._$AH) ? this._$AA.nextSibling.data = e : this.T(y.createTextNode(e)), this._$AH = e;
+		this._$AH !== O && b(this._$AH) ? this._$AA.nextSibling.data = e : this.T(v.createTextNode(e)), this._$AH = e;
 	}
 	$(e) {
-		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = P.createElement(N(n.h, n.h[0]), this.options)), n);
+		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = M.createElement(j(n.h, n.h[0]), this.options)), n);
 		if (this._$AH?._$AD === r) this._$AH.p(t);
 		else {
-			let e = new oe(r, this), n = e.u(this.options);
+			let e = new ce(r, this), n = e.u(this.options);
 			e.p(t), this.T(n), this._$AH = e;
 		}
 	}
 	_$AC(e) {
-		let t = j.get(e.strings);
-		return t === void 0 && j.set(e.strings, t = new P(e)), t;
+		let t = k.get(e.strings);
+		return t === void 0 && k.set(e.strings, t = new M(e)), t;
 	}
 	k(t) {
-		S(this._$AH) || (this._$AH = [], this._$AR());
+		x(this._$AH) || (this._$AH = [], this._$AR());
 		let n = this._$AH, r, i = 0;
-		for (let a of t) i === n.length ? n.push(r = new e(this.O(b()), this.O(b()), this, this.options)) : r = n[i], r._$AI(a), i++;
+		for (let a of t) i === n.length ? n.push(r = new e(this.O(y()), this.O(y()), this, this.options)) : r = n[i], r._$AI(a), i++;
 		i < n.length && (this._$AR(r && r._$AB.nextSibling, i), n.length = i);
 	}
 	_$AR(e = this._$AA.nextSibling, t) {
 		for (this._$AP?.(!1, !0, t); e !== this._$AB;) {
-			let t = p(e).nextSibling;
-			p(e).remove(), e = t;
+			let t = m(e).nextSibling;
+			m(e).remove(), e = t;
 		}
 	}
 	setConnected(e) {
 		this._$AM === void 0 && (this._$Cv = e, this._$AP?.(e));
 	}
-}, L = class {
+}, F = class {
 	get tagName() {
 		return this.element.tagName;
 	}
@@ -1186,47 +1186,47 @@ var oe = class {
 		return this._$AM._$AU;
 	}
 	constructor(e, t, n, r, i) {
-		this.type = 1, this._$AH = A, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = A;
+		this.type = 1, this._$AH = O, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = O;
 	}
 	_$AI(e, t = this, n, r) {
 		let i = this.strings, a = !1;
-		if (i === void 0) e = F(this, e, t, 0), a = !x(e) || e !== this._$AH && e !== k, a && (this._$AH = e);
+		if (i === void 0) e = N(this, e, t, 0), a = !b(e) || e !== this._$AH && e !== D, a && (this._$AH = e);
 		else {
 			let r = e, o, s;
-			for (e = i[0], o = 0; o < i.length - 1; o++) s = F(this, r[n + o], t, o), s === k && (s = this._$AH[o]), a ||= !x(s) || s !== this._$AH[o], s === A ? e = A : e !== A && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
+			for (e = i[0], o = 0; o < i.length - 1; o++) s = N(this, r[n + o], t, o), s === D && (s = this._$AH[o]), a ||= !b(s) || s !== this._$AH[o], s === O ? e = O : e !== O && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
 		}
 		a && !r && this.j(e);
 	}
 	j(e) {
-		e === A ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
+		e === O ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
 	}
-}, se = class extends L {
+}, le = class extends F {
 	constructor() {
 		super(...arguments), this.type = 3;
 	}
 	j(e) {
-		this.element[this.name] = e === A ? void 0 : e;
+		this.element[this.name] = e === O ? void 0 : e;
 	}
-}, ce = class extends L {
+}, ue = class extends F {
 	constructor() {
 		super(...arguments), this.type = 4;
 	}
 	j(e) {
-		this.element.toggleAttribute(this.name, !!e && e !== A);
+		this.element.toggleAttribute(this.name, !!e && e !== O);
 	}
-}, le = class extends L {
+}, de = class extends F {
 	constructor(e, t, n, r, i) {
 		super(e, t, n, r, i), this.type = 5;
 	}
 	_$AI(e, t = this) {
-		if ((e = F(this, e, t, 0) ?? A) === k) return;
-		let n = this._$AH, r = e === A && n !== A || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== A && (n === A || r);
+		if ((e = N(this, e, t, 0) ?? O) === D) return;
+		let n = this._$AH, r = e === O && n !== O || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== O && (n === O || r);
 		r && this.element.removeEventListener(this.name, this, n), i && this.element.addEventListener(this.name, this, e), this._$AH = e;
 	}
 	handleEvent(e) {
 		typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, e) : this._$AH.handleEvent(e);
 	}
-}, ue = class {
+}, fe = class {
 	constructor(e, t, n) {
 		this.element = e, this.type = 6, this._$AN = void 0, this._$AM = t, this.options = n;
 	}
@@ -1234,13 +1234,13 @@ var oe = class {
 		return this._$AM._$AU;
 	}
 	_$AI(e) {
-		F(this, e);
+		N(this, e);
 	}
-}, de = f.litHtmlPolyfillSupport;
-de?.(P, I), (f.litHtmlVersions ??= []).push("3.3.2");
+}, pe = p.litHtmlPolyfillSupport;
+pe?.(M, P), (p.litHtmlVersions ??= []).push("3.3.2");
 //#endregion
 //#region node_modules/lit-html/directives/if-defined.js
-var R = (e) => e ?? A, z = class extends e {
+var I = (e) => e ?? O, L = class extends e {
 	static properties = {
 		checked: {
 			type: Boolean,
@@ -1345,7 +1345,7 @@ var R = (e) => e ?? A, z = class extends e {
           name="${this.name || ""}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${R(t)}"
+          aria-label="${I(t)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -1363,10 +1363,10 @@ var R = (e) => e ?? A, z = class extends e {
 		})));
 	}
 };
-customElements.define("pastis-toggle", z);
+customElements.define("pastis-toggle", L);
 //#endregion
 //#region src/components/badge/pastis-badge.js
-var B = class extends e {
+var R = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -1488,10 +1488,10 @@ var B = class extends e {
     `;
 	}
 };
-customElements.define("pastis-badge", B);
+customElements.define("pastis-badge", R);
 //#endregion
 //#region src/components/avatar/pastis-avatar.js
-var V = class extends e {
+var z = class extends e {
 	static properties = {
 		src: { type: String },
 		alt: { type: String },
@@ -1619,10 +1619,10 @@ var V = class extends e {
     `;
 	}
 };
-customElements.define("pastis-avatar", V);
+customElements.define("pastis-avatar", z);
 //#endregion
 //#region src/components/card/pastis-card.js
-var H = class extends e {
+var B = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -1911,10 +1911,10 @@ var H = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-card", H);
+customElements.define("pastis-card", B);
 //#endregion
 //#region src/components/alert/pastis-alert.js
-var U = class extends e {
+var V = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -2037,22 +2037,22 @@ var U = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-alert", U);
+customElements.define("pastis-alert", V);
 //#endregion
 //#region src/components/modal/pastis-modal.js
-function W() {
+function H() {
 	let e = document.activeElement;
 	for (; e?.shadowRoot?.activeElement;) e = e.shadowRoot.activeElement;
 	return e;
 }
-function fe(e) {
-	for (let t = W(); t; t = t.getRootNode().host) if (t === e || e.contains(t)) return !0;
+function me(e) {
+	for (let t = H(); t; t = t.getRootNode().host) if (t === e || e.contains(t)) return !0;
 	return !1;
 }
-function pe(e) {
+function he(e) {
 	return e.tabIndex < 0 || e.localName === "slot" || e.localName === "a" && !e.hasAttribute("href") && !e.hasAttribute("tabindex") || e.disabled || e.matches(":disabled") || e.inert || e.closest("[inert]") ? !1 : typeof e.checkVisibility == "function" ? e.checkVisibility({ visibilityProperty: !0 }) : e.getClientRects().length > 0;
 }
-function me(e) {
+function ge(e) {
 	let t = (e) => e instanceof HTMLInputElement && e.type === "radio" && e.name ? e.name : null, n = /* @__PURE__ */ new Map();
 	for (let r of e) {
 		let e = t(r);
@@ -2066,13 +2066,13 @@ function me(e) {
 	for (let e of n.values()) for (let t of e.values()) r.add(t.find((e) => e.checked) ?? t[0]);
 	return e.filter((e) => !t(e) || r.has(e));
 }
-function* G(e) {
-	for (let t of e) if (t instanceof HTMLElement) if (pe(t) && (yield t), t.localName === "slot") {
+function* U(e) {
+	for (let t of e) if (t instanceof HTMLElement) if (he(t) && (yield t), t.localName === "slot") {
 		let e = t.assignedElements({ flatten: !0 });
-		yield* G(e.length ? e : t.children);
-	} else t.shadowRoot ? yield* G(t.shadowRoot.children) : yield* G(t.children);
+		yield* U(e.length ? e : t.children);
+	} else t.shadowRoot ? yield* U(t.shadowRoot.children) : yield* U(t.children);
 }
-var K = class extends e {
+var W = class extends e {
 	static properties = {
 		open: {
 			type: Boolean,
@@ -2229,22 +2229,22 @@ var K = class extends e {
 	}
 	_getFocusableElements() {
 		let e = this.shadowRoot?.querySelector(".dialog");
-		return e ? me([...G(e.children)]) : [];
+		return e ? ge([...U(e.children)]) : [];
 	}
 	willUpdate(e) {
 		e.has("open") && !this.open && this._dialog?.close();
 	}
 	updated(e) {
 		if (e.has("open")) if (this._openGeneration++, this.open) {
-			this._previousFocus = W(), document.body.style.overflow = "hidden";
+			this._previousFocus = H(), document.body.style.overflow = "hidden";
 			let e = this._dialog;
-			e && !e.open && e.isConnected && e.showModal(), this._dialogFocus = W(), this._focusInitialWhenReady();
-		} else e.get("open") && (document.body.style.overflow = "", this._previousFocus?.isConnected && W() !== this._previousFocus && this._previousFocus.focus(), this._previousFocus = null, this._dialogFocus = null);
+			e && !e.open && e.isConnected && e.showModal(), this._dialogFocus = H(), this._focusInitialWhenReady();
+		} else e.get("open") && (document.body.style.overflow = "", this._previousFocus?.isConnected && H() !== this._previousFocus && this._previousFocus.focus(), this._previousFocus = null, this._dialogFocus = null);
 	}
 	async _focusInitialWhenReady() {
 		let e = this._openGeneration, t = [...this.querySelectorAll("*")].map((e) => e.updateComplete).filter((e) => e && typeof e.then == "function");
 		if (t.length && await Promise.all(t), e !== this._openGeneration || !this.open || !this.isConnected) return;
-		let n = W();
+		let n = H();
 		n && (this.contains(n) || this.shadowRoot.contains(n) || this.contains(n.getRootNode().host)) && n !== this._dialogFocus && n !== this._dialog || this._focusInitial();
 	}
 	_focusInitial() {
@@ -2254,7 +2254,7 @@ var K = class extends e {
 			this.shadowRoot.querySelector(".close-btn"),
 			this.shadowRoot.querySelector(".modal-body")
 		];
-		for (let e of t) if (e && (e.focus(), fe(e))) return;
+		for (let e of t) if (e && (e.focus(), me(e))) return;
 	}
 	render() {
 		if (!this.open) return n``;
@@ -2306,7 +2306,7 @@ var K = class extends e {
 			e.preventDefault();
 			return;
 		}
-		let n = t[0], r = t[t.length - 1], i = W(), a = t.includes(i);
+		let n = t[0], r = t[t.length - 1], i = H(), a = t.includes(i);
 		e.shiftKey && (i === n || !a) ? (e.preventDefault(), r.focus()) : !e.shiftKey && (i === r || !a) && (e.preventDefault(), n.focus());
 	}
 	open_() {
@@ -2322,10 +2322,10 @@ var K = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-modal", K);
+customElements.define("pastis-modal", W);
 //#endregion
 //#region src/components/toast/pastis-toast.js
-var q = class extends e {
+var G = class extends e {
 	static properties = {
 		message: { type: String },
 		variant: {
@@ -2498,10 +2498,10 @@ var q = class extends e {
     ` : n``;
 	}
 };
-customElements.define("pastis-toast", q);
+customElements.define("pastis-toast", G);
 //#endregion
 //#region src/components/spinner/pastis-spinner.js
-var J = class extends e {
+var K = class extends e {
 	static properties = {
 		size: {
 			type: String,
@@ -2612,10 +2612,10 @@ var J = class extends e {
     `;
 	}
 };
-customElements.define("pastis-spinner", J);
+customElements.define("pastis-spinner", K);
 //#endregion
 //#region src/components/skeleton/pastis-skeleton.js
-var Y = class extends e {
+var q = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -2701,10 +2701,10 @@ var Y = class extends e {
 		return n`<div class="skeleton" style="${e || "width:100%;height:16px"}" part="skeleton"></div>`;
 	}
 };
-customElements.define("pastis-skeleton", Y);
+customElements.define("pastis-skeleton", q);
 //#endregion
 //#region src/components/tooltip/pastis-tooltip.js
-var X = class extends e {
+var J = class extends e {
 	static properties = {
 		content: { type: String },
 		position: {
@@ -2827,10 +2827,10 @@ var X = class extends e {
 		}, 100);
 	}
 };
-customElements.define("pastis-tooltip", X);
+customElements.define("pastis-tooltip", J);
 //#endregion
 //#region src/components/dropdown/pastis-dropdown.js
-var Z = class extends e {
+var _e = class extends e {
 	static properties = {
 		label: { type: String },
 		placeholder: { type: String },
@@ -3131,10 +3131,10 @@ var Z = class extends e {
     `;
 	}
 };
-customElements.define("pastis-dropdown", Z);
+customElements.define("pastis-dropdown", _e);
 //#endregion
 //#region src/components/tabs/pastis-tabs.js
-var he = class extends e {
+var ve = class extends e {
 	static properties = {
 		tabs: { type: Array },
 		active: {
@@ -3332,10 +3332,10 @@ var he = class extends e {
     `;
 	}
 };
-customElements.define("pastis-tabs", he);
+customElements.define("pastis-tabs", ve);
 //#endregion
 //#region src/components/accordion/pastis-accordion.js
-var ge = class extends e {
+var ye = class extends e {
 	static properties = {
 		items: { type: Array },
 		multiple: {
@@ -3515,10 +3515,10 @@ var ge = class extends e {
     `;
 	}
 };
-customElements.define("pastis-accordion", ge);
+customElements.define("pastis-accordion", ye);
 //#endregion
 //#region src/components/breadcrumb/pastis-breadcrumb.js
-var _e = class extends e {
+var be = class extends e {
 	static properties = {
 		items: { type: Array },
 		separator: { type: String },
@@ -3645,10 +3645,10 @@ var _e = class extends e {
     `;
 	}
 };
-customElements.define("pastis-breadcrumb", _e);
+customElements.define("pastis-breadcrumb", be);
 //#endregion
 //#region src/components/pagination/pastis-pagination.js
-var ve = class extends e {
+var xe = class extends e {
 	static properties = {
 		total: { type: Number },
 		page: {
@@ -3844,10 +3844,10 @@ var ve = class extends e {
     `;
 	}
 };
-customElements.define("pastis-pagination", ve);
+customElements.define("pastis-pagination", xe);
 //#endregion
 //#region src/components/progress/pastis-progress.js
-var ye = class extends e {
+var Se = class extends e {
 	static properties = {
 		value: {
 			type: Number,
@@ -4060,10 +4060,10 @@ var ye = class extends e {
     `;
 	}
 };
-customElements.define("pastis-progress", ye);
+customElements.define("pastis-progress", Se);
 //#endregion
 //#region src/components/tag/pastis-tag.js
-var be = class extends e {
+var Ce = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -4206,10 +4206,10 @@ var be = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-tag", be);
+customElements.define("pastis-tag", Ce);
 //#endregion
 //#region src/components/divider/pastis-divider.js
-var xe = class extends e {
+var we = class extends e {
 	static properties = {
 		orientation: {
 			type: String,
@@ -4336,10 +4336,10 @@ var xe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-divider", xe);
+customElements.define("pastis-divider", we);
 //#endregion
 //#region src/components/hero/pastis-hero.js
-var Se = class extends e {
+var Te = class extends e {
 	static properties = {
 		heading: { type: String },
 		subheading: { type: String },
@@ -4566,10 +4566,10 @@ var Se = class extends e {
     `;
 	}
 };
-customElements.define("pastis-hero", Se);
+customElements.define("pastis-hero", Te);
 //#endregion
 //#region src/components/search/pastis-search.js
-var Ce = class extends e {
+var Ee = class extends e {
 	static properties = {
 		placeholder: { type: String },
 		value: {
@@ -4827,7 +4827,7 @@ var Ce = class extends e {
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${R(this._focusedIndex >= 0 ? this._optionId(this._focusedIndex) : void 0)}"
+            aria-activedescendant="${I(this._focusedIndex >= 0 ? this._optionId(this._focusedIndex) : void 0)}"
             @input="${this._handleInput}"
             @focus="${() => {
 			this.value.length >= this.minChars && (this.open = !0);
@@ -4864,10 +4864,10 @@ var Ce = class extends e {
     `;
 	}
 };
-customElements.define("pastis-search", Ce);
+customElements.define("pastis-search", Ee);
 //#endregion
 //#region src/components/drawer/pastis-drawer.js
-var we = class extends e {
+var De = class extends e {
 	static properties = {
 		open: {
 			type: Boolean,
@@ -5102,10 +5102,10 @@ var we = class extends e {
     ` : n``;
 	}
 };
-customElements.define("pastis-drawer", we);
+customElements.define("pastis-drawer", De);
 //#endregion
 //#region src/components/file-upload/pastis-file-upload.js
-var Te = class extends e {
+var Oe = class extends e {
 	static properties = {
 		accept: { type: String },
 		multiple: {
@@ -5412,10 +5412,10 @@ var Te = class extends e {
     `;
 	}
 };
-customElements.define("pastis-file-upload", Te);
+customElements.define("pastis-file-upload", Oe);
 //#endregion
 //#region src/components/cookie-banner/pastis-cookie-banner.js
-var Ee = class extends e {
+var ke = class extends e {
 	static properties = {
 		visible: {
 			type: Boolean,
@@ -5737,10 +5737,10 @@ var Ee = class extends e {
     `;
 	}
 };
-customElements.define("pastis-cookie-banner", Ee);
+customElements.define("pastis-cookie-banner", ke);
 //#endregion
 //#region src/components/radio/pastis-radio.js
-var De = class extends e {
+var Ae = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5852,10 +5852,10 @@ var De = class extends e {
 		(e.key === " " || e.key === "Enter") && (e.preventDefault(), this.disabled || (this.checked = !0, this._handleChange({ target: { checked: !0 } })));
 	}
 };
-customElements.define("pastis-radio", De);
+customElements.define("pastis-radio", Ae);
 //#endregion
 //#region src/components/stat-card/pastis-stat-card.js
-var Oe = class extends e {
+var je = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5961,10 +5961,10 @@ var Oe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-stat-card", Oe);
+customElements.define("pastis-stat-card", je);
 //#endregion
 //#region src/components/table-row/pastis-table-row.js
-var ke = class extends e {
+var Me = class extends e {
 	static properties = {
 		columns: { type: Array },
 		rows: { type: Array },
@@ -6175,10 +6175,10 @@ var ke = class extends e {
     `;
 	}
 };
-customElements.define("pastis-table", ke);
+customElements.define("pastis-table", Me);
 //#endregion
 //#region src/components/code-block/pastis-code-block.js
-var Ae = class extends e {
+var Ne = class extends e {
 	static properties = {
 		code: { type: String },
 		language: { type: String },
@@ -6338,10 +6338,10 @@ var Ae = class extends e {
     `;
 	}
 };
-customElements.define("pastis-code-block", Ae);
+customElements.define("pastis-code-block", Ne);
 //#endregion
 //#region src/components/empty-state/pastis-empty-state.js
-var je = class extends e {
+var Pe = class extends e {
 	static properties = {
 		icon: { type: String },
 		heading: { type: String },
@@ -6483,10 +6483,10 @@ var je = class extends e {
     `;
 	}
 };
-customElements.define("pastis-empty-state", je);
+customElements.define("pastis-empty-state", Pe);
 //#endregion
 //#region src/components/filter-chip/pastis-filter-chip.js
-var Me = class extends e {
+var Fe = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -6638,8 +6638,8 @@ var Me = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-chip", Me);
-var Ne = class extends e {
+customElements.define("pastis-filter-chip", Fe);
+var Ie = class extends e {
 	static properties = {
 		filters: { type: Array },
 		active: { type: Array },
@@ -6726,10 +6726,10 @@ var Ne = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-bar", Ne);
+customElements.define("pastis-filter-bar", Ie);
 //#endregion
 //#region src/components/theme-toggle/pastis-theme-toggle.js
-var Pe = class extends e {
+var Le = class extends e {
 	static properties = {
 		theme: {
 			type: String,
@@ -6836,10 +6836,10 @@ var Pe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-theme-toggle", Pe);
+customElements.define("pastis-theme-toggle", Le);
 //#endregion
 //#region src/components/carousel/pastis-carousel.js
-var Fe = class extends e {
+var Re = class extends e {
 	static properties = {
 		slides: { type: Array },
 		active: {
@@ -7155,10 +7155,10 @@ var Fe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-carousel", Fe);
+customElements.define("pastis-carousel", Re);
 //#endregion
 //#region src/components/timeline/pastis-timeline.js
-var Ie = class extends e {
+var ze = class extends e {
 	static properties = {
 		items: { type: Array },
 		variant: {
@@ -7253,10 +7253,10 @@ var Ie = class extends e {
     `;
 	}
 };
-customElements.define("pastis-timeline", Ie);
+customElements.define("pastis-timeline", ze);
 //#endregion
 //#region src/components/testimonial/pastis-testimonial.js
-var Le = class extends e {
+var Be = class extends e {
 	static properties = {
 		quote: { type: String },
 		name: { type: String },
@@ -7432,10 +7432,10 @@ var Le = class extends e {
     `;
 	}
 };
-customElements.define("pastis-testimonial", Le);
+customElements.define("pastis-testimonial", Be);
 //#endregion
 //#region src/components/section/pastis-section.js
-var Re = class extends e {
+var Ve = class extends e {
 	static properties = {
 		label: { type: String },
 		heading: { type: String },
@@ -7566,10 +7566,10 @@ var Re = class extends e {
     `;
 	}
 };
-customElements.define("pastis-section", Re);
+customElements.define("pastis-section", Ve);
 //#endregion
 //#region src/components/footer/pastis-footer.js
-var ze = class extends e {
+var He = class extends e {
 	static properties = {
 		brand: { type: String },
 		tagline: { type: String },
@@ -7797,10 +7797,10 @@ var ze = class extends e {
     `;
 	}
 };
-customElements.define("pastis-footer", ze);
+customElements.define("pastis-footer", He);
 //#endregion
 //#region src/components/nav/pastis-nav.js
-var Be = class extends e {
+var Ue = class extends e {
 	static properties = {
 		brand: { type: String },
 		items: { type: Array },
@@ -8272,10 +8272,10 @@ var Be = class extends e {
     `;
 	}
 };
-customElements.define("pastis-nav", Be);
+customElements.define("pastis-nav", Ue);
 //#endregion
 //#region src/components/project-card/pastis-project-card.js
-var Ve = class extends e {
+var We = class extends e {
 	static properties = {
 		href: { type: String },
 		heading: { type: String },
@@ -8533,10 +8533,10 @@ var Ve = class extends e {
     `;
 	}
 };
-customElements.define("pastis-project-card", Ve);
+customElements.define("pastis-project-card", We);
 //#endregion
 //#region src/components/statement/pastis-statement.js
-var He = class extends e {
+var Ge = class extends e {
 	static properties = {
 		eyebrow: { type: String },
 		size: {
@@ -8636,10 +8636,10 @@ var He = class extends e {
     `;
 	}
 };
-customElements.define("pastis-statement", He);
+customElements.define("pastis-statement", Ge);
 //#endregion
 //#region src/components/token-swatch/pastis-token-swatch.js
-var Q = class extends e {
+var Ke = class extends e {
 	static properties = {
 		token: { type: String },
 		label: { type: String },
@@ -8713,10 +8713,10 @@ var Q = class extends e {
     `;
 	}
 };
-customElements.define("pastis-token-swatch", Q);
+customElements.define("pastis-token-swatch", Ke);
 //#endregion
 //#region src/components/spec-table/pastis-spec-table.js
-var Ue = class extends e {
+var qe = class extends e {
 	static properties = {
 		tokens: { type: Array },
 		kind: {
@@ -8882,10 +8882,10 @@ var Ue = class extends e {
     `;
 	}
 };
-customElements.define("pastis-spec-table", Ue);
+customElements.define("pastis-spec-table", qe);
 //#endregion
 //#region src/components/shelf/pastis-shelf.js
-var We = class extends e {
+var Je = class extends e {
 	static properties = {
 		label: { type: String },
 		stagger: { type: Number },
@@ -9080,10 +9080,10 @@ var We = class extends e {
     `;
 	}
 };
-customElements.define("pastis-shelf", We);
+customElements.define("pastis-shelf", Je);
 //#endregion
 //#region src/components/icon/icons.js
-var $ = {
+var Y = {
 	today: i`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,
 	calendar: i`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,
 	list: i`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,
@@ -9104,7 +9104,7 @@ var $ = {
 	"chevron-left": i`<path d="m15 18-6-6 6-6" />`,
 	inbox: i`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,
 	"trash-restore": i`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`
-}, Ge = Object.keys($), Ke = class extends e {
+}, Ye = Object.keys(Y), Xe = class extends e {
 	static properties = {
 		name: {
 			type: String,
@@ -9135,10 +9135,10 @@ var $ = {
 		super(), this.size = "md";
 	}
 	willUpdate(e) {
-		e.has("name") && !Object.hasOwn($, this.name ?? "") && console.warn(`pastis-icon: unknown icon name "${this.name ?? ""}"`), this.label ? (this.setAttribute("role", "img"), this.setAttribute("aria-label", this.label), this.removeAttribute("aria-hidden")) : (this.removeAttribute("role"), this.removeAttribute("aria-label"), this.setAttribute("aria-hidden", "true"));
+		e.has("name") && !Object.hasOwn(Y, this.name ?? "") && console.warn(`pastis-icon: unknown icon name "${this.name ?? ""}"`), this.label ? (this.setAttribute("role", "img"), this.setAttribute("aria-label", this.label), this.removeAttribute("aria-hidden")) : (this.removeAttribute("role"), this.removeAttribute("aria-label"), this.setAttribute("aria-hidden", "true"));
 	}
 	render() {
-		let e = Object.hasOwn($, this.name ?? "") ? $[this.name] : null;
+		let e = Object.hasOwn(Y, this.name ?? "") ? Y[this.name] : null;
 		return e ? n`<svg
       part="svg"
       viewBox="0 0 24 24"
@@ -9152,15 +9152,15 @@ var $ = {
     >${e}</svg>` : r;
 	}
 };
-customElements.define("pastis-icon", Ke);
+customElements.define("pastis-icon", Xe);
 //#endregion
 //#region src/components/task-row/pastis-task-row.js
-var qe = [
+var Ze = [
 	"",
 	"low",
 	"medium",
 	"high"
-], Je = "Untitled task", Ye = class extends e {
+], Qe = "Untitled task", $e = class extends e {
 	static properties = {
 		taskTitle: {
 			type: String,
@@ -9385,7 +9385,7 @@ var qe = [
 		});
 		let t = Math.trunc(Number(this.priority));
 		t >= 1 && t <= 3 && e.push({
-			text: `Priority ${qe[t]}`,
+			text: `Priority ${Ze[t]}`,
 			view: n`<span class="meta-item priority">${"!".repeat(t)}</span>`
 		}), this.subtasks && e.push({
 			text: `Subtasks ${this.subtasks}`,
@@ -9402,7 +9402,7 @@ var qe = [
 		}), e;
 	}
 	render() {
-		let e = this._metaItems(), t = !!String(this.taskTitle ?? "").trim(), i = t ? this.taskTitle : Je;
+		let e = this._metaItems(), t = !!String(this.taskTitle ?? "").trim(), i = t ? this.taskTitle : Qe;
 		return n`
       <div class="row" part="row">
         <button
@@ -9425,7 +9425,7 @@ var qe = [
             class="title"
             part="title"
             type="button"
-            aria-label=${t ? r : Je}
+            aria-label=${t ? r : Qe}
             aria-describedby=${e.length ? "description" : r}
             ?disabled=${this.disabled}
             @click=${this._onOpen}
@@ -9459,10 +9459,10 @@ var qe = [
 		}));
 	}
 };
-customElements.define("pastis-task-row", Ye);
+customElements.define("pastis-task-row", $e);
 //#endregion
 //#region src/components/tab-bar/pastis-tab-bar.js
-var Xe = class extends e {
+var X = class extends e {
 	static properties = { label: { type: String } };
 	static styles = t`
     :host {
@@ -9491,7 +9491,7 @@ var Xe = class extends e {
 	render() {
 		return n`<nav part="nav" aria-label=${this.label || r}><slot></slot></nav>`;
 	}
-}, Ze = class extends e {
+}, et = class extends e {
 	static properties = {
 		href: { type: String },
 		icon: { type: String },
@@ -9613,6 +9613,353 @@ var Xe = class extends e {
 		this.dispatchEvent(t) || e.preventDefault();
 	}
 };
-customElements.define("pastis-tab-bar", Xe), customElements.define("pastis-tab-bar-item", Ze);
+customElements.define("pastis-tab-bar", X), customElements.define("pastis-tab-bar-item", et);
 //#endregion
-export { ge as PastisAccordion, U as PastisAlert, V as PastisAvatar, B as PastisBadge, _e as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, H as PastisCard, Fe as PastisCarousel, ee as PastisCheckbox, Ae as PastisCodeBlock, Ee as PastisCookieBanner, xe as PastisDivider, we as PastisDrawer, Z as PastisDropdown, je as PastisEmptyState, Te as PastisFileUpload, Ne as PastisFilterBar, Me as PastisFilterChip, ze as PastisFooter, Se as PastisHero, Ke as PastisIcon, d as PastisInput, K as PastisModal, Be as PastisNav, ve as PastisPagination, ye as PastisProgress, Ve as PastisProjectCard, De as PastisRadio, Ce as PastisSearch, Re as PastisSection, We as PastisShelf, Y as PastisSkeleton, Ue as PastisSpecTable, J as PastisSpinner, Oe as PastisStatCard, He as PastisStatement, Xe as PastisTabBar, Ze as PastisTabBarItem, ke as PastisTable, he as PastisTabs, be as PastisTag, Ye as PastisTaskRow, Le as PastisTestimonial, Pe as PastisThemeToggle, Ie as PastisTimeline, q as PastisToast, z as PastisToggle, Q as PastisTokenSwatch, X as PastisTooltip, Ge as iconNames, $ as icons };
+//#region src/components/date-field/pastis-date-time-field-base.js
+var tt = 0, Z = {};
+function Q(e, t) {
+	return t == null || t === "" ? "" : (Z[e] ??= Object.assign(document.createElement("input"), { type: e }), Z[e].value = String(t), Z[e].value);
+}
+function nt(e) {
+	return Array.from(e.elements).find((e) => e.type === "submit" || e instanceof HTMLInputElement && e.type === "image");
+}
+var $ = class extends e {
+	static formAssociated = !0;
+	static shadowRootOptions = {
+		...e.shadowRootOptions,
+		delegatesFocus: !0
+	};
+	static inputType = "text";
+	static properties = {
+		label: { type: String },
+		value: {
+			type: String,
+			reflect: !0
+		},
+		min: { type: String },
+		max: { type: String },
+		helper: { type: String },
+		error: { type: String },
+		disabled: {
+			type: Boolean,
+			reflect: !0
+		},
+		required: {
+			type: Boolean,
+			reflect: !0
+		},
+		name: { type: String },
+		chips: { type: Array },
+		_formDisabled: { state: !0 }
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm, 8px);
+      font-family: var(--font-family-mono, monospace);
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs, 4px);
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+      color: var(--text-primary, #f4eee3);
+    }
+
+    .required-dot {
+      color: var(--text-error, #f45f6b);
+      font-size: var(--font-size-body, 16px);
+      line-height: 1;
+    }
+
+    .control {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs, 4px);
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      box-sizing: border-box;
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      margin: 0;
+      padding: var(--space-sm, 8px) calc(var(--space-sm, 8px) * 1.5);
+      font: inherit;
+      font-size: var(--font-size-body-sm, 14px);
+      font-weight: var(--font-weight-bold, 700);
+      color: var(--text-secondary, #e6dfd2);
+      background: var(--bg-primary, #110d0a);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-radius: var(--radius-md, 6px);
+      /* Native picker icon and popup follow the theme */
+      color-scheme: var(--color-scheme, dark);
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+
+    input:hover { border-color: var(--text-tertiary, #a39b90); }
+
+    input:focus { border-color: var(--border-focus, #fcba28); outline: none; }
+
+    input:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
+
+    .has-error input { border-color: var(--text-error, #f45f6b); }
+
+    input:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    button {
+      box-sizing: border-box;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
+
+    button:disabled { cursor: not-allowed; opacity: 0.4; }
+
+    .clear {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--space-xl, 32px);
+      height: var(--space-xl, 32px);
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-full, 9999px);
+      background: none;
+      color: var(--text-tertiary, #a39b90);
+    }
+
+    .clear:hover { color: var(--text-primary, #f4eee3); background: var(--bg-elevated, #251f1a); }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm, 8px);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--space-xl, 32px);
+      padding: 0 calc(var(--space-sm, 8px) * 1.5);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-radius: var(--radius-full, 9999px);
+      background: var(--bg-card, #1b1612);
+      color: var(--text-secondary, #e6dfd2);
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-bold, 700);
+      white-space: nowrap;
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+
+    .chip:hover:not(:disabled) { border-color: var(--action-primary, #fcba28); }
+
+    .chip[aria-pressed="true"] {
+      background: var(--action-primary, #fcba28);
+      border-color: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+    }
+
+    /* 44 × 44 px targets on touch screens */
+    @media (pointer: coarse) {
+      .clear {
+        width: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+        height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      }
+      .chip { min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px)); }
+    }
+
+    .helper-text, .error-text {
+      margin: 0;
+      font-size: var(--font-size-micro, 11px);
+      line-height: var(--line-height-caption, 1.4);
+    }
+
+    .helper-text { color: var(--text-tertiary, #a39b90); }
+    .error-text { color: var(--text-error, #f45f6b); }
+
+    @media (forced-colors: active) {
+      .chip[aria-pressed="true"] { background: Highlight; color: HighlightText; border-color: Highlight; }
+    }
+  `;
+	constructor() {
+		super(), this.value = "", this.disabled = !1, this.required = !1, this.chips = [], this._formDisabled = !1, this._id = `pastis-dt-field-${++tt}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
+	}
+	get form() {
+		return this._internals.form;
+	}
+	get validity() {
+		return this._internals.validity;
+	}
+	get validationMessage() {
+		return this._internals.validationMessage;
+	}
+	get willValidate() {
+		return this._internals.willValidate;
+	}
+	checkValidity() {
+		return this._internals.checkValidity();
+	}
+	reportValidity() {
+		return this._internals.reportValidity();
+	}
+	formResetCallback() {
+		this.value = this._defaultValue ?? "", this._input && (this._input.value = this.value), this._syncForm();
+	}
+	formDisabledCallback(e) {
+		this._formDisabled = e;
+	}
+	formStateRestoreCallback(e) {
+		typeof e == "string" && (this.value = e);
+	}
+	focus(e) {
+		this._input ? this._input.focus(e) : super.focus(e);
+	}
+	get _input() {
+		return this.shadowRoot?.querySelector("input") ?? null;
+	}
+	get _isDisabled() {
+		return this.disabled || this._formDisabled;
+	}
+	willUpdate(e) {
+		e.has("value") && (this.value = Q(this.constructor.inputType, this.value)), this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
+	}
+	updated() {
+		this._syncForm();
+	}
+	_syncForm() {
+		let e = this._input;
+		e && (this._internals.setFormValue(this.value, this.value), e.validity.valid ? this._internals.setValidity({}) : this._internals.setValidity(e.validity, e.validationMessage, e));
+	}
+	_inputAttributes() {
+		return {};
+	}
+	render() {
+		let e = this._id, t = !!this.error, i = this._isDisabled, a = Array.isArray(this.chips) ? this.chips.filter((e) => e && e.label) : [], o = !this.required && !i && this.value !== "", s = this._inputAttributes();
+		return n`
+      <div class="field ${t ? "has-error" : ""}">
+        ${this.label ? n`
+          <label for="${e}">
+            ${this.label}
+            ${this.required ? n`<span class="required-dot" aria-hidden="true">*</span>` : r}
+          </label>
+        ` : r}
+        <div class="control">
+          <input
+            id="${e}"
+            part="input"
+            type="${this.constructor.inputType}"
+            .value="${this.value}"
+            min=${this.min || r}
+            max=${this.max || r}
+            step=${s.step ?? r}
+            ?disabled=${i}
+            ?required=${this.required}
+            aria-label=${this.label || r}
+            aria-invalid="${t ? "true" : "false"}"
+            aria-describedby=${t ? `${e}-error` : this.helper ? `${e}-helper` : r}
+            @input=${this._onInput}
+            @change=${this._onChange}
+            @keyup=${this._syncForm}
+            @blur=${this._syncForm}
+          />
+          ${o ? n`
+            <button
+              class="clear"
+              part="clear"
+              type="button"
+              aria-label=${this.label ? `Clear ${this.label}` : "Clear"}
+              @click=${this._onClear}
+            ><pastis-icon name="close" size="sm"></pastis-icon></button>
+          ` : r}
+        </div>
+        ${t ? n`<p class="error-text" id="${e}-error" role="alert">${this.error}</p>` : this.helper ? n`<p class="helper-text" id="${e}-helper">${this.helper}</p>` : r}
+        ${a.length ? n`
+          <div class="chips" part="chips" role="group" aria-label=${this.label || r}>
+            ${a.map((e) => n`
+              <button
+                class="chip"
+                part="chip"
+                type="button"
+                aria-pressed=${Q(this.constructor.inputType, e.value) === this.value ? "true" : "false"}
+                ?disabled=${i}
+                @click=${() => this._pick(e.value)}
+              >${e.label}</button>
+            `)}
+          </div>
+        ` : r}
+      </div>
+    `;
+	}
+	_emit(e) {
+		this.dispatchEvent(new CustomEvent(e, {
+			detail: { value: this.value },
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+	_onInput(e) {
+		this.value = e.target.value, this._syncForm(), this._emit("pastis-input");
+	}
+	_onChange(e) {
+		this.value = e.target.value, this._syncForm(), this._emit("pastis-change");
+	}
+	_setByUser(e) {
+		let t = Q(this.constructor.inputType, e);
+		return t === this.value && (!this._input || this._input.value === t) ? !1 : (this.value = t, this._input && (this._input.value = t), this._syncForm(), this._emit("pastis-input"), this._emit("pastis-change"), !0);
+	}
+	_pick(e) {
+		this._isDisabled || this._setByUser(e);
+	}
+	_onClear() {
+		this._isDisabled || (this._setByUser(""), this._input?.focus());
+	}
+	_onKeydown(e) {
+		if (e.key !== "Enter" || e.isComposing || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.composedPath()[0] !== this._input) return;
+		let t = this.form;
+		t && setTimeout(() => {
+			if (e.defaultPrevented) return;
+			let n = nt(t);
+			n ? !n.disabled && !n.matches(":disabled") && n.click() : t.requestSubmit();
+		});
+	}
+}, rt = class extends $ {
+	static inputType = "date";
+};
+customElements.define("pastis-date-field", rt);
+//#endregion
+//#region src/components/time-field/pastis-time-field.js
+var it = class extends $ {
+	static inputType = "time";
+	static properties = {
+		...$.properties,
+		step: { type: Number }
+	};
+	_inputAttributes() {
+		return { step: this.step };
+	}
+};
+customElements.define("pastis-time-field", it);
+//#endregion
+export { ye as PastisAccordion, V as PastisAlert, z as PastisAvatar, R as PastisBadge, be as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, B as PastisCard, Re as PastisCarousel, f as PastisCheckbox, Ne as PastisCodeBlock, ke as PastisCookieBanner, rt as PastisDateField, we as PastisDivider, De as PastisDrawer, _e as PastisDropdown, Pe as PastisEmptyState, Oe as PastisFileUpload, Ie as PastisFilterBar, Fe as PastisFilterChip, He as PastisFooter, Te as PastisHero, Xe as PastisIcon, d as PastisInput, W as PastisModal, Ue as PastisNav, xe as PastisPagination, Se as PastisProgress, We as PastisProjectCard, Ae as PastisRadio, Ee as PastisSearch, Ve as PastisSection, Je as PastisShelf, q as PastisSkeleton, qe as PastisSpecTable, K as PastisSpinner, je as PastisStatCard, Ge as PastisStatement, X as PastisTabBar, et as PastisTabBarItem, Me as PastisTable, ve as PastisTabs, Ce as PastisTag, $e as PastisTaskRow, Be as PastisTestimonial, Le as PastisThemeToggle, it as PastisTimeField, ze as PastisTimeline, G as PastisToast, L as PastisToggle, Ke as PastisTokenSwatch, J as PastisTooltip, Ye as iconNames, Y as icons };
