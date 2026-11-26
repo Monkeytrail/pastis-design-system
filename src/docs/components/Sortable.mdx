@@ -1,0 +1,48 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SortableStories from '../../components/sortable/pastis-sortable.stories.js';
+
+<Meta of={SortableStories} name="Usage" />
+
+# Sortable
+
+`<pastis-sortable>` makes its children reorderable by their handles and tells the app the new
+order. It never moves the children itself: the app updates its data and renders them again.
+
+<Canvas of={SortableStories.Default} />
+
+## Usage
+
+- **Handles.** A handle is any element with the part `handle` (`<pastis-task-row reorderable>`
+  renders one, named “Reorder” and the title) or the attribute `data-sortable-handle` (a button
+  in a row the app renders). Handles must be buttons with a name.
+- **Three ways to move** (WCAG 2.5.7 needs one that is not a drag):
+  drag a handle (mouse, pen, touch; a line shows where the row lands); tap a handle to pick the
+  row up and tap another row's handle to put it in that place (tap it again or press Escape to
+  put it back); or press Arrow Up / Arrow Down on a focused handle.
+- **Event.** `pastis-reorder` with `detail { from, to }`: the child's index before and in the new
+  order. The moved row keeps focus; moves are not announced yet.
+- **A list.** Give the element `role="list"` and an `aria-label`; its children are the items
+  (`<pastis-task-row>` is one; give other rows `role="listitem"`).
+- **Touch.** Handles set `touch-action: none`, so dragging one never scrolls the page; give a
+  `data-sortable-handle` the same.
+
+<Controls of={SortableStories.Default} />
+
+## Do
+
+```html
+<pastis-sortable role="list" aria-label="Groceries">
+  <pastis-task-row reorderable task-title="Milk"></pastis-task-row>
+  <pastis-task-row reorderable task-title="Bread"></pastis-task-row>
+</pastis-sortable>
+```
+
+```js
+sortable.addEventListener('pastis-reorder', (e) => saveOrder(e.detail.from, e.detail.to));
+```
+
+## Don't
+
+```js
+// Don't leave the children where they are after pastis-reorder: nothing moves them for you
+```

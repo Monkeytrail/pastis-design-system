@@ -1,6 +1,6 @@
 {
   "name": "pastis-design-system",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Pastis — Design system by Jeroen van Ginneken",
   "type": "module",
   "exports": {

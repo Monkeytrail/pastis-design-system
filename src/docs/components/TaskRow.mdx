@@ -27,6 +27,9 @@ Reminders-style list, not a form control; use `<pastis-checkbox>` in forms.
   property, or a JSON array attribute). Screen readers hear the meta as the title's
   description: “Buy oat milk, button, Today 14:00, Flagged”.
 - `indent` shows a subtask one level in; `disabled` disables the toggle and the title.
+- **Reordering.** `reorderable` adds a handle at the end of the row (“Reorder” plus the title,
+  `reorder-label` overrides it) for [`<pastis-sortable>`](?path=/docs/basics-sortable--usage),
+  which turns drags, taps and arrow keys on it into `pastis-reorder`.
 - **Actions.** Put buttons in the `actions` slot; they come after the title in the Tab order.
 
 <Controls of={TaskRowStories.Plain} />

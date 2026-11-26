@@ -68,6 +68,13 @@ export class PastisTaskRow extends LitElement {
     indent: { type: Boolean, reflect: true },
     /** Disables the toggle and the title. */
     disabled: { type: Boolean, reflect: true },
+    /**
+     * Shows a reorder handle (part `handle`) at the end of the row, for `<pastis-sortable>`:
+     * drag it, tap it to pick the row up, or use the arrow keys on it.
+     */
+    reorderable: { type: Boolean, reflect: true },
+    /** The handle's accessible name (default “Reorder <title>”). */
+    reorderLabel: { type: String, attribute: 'reorder-label' },
   };
 
   static styles = css`
@@ -102,6 +109,38 @@ export class PastisTaskRow extends LitElement {
       background: none;
       color: inherit;
       cursor: pointer;
+    }
+
+    /* ── Reorder handle (with <pastis-sortable>): 44 × 44 px, never scrolls the page on touch ── */
+    .handle {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-md, 6px);
+      background: none;
+      color: var(--text-tertiary, #a39b90);
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .handle:hover:not(:disabled) { color: var(--text-primary, #f4eee3); }
+
+    .handle:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .handle:disabled { cursor: not-allowed; opacity: 0.4; }
+
+    :host([data-picked]) .handle {
+      color: var(--action-primary-text, #0d0d0d);
+      background: var(--action-primary, #fcba28);
     }
 
     .circle {
@@ -242,6 +281,7 @@ export class PastisTaskRow extends LitElement {
     this.tags = [];
     this.indent = false;
     this.disabled = false;
+    this.reorderable = false;
   }
 
   connectedCallback() {
@@ -337,6 +377,15 @@ export class PastisTaskRow extends LitElement {
           ` : nothing}
         </div>
         <div class="actions" part="actions"><slot name="actions"></slot></div>
+        ${this.reorderable ? html`
+          <button
+            class="handle"
+            part="handle"
+            type="button"
+            aria-label=${this.reorderLabel || `Reorder ${name}`}
+            ?disabled=${this.disabled}
+          ><pastis-icon name="grip"></pastis-icon></button>
+        ` : nothing}
       </div>
     `;
   }

@@ -24,7 +24,7 @@ async function axNodes() {
 const INITIAL_SET = [
   'today', 'calendar', 'list', 'search', 'flag', 'repeat', 'clock', 'tag', 'subtasks', 'alert',
   'plus', 'check', 'close', 'more', 'edit', 'trash', 'chevron-right', 'chevron-left', 'inbox',
-  'trash-restore',
+  'trash-restore', 'grip',
 ];
 
 describe('pastis-icon', () => {
