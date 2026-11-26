@@ -10767,4 +10767,118 @@ var mt = 6, ht = class extends e {
 };
 customElements.define("pastis-sortable", ht);
 //#endregion
-export { xe as PastisAccordion, R as PastisAlert, I as PastisAvatar, F as PastisBadge, Se as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, L as PastisCard, Be as PastisCarousel, ee as PastisCheckbox, Fe as PastisCodeBlock, je as PastisCookieBanner, at as PastisDateField, Ee as PastisDivider, ke as PastisDrawer, K as PastisDropdown, Ie as PastisEmptyState, Ae as PastisFileUpload, Re as PastisFilterBar, Le as PastisFilterChip, We as PastisFooter, De as PastisHero, Qe as PastisIcon, d as PastisInput, V as PastisModal, Ge as PastisNav, Ce as PastisPagination, we as PastisProgress, Ke as PastisProjectCard, ct as PastisQuickAdd, Me as PastisRadio, pt as PastisRecurrencePicker, Oe as PastisSearch, Ue as PastisSection, Xe as PastisShelf, W as PastisSkeleton, ht as PastisSortable, Ye as PastisSpecTable, U as PastisSpinner, Ne as PastisStatCard, qe as PastisStatement, nt as PastisTabBar, J as PastisTabBarItem, Pe as PastisTable, be as PastisTabs, Te as PastisTag, tt as PastisTaskRow, He as PastisTestimonial, ze as PastisThemeToggle, ot as PastisTimeField, Ve as PastisTimeline, H as PastisToast, P as PastisToggle, Je as PastisTokenSwatch, G as PastisTooltip, Ze as iconNames, q as icons };
+//#region src/components/editor/pastis-editor.js
+var gt = class extends e {
+	static properties = {
+		label: { type: String },
+		helper: { type: String },
+		error: { type: String },
+		disabled: {
+			type: Boolean,
+			reflect: !0
+		}
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm, 8px);
+      font-family: var(--font-family-mono, monospace);
+    }
+
+    .label {
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+      color: var(--text-primary, #f4eee3);
+    }
+
+    .frame {
+      display: flex;
+      flex-direction: column;
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-radius: var(--radius-md, 6px);
+      background: var(--bg-primary, #110d0a);
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+
+    .frame:hover { border-color: var(--text-tertiary, #a39b90); }
+
+    .frame:focus-within {
+      border-color: var(--border-focus, #fcba28);
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
+
+    .has-error .frame { border-color: var(--text-error, #f45f6b); }
+
+    :host([disabled]) .frame { opacity: 0.4; }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs, 4px);
+      padding: var(--space-xs, 4px);
+      border-bottom: var(--border-width, 1px) solid var(--border-subtle, #2a241f);
+    }
+
+    .toolbar:not(.filled) { display: none; }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-sm, 8px) calc(var(--space-sm, 8px) * 1.5);
+      min-height: calc(var(--space-2xl, 48px) * 3);
+      cursor: text;
+    }
+
+    .helper-text, .error-text {
+      margin: 0;
+      font-size: var(--font-size-micro, 11px);
+      line-height: var(--line-height-caption, 1.4);
+    }
+
+    .helper-text { color: var(--text-tertiary, #a39b90); }
+    .error-text { color: var(--text-error, #f45f6b); }
+  `;
+	constructor() {
+		super(), this.disabled = !1, this._toolbarFilled = !1;
+	}
+	render() {
+		let e = !!this.error;
+		return n`
+      <div class="field ${e ? "has-error" : ""}">
+        ${this.label ? n`<span class="label">${this.label}</span>` : r}
+        <div class="frame" part="frame">
+          <div class="toolbar ${this._toolbarFilled ? "filled" : ""}" part="toolbar">
+            <slot name="toolbar" @slotchange=${this._onToolbarChange}></slot>
+          </div>
+          <div class="content" @click=${this._focusEditor}><slot @slotchange=${this._applyDisabled}></slot></div>
+        </div>
+        ${e ? n`<p class="error-text" role="alert">${this.error}</p>` : this.helper ? n`<p class="helper-text">${this.helper}</p>` : r}
+      </div>
+    `;
+	}
+	updated(e) {
+		e.has("disabled") && this._applyDisabled();
+	}
+	_applyDisabled() {
+		for (let e of this.children) e.inert = this.disabled;
+	}
+	_focusEditor(e) {
+		if (this.disabled) return;
+		let t = this.querySelector("[contenteditable=\"true\"]");
+		t && !t.contains(e.target) && t.focus();
+	}
+	_onToolbarChange(e) {
+		let t = e.target.assignedElements().length > 0;
+		t !== this._toolbarFilled && (this._toolbarFilled = t, this.requestUpdate());
+	}
+};
+customElements.define("pastis-editor", gt);
+//#endregion
+export { xe as PastisAccordion, R as PastisAlert, I as PastisAvatar, F as PastisBadge, Se as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, L as PastisCard, Be as PastisCarousel, ee as PastisCheckbox, Fe as PastisCodeBlock, je as PastisCookieBanner, at as PastisDateField, Ee as PastisDivider, ke as PastisDrawer, K as PastisDropdown, gt as PastisEditor, Ie as PastisEmptyState, Ae as PastisFileUpload, Re as PastisFilterBar, Le as PastisFilterChip, We as PastisFooter, De as PastisHero, Qe as PastisIcon, d as PastisInput, V as PastisModal, Ge as PastisNav, Ce as PastisPagination, we as PastisProgress, Ke as PastisProjectCard, ct as PastisQuickAdd, Me as PastisRadio, pt as PastisRecurrencePicker, Oe as PastisSearch, Ue as PastisSection, Xe as PastisShelf, W as PastisSkeleton, ht as PastisSortable, Ye as PastisSpecTable, U as PastisSpinner, Ne as PastisStatCard, qe as PastisStatement, nt as PastisTabBar, J as PastisTabBarItem, Pe as PastisTable, be as PastisTabs, Te as PastisTag, tt as PastisTaskRow, He as PastisTestimonial, ze as PastisThemeToggle, ot as PastisTimeField, Ve as PastisTimeline, H as PastisToast, P as PastisToggle, Je as PastisTokenSwatch, G as PastisTooltip, Ze as iconNames, q as icons };
