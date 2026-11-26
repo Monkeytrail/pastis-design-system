@@ -802,7 +802,7 @@ var u = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, 
 customElements.define("pastis-input", d);
 //#endregion
 //#region src/components/checkbox/pastis-checkbox.js
-var f = class extends e {
+var ee = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -1019,83 +1019,83 @@ var f = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-checkbox", f);
+customElements.define("pastis-checkbox", ee);
 //#endregion
 //#region node_modules/lit-html/lit-html.js
-var p = globalThis, m = (e) => e, h = p.trustedTypes, ee = h ? h.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, te = "$lit$", g = `lit$${Math.random().toFixed(9).slice(2)}$`, _ = "?" + g, ne = `<${_}>`, v = document, y = () => v.createComment(""), b = (e) => e === null || typeof e != "object" && typeof e != "function", x = Array.isArray, re = (e) => x(e) || typeof e?.[Symbol.iterator] == "function", S = "[ 	\n\f\r]", C = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, w = /-->/g, T = />/g, E = RegExp(`>|${S}(?:([^\\s"'>=/]+)(${S}*=${S}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), ie = /'/g, ae = /"/g, oe = /^(?:script|style|textarea|title)$/i, D = Symbol.for("lit-noChange"), O = Symbol.for("lit-nothing"), k = /* @__PURE__ */ new WeakMap(), A = v.createTreeWalker(v, 129);
-function j(e, t) {
-	if (!x(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
-	return ee === void 0 ? t : ee.createHTML(t);
+var f = globalThis, te = (e) => e, p = f.trustedTypes, ne = p ? p.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, re = "$lit$", m = `lit$${Math.random().toFixed(9).slice(2)}$`, h = "?" + m, ie = `<${h}>`, g = document, _ = () => g.createComment(""), v = (e) => e === null || typeof e != "object" && typeof e != "function", y = Array.isArray, ae = (e) => y(e) || typeof e?.[Symbol.iterator] == "function", b = "[ 	\n\f\r]", x = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, S = /-->/g, C = />/g, w = RegExp(`>|${b}(?:([^\\s"'>=/]+)(${b}*=${b}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), oe = /'/g, se = /"/g, ce = /^(?:script|style|textarea|title)$/i, T = Symbol.for("lit-noChange"), E = Symbol.for("lit-nothing"), le = /* @__PURE__ */ new WeakMap(), D = g.createTreeWalker(g, 129);
+function O(e, t) {
+	if (!y(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
+	return ne === void 0 ? t : ne.createHTML(t);
 }
-var se = (e, t) => {
-	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = C;
+var ue = (e, t) => {
+	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = x;
 	for (let t = 0; t < n; t++) {
 		let n = e[t], s, c, l = -1, u = 0;
-		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === C ? c[1] === "!--" ? o = w : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = E) : (oe.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = E) : o = T : o === E ? c[0] === ">" ? (o = i ?? C, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? E : c[3] === "\"" ? ae : ie) : o === ae || o === ie ? o = E : o === w || o === T ? o = C : (o = E, i = void 0);
-		let d = o === E && e[t + 1].startsWith("/>") ? " " : "";
-		a += o === C ? n + ne : l >= 0 ? (r.push(s), n.slice(0, l) + te + n.slice(l) + g + d) : n + g + (l === -2 ? t : d);
+		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === x ? c[1] === "!--" ? o = S : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = w) : (ce.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = w) : o = C : o === w ? c[0] === ">" ? (o = i ?? x, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? w : c[3] === "\"" ? se : oe) : o === se || o === oe ? o = w : o === S || o === C ? o = x : (o = w, i = void 0);
+		let d = o === w && e[t + 1].startsWith("/>") ? " " : "";
+		a += o === x ? n + ie : l >= 0 ? (r.push(s), n.slice(0, l) + re + n.slice(l) + m + d) : n + m + (l === -2 ? t : d);
 	}
-	return [j(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
-}, M = class e {
+	return [O(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+}, k = class e {
 	constructor({ strings: t, _$litType$: n }, r) {
 		let i;
 		this.parts = [];
-		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = se(t, n);
-		if (this.el = e.createElement(l, r), A.currentNode = this.el.content, n === 2 || n === 3) {
+		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = ue(t, n);
+		if (this.el = e.createElement(l, r), D.currentNode = this.el.content, n === 2 || n === 3) {
 			let e = this.el.content.firstChild;
 			e.replaceWith(...e.childNodes);
 		}
-		for (; (i = A.nextNode()) !== null && c.length < s;) {
+		for (; (i = D.nextNode()) !== null && c.length < s;) {
 			if (i.nodeType === 1) {
-				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(te)) {
-					let t = u[o++], n = i.getAttribute(e).split(g), r = /([.?@])?(.*)/.exec(t);
+				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(re)) {
+					let t = u[o++], n = i.getAttribute(e).split(m), r = /([.?@])?(.*)/.exec(t);
 					c.push({
 						type: 1,
 						index: a,
 						name: r[2],
 						strings: n,
-						ctor: r[1] === "." ? le : r[1] === "?" ? ue : r[1] === "@" ? de : F
+						ctor: r[1] === "." ? fe : r[1] === "?" ? pe : r[1] === "@" ? me : M
 					}), i.removeAttribute(e);
-				} else e.startsWith(g) && (c.push({
+				} else e.startsWith(m) && (c.push({
 					type: 6,
 					index: a
 				}), i.removeAttribute(e));
-				if (oe.test(i.tagName)) {
-					let e = i.textContent.split(g), t = e.length - 1;
+				if (ce.test(i.tagName)) {
+					let e = i.textContent.split(m), t = e.length - 1;
 					if (t > 0) {
-						i.textContent = h ? h.emptyScript : "";
-						for (let n = 0; n < t; n++) i.append(e[n], y()), A.nextNode(), c.push({
+						i.textContent = p ? p.emptyScript : "";
+						for (let n = 0; n < t; n++) i.append(e[n], _()), D.nextNode(), c.push({
 							type: 2,
 							index: ++a
 						});
-						i.append(e[t], y());
+						i.append(e[t], _());
 					}
 				}
-			} else if (i.nodeType === 8) if (i.data === _) c.push({
+			} else if (i.nodeType === 8) if (i.data === h) c.push({
 				type: 2,
 				index: a
 			});
 			else {
 				let e = -1;
-				for (; (e = i.data.indexOf(g, e + 1)) !== -1;) c.push({
+				for (; (e = i.data.indexOf(m, e + 1)) !== -1;) c.push({
 					type: 7,
 					index: a
-				}), e += g.length - 1;
+				}), e += m.length - 1;
 			}
 			a++;
 		}
 	}
 	static createElement(e, t) {
-		let n = v.createElement("template");
+		let n = g.createElement("template");
 		return n.innerHTML = e, n;
 	}
 };
-function N(e, t, n = e, r) {
-	if (t === D) return t;
-	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = b(t) ? void 0 : t._$litDirective$;
-	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = N(e, i._$AS(e, t.values), i, r)), t;
+function A(e, t, n = e, r) {
+	if (t === T) return t;
+	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = v(t) ? void 0 : t._$litDirective$;
+	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = A(e, i._$AS(e, t.values), i, r)), t;
 }
-var ce = class {
+var de = class {
 	constructor(e, t) {
 		this._$AV = [], this._$AN = void 0, this._$AD = e, this._$AM = t;
 	}
@@ -1106,28 +1106,28 @@ var ce = class {
 		return this._$AM._$AU;
 	}
 	u(e) {
-		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? v).importNode(t, !0);
-		A.currentNode = r;
-		let i = A.nextNode(), a = 0, o = 0, s = n[0];
+		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? g).importNode(t, !0);
+		D.currentNode = r;
+		let i = D.nextNode(), a = 0, o = 0, s = n[0];
 		for (; s !== void 0;) {
 			if (a === s.index) {
 				let t;
-				s.type === 2 ? t = new P(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new fe(i, this, e)), this._$AV.push(t), s = n[++o];
+				s.type === 2 ? t = new j(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new he(i, this, e)), this._$AV.push(t), s = n[++o];
 			}
-			a !== s?.index && (i = A.nextNode(), a++);
+			a !== s?.index && (i = D.nextNode(), a++);
 		}
-		return A.currentNode = v, r;
+		return D.currentNode = g, r;
 	}
 	p(e) {
 		let t = 0;
 		for (let n of this._$AV) n !== void 0 && (n.strings === void 0 ? n._$AI(e[t]) : (n._$AI(e, n, t), t += n.strings.length - 2)), t++;
 	}
-}, P = class e {
+}, j = class e {
 	get _$AU() {
 		return this._$AM?._$AU ?? this._$Cv;
 	}
 	constructor(e, t, n, r) {
-		this.type = 2, this._$AH = O, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
+		this.type = 2, this._$AH = E, this._$AN = void 0, this._$AA = e, this._$AB = t, this._$AM = n, this.options = r, this._$Cv = r?.isConnected ?? !0;
 	}
 	get parentNode() {
 		let e = this._$AA.parentNode, t = this._$AM;
@@ -1140,7 +1140,7 @@ var ce = class {
 		return this._$AB;
 	}
 	_$AI(e, t = this) {
-		e = N(this, e, t), b(e) ? e === O || e == null || e === "" ? (this._$AH !== O && this._$AR(), this._$AH = O) : e !== this._$AH && e !== D && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? re(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
+		e = A(this, e, t), v(e) ? e === E || e == null || e === "" ? (this._$AH !== E && this._$AR(), this._$AH = E) : e !== this._$AH && e !== T && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? ae(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
 	}
 	O(e) {
 		return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -1149,36 +1149,36 @@ var ce = class {
 		this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
 	}
 	_(e) {
-		this._$AH !== O && b(this._$AH) ? this._$AA.nextSibling.data = e : this.T(v.createTextNode(e)), this._$AH = e;
+		this._$AH !== E && v(this._$AH) ? this._$AA.nextSibling.data = e : this.T(g.createTextNode(e)), this._$AH = e;
 	}
 	$(e) {
-		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = M.createElement(j(n.h, n.h[0]), this.options)), n);
+		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = k.createElement(O(n.h, n.h[0]), this.options)), n);
 		if (this._$AH?._$AD === r) this._$AH.p(t);
 		else {
-			let e = new ce(r, this), n = e.u(this.options);
+			let e = new de(r, this), n = e.u(this.options);
 			e.p(t), this.T(n), this._$AH = e;
 		}
 	}
 	_$AC(e) {
-		let t = k.get(e.strings);
-		return t === void 0 && k.set(e.strings, t = new M(e)), t;
+		let t = le.get(e.strings);
+		return t === void 0 && le.set(e.strings, t = new k(e)), t;
 	}
 	k(t) {
-		x(this._$AH) || (this._$AH = [], this._$AR());
+		y(this._$AH) || (this._$AH = [], this._$AR());
 		let n = this._$AH, r, i = 0;
-		for (let a of t) i === n.length ? n.push(r = new e(this.O(y()), this.O(y()), this, this.options)) : r = n[i], r._$AI(a), i++;
+		for (let a of t) i === n.length ? n.push(r = new e(this.O(_()), this.O(_()), this, this.options)) : r = n[i], r._$AI(a), i++;
 		i < n.length && (this._$AR(r && r._$AB.nextSibling, i), n.length = i);
 	}
 	_$AR(e = this._$AA.nextSibling, t) {
 		for (this._$AP?.(!1, !0, t); e !== this._$AB;) {
-			let t = m(e).nextSibling;
-			m(e).remove(), e = t;
+			let t = te(e).nextSibling;
+			te(e).remove(), e = t;
 		}
 	}
 	setConnected(e) {
 		this._$AM === void 0 && (this._$Cv = e, this._$AP?.(e));
 	}
-}, F = class {
+}, M = class {
 	get tagName() {
 		return this.element.tagName;
 	}
@@ -1186,47 +1186,47 @@ var ce = class {
 		return this._$AM._$AU;
 	}
 	constructor(e, t, n, r, i) {
-		this.type = 1, this._$AH = O, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = O;
+		this.type = 1, this._$AH = E, this._$AN = void 0, this.element = e, this.name = t, this._$AM = r, this.options = i, n.length > 2 || n[0] !== "" || n[1] !== "" ? (this._$AH = Array(n.length - 1).fill(/* @__PURE__ */ new String()), this.strings = n) : this._$AH = E;
 	}
 	_$AI(e, t = this, n, r) {
 		let i = this.strings, a = !1;
-		if (i === void 0) e = N(this, e, t, 0), a = !b(e) || e !== this._$AH && e !== D, a && (this._$AH = e);
+		if (i === void 0) e = A(this, e, t, 0), a = !v(e) || e !== this._$AH && e !== T, a && (this._$AH = e);
 		else {
 			let r = e, o, s;
-			for (e = i[0], o = 0; o < i.length - 1; o++) s = N(this, r[n + o], t, o), s === D && (s = this._$AH[o]), a ||= !b(s) || s !== this._$AH[o], s === O ? e = O : e !== O && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
+			for (e = i[0], o = 0; o < i.length - 1; o++) s = A(this, r[n + o], t, o), s === T && (s = this._$AH[o]), a ||= !v(s) || s !== this._$AH[o], s === E ? e = E : e !== E && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
 		}
 		a && !r && this.j(e);
 	}
 	j(e) {
-		e === O ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
+		e === E ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
 	}
-}, le = class extends F {
+}, fe = class extends M {
 	constructor() {
 		super(...arguments), this.type = 3;
 	}
 	j(e) {
-		this.element[this.name] = e === O ? void 0 : e;
+		this.element[this.name] = e === E ? void 0 : e;
 	}
-}, ue = class extends F {
+}, pe = class extends M {
 	constructor() {
 		super(...arguments), this.type = 4;
 	}
 	j(e) {
-		this.element.toggleAttribute(this.name, !!e && e !== O);
+		this.element.toggleAttribute(this.name, !!e && e !== E);
 	}
-}, de = class extends F {
+}, me = class extends M {
 	constructor(e, t, n, r, i) {
 		super(e, t, n, r, i), this.type = 5;
 	}
 	_$AI(e, t = this) {
-		if ((e = N(this, e, t, 0) ?? O) === D) return;
-		let n = this._$AH, r = e === O && n !== O || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== O && (n === O || r);
+		if ((e = A(this, e, t, 0) ?? E) === T) return;
+		let n = this._$AH, r = e === E && n !== E || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== E && (n === E || r);
 		r && this.element.removeEventListener(this.name, this, n), i && this.element.addEventListener(this.name, this, e), this._$AH = e;
 	}
 	handleEvent(e) {
 		typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, e) : this._$AH.handleEvent(e);
 	}
-}, fe = class {
+}, he = class {
 	constructor(e, t, n) {
 		this.element = e, this.type = 6, this._$AN = void 0, this._$AM = t, this.options = n;
 	}
@@ -1234,13 +1234,13 @@ var ce = class {
 		return this._$AM._$AU;
 	}
 	_$AI(e) {
-		N(this, e);
+		A(this, e);
 	}
-}, pe = p.litHtmlPolyfillSupport;
-pe?.(M, P), (p.litHtmlVersions ??= []).push("3.3.2");
+}, ge = f.litHtmlPolyfillSupport;
+ge?.(k, j), (f.litHtmlVersions ??= []).push("3.3.2");
 //#endregion
 //#region node_modules/lit-html/directives/if-defined.js
-var I = (e) => e ?? O, L = class extends e {
+var N = (e) => e ?? E, P = class extends e {
 	static properties = {
 		checked: {
 			type: Boolean,
@@ -1345,7 +1345,7 @@ var I = (e) => e ?? O, L = class extends e {
           name="${this.name || ""}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${I(t)}"
+          aria-label="${N(t)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -1363,10 +1363,10 @@ var I = (e) => e ?? O, L = class extends e {
 		})));
 	}
 };
-customElements.define("pastis-toggle", L);
+customElements.define("pastis-toggle", P);
 //#endregion
 //#region src/components/badge/pastis-badge.js
-var R = class extends e {
+var F = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -1488,10 +1488,10 @@ var R = class extends e {
     `;
 	}
 };
-customElements.define("pastis-badge", R);
+customElements.define("pastis-badge", F);
 //#endregion
 //#region src/components/avatar/pastis-avatar.js
-var z = class extends e {
+var I = class extends e {
 	static properties = {
 		src: { type: String },
 		alt: { type: String },
@@ -1619,10 +1619,10 @@ var z = class extends e {
     `;
 	}
 };
-customElements.define("pastis-avatar", z);
+customElements.define("pastis-avatar", I);
 //#endregion
 //#region src/components/card/pastis-card.js
-var B = class extends e {
+var L = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -1911,10 +1911,10 @@ var B = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-card", B);
+customElements.define("pastis-card", L);
 //#endregion
 //#region src/components/alert/pastis-alert.js
-var V = class extends e {
+var R = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -2037,22 +2037,22 @@ var V = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-alert", V);
+customElements.define("pastis-alert", R);
 //#endregion
 //#region src/components/modal/pastis-modal.js
-function H() {
+function z() {
 	let e = document.activeElement;
 	for (; e?.shadowRoot?.activeElement;) e = e.shadowRoot.activeElement;
 	return e;
 }
-function me(e) {
-	for (let t = H(); t; t = t.getRootNode().host) if (t === e || e.contains(t)) return !0;
+function _e(e) {
+	for (let t = z(); t; t = t.getRootNode().host) if (t === e || e.contains(t)) return !0;
 	return !1;
 }
-function he(e) {
+function ve(e) {
 	return e.tabIndex < 0 || e.localName === "slot" || e.localName === "a" && !e.hasAttribute("href") && !e.hasAttribute("tabindex") || e.disabled || e.matches(":disabled") || e.inert || e.closest("[inert]") ? !1 : typeof e.checkVisibility == "function" ? e.checkVisibility({ visibilityProperty: !0 }) : e.getClientRects().length > 0;
 }
-function ge(e) {
+function ye(e) {
 	let t = (e) => e instanceof HTMLInputElement && e.type === "radio" && e.name ? e.name : null, n = /* @__PURE__ */ new Map();
 	for (let r of e) {
 		let e = t(r);
@@ -2066,13 +2066,13 @@ function ge(e) {
 	for (let e of n.values()) for (let t of e.values()) r.add(t.find((e) => e.checked) ?? t[0]);
 	return e.filter((e) => !t(e) || r.has(e));
 }
-function* U(e) {
-	for (let t of e) if (t instanceof HTMLElement) if (he(t) && (yield t), t.localName === "slot") {
+function* B(e) {
+	for (let t of e) if (t instanceof HTMLElement) if (ve(t) && (yield t), t.localName === "slot") {
 		let e = t.assignedElements({ flatten: !0 });
-		yield* U(e.length ? e : t.children);
-	} else t.shadowRoot ? yield* U(t.shadowRoot.children) : yield* U(t.children);
+		yield* B(e.length ? e : t.children);
+	} else t.shadowRoot ? yield* B(t.shadowRoot.children) : yield* B(t.children);
 }
-var W = class extends e {
+var V = class extends e {
 	static properties = {
 		open: {
 			type: Boolean,
@@ -2229,22 +2229,22 @@ var W = class extends e {
 	}
 	_getFocusableElements() {
 		let e = this.shadowRoot?.querySelector(".dialog");
-		return e ? ge([...U(e.children)]) : [];
+		return e ? ye([...B(e.children)]) : [];
 	}
 	willUpdate(e) {
 		e.has("open") && !this.open && this._dialog?.close();
 	}
 	updated(e) {
 		if (e.has("open")) if (this._openGeneration++, this.open) {
-			this._previousFocus = H(), document.body.style.overflow = "hidden";
+			this._previousFocus = z(), document.body.style.overflow = "hidden";
 			let e = this._dialog;
-			e && !e.open && e.isConnected && e.showModal(), this._dialogFocus = H(), this._focusInitialWhenReady();
-		} else e.get("open") && (document.body.style.overflow = "", this._previousFocus?.isConnected && H() !== this._previousFocus && this._previousFocus.focus(), this._previousFocus = null, this._dialogFocus = null);
+			e && !e.open && e.isConnected && e.showModal(), this._dialogFocus = z(), this._focusInitialWhenReady();
+		} else e.get("open") && (document.body.style.overflow = "", this._previousFocus?.isConnected && z() !== this._previousFocus && this._previousFocus.focus(), this._previousFocus = null, this._dialogFocus = null);
 	}
 	async _focusInitialWhenReady() {
 		let e = this._openGeneration, t = [...this.querySelectorAll("*")].map((e) => e.updateComplete).filter((e) => e && typeof e.then == "function");
 		if (t.length && await Promise.all(t), e !== this._openGeneration || !this.open || !this.isConnected) return;
-		let n = H();
+		let n = z();
 		n && (this.contains(n) || this.shadowRoot.contains(n) || this.contains(n.getRootNode().host)) && n !== this._dialogFocus && n !== this._dialog || this._focusInitial();
 	}
 	_focusInitial() {
@@ -2254,7 +2254,7 @@ var W = class extends e {
 			this.shadowRoot.querySelector(".close-btn"),
 			this.shadowRoot.querySelector(".modal-body")
 		];
-		for (let e of t) if (e && (e.focus(), me(e))) return;
+		for (let e of t) if (e && (e.focus(), _e(e))) return;
 	}
 	render() {
 		if (!this.open) return n``;
@@ -2306,7 +2306,7 @@ var W = class extends e {
 			e.preventDefault();
 			return;
 		}
-		let n = t[0], r = t[t.length - 1], i = H(), a = t.includes(i);
+		let n = t[0], r = t[t.length - 1], i = z(), a = t.includes(i);
 		e.shiftKey && (i === n || !a) ? (e.preventDefault(), r.focus()) : !e.shiftKey && (i === r || !a) && (e.preventDefault(), n.focus());
 	}
 	open_() {
@@ -2322,10 +2322,10 @@ var W = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-modal", W);
+customElements.define("pastis-modal", V);
 //#endregion
 //#region src/components/toast/pastis-toast.js
-var G = class extends e {
+var H = class extends e {
 	static properties = {
 		message: { type: String },
 		variant: {
@@ -2498,10 +2498,10 @@ var G = class extends e {
     ` : n``;
 	}
 };
-customElements.define("pastis-toast", G);
+customElements.define("pastis-toast", H);
 //#endregion
 //#region src/components/spinner/pastis-spinner.js
-var K = class extends e {
+var U = class extends e {
 	static properties = {
 		size: {
 			type: String,
@@ -2612,10 +2612,10 @@ var K = class extends e {
     `;
 	}
 };
-customElements.define("pastis-spinner", K);
+customElements.define("pastis-spinner", U);
 //#endregion
 //#region src/components/skeleton/pastis-skeleton.js
-var q = class extends e {
+var W = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -2701,10 +2701,10 @@ var q = class extends e {
 		return n`<div class="skeleton" style="${e || "width:100%;height:16px"}" part="skeleton"></div>`;
 	}
 };
-customElements.define("pastis-skeleton", q);
+customElements.define("pastis-skeleton", W);
 //#endregion
 //#region src/components/tooltip/pastis-tooltip.js
-var J = class extends e {
+var G = class extends e {
 	static properties = {
 		content: { type: String },
 		position: {
@@ -2827,10 +2827,10 @@ var J = class extends e {
 		}, 100);
 	}
 };
-customElements.define("pastis-tooltip", J);
+customElements.define("pastis-tooltip", G);
 //#endregion
 //#region src/components/dropdown/pastis-dropdown.js
-var _e = class extends e {
+var K = class extends e {
 	static properties = {
 		label: { type: String },
 		placeholder: { type: String },
@@ -3131,10 +3131,10 @@ var _e = class extends e {
     `;
 	}
 };
-customElements.define("pastis-dropdown", _e);
+customElements.define("pastis-dropdown", K);
 //#endregion
 //#region src/components/tabs/pastis-tabs.js
-var ve = class extends e {
+var be = class extends e {
 	static properties = {
 		tabs: { type: Array },
 		active: {
@@ -3332,10 +3332,10 @@ var ve = class extends e {
     `;
 	}
 };
-customElements.define("pastis-tabs", ve);
+customElements.define("pastis-tabs", be);
 //#endregion
 //#region src/components/accordion/pastis-accordion.js
-var ye = class extends e {
+var xe = class extends e {
 	static properties = {
 		items: { type: Array },
 		multiple: {
@@ -3515,10 +3515,10 @@ var ye = class extends e {
     `;
 	}
 };
-customElements.define("pastis-accordion", ye);
+customElements.define("pastis-accordion", xe);
 //#endregion
 //#region src/components/breadcrumb/pastis-breadcrumb.js
-var be = class extends e {
+var Se = class extends e {
 	static properties = {
 		items: { type: Array },
 		separator: { type: String },
@@ -3645,10 +3645,10 @@ var be = class extends e {
     `;
 	}
 };
-customElements.define("pastis-breadcrumb", be);
+customElements.define("pastis-breadcrumb", Se);
 //#endregion
 //#region src/components/pagination/pastis-pagination.js
-var xe = class extends e {
+var Ce = class extends e {
 	static properties = {
 		total: { type: Number },
 		page: {
@@ -3844,10 +3844,10 @@ var xe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-pagination", xe);
+customElements.define("pastis-pagination", Ce);
 //#endregion
 //#region src/components/progress/pastis-progress.js
-var Se = class extends e {
+var we = class extends e {
 	static properties = {
 		value: {
 			type: Number,
@@ -4060,10 +4060,10 @@ var Se = class extends e {
     `;
 	}
 };
-customElements.define("pastis-progress", Se);
+customElements.define("pastis-progress", we);
 //#endregion
 //#region src/components/tag/pastis-tag.js
-var Ce = class extends e {
+var Te = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -4206,10 +4206,10 @@ var Ce = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-tag", Ce);
+customElements.define("pastis-tag", Te);
 //#endregion
 //#region src/components/divider/pastis-divider.js
-var we = class extends e {
+var Ee = class extends e {
 	static properties = {
 		orientation: {
 			type: String,
@@ -4336,10 +4336,10 @@ var we = class extends e {
     `;
 	}
 };
-customElements.define("pastis-divider", we);
+customElements.define("pastis-divider", Ee);
 //#endregion
 //#region src/components/hero/pastis-hero.js
-var Te = class extends e {
+var De = class extends e {
 	static properties = {
 		heading: { type: String },
 		subheading: { type: String },
@@ -4566,10 +4566,10 @@ var Te = class extends e {
     `;
 	}
 };
-customElements.define("pastis-hero", Te);
+customElements.define("pastis-hero", De);
 //#endregion
 //#region src/components/search/pastis-search.js
-var Ee = class extends e {
+var Oe = class extends e {
 	static properties = {
 		placeholder: { type: String },
 		value: {
@@ -4827,7 +4827,7 @@ var Ee = class extends e {
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${I(this._focusedIndex >= 0 ? this._optionId(this._focusedIndex) : void 0)}"
+            aria-activedescendant="${N(this._focusedIndex >= 0 ? this._optionId(this._focusedIndex) : void 0)}"
             @input="${this._handleInput}"
             @focus="${() => {
 			this.value.length >= this.minChars && (this.open = !0);
@@ -4864,10 +4864,10 @@ var Ee = class extends e {
     `;
 	}
 };
-customElements.define("pastis-search", Ee);
+customElements.define("pastis-search", Oe);
 //#endregion
 //#region src/components/drawer/pastis-drawer.js
-var De = class extends e {
+var ke = class extends e {
 	static properties = {
 		open: {
 			type: Boolean,
@@ -5102,10 +5102,10 @@ var De = class extends e {
     ` : n``;
 	}
 };
-customElements.define("pastis-drawer", De);
+customElements.define("pastis-drawer", ke);
 //#endregion
 //#region src/components/file-upload/pastis-file-upload.js
-var Oe = class extends e {
+var Ae = class extends e {
 	static properties = {
 		accept: { type: String },
 		multiple: {
@@ -5412,10 +5412,10 @@ var Oe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-file-upload", Oe);
+customElements.define("pastis-file-upload", Ae);
 //#endregion
 //#region src/components/cookie-banner/pastis-cookie-banner.js
-var ke = class extends e {
+var je = class extends e {
 	static properties = {
 		visible: {
 			type: Boolean,
@@ -5737,10 +5737,10 @@ var ke = class extends e {
     `;
 	}
 };
-customElements.define("pastis-cookie-banner", ke);
+customElements.define("pastis-cookie-banner", je);
 //#endregion
 //#region src/components/radio/pastis-radio.js
-var Ae = class extends e {
+var Me = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5852,10 +5852,10 @@ var Ae = class extends e {
 		(e.key === " " || e.key === "Enter") && (e.preventDefault(), this.disabled || (this.checked = !0, this._handleChange({ target: { checked: !0 } })));
 	}
 };
-customElements.define("pastis-radio", Ae);
+customElements.define("pastis-radio", Me);
 //#endregion
 //#region src/components/stat-card/pastis-stat-card.js
-var je = class extends e {
+var Ne = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5961,10 +5961,10 @@ var je = class extends e {
     `;
 	}
 };
-customElements.define("pastis-stat-card", je);
+customElements.define("pastis-stat-card", Ne);
 //#endregion
 //#region src/components/table-row/pastis-table-row.js
-var Me = class extends e {
+var Pe = class extends e {
 	static properties = {
 		columns: { type: Array },
 		rows: { type: Array },
@@ -6175,10 +6175,10 @@ var Me = class extends e {
     `;
 	}
 };
-customElements.define("pastis-table", Me);
+customElements.define("pastis-table", Pe);
 //#endregion
 //#region src/components/code-block/pastis-code-block.js
-var Ne = class extends e {
+var Fe = class extends e {
 	static properties = {
 		code: { type: String },
 		language: { type: String },
@@ -6338,10 +6338,10 @@ var Ne = class extends e {
     `;
 	}
 };
-customElements.define("pastis-code-block", Ne);
+customElements.define("pastis-code-block", Fe);
 //#endregion
 //#region src/components/empty-state/pastis-empty-state.js
-var Pe = class extends e {
+var Ie = class extends e {
 	static properties = {
 		icon: { type: String },
 		heading: { type: String },
@@ -6483,10 +6483,10 @@ var Pe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-empty-state", Pe);
+customElements.define("pastis-empty-state", Ie);
 //#endregion
 //#region src/components/filter-chip/pastis-filter-chip.js
-var Fe = class extends e {
+var Le = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -6638,8 +6638,8 @@ var Fe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-chip", Fe);
-var Ie = class extends e {
+customElements.define("pastis-filter-chip", Le);
+var Re = class extends e {
 	static properties = {
 		filters: { type: Array },
 		active: { type: Array },
@@ -6726,10 +6726,10 @@ var Ie = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-bar", Ie);
+customElements.define("pastis-filter-bar", Re);
 //#endregion
 //#region src/components/theme-toggle/pastis-theme-toggle.js
-var Le = class extends e {
+var ze = class extends e {
 	static properties = {
 		theme: {
 			type: String,
@@ -6836,10 +6836,10 @@ var Le = class extends e {
     `;
 	}
 };
-customElements.define("pastis-theme-toggle", Le);
+customElements.define("pastis-theme-toggle", ze);
 //#endregion
 //#region src/components/carousel/pastis-carousel.js
-var Re = class extends e {
+var Be = class extends e {
 	static properties = {
 		slides: { type: Array },
 		active: {
@@ -7155,10 +7155,10 @@ var Re = class extends e {
     `;
 	}
 };
-customElements.define("pastis-carousel", Re);
+customElements.define("pastis-carousel", Be);
 //#endregion
 //#region src/components/timeline/pastis-timeline.js
-var ze = class extends e {
+var Ve = class extends e {
 	static properties = {
 		items: { type: Array },
 		variant: {
@@ -7253,10 +7253,10 @@ var ze = class extends e {
     `;
 	}
 };
-customElements.define("pastis-timeline", ze);
+customElements.define("pastis-timeline", Ve);
 //#endregion
 //#region src/components/testimonial/pastis-testimonial.js
-var Be = class extends e {
+var He = class extends e {
 	static properties = {
 		quote: { type: String },
 		name: { type: String },
@@ -7432,10 +7432,10 @@ var Be = class extends e {
     `;
 	}
 };
-customElements.define("pastis-testimonial", Be);
+customElements.define("pastis-testimonial", He);
 //#endregion
 //#region src/components/section/pastis-section.js
-var Ve = class extends e {
+var Ue = class extends e {
 	static properties = {
 		label: { type: String },
 		heading: { type: String },
@@ -7566,10 +7566,10 @@ var Ve = class extends e {
     `;
 	}
 };
-customElements.define("pastis-section", Ve);
+customElements.define("pastis-section", Ue);
 //#endregion
 //#region src/components/footer/pastis-footer.js
-var He = class extends e {
+var We = class extends e {
 	static properties = {
 		brand: { type: String },
 		tagline: { type: String },
@@ -7797,10 +7797,10 @@ var He = class extends e {
     `;
 	}
 };
-customElements.define("pastis-footer", He);
+customElements.define("pastis-footer", We);
 //#endregion
 //#region src/components/nav/pastis-nav.js
-var Ue = class extends e {
+var Ge = class extends e {
 	static properties = {
 		brand: { type: String },
 		items: { type: Array },
@@ -8272,10 +8272,10 @@ var Ue = class extends e {
     `;
 	}
 };
-customElements.define("pastis-nav", Ue);
+customElements.define("pastis-nav", Ge);
 //#endregion
 //#region src/components/project-card/pastis-project-card.js
-var We = class extends e {
+var Ke = class extends e {
 	static properties = {
 		href: { type: String },
 		heading: { type: String },
@@ -8533,10 +8533,10 @@ var We = class extends e {
     `;
 	}
 };
-customElements.define("pastis-project-card", We);
+customElements.define("pastis-project-card", Ke);
 //#endregion
 //#region src/components/statement/pastis-statement.js
-var Ge = class extends e {
+var qe = class extends e {
 	static properties = {
 		eyebrow: { type: String },
 		size: {
@@ -8636,10 +8636,10 @@ var Ge = class extends e {
     `;
 	}
 };
-customElements.define("pastis-statement", Ge);
+customElements.define("pastis-statement", qe);
 //#endregion
 //#region src/components/token-swatch/pastis-token-swatch.js
-var Ke = class extends e {
+var Je = class extends e {
 	static properties = {
 		token: { type: String },
 		label: { type: String },
@@ -8713,10 +8713,10 @@ var Ke = class extends e {
     `;
 	}
 };
-customElements.define("pastis-token-swatch", Ke);
+customElements.define("pastis-token-swatch", Je);
 //#endregion
 //#region src/components/spec-table/pastis-spec-table.js
-var qe = class extends e {
+var Ye = class extends e {
 	static properties = {
 		tokens: { type: Array },
 		kind: {
@@ -8882,10 +8882,10 @@ var qe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-spec-table", qe);
+customElements.define("pastis-spec-table", Ye);
 //#endregion
 //#region src/components/shelf/pastis-shelf.js
-var Je = class extends e {
+var Xe = class extends e {
 	static properties = {
 		label: { type: String },
 		stagger: { type: Number },
@@ -9080,14 +9080,15 @@ var Je = class extends e {
     `;
 	}
 };
-customElements.define("pastis-shelf", Je);
+customElements.define("pastis-shelf", Xe);
 //#endregion
 //#region src/components/icon/icons.js
-var Y = {
+var q = {
 	today: i`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,
 	calendar: i`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,
 	list: i`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,
 	search: i`<path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" />`,
+	grip: i`<circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" /><circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />`,
 	flag: i`<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />`,
 	repeat: i`<path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" />`,
 	clock: i`<circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />`,
@@ -9104,7 +9105,7 @@ var Y = {
 	"chevron-left": i`<path d="m15 18-6-6 6-6" />`,
 	inbox: i`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,
 	"trash-restore": i`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`
-}, Ye = Object.keys(Y), Xe = class extends e {
+}, Ze = Object.keys(q), Qe = class extends e {
 	static properties = {
 		name: {
 			type: String,
@@ -9135,10 +9136,10 @@ var Y = {
 		super(), this.size = "md";
 	}
 	willUpdate(e) {
-		e.has("name") && !Object.hasOwn(Y, this.name ?? "") && console.warn(`pastis-icon: unknown icon name "${this.name ?? ""}"`), this.label ? (this.setAttribute("role", "img"), this.setAttribute("aria-label", this.label), this.removeAttribute("aria-hidden")) : (this.removeAttribute("role"), this.removeAttribute("aria-label"), this.setAttribute("aria-hidden", "true"));
+		e.has("name") && !Object.hasOwn(q, this.name ?? "") && console.warn(`pastis-icon: unknown icon name "${this.name ?? ""}"`), this.label ? (this.setAttribute("role", "img"), this.setAttribute("aria-label", this.label), this.removeAttribute("aria-hidden")) : (this.removeAttribute("role"), this.removeAttribute("aria-label"), this.setAttribute("aria-hidden", "true"));
 	}
 	render() {
-		let e = Object.hasOwn(Y, this.name ?? "") ? Y[this.name] : null;
+		let e = Object.hasOwn(q, this.name ?? "") ? q[this.name] : null;
 		return e ? n`<svg
       part="svg"
       viewBox="0 0 24 24"
@@ -9152,15 +9153,15 @@ var Y = {
     >${e}</svg>` : r;
 	}
 };
-customElements.define("pastis-icon", Xe);
+customElements.define("pastis-icon", Qe);
 //#endregion
 //#region src/components/task-row/pastis-task-row.js
-var Ze = [
+var $e = [
 	"",
 	"low",
 	"medium",
 	"high"
-], Qe = "Untitled task", $e = class extends e {
+], et = "Untitled task", tt = class extends e {
 	static properties = {
 		taskTitle: {
 			type: String,
@@ -9200,6 +9201,14 @@ var Ze = [
 		disabled: {
 			type: Boolean,
 			reflect: !0
+		},
+		reorderable: {
+			type: Boolean,
+			reflect: !0
+		},
+		reorderLabel: {
+			type: String,
+			attribute: "reorder-label"
 		}
 	};
 	static styles = t`
@@ -9234,6 +9243,38 @@ var Ze = [
       background: none;
       color: inherit;
       cursor: pointer;
+    }
+
+    /* ── Reorder handle (with <pastis-sortable>): 44 × 44 px, never scrolls the page on touch ── */
+    .handle {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-md, 6px);
+      background: none;
+      color: var(--text-tertiary, #a39b90);
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .handle:hover:not(:disabled) { color: var(--text-primary, #f4eee3); }
+
+    .handle:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .handle:disabled { cursor: not-allowed; opacity: 0.4; }
+
+    :host([data-picked]) .handle {
+      color: var(--action-primary-text, #0d0d0d);
+      background: var(--action-primary, #fcba28);
     }
 
     .circle {
@@ -9363,7 +9404,7 @@ var Ze = [
     }
   `;
 	constructor() {
-		super(), this.taskTitle = "", this.done = !1, this.overdue = !1, this.repeats = !1, this.flagged = !1, this.priority = 0, this.tags = [], this.indent = !1, this.disabled = !1;
+		super(), this.taskTitle = "", this.done = !1, this.overdue = !1, this.repeats = !1, this.flagged = !1, this.priority = 0, this.tags = [], this.indent = !1, this.disabled = !1, this.reorderable = !1;
 	}
 	connectedCallback() {
 		super.connectedCallback(), this.hasAttribute("role") || this.setAttribute("role", "listitem");
@@ -9385,7 +9426,7 @@ var Ze = [
 		});
 		let t = Math.trunc(Number(this.priority));
 		t >= 1 && t <= 3 && e.push({
-			text: `Priority ${Ze[t]}`,
+			text: `Priority ${$e[t]}`,
 			view: n`<span class="meta-item priority">${"!".repeat(t)}</span>`
 		}), this.subtasks && e.push({
 			text: `Subtasks ${this.subtasks}`,
@@ -9402,7 +9443,7 @@ var Ze = [
 		}), e;
 	}
 	render() {
-		let e = this._metaItems(), t = !!String(this.taskTitle ?? "").trim(), i = t ? this.taskTitle : Qe;
+		let e = this._metaItems(), t = !!String(this.taskTitle ?? "").trim(), i = t ? this.taskTitle : et;
 		return n`
       <div class="row" part="row">
         <button
@@ -9425,7 +9466,7 @@ var Ze = [
             class="title"
             part="title"
             type="button"
-            aria-label=${t ? r : Qe}
+            aria-label=${t ? r : et}
             aria-describedby=${e.length ? "description" : r}
             ?disabled=${this.disabled}
             @click=${this._onOpen}
@@ -9436,6 +9477,15 @@ var Ze = [
           ` : r}
         </div>
         <div class="actions" part="actions"><slot name="actions"></slot></div>
+        ${this.reorderable ? n`
+          <button
+            class="handle"
+            part="handle"
+            type="button"
+            aria-label=${this.reorderLabel || `Reorder ${i}`}
+            ?disabled=${this.disabled}
+          ><pastis-icon name="grip"></pastis-icon></button>
+        ` : r}
       </div>
     `;
 	}
@@ -9459,10 +9509,10 @@ var Ze = [
 		}));
 	}
 };
-customElements.define("pastis-task-row", $e);
+customElements.define("pastis-task-row", tt);
 //#endregion
 //#region src/components/tab-bar/pastis-tab-bar.js
-var X = class extends e {
+var nt = class extends e {
 	static properties = { label: { type: String } };
 	static styles = t`
     :host {
@@ -9491,7 +9541,7 @@ var X = class extends e {
 	render() {
 		return n`<nav part="nav" aria-label=${this.label || r}><slot></slot></nav>`;
 	}
-}, et = class extends e {
+}, J = class extends e {
 	static properties = {
 		href: { type: String },
 		icon: { type: String },
@@ -9613,17 +9663,17 @@ var X = class extends e {
 		this.dispatchEvent(t) || e.preventDefault();
 	}
 };
-customElements.define("pastis-tab-bar", X), customElements.define("pastis-tab-bar-item", et);
+customElements.define("pastis-tab-bar", nt), customElements.define("pastis-tab-bar-item", J);
 //#endregion
 //#region src/components/date-field/pastis-date-time-field-base.js
-var tt = 0, Z = {};
-function Q(e, t) {
-	return t == null || t === "" ? "" : (Z[e] ??= Object.assign(document.createElement("input"), { type: e }), Z[e].value = String(t), Z[e].value);
+var rt = 0, Y = {};
+function X(e, t) {
+	return t == null || t === "" ? "" : (Y[e] ??= Object.assign(document.createElement("input"), { type: e }), Y[e].value = String(t), Y[e].value);
 }
-function nt(e) {
+function it(e) {
 	return Array.from(e.elements).find((e) => e.type === "submit" || e instanceof HTMLInputElement && e.type === "image");
 }
-var $ = class extends e {
+var Z = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -9804,7 +9854,7 @@ var $ = class extends e {
     }
   `;
 	constructor() {
-		super(), this.value = "", this.disabled = !1, this.required = !1, this.chips = [], this._formDisabled = !1, this._id = `pastis-dt-field-${++tt}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
+		super(), this.value = "", this.disabled = !1, this.required = !1, this.chips = [], this._formDisabled = !1, this._id = `pastis-dt-field-${++rt}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
 	}
 	get form() {
 		return this._internals.form;
@@ -9843,7 +9893,7 @@ var $ = class extends e {
 		return this.disabled || this._formDisabled;
 	}
 	willUpdate(e) {
-		e.has("value") && (this.value = Q(this.constructor.inputType, this.value)), this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
+		e.has("value") && (this.value = X(this.constructor.inputType, this.value)), this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
 	}
 	updated() {
 		this._syncForm();
@@ -9902,7 +9952,7 @@ var $ = class extends e {
                 class="chip"
                 part="chip"
                 type="button"
-                aria-pressed=${Q(this.constructor.inputType, e.value) === this.value ? "true" : "false"}
+                aria-pressed=${X(this.constructor.inputType, e.value) === this.value ? "true" : "false"}
                 ?disabled=${i}
                 @click=${() => this._pick(e.value)}
               >${e.label}</button>
@@ -9926,7 +9976,7 @@ var $ = class extends e {
 		this.value = e.target.value, this._syncForm(), this._emit("pastis-change");
 	}
 	_setByUser(e) {
-		let t = Q(this.constructor.inputType, e);
+		let t = X(this.constructor.inputType, e);
 		return t === this.value && (!this._input || this._input.value === t) ? !1 : (this.value = t, this._input && (this._input.value = t), this._syncForm(), this._emit("pastis-input"), this._emit("pastis-change"), !0);
 	}
 	_pick(e) {
@@ -9940,26 +9990,781 @@ var $ = class extends e {
 		let t = this.form;
 		t && setTimeout(() => {
 			if (e.defaultPrevented) return;
-			let n = nt(t);
+			let n = it(t);
 			n ? !n.disabled && !n.matches(":disabled") && n.click() : t.requestSubmit();
 		});
 	}
-}, rt = class extends $ {
+}, at = class extends Z {
 	static inputType = "date";
 };
-customElements.define("pastis-date-field", rt);
+customElements.define("pastis-date-field", at);
 //#endregion
 //#region src/components/time-field/pastis-time-field.js
-var it = class extends $ {
+var ot = class extends Z {
 	static inputType = "time";
 	static properties = {
-		...$.properties,
+		...Z.properties,
 		step: { type: Number }
 	};
 	_inputAttributes() {
 		return { step: this.step };
 	}
 };
-customElements.define("pastis-time-field", it);
+customElements.define("pastis-time-field", ot);
 //#endregion
-export { ye as PastisAccordion, V as PastisAlert, z as PastisAvatar, R as PastisBadge, be as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, B as PastisCard, Re as PastisCarousel, f as PastisCheckbox, Ne as PastisCodeBlock, ke as PastisCookieBanner, rt as PastisDateField, we as PastisDivider, De as PastisDrawer, _e as PastisDropdown, Pe as PastisEmptyState, Oe as PastisFileUpload, Ie as PastisFilterBar, Fe as PastisFilterChip, He as PastisFooter, Te as PastisHero, Xe as PastisIcon, d as PastisInput, W as PastisModal, Ue as PastisNav, xe as PastisPagination, Se as PastisProgress, We as PastisProjectCard, Ae as PastisRadio, Ee as PastisSearch, Ve as PastisSection, Je as PastisShelf, q as PastisSkeleton, qe as PastisSpecTable, K as PastisSpinner, je as PastisStatCard, Ge as PastisStatement, X as PastisTabBar, et as PastisTabBarItem, Me as PastisTable, ve as PastisTabs, Ce as PastisTag, $e as PastisTaskRow, Be as PastisTestimonial, Le as PastisThemeToggle, it as PastisTimeField, ze as PastisTimeline, G as PastisToast, L as PastisToggle, Ke as PastisTokenSwatch, J as PastisTooltip, Ye as iconNames, Y as icons };
+//#region src/components/quick-add/pastis-quick-add.js
+var st = 0, ct = class extends e {
+	static shadowRootOptions = {
+		...e.shadowRootOptions,
+		delegatesFocus: !0
+	};
+	static properties = {
+		label: { type: String },
+		value: { type: String },
+		placeholder: { type: String },
+		maxlength: { type: Number },
+		submitLabel: {
+			type: String,
+			attribute: "submit-label"
+		},
+		tokensLabel: {
+			type: String,
+			attribute: "tokens-label"
+		},
+		tokens: { type: Array },
+		disabled: {
+			type: Boolean,
+			reflect: !0
+		}
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm, 8px);
+      margin: 0;
+      font-family: var(--font-family-mono, monospace);
+    }
+
+    label {
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+      color: var(--text-primary, #f4eee3);
+    }
+
+    .control {
+      display: flex;
+      align-items: stretch;
+      gap: var(--space-sm, 8px);
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      box-sizing: border-box;
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      margin: 0;
+      padding: var(--space-sm, 8px) calc(var(--space-sm, 8px) * 1.5);
+      font: inherit;
+      font-size: var(--font-size-body-sm, 14px);
+      font-weight: var(--font-weight-bold, 700);
+      color: var(--text-secondary, #e6dfd2);
+      background: var(--bg-primary, #110d0a);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-radius: var(--radius-md, 6px);
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+
+    input::placeholder { color: var(--text-tertiary, #a39b90); font-weight: 400; }
+    input:hover { border-color: var(--text-tertiary, #a39b90); }
+    input:focus { border-color: var(--border-focus, #fcba28); outline: none; }
+    input:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
+    input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    button {
+      box-sizing: border-box;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
+    button:disabled { cursor: not-allowed; opacity: 0.4; }
+
+    .submit {
+      flex: none;
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      padding: 0 var(--space-md, 16px);
+      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
+      border-radius: var(--radius-md, 6px);
+      background: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+    }
+
+    .submit:hover:not(:disabled) { filter: brightness(1.08); }
+
+    .tokens {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs, 4px) var(--space-sm, 8px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .token {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs, 4px);
+      min-height: var(--space-xl, 32px);
+      padding-left: calc(var(--space-sm, 8px) * 1.25);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-radius: var(--radius-full, 9999px);
+      background: var(--bg-card, #1b1612);
+      color: var(--text-secondary, #e6dfd2);
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-bold, 700);
+      white-space: nowrap;
+    }
+
+    .remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--space-xl, 32px);
+      height: var(--space-xl, 32px);
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-full, 9999px);
+      background: none;
+      color: var(--text-tertiary, #a39b90);
+    }
+
+    .remove:hover:not(:disabled) { color: var(--text-primary, #f4eee3); background: var(--bg-elevated, #251f1a); }
+
+    /* 44 × 44 px targets on touch screens */
+    @media (pointer: coarse) {
+      .remove {
+        width: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+        height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      }
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+  `;
+	constructor() {
+		super(), this.value = "", this.tokens = [], this.disabled = !1, this._id = `pastis-quick-add-${++st}`;
+	}
+	focus(e) {
+		let t = this.shadowRoot?.querySelector("input");
+		t ? t.focus(e) : super.focus(e);
+	}
+	_tokens() {
+		return Array.isArray(this.tokens) ? this.tokens.filter((e) => e && e.label) : [];
+	}
+	render() {
+		let e = this._id, t = this._tokens(), i = this.tokensLabel || "Will set";
+		return n`
+      <form @submit=${this._onSubmit} novalidate>
+        ${this.label ? n`<label for="${e}">${this.label}</label>` : r}
+        <div class="control">
+          <input
+            id="${e}"
+            part="input"
+            type="text"
+            autocomplete="off"
+            enterkeyhint="done"
+            .value="${this.value ?? ""}"
+            placeholder=${this.placeholder || r}
+            maxlength=${this.maxlength ?? r}
+            aria-label=${this.label || r}
+            aria-describedby=${t.length ? `${e}-summary` : r}
+            ?disabled=${this.disabled}
+            @input=${this._onInput}
+          />
+          <!-- aria-label: Chrome would name it by its uppercased rendering -->
+          <button
+            class="submit"
+            part="submit"
+            type="submit"
+            aria-label=${this.submitLabel || "Add"}
+            ?disabled=${this.disabled}
+          >${this.submitLabel || "Add"}</button>
+        </div>
+        ${t.length ? n`
+          <p class="sr-only" id="${e}-summary">${i}: ${t.map((e) => e.label).join(", ")}</p>
+          <ul class="tokens" part="tokens" aria-label=${i}>
+            ${t.map((e) => n`
+              <li class="token" part="token">
+                ${e.icon ? n`<pastis-icon name=${e.icon} size="sm"></pastis-icon>` : r}
+                <span>${e.label}</span>
+                <button
+                  class="remove"
+                  type="button"
+                  aria-label="Remove ${e.label}"
+                  ?disabled=${this.disabled}
+                  @click=${() => this._remove(e.id)}
+                ><pastis-icon name="close" size="sm"></pastis-icon></button>
+              </li>
+            `)}
+          </ul>
+        ` : r}
+      </form>
+    `;
+	}
+	_onInput(e) {
+		this.value = e.target.value, this.dispatchEvent(new CustomEvent("pastis-input", {
+			detail: { value: this.value },
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+	_onSubmit(e) {
+		e.preventDefault(), !(this.disabled || (this.value ?? "").trim() === "") && this.dispatchEvent(new CustomEvent("pastis-submit", {
+			detail: { value: this.value },
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+	_remove(e) {
+		this.dispatchEvent(new CustomEvent("pastis-token-remove", {
+			detail: { id: e },
+			bubbles: !0,
+			composed: !0
+		})), this.focus();
+	}
+};
+customElements.define("pastis-quick-add", ct);
+//#endregion
+//#region src/components/recurrence-picker/pastis-recurrence-picker.js
+var lt = 0, ut = [
+	["", "Never"],
+	["daily", "Daily"],
+	["weekly", "Weekly"],
+	["monthly", "Monthly"],
+	["yearly", "Yearly"]
+], dt = {
+	daily: ["day", "days"],
+	weekly: ["week", "weeks"],
+	monthly: ["month", "months"],
+	yearly: ["year", "years"]
+}, ft = [
+	"MO",
+	"TU",
+	"WE",
+	"TH",
+	"FR",
+	"SA",
+	"SU"
+], Q = 99;
+function $(e) {
+	if (!e || !dt[e.freq]) return null;
+	let t = Math.min(Q, Math.max(1, Math.trunc(Number(e.interval)) || 1)), n = ft.filter((t) => Array.isArray(e.byDay) && e.byDay.includes(t));
+	return {
+		freq: e.freq,
+		interval: t,
+		byDay: n,
+		mode: e.mode === "completion" ? "completion" : "schedule",
+		until: typeof e.until == "string" && /^\d{4}-\d{2}-\d{2}$/.test(e.until) ? e.until : null
+	};
+}
+var pt = class extends e {
+	static shadowRootOptions = {
+		...e.shadowRootOptions,
+		delegatesFocus: !0
+	};
+	static properties = {
+		label: { type: String },
+		value: { type: Object },
+		weekdayLabels: {
+			type: Array,
+			attribute: "weekday-labels"
+		},
+		helper: { type: String },
+		disabled: {
+			type: Boolean,
+			reflect: !0
+		}
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .picker {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md, 16px);
+      font-family: var(--font-family-mono, monospace);
+    }
+
+    fieldset {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm, 8px);
+      margin: 0;
+      padding: 0;
+      border: 0;
+      min-width: 0;
+    }
+
+    legend {
+      width: 100%;
+      padding: 0;
+      margin-bottom: var(--space-sm, 8px);
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+      color: var(--text-primary, #f4eee3);
+    }
+
+    .choice { position: relative; display: inline-flex; }
+
+    /* The native control stays in the tree (1 px clip), the label is the visible chip */
+    .choice input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      opacity: 0;
+      clip-path: inset(50%);
+    }
+
+    .choice span {
+      display: inline-flex;
+      align-items: center;
+      min-height: var(--space-xl, 32px);
+      padding: 0 calc(var(--space-sm, 8px) * 1.5);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-radius: var(--radius-full, 9999px);
+      background: var(--bg-card, #1b1612);
+      color: var(--text-secondary, #e6dfd2);
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-bold, 700);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+
+    .choice span:hover { border-color: var(--action-primary, #fcba28); }
+
+    .choice input:checked + span {
+      background: var(--action-primary, #fcba28);
+      border-color: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+    }
+
+    .choice input:focus-visible + span {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
+
+    .choice input:disabled + span { opacity: 0.4; cursor: not-allowed; }
+
+    .every {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm, 8px);
+      font-size: var(--font-size-body-sm, 14px);
+      color: var(--text-secondary, #e6dfd2);
+    }
+
+    input[type='number'], input[type='date'] {
+      box-sizing: border-box;
+      min-height: var(--space-xl, 32px);
+      padding: 0 var(--space-sm, 8px);
+      font: inherit;
+      font-size: var(--font-size-body-sm, 14px);
+      font-weight: var(--font-weight-bold, 700);
+      color: var(--text-secondary, #e6dfd2);
+      background: var(--bg-primary, #110d0a);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-radius: var(--radius-md, 6px);
+      color-scheme: var(--color-scheme, dark);
+    }
+
+    input[type='number'] { width: 4.5em; }
+
+    input[type='number']:focus-visible, input[type='date']:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: 2px;
+    }
+
+    input:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .helper {
+      margin: 0;
+      font-size: var(--font-size-micro, 11px);
+      line-height: var(--line-height-caption, 1.4);
+      color: var(--text-tertiary, #a39b90);
+    }
+
+    /* 44 px targets on touch screens */
+    @media (pointer: coarse) {
+      .choice span, input[type='number'], input[type='date'] {
+        min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      }
+    }
+
+    @media (forced-colors: active) {
+      .choice input:checked + span { background: Highlight; color: HighlightText; border-color: Highlight; }
+    }
+  `;
+	constructor() {
+		super(), this.value = null, this.disabled = !1, this._id = `pastis-recurrence-${++lt}`;
+	}
+	_labels() {
+		return Array.isArray(this.weekdayLabels) && this.weekdayLabels.length === 7 ? this.weekdayLabels : [
+			"Mon",
+			"Tue",
+			"Wed",
+			"Thu",
+			"Fri",
+			"Sat",
+			"Sun"
+		];
+	}
+	_choice({ type: e, name: t, checked: r, label: i, onChange: a, value: o = "" }) {
+		return n`
+      <label class="choice">
+        <input
+          type=${e}
+          name=${t}
+          .value=${o}
+          .checked=${r}
+          ?disabled=${this.disabled}
+          @change=${a}
+        /><span>${i}</span>
+      </label>
+    `;
+	}
+	render() {
+		let e = this._id, t = $(this.value), i = t?.freq ?? "", a = t ? dt[t.freq] : null, o = this._labels();
+		return n`
+      <div class="picker">
+        <!-- aria-label on each fieldset: Chrome would name it by the uppercased legend -->
+        <fieldset part="group" aria-label=${this.label || "Repeat"}>
+          <legend>${this.label || "Repeat"}</legend>
+          ${ut.map(([t, n]) => this._choice({
+			type: "radio",
+			name: `${e}-freq`,
+			value: t,
+			checked: i === t,
+			label: n,
+			onChange: () => this._setFreq(t)
+		}))}
+        </fieldset>
+        ${t ? n`
+          <div class="every">
+            <label for="${e}-interval">Every</label>
+            <input
+              id="${e}-interval"
+              type="number"
+              min="1"
+              max="${Q}"
+              inputmode="numeric"
+              .value=${String(t.interval)}
+              aria-describedby="${e}-unit"
+              ?disabled=${this.disabled}
+              @change=${this._onInterval}
+            />
+            <span id="${e}-unit">${t.interval === 1 ? a[0] : a[1]}</span>
+          </div>
+          <fieldset part="group" aria-label="Next one counts from">
+            <legend>Next one counts from</legend>
+            ${this._choice({
+			type: "radio",
+			name: `${e}-mode`,
+			value: "schedule",
+			checked: t.mode === "schedule",
+			label: "The schedule",
+			onChange: () => this._update({ mode: "schedule" })
+		})}
+            ${this._choice({
+			type: "radio",
+			name: `${e}-mode`,
+			value: "completion",
+			checked: t.mode === "completion",
+			label: "Completion",
+			onChange: () => this._update({ mode: "completion" })
+		})}
+          </fieldset>
+          ${t.freq === "weekly" && t.mode === "schedule" ? n`
+            <fieldset part="group" aria-label="On">
+              <legend>On</legend>
+              ${ft.map((n, r) => this._choice({
+			type: "checkbox",
+			name: `${e}-day`,
+			value: n,
+			checked: t.byDay.includes(n),
+			label: o[r],
+			onChange: (e) => this._toggleDay(n, e.target.checked)
+		}))}
+            </fieldset>
+          ` : r}
+          <fieldset part="group" aria-label="Ends">
+            <legend>Ends</legend>
+            ${this._choice({
+			type: "radio",
+			name: `${e}-end`,
+			value: "never",
+			checked: t.until === null,
+			label: "Never",
+			onChange: () => this._update({ until: null })
+		})}
+            ${this._choice({
+			type: "radio",
+			name: `${e}-end`,
+			value: "on",
+			checked: t.until !== null,
+			label: "On a date",
+			onChange: () => this._endOn()
+		})}
+            ${t.until === null ? r : n`
+              <input
+                type="date"
+                aria-label="End date"
+                .value=${t.until}
+                ?disabled=${this.disabled}
+                @change=${this._onUntil}
+              />
+            `}
+          </fieldset>
+        ` : r}
+        ${this.helper ? n`<p class="helper">${this.helper}</p>` : r}
+      </div>
+    `;
+	}
+	_emit(e) {
+		this.value = e, this.dispatchEvent(new CustomEvent("pastis-change", {
+			detail: { value: e },
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+	_update(e) {
+		let t = $(this.value);
+		t && this._emit($({
+			...t,
+			...e
+		}));
+	}
+	_setFreq(e) {
+		if (!e) {
+			this._emit(null);
+			return;
+		}
+		let t = $(this.value);
+		this._emit($({
+			interval: 1,
+			byDay: [],
+			mode: "schedule",
+			until: null,
+			...t,
+			freq: e,
+			...e === "weekly" ? {} : { byDay: [] }
+		}));
+	}
+	_onInterval(e) {
+		let t = Math.min(Q, Math.max(1, Math.trunc(Number(e.target.value)) || 1));
+		e.target.value = String(t), this._update({ interval: t });
+	}
+	_toggleDay(e, t) {
+		let n = $(this.value);
+		if (!n) return;
+		let r = t ? [...n.byDay, e] : n.byDay.filter((t) => t !== e);
+		this._update({ byDay: r });
+	}
+	_endOn() {
+		let e = /* @__PURE__ */ new Date();
+		e.setDate(e.getDate() + 28);
+		let t = `${e.getFullYear()}-${String(e.getMonth() + 1).padStart(2, "0")}-${String(e.getDate()).padStart(2, "0")}`;
+		this._update({ until: t });
+	}
+	_onUntil(e) {
+		if (!e.target.value) {
+			e.target.value = $(this.value)?.until ?? "";
+			return;
+		}
+		this._update({ until: e.target.value });
+	}
+};
+customElements.define("pastis-recurrence-picker", pt);
+//#endregion
+//#region src/components/sortable/pastis-sortable.js
+var mt = 6, ht = class extends e {
+	static properties = { disabled: {
+		type: Boolean,
+		reflect: !0
+	} };
+	static styles = t`
+    :host { display: block; position: relative; }
+    :host([hidden]) { display: none; }
+
+    ::slotted([data-dragging]) {
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+      box-shadow: var(--shadow-md, 0 4px 12px rgba(0, 0, 0, 0.35));
+      background: var(--bg-elevated, #251f1a);
+    }
+
+    ::slotted([data-picked]) {
+      outline: 2px solid var(--action-primary, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .indicator {
+      position: absolute;
+      inset-inline: 0;
+      height: 2px;
+      margin-top: -1px;
+      background: var(--action-primary, #fcba28);
+      pointer-events: none;
+    }
+
+    .indicator[hidden] { display: none; }
+
+  `;
+	constructor() {
+		super(), this.disabled = !1, this._press = null, this._picked = null, this._onPointerDown = this._onPointerDown.bind(this), this._onPointerMove = this._onPointerMove.bind(this), this._onPointerUp = this._onPointerUp.bind(this), this._onClick = this._onClick.bind(this), this._onKeydown = this._onKeydown.bind(this);
+	}
+	connectedCallback() {
+		super.connectedCallback(), this.addEventListener("pointerdown", this._onPointerDown), this.addEventListener("click", this._onClick), this.addEventListener("keydown", this._onKeydown);
+	}
+	disconnectedCallback() {
+		super.disconnectedCallback(), this.removeEventListener("pointerdown", this._onPointerDown), this.removeEventListener("click", this._onClick), this.removeEventListener("keydown", this._onKeydown), this._endPress();
+	}
+	render() {
+		return n`
+      <slot></slot>
+      <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
+    `;
+	}
+	_items() {
+		return [...this.children].filter((e) => !e.hidden);
+	}
+	_childOfHandle(e) {
+		let t = e.composedPath(), n = t.findIndex((e) => e instanceof Element && (e.hasAttribute("data-sortable-handle") || (e.getAttribute("part") ?? "").split(/\s+/).includes("handle")));
+		return n === -1 || t[n].disabled ? null : t.slice(n).find((e) => e instanceof Element && e.parentElement === this) ?? null;
+	}
+	_move(e, t) {
+		let n = this._items();
+		e === t || e < 0 || t < 0 || t >= n.length || this.dispatchEvent(new CustomEvent("pastis-reorder", {
+			detail: {
+				from: e,
+				to: t
+			},
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+	_setPicked(e) {
+		this._picked?.removeAttribute("data-picked"), this._picked = e, e?.setAttribute("data-picked", "");
+	}
+	_onClick(e) {
+		if (this.disabled) return;
+		let t = this._childOfHandle(e);
+		if (!t) return;
+		if (this._suppressClick) {
+			this._suppressClick = !1;
+			return;
+		}
+		if (!this._picked) {
+			this._setPicked(t);
+			return;
+		}
+		let n = this._items(), r = n.indexOf(this._picked), i = n.indexOf(t);
+		this._setPicked(null), r !== i && this._move(r, i);
+	}
+	_onKeydown(e) {
+		if (this.disabled) return;
+		if (e.key === "Escape" && this._picked) {
+			this._setPicked(null);
+			return;
+		}
+		if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+		let t = this._childOfHandle(e);
+		if (!t) return;
+		e.preventDefault();
+		let n = this._items().indexOf(t);
+		this._move(n, n + (e.key === "ArrowUp" ? -1 : 1));
+	}
+	_onPointerDown(e) {
+		if (this.disabled || e.button !== 0 || this._press) return;
+		let t = this._childOfHandle(e);
+		t && (this._press = {
+			child: t,
+			pointerId: e.pointerId,
+			startY: e.clientY,
+			dragging: !1,
+			to: null
+		}, this.addEventListener("pointermove", this._onPointerMove), this.addEventListener("pointerup", this._onPointerUp), this.addEventListener("pointercancel", this._onPointerUp));
+	}
+	_onPointerMove(e) {
+		let t = this._press;
+		if (!t || e.pointerId !== t.pointerId) return;
+		let n = e.clientY - t.startY;
+		if (!t.dragging) {
+			if (Math.abs(n) < mt) return;
+			t.dragging = !0;
+			try {
+				this.setPointerCapture(t.pointerId);
+			} catch {}
+			this._setPicked(null), t.child.setAttribute("data-dragging", "");
+		}
+		e.preventDefault(), t.child.style.transform = `translateY(${n}px)`, t.to = this._dropIndex(e.clientY, t.child), this._showIndicator(t.to, t.child);
+	}
+	_onPointerUp(e) {
+		let t = this._press;
+		if (!t || e.pointerId !== t.pointerId) return;
+		let { child: n, dragging: r, to: i } = t;
+		this._endPress(), r && (this._suppressClick = !0, setTimeout(() => {
+			this._suppressClick = !1;
+		}, 0), !(e.type === "pointercancel" || i === null) && this._move(this._items().indexOf(n), i));
+	}
+	_endPress() {
+		let e = this._press;
+		if (e) {
+			this._press = null, e.child.removeAttribute("data-dragging"), e.child.style.transform = "", this.shadowRoot?.querySelector(".indicator")?.setAttribute("hidden", ""), this.removeEventListener("pointermove", this._onPointerMove), this.removeEventListener("pointerup", this._onPointerUp), this.removeEventListener("pointercancel", this._onPointerUp);
+			try {
+				this.hasPointerCapture(e.pointerId) && this.releasePointerCapture(e.pointerId);
+			} catch {}
+		}
+	}
+	_dropIndex(e, t) {
+		let n = this._items().filter((e) => e !== t), r = 0;
+		for (let t of n) {
+			let n = t.getBoundingClientRect();
+			e > n.top + n.height / 2 && r++;
+		}
+		return r;
+	}
+	_showIndicator(e, t) {
+		let n = this.shadowRoot?.querySelector(".indicator");
+		if (!n) return;
+		let r = this._items().filter((e) => e !== t), i = this.getBoundingClientRect(), a = e < r.length ? r[e].getBoundingClientRect().top : r.at(-1)?.getBoundingClientRect().bottom ?? i.top;
+		n.style.top = `${a - i.top}px`, n.removeAttribute("hidden");
+	}
+};
+customElements.define("pastis-sortable", ht);
+//#endregion
+export { xe as PastisAccordion, R as PastisAlert, I as PastisAvatar, F as PastisBadge, Se as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, L as PastisCard, Be as PastisCarousel, ee as PastisCheckbox, Fe as PastisCodeBlock, je as PastisCookieBanner, at as PastisDateField, Ee as PastisDivider, ke as PastisDrawer, K as PastisDropdown, Ie as PastisEmptyState, Ae as PastisFileUpload, Re as PastisFilterBar, Le as PastisFilterChip, We as PastisFooter, De as PastisHero, Qe as PastisIcon, d as PastisInput, V as PastisModal, Ge as PastisNav, Ce as PastisPagination, we as PastisProgress, Ke as PastisProjectCard, ct as PastisQuickAdd, Me as PastisRadio, pt as PastisRecurrencePicker, Oe as PastisSearch, Ue as PastisSection, Xe as PastisShelf, W as PastisSkeleton, ht as PastisSortable, Ye as PastisSpecTable, U as PastisSpinner, Ne as PastisStatCard, qe as PastisStatement, nt as PastisTabBar, J as PastisTabBarItem, Pe as PastisTable, be as PastisTabs, Te as PastisTag, tt as PastisTaskRow, He as PastisTestimonial, ze as PastisThemeToggle, ot as PastisTimeField, Ve as PastisTimeline, H as PastisToast, P as PastisToggle, Je as PastisTokenSwatch, G as PastisTooltip, Ze as iconNames, q as icons };

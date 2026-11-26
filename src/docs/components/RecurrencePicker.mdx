@@ -1,0 +1,45 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as RecurrenceStories from '../../components/recurrence-picker/pastis-recurrence-picker.stories.js';
+
+<Meta of={RecurrenceStories} name="Usage" />
+
+# Recurrence picker
+
+`<pastis-recurrence-picker>` sets how a task repeats: a frequency, “every n”, weekdays for
+weekly repeats, whether the next one counts from the schedule or from completion, and an end.
+It does no date maths: the app turns its value into a rule and works out the dates.
+
+<Canvas of={RecurrenceStories.Weekly} />
+
+## Usage
+
+- **Value.** `null` (does not repeat) or `{ freq, interval, byDay, mode, until }`: `freq` is
+  `daily`, `weekly`, `monthly` or `yearly`; `interval` 1–99; `byDay` weekday codes `MO`…`SU`
+  (Monday first; empty means the due's own weekday); `mode` `schedule` or `completion`; `until`
+  a `YYYY-MM-DD` date or `null`. Set it as a property.
+- **Events.** `pastis-change` with `detail { value }` on every change (the interval when it is
+  committed). The picker shows the change itself; set `value` to put it back, e.g. after a
+  failed save.
+- **Weekdays** show only for weekly repeats counted from the schedule. Their names come from
+  `weekday-labels` (Monday to Sunday, default Mon…Sun).
+- **Accessible.** Every part is a native radio or checkbox group in a fieldset: Tab moves
+  between groups, arrow keys within one. The frequency group is named by `label` (default
+  “Repeat”). Targets are at least 32 px, 44 px on touch screens.
+- **Helper.** Use `helper` for a summary (“Every week on Mon, Thu”) or for why the picker is
+  `disabled` (“Set a due date to repeat”).
+
+<Controls of={RecurrenceStories.Default} />
+
+## Do
+
+```js
+picker.value = { freq: 'weekly', interval: 1, byDay: ['MO', 'TH'], mode: 'schedule', until: null };
+picker.addEventListener('pastis-change', (e) => saveRepeat(e.detail.value));
+```
+
+## Don't
+
+```js
+// Don't pass an RRULE string: the picker takes the object form only
+picker.value = 'FREQ=WEEKLY;BYDAY=MO';
+```

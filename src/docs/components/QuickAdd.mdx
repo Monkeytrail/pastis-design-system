@@ -1,0 +1,56 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as QuickAddStories from '../../components/quick-add/pastis-quick-add.stories.js';
+
+<Meta of={QuickAddStories} name="Usage" />
+
+# Quick add
+
+`<pastis-quick-add>` is a single-line command bar: the user types a whole entry (“Call the
+plumber tomorrow at 9 #home !!”), the app parses it and shows what it understood as tokens
+below the input, and Enter or Add adds it. The component does no parsing itself.
+
+<Canvas of={QuickAddStories.WithTokens} />
+
+## Usage
+
+- **Value.** The app owns it: `pastis-input` reports every edit with `detail { value }`; set
+  `value` back, typically to `''` once the entry is saved.
+- **Tokens.** Set `tokens` to an array of `{ id, label, icon? }` (a property, or a JSON array
+  attribute), computed from the value on every edit. Each token has a remove button, named “Remove” and the token's
+  label, that fires `pastis-token-remove` with `detail { id }`; the app decides what removing
+  means (usually: leave that text in the title). The tokens also describe the input for screen
+  readers (“Will set: …”, `tokens-label` changes the prefix).
+- **Submit.** Enter in the input or the Add button fires `pastis-submit` with
+  `detail { value }`. A blank value fires nothing. The bar is its own form and is not
+  form-associated: don't put it in another form expecting its value.
+- **Label.** Always set `label`; it names the input. `submit-label` changes “Add”.
+- **Targets** are at least 24 px, 44 px on touch screens.
+
+<Controls of={QuickAddStories.Default} />
+
+## Do
+
+```html
+<pastis-quick-add label="New item" maxlength="500"></pastis-quick-add>
+```
+
+```js
+bar.addEventListener('pastis-input', (e) => {
+  const parsed = parse(e.detail.value);
+  bar.tokens = parsed.tokens; // e.g. [{ id: 'due', label: 'Tomorrow 09:00', icon: 'calendar' }]
+});
+bar.addEventListener('pastis-submit', async (e) => {
+  await save(parse(e.detail.value));
+  bar.value = '';
+  bar.tokens = [];
+});
+```
+
+## Don't
+
+```html
+<!-- Don't leave out the label: the input would have no name -->
+<pastis-quick-add></pastis-quick-add>
+
+<!-- Don't save something the tokens did not show: what the user sees is what gets set -->
+```
