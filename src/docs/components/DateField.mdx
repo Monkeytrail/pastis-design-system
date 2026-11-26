@@ -1,0 +1,66 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as DateFieldStories from '../../components/date-field/pastis-date-field.stories.js';
+
+<Meta of={DateFieldStories} name="Usage" />
+
+# Date field
+
+`<pastis-date-field>` picks a calendar date. It wraps a native `<input type="date">`, so every
+platform shows its own picker (the wheel on iOS, a calendar on desktop), with a Pastis label,
+helper and error text, optional quick-pick chips and a clear button. For a time of day, use
+[`<pastis-time-field>`](?path=/docs/basics-timefield--usage); both share the same API.
+
+<Canvas of={DateFieldStories.WithChips} />
+
+## Usage
+
+- **Value.** `value` is `YYYY-MM-DD`, or `''` for no date. Anything else becomes `''`, as on the
+  native input. `min` and `max` take the same format. The picker shows the date in the
+  browser's locale; the value never changes format.
+- **Label.** Always set `label`: it names the input, the chips group and the clear button
+  (“Clear Due date”). It is shown in capitals; screen readers get it as written.
+- **Forms.** The field is form-associated: its value is submitted under `name`, `required`,
+  `min`, `max` and a partly typed date make it invalid, `form.reset()` restores the initial
+  `value`, a disabled `<fieldset>` disables it, and Enter in the input submits the form.
+- **Events.** `pastis-input` on every edit, `pastis-change` on commit, both with
+  `detail { value }` (bubbling, composed). A chip click or the clear button fires both.
+- **Chips.** Set `chips` to an array of `{ label, value }` (a property, or a JSON array
+  attribute); `value` is a date or `''` for “No date”. The app computes the dates (“Next week” is
+  whatever the app decides). The chip matching the value is pressed (`aria-pressed`); clicking
+  the pressed chip does nothing. The chips are a group named by the label, below the field.
+- **Clear.** Unless `required` or `disabled`, a field with a value shows a clear button that
+  empties it and moves focus back to the input.
+- **Targets** are at least 24 px, 44 px on touch screens. The native picker follows the theme
+  through the `--color-scheme` token.
+
+<Controls of={DateFieldStories.Default} />
+
+## Do
+
+```html
+<pastis-date-field label="Due date" name="due"></pastis-date-field>
+```
+
+```js
+// The app computes the dates, in the user's time zone
+field.chips = [
+  { label: 'Today', value: '2026-11-25' },
+  { label: 'Tomorrow', value: '2026-11-26' },
+  { label: 'Next week', value: '2026-11-30' },
+  { label: 'No date', value: '' },
+];
+field.addEventListener('pastis-change', (e) => save({ due: e.detail.value || null }));
+```
+
+## Don't
+
+```html
+<!-- Don't leave out the label: the input, chips and clear button would have no name -->
+<pastis-date-field></pastis-date-field>
+
+<!-- Don't pass a formatted or timestamped date: only YYYY-MM-DD is kept -->
+<pastis-date-field label="Due date" value="25/11/2026"></pastis-date-field>
+<pastis-date-field label="Due date" value="2026-11-25T14:00:00Z"></pastis-date-field>
+
+<!-- Don't offer a “No date” chip on a required field -->
+```

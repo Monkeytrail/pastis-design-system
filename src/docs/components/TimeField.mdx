@@ -1,0 +1,39 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TimeFieldStories from '../../components/time-field/pastis-time-field.stories.js';
+
+<Meta of={TimeFieldStories} name="Usage" />
+
+# Time field
+
+`<pastis-time-field>` picks a time of day. It wraps a native `<input type="time">` and works
+exactly like [`<pastis-date-field>`](?path=/docs/basics-datefield--usage): label, helper and
+error text, chips, clear button, form association and the same events.
+
+<Canvas of={TimeFieldStories.DateAndTime} />
+
+## Usage
+
+- **Value.** `value` is `HH:MM` on a 24-hour clock (`HH:MM:SS` only when `step` allows
+  seconds), or `''` for no time. The picker shows 12 or 24 hours as the browser's locale does;
+  the value is always 24-hour.
+- **Step.** `step` is in seconds, as on the native input: `900` allows quarter hours only (other
+  values are invalid, `validity.stepMismatch`). The default is one minute.
+- **Chips.** e.g. `[{ label: '09:00', value: '09:00' }, { label: '12:00', value: '12:00' }]`.
+- **A time is not a date.** The field knows nothing about days or time zones; combine its value
+  with a date in the app.
+
+<Controls of={TimeFieldStories.Default} />
+
+## Do
+
+```html
+<pastis-date-field label="Due date" name="due-date"></pastis-date-field>
+<pastis-time-field label="Time" name="due-time" step="300"></pastis-time-field>
+```
+
+## Don't
+
+```html
+<!-- Don't pass 12-hour text: the value is always HH:MM, 24-hour -->
+<pastis-time-field label="Time" value="2:30 PM"></pastis-time-field>
+```
