@@ -1,0 +1,44 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as KanbanStories from '../../components/kanban/pastis-kanban-board.stories.js';
+
+<Meta of={KanbanStories} name="Usage" />
+
+# Kanban board
+
+`<pastis-kanban-board>` lays out `<pastis-kanban-column>`s side by side (scrolling sideways on a
+phone) and turns gestures on the cards' handles into moves. It never moves the cards itself: the
+app updates its data and renders them again.
+
+<Canvas of={KanbanStories.Default} />
+
+## Usage
+
+- **Columns.** Each `<pastis-kanban-column>` has a `value` (reported in moves, e.g. a status) and a
+  `label`; it is a list named by its label and count, and its children are the cards.
+- **Cards and handles.** Use `<pastis-task-row reorderable>` (its handle has the part `handle`) or
+  any card with a `data-sortable-handle` button.
+- **Three ways to move** (WCAG 2.5.7 needs one that is not a drag): drag a handle (the column under
+  the pointer highlights, a line shows the place); tap a handle to pick the card up, then tap
+  another card's handle (that place) or a column's "Move here" (its end), Escape to put it back;
+  or Arrow Up / Down within a column and Arrow Left / Right to the next column.
+- **Event.** `pastis-kanban-move` with `detail { from: { column, index }, to: { column, index } }`;
+  `to.index` is the card's index in the target column afterwards.
+
+<Controls of={KanbanStories.Default} />
+
+## Do
+
+```html
+<pastis-kanban-board>
+  <pastis-kanban-column value="todo" label="To do">
+    <pastis-task-row reorderable task-title="Write release notes"></pastis-task-row>
+  </pastis-kanban-column>
+  <pastis-kanban-column value="doing" label="Doing"></pastis-kanban-column>
+</pastis-kanban-board>
+```
+
+## Don't
+
+```js
+// Don't leave the card where it is after pastis-kanban-move: nothing moves it for you
+```

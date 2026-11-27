@@ -9541,7 +9541,7 @@ var nt = class extends e {
 	render() {
 		return n`<nav part="nav" aria-label=${this.label || r}><slot></slot></nav>`;
 	}
-}, J = class extends e {
+}, rt = class extends e {
 	static properties = {
 		href: { type: String },
 		icon: { type: String },
@@ -9663,17 +9663,17 @@ var nt = class extends e {
 		this.dispatchEvent(t) || e.preventDefault();
 	}
 };
-customElements.define("pastis-tab-bar", nt), customElements.define("pastis-tab-bar-item", J);
+customElements.define("pastis-tab-bar", nt), customElements.define("pastis-tab-bar-item", rt);
 //#endregion
 //#region src/components/date-field/pastis-date-time-field-base.js
-var rt = 0, Y = {};
-function X(e, t) {
-	return t == null || t === "" ? "" : (Y[e] ??= Object.assign(document.createElement("input"), { type: e }), Y[e].value = String(t), Y[e].value);
+var it = 0, J = {};
+function Y(e, t) {
+	return t == null || t === "" ? "" : (J[e] ??= Object.assign(document.createElement("input"), { type: e }), J[e].value = String(t), J[e].value);
 }
-function it(e) {
+function at(e) {
 	return Array.from(e.elements).find((e) => e.type === "submit" || e instanceof HTMLInputElement && e.type === "image");
 }
-var Z = class extends e {
+var X = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -9854,7 +9854,7 @@ var Z = class extends e {
     }
   `;
 	constructor() {
-		super(), this.value = "", this.disabled = !1, this.required = !1, this.chips = [], this._formDisabled = !1, this._id = `pastis-dt-field-${++rt}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
+		super(), this.value = "", this.disabled = !1, this.required = !1, this.chips = [], this._formDisabled = !1, this._id = `pastis-dt-field-${++it}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
 	}
 	get form() {
 		return this._internals.form;
@@ -9893,7 +9893,7 @@ var Z = class extends e {
 		return this.disabled || this._formDisabled;
 	}
 	willUpdate(e) {
-		e.has("value") && (this.value = X(this.constructor.inputType, this.value)), this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
+		e.has("value") && (this.value = Y(this.constructor.inputType, this.value)), this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
 	}
 	updated() {
 		this._syncForm();
@@ -9952,7 +9952,7 @@ var Z = class extends e {
                 class="chip"
                 part="chip"
                 type="button"
-                aria-pressed=${X(this.constructor.inputType, e.value) === this.value ? "true" : "false"}
+                aria-pressed=${Y(this.constructor.inputType, e.value) === this.value ? "true" : "false"}
                 ?disabled=${i}
                 @click=${() => this._pick(e.value)}
               >${e.label}</button>
@@ -9976,7 +9976,7 @@ var Z = class extends e {
 		this.value = e.target.value, this._syncForm(), this._emit("pastis-change");
 	}
 	_setByUser(e) {
-		let t = X(this.constructor.inputType, e);
+		let t = Y(this.constructor.inputType, e);
 		return t === this.value && (!this._input || this._input.value === t) ? !1 : (this.value = t, this._input && (this._input.value = t), this._syncForm(), this._emit("pastis-input"), this._emit("pastis-change"), !0);
 	}
 	_pick(e) {
@@ -9990,27 +9990,27 @@ var Z = class extends e {
 		let t = this.form;
 		t && setTimeout(() => {
 			if (e.defaultPrevented) return;
-			let n = it(t);
+			let n = at(t);
 			n ? !n.disabled && !n.matches(":disabled") && n.click() : t.requestSubmit();
 		});
 	}
-}, at = class extends Z {
+}, ot = class extends X {
 	static inputType = "date";
 };
-customElements.define("pastis-date-field", at);
+customElements.define("pastis-date-field", ot);
 //#endregion
 //#region src/components/time-field/pastis-time-field.js
-var ot = class extends Z {
+var Z = class extends X {
 	static inputType = "time";
 	static properties = {
-		...Z.properties,
+		...X.properties,
 		step: { type: Number }
 	};
 	_inputAttributes() {
 		return { step: this.step };
 	}
 };
-customElements.define("pastis-time-field", ot);
+customElements.define("pastis-time-field", Z);
 //#endregion
 //#region src/components/quick-add/pastis-quick-add.js
 var st = 0, ct = class extends e {
@@ -10881,4 +10881,339 @@ var gt = class extends e {
 };
 customElements.define("pastis-editor", gt);
 //#endregion
-export { xe as PastisAccordion, R as PastisAlert, I as PastisAvatar, F as PastisBadge, Se as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, L as PastisCard, Be as PastisCarousel, ee as PastisCheckbox, Fe as PastisCodeBlock, je as PastisCookieBanner, at as PastisDateField, Ee as PastisDivider, ke as PastisDrawer, K as PastisDropdown, gt as PastisEditor, Ie as PastisEmptyState, Ae as PastisFileUpload, Re as PastisFilterBar, Le as PastisFilterChip, We as PastisFooter, De as PastisHero, Qe as PastisIcon, d as PastisInput, V as PastisModal, Ge as PastisNav, Ce as PastisPagination, we as PastisProgress, Ke as PastisProjectCard, ct as PastisQuickAdd, Me as PastisRadio, pt as PastisRecurrencePicker, Oe as PastisSearch, Ue as PastisSection, Xe as PastisShelf, W as PastisSkeleton, ht as PastisSortable, Ye as PastisSpecTable, U as PastisSpinner, Ne as PastisStatCard, qe as PastisStatement, nt as PastisTabBar, J as PastisTabBarItem, Pe as PastisTable, be as PastisTabs, Te as PastisTag, tt as PastisTaskRow, He as PastisTestimonial, ze as PastisThemeToggle, ot as PastisTimeField, Ve as PastisTimeline, H as PastisToast, P as PastisToggle, Je as PastisTokenSwatch, G as PastisTooltip, Ze as iconNames, q as icons };
+//#region src/components/kanban/pastis-kanban-column.js
+var _t = class extends e {
+	static properties = {
+		value: {
+			type: String,
+			reflect: !0
+		},
+		label: { type: String },
+		dropTarget: {
+			type: Boolean,
+			reflect: !0,
+			attribute: "drop-target"
+		},
+		over: {
+			type: Boolean,
+			reflect: !0
+		},
+		_count: { state: !0 }
+	};
+	static styles = t`
+    :host {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      border: var(--border-width, 1px) solid var(--border-subtle, #2a241f);
+      border-radius: var(--radius-lg, 10px);
+      background: var(--bg-secondary, #16110d);
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+    :host([hidden]) { display: none; }
+    :host([over]) { border-color: var(--action-primary, #fcba28); }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm, 8px);
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      padding: 0 var(--space-sm, 8px) 0 var(--space-md, 16px);
+      font-family: var(--font-family-mono, monospace);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+      color: var(--text-primary, #f4eee3);
+    }
+
+    .count {
+      color: var(--text-tertiary, #a39b90);
+      font-size: var(--font-size-caption, 12px);
+    }
+
+    .move {
+      margin: 0;
+      min-height: var(--space-xl, 32px);
+      padding: 0 var(--space-sm, 8px);
+      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
+      border-radius: var(--radius-full, 9999px);
+      background: none;
+      color: var(--text-primary, #f4eee3);
+      font: inherit;
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-bold, 700);
+      cursor: pointer;
+    }
+    .move:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
+
+    @media (pointer: coarse) {
+      .move { min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px)); }
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs, 4px);
+      flex: 1;
+      min-height: var(--space-2xl, 48px);
+      padding: 0 var(--space-xs, 4px) var(--space-xs, 4px);
+    }
+  `;
+	constructor() {
+		super(), this.dropTarget = !1, this.over = !1, this._count = 0;
+	}
+	render() {
+		let e = this.label || this.value || "";
+		return n`
+      <div class="header" part="header">
+        <h3>${e} <span class="count" aria-hidden="true">${this._count}</span></h3>
+        ${this.dropTarget ? n`
+          <button class="move" type="button" aria-label="Move here: ${e}" @click=${this._moveHere}>Move here</button>
+        ` : r}
+      </div>
+      <div class="cards" part="cards" role="list" aria-label="${e}, ${this._count} ${this._count === 1 ? "item" : "items"}">
+        <slot @slotchange=${this._onSlotChange}></slot>
+      </div>
+    `;
+	}
+	_onSlotChange(e) {
+		this._count = e.target.assignedElements().length;
+	}
+	_moveHere() {
+		this.dispatchEvent(new CustomEvent("pastis-kanban-move-here", {
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+};
+customElements.define("pastis-kanban-column", _t);
+//#endregion
+//#region src/components/kanban/pastis-kanban-board.js
+var vt = 6, yt = class extends e {
+	static properties = { disabled: {
+		type: Boolean,
+		reflect: !0
+	} };
+	static styles = t`
+    :host { display: block; position: relative; }
+    :host([hidden]) { display: none; }
+
+    .columns {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(16rem, 1fr);
+      gap: var(--space-sm, 8px);
+      overflow-x: auto;
+      padding-bottom: var(--space-xs, 4px);
+      scroll-snap-type: x proximity;
+    }
+
+    ::slotted(pastis-kanban-column) { scroll-snap-align: start; }
+
+    ::slotted([data-dragging]) { opacity: 0.4; }
+
+    .indicator {
+      position: absolute;
+      height: 2px;
+      margin-top: -1px;
+      background: var(--action-primary, #fcba28);
+      pointer-events: none;
+    }
+    .indicator[hidden] { display: none; }
+  `;
+	constructor() {
+		super(), this.disabled = !1, this._press = null, this._picked = null, this._onPointerDown = this._onPointerDown.bind(this), this._onPointerMove = this._onPointerMove.bind(this), this._onPointerUp = this._onPointerUp.bind(this), this._onClick = this._onClick.bind(this), this._onKeydown = this._onKeydown.bind(this), this._onMoveHere = this._onMoveHere.bind(this);
+	}
+	connectedCallback() {
+		super.connectedCallback(), this.addEventListener("pointerdown", this._onPointerDown), this.addEventListener("click", this._onClick), this.addEventListener("keydown", this._onKeydown), this.addEventListener("pastis-kanban-move-here", this._onMoveHere);
+	}
+	disconnectedCallback() {
+		super.disconnectedCallback(), this.removeEventListener("pointerdown", this._onPointerDown), this.removeEventListener("click", this._onClick), this.removeEventListener("keydown", this._onKeydown), this.removeEventListener("pastis-kanban-move-here", this._onMoveHere), this._endPress();
+	}
+	render() {
+		return n`
+      <div class="columns"><slot></slot></div>
+      <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
+    `;
+	}
+	_columns() {
+		return [...this.children].filter((e) => e.localName === "pastis-kanban-column" && !e.hidden);
+	}
+	_cards(e) {
+		return [...e.children].filter((e) => !e.hidden);
+	}
+	_cardOfHandle(e) {
+		let t = e.composedPath(), n = t.findIndex((e) => e instanceof Element && (e.hasAttribute("data-sortable-handle") || (e.getAttribute("part") ?? "").split(/\s+/).includes("handle")));
+		if (n === -1 || t[n].disabled) return null;
+		let r = t.slice(n), i = r.find((e) => e instanceof Element && e.localName === "pastis-kanban-column" && e.parentElement === this);
+		if (!i) return null;
+		let a = r.find((e) => e instanceof Element && e.parentElement === i);
+		return a ? {
+			card: a,
+			column: i
+		} : null;
+	}
+	_where(e, t) {
+		return {
+			column: t.value,
+			index: this._cards(t).indexOf(e)
+		};
+	}
+	_move(e, t) {
+		e.column === t.column && e.index === t.index || this.dispatchEvent(new CustomEvent("pastis-kanban-move", {
+			detail: {
+				from: e,
+				to: t
+			},
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+	_setPicked(e) {
+		this._picked && this._picked.card.removeAttribute("data-picked"), this._picked = e, e && e.card.setAttribute("data-picked", "");
+		for (let t of this._columns()) t.dropTarget = !!e && t !== e.column;
+	}
+	_onClick(e) {
+		if (this.disabled) return;
+		let t = this._cardOfHandle(e);
+		if (!t) return;
+		if (this._suppressClick) {
+			this._suppressClick = !1;
+			return;
+		}
+		if (!this._picked) {
+			this._setPicked(t);
+			return;
+		}
+		let n = this._picked;
+		if (this._setPicked(null), n.card === t.card) return;
+		let r = this._where(n.card, n.column), i = this._where(t.card, t.column);
+		this._move(r, i);
+	}
+	_onMoveHere(e) {
+		if (this.disabled || !this._picked) return;
+		let t = e.composedPath().find((e) => e instanceof Element && e.localName === "pastis-kanban-column");
+		if (!t) return;
+		let n = this._picked;
+		this._setPicked(null), this._move(this._where(n.card, n.column), {
+			column: t.value,
+			index: this._cards(t).length
+		});
+	}
+	_onKeydown(e) {
+		if (this.disabled) return;
+		if (e.key === "Escape" && this._picked) {
+			this._setPicked(null);
+			return;
+		}
+		if (![
+			"ArrowUp",
+			"ArrowDown",
+			"ArrowLeft",
+			"ArrowRight"
+		].includes(e.key)) return;
+		let t = this._cardOfHandle(e);
+		if (!t) return;
+		e.preventDefault();
+		let n = this._where(t.card, t.column);
+		if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+			let r = n.index + (e.key === "ArrowUp" ? -1 : 1);
+			if (r < 0 || r >= this._cards(t.column).length) return;
+			this._move(n, {
+				column: n.column,
+				index: r
+			});
+			return;
+		}
+		let r = this._columns(), i = r[r.indexOf(t.column) + (e.key === "ArrowLeft" ? -1 : 1)];
+		i && this._move(n, {
+			column: i.value,
+			index: this._cards(i).length
+		});
+	}
+	_onPointerDown(e) {
+		if (this.disabled || e.button !== 0 || this._press) return;
+		let t = this._cardOfHandle(e);
+		t && (this._press = {
+			...t,
+			pointerId: e.pointerId,
+			startX: e.clientX,
+			startY: e.clientY,
+			dragging: !1,
+			to: null
+		}, this.addEventListener("pointermove", this._onPointerMove), this.addEventListener("pointerup", this._onPointerUp), this.addEventListener("pointercancel", this._onPointerUp));
+	}
+	_onPointerMove(e) {
+		let t = this._press;
+		if (!t || e.pointerId !== t.pointerId) return;
+		if (!t.dragging) {
+			if (Math.hypot(e.clientX - t.startX, e.clientY - t.startY) < vt) return;
+			t.dragging = !0;
+			try {
+				this.setPointerCapture(t.pointerId);
+			} catch {}
+			this._setPicked(null), t.card.setAttribute("data-dragging", "");
+		}
+		e.preventDefault();
+		let n = this._columnAt(e.clientX);
+		for (let e of this._columns()) e.over = e === n;
+		if (!n) {
+			t.to = null, this.shadowRoot?.querySelector(".indicator")?.setAttribute("hidden", "");
+			return;
+		}
+		let r = this._dropIndex(n, e.clientY, t.card);
+		t.to = {
+			column: n.value,
+			index: r
+		}, this._showIndicator(n, r, t.card);
+	}
+	_onPointerUp(e) {
+		let t = this._press;
+		if (!t || e.pointerId !== t.pointerId) return;
+		let { card: n, column: r, dragging: i, to: a } = t;
+		this._endPress(), i && (this._suppressClick = !0, setTimeout(() => {
+			this._suppressClick = !1;
+		}, 0), !(e.type === "pointercancel" || !a) && this._move(this._where(n, r), a));
+	}
+	_endPress() {
+		let e = this._press;
+		if (e) {
+			this._press = null, e.card.removeAttribute("data-dragging");
+			for (let e of this._columns()) e.over = !1;
+			this.shadowRoot?.querySelector(".indicator")?.setAttribute("hidden", ""), this.removeEventListener("pointermove", this._onPointerMove), this.removeEventListener("pointerup", this._onPointerUp), this.removeEventListener("pointercancel", this._onPointerUp);
+			try {
+				this.hasPointerCapture(e.pointerId) && this.releasePointerCapture(e.pointerId);
+			} catch {}
+		}
+	}
+	_columnAt(e) {
+		return this._columns().find((t) => {
+			let n = t.getBoundingClientRect();
+			return e >= n.left && e <= n.right;
+		}) ?? null;
+	}
+	_dropIndex(e, t, n) {
+		let r = 0;
+		for (let i of this._cards(e)) {
+			if (i === n) continue;
+			let e = i.getBoundingClientRect();
+			t > e.top + e.height / 2 && r++;
+		}
+		return r;
+	}
+	_showIndicator(e, t, n) {
+		let r = this.shadowRoot?.querySelector(".indicator");
+		if (!r) return;
+		let i = this._cards(e).filter((e) => e !== n), a = this.getBoundingClientRect(), o = e.getBoundingClientRect(), s = t < i.length ? i[t].getBoundingClientRect().top : i.at(-1)?.getBoundingClientRect().bottom ?? o.top + o.height / 2;
+		r.style.top = `${s - a.top}px`, r.style.left = `${o.left - a.left + 8}px`, r.style.width = `${o.width - 16}px`, r.removeAttribute("hidden");
+	}
+};
+customElements.define("pastis-kanban-board", yt);
+//#endregion
+export { xe as PastisAccordion, R as PastisAlert, I as PastisAvatar, F as PastisBadge, Se as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, L as PastisCard, Be as PastisCarousel, ee as PastisCheckbox, Fe as PastisCodeBlock, je as PastisCookieBanner, ot as PastisDateField, Ee as PastisDivider, ke as PastisDrawer, K as PastisDropdown, gt as PastisEditor, Ie as PastisEmptyState, Ae as PastisFileUpload, Re as PastisFilterBar, Le as PastisFilterChip, We as PastisFooter, De as PastisHero, Qe as PastisIcon, d as PastisInput, yt as PastisKanbanBoard, _t as PastisKanbanColumn, V as PastisModal, Ge as PastisNav, Ce as PastisPagination, we as PastisProgress, Ke as PastisProjectCard, ct as PastisQuickAdd, Me as PastisRadio, pt as PastisRecurrencePicker, Oe as PastisSearch, Ue as PastisSection, Xe as PastisShelf, W as PastisSkeleton, ht as PastisSortable, Ye as PastisSpecTable, U as PastisSpinner, Ne as PastisStatCard, qe as PastisStatement, nt as PastisTabBar, rt as PastisTabBarItem, Pe as PastisTable, be as PastisTabs, Te as PastisTag, tt as PastisTaskRow, He as PastisTestimonial, ze as PastisThemeToggle, Z as PastisTimeField, Ve as PastisTimeline, H as PastisToast, P as PastisToggle, Je as PastisTokenSwatch, G as PastisTooltip, Ze as iconNames, q as icons };
