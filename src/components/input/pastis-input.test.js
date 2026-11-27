@@ -20,6 +20,20 @@ describe('pastis-input', () => {
 
   // ─── Default render ───────────────────────────────────────────────────────
 
+  it('names the built-in input by its label as written, not its uppercase styling', async () => {
+    const field = document.createElement('pastis-input');
+    field.label = 'New item';
+    document.body.appendChild(field);
+    await field.updateComplete;
+    try {
+      await expect
+        .element(page.getByRole('textbox', { name: 'New item', exact: true }))
+        .toBeInTheDocument();
+    } finally {
+      field.remove();
+    }
+  });
+
   it('renders a native <input> element', () => {
     expect(el.shadowRoot.querySelector('input')).toBeTruthy();
   });
@@ -424,7 +438,7 @@ describe('pastis-input attributes', () => {
   it('leaves unset pass-through attributes off the inner input', async () => {
     container = await mount(`<pastis-input label="Name"></pastis-input>`);
     const input = container.querySelector('pastis-input').shadowRoot.querySelector('input');
-    for (const name of ['maxlength', 'minlength', 'pattern', 'autocomplete', 'inputmode', 'enterkeyhint', 'spellcheck', 'autocapitalize', 'aria-label']) {
+    for (const name of ['maxlength', 'minlength', 'pattern', 'autocomplete', 'inputmode', 'enterkeyhint', 'spellcheck', 'autocapitalize']) {
       expect(input.hasAttribute(name), name).toBe(false);
     }
   });
@@ -443,14 +457,15 @@ describe('pastis-input attributes', () => {
     expect(field.shadowRoot.activeElement).toBe(field.shadowRoot.querySelector('input'));
   });
 
-  it('aria-label on the host names the input when there is no visible label', async () => {
+  it('aria-label on the host names the input when there is no visible label; a label wins', async () => {
     container = await mount(`<pastis-input aria-label="Rename list"></pastis-input>`);
     const field = container.querySelector('pastis-input');
     const input = field.shadowRoot.querySelector('input');
     expect(input.getAttribute('aria-label')).toBe('Rename list');
     field.label = 'List name';
     await field.updateComplete;
-    expect(input.hasAttribute('aria-label')).toBe(false);
+    // The visible label, as written (spec: its uppercase styling must not reach the name).
+    expect(input.getAttribute('aria-label')).toBe('List name');
     const results = await axe.run(container, { runOnly: ['wcag2a', 'wcag2aa', 'wcag22aa'] });
     expect(results.violations).toHaveLength(0);
   });

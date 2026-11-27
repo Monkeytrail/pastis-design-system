@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { announce, itemName } from './announcer.js';
 
 /** Pointer travel (px) before a press on a handle becomes a drag rather than a tap. */
 const DRAG_THRESHOLD = 6;
@@ -17,9 +18,11 @@ const DRAG_THRESHOLD = 6;
  *      handle to put it in that place; tap the same handle (or Escape) to put it down.
  *   3. **Arrow Up / Arrow Down** on a focused handle move it one place.
  * - **A list:** give the element `role="list"` and a name (`aria-label`); its children are the
- *   items (`<pastis-task-row>` is a `listitem`; give other children `role="listitem"`). The
- *   moved row keeps focus; moves are not announced yet (a live region in the list would be one
- *   of its items).
+ *   items (`<pastis-task-row>` is a `listitem`; give other children `role="listitem"`).
+ * - **Announced:** picking up (“Milk picked up…”), each move (“Milk, 2 of 5”) and putting back,
+ *   in one live region outside the list (`announcer.js`). A child's name is its
+ *   `data-sortable-label`, `aria-label`, task row title or text. After a keyboard move the
+ *   handle keeps focus, also when the app moves the child's element.
  * - **Event:** `pastis-reorder` with `detail { from, to }`: the child's index before, and its
  *   index in the new order (both among the element children, in order). Not fired for no move.
  *
@@ -123,12 +126,20 @@ export class PastisSortable extends LitElement {
     this.dispatchEvent(new CustomEvent('pastis-reorder', {
       detail: { from, to }, bubbles: true, composed: true,
     }));
+    announce(`${itemName(items[from])}, ${to + 1} of ${items.length}`);
   }
 
-  _setPicked(child) {
-    this._picked?.removeAttribute('data-picked');
+  _setPicked(child, { announced = true } = {}) {
+    const previous = this._picked;
+    previous?.removeAttribute('data-picked');
     this._picked = child;
     child?.setAttribute('data-picked', '');
+    if (!announced) return;
+    if (child) {
+      announce(`${itemName(child)} picked up. Choose its place with another handle, or press Escape.`);
+    } else if (previous) {
+      announce(`${itemName(previous)} put back`);
+    }
   }
 
   // ─── Tap: pick up and put down ─────────────────────────────────────────────
@@ -148,7 +159,8 @@ export class PastisSortable extends LitElement {
     const items = this._items();
     const from = items.indexOf(this._picked);
     const to = items.indexOf(child);
-    this._setPicked(null);
+    // Put down where it goes: the move says so; on itself it is put back.
+    this._setPicked(null, { announced: from === to });
     if (from !== to) this._move(from, to);
   }
 
@@ -164,8 +176,15 @@ export class PastisSortable extends LitElement {
     const child = this._childOfHandle(event);
     if (!child) return;
     event.preventDefault();
+    const handle = event.composedPath()[0];
     const from = this._items().indexOf(child);
     this._move(from, from + (event.key === 'ArrowUp' ? -1 : 1));
+    // The app moves the child's element, which can drop focus: give it back to the handle.
+    requestAnimationFrame(() => {
+      if (handle instanceof HTMLElement && handle.isConnected && !handle.matches(':focus')) {
+        handle.focus();
+      }
+    });
   }
 
   // ─── Drag ──────────────────────────────────────────────────────────────────
@@ -194,7 +213,7 @@ export class PastisSortable extends LitElement {
       } catch {
         // A pointer the browser no longer tracks (or a synthetic one): follow it uncaptured
       }
-      this._setPicked(null);
+      this._setPicked(null, { announced: false });
       press.child.setAttribute('data-dragging', '');
     }
     event.preventDefault();

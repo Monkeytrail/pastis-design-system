@@ -1,0 +1,35 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SelectStories from '../../components/select/pastis-select.stories.js';
+
+<Meta of={SelectStories} name="Usage" />
+
+# Select
+
+`<pastis-select>` is a form field for one choice from a list. Inside is a native `<select>`, so
+phones show their own picker.
+
+<Canvas of={SelectStories.Default} />
+
+## Usage
+
+- **Options** come from the `options` property: `[{ value, label, disabled? }]`, labels as
+  written. Set `value` to choose one; `pastis-change { value }` says what the user picked.
+- **Form-associated:** `name`, `required` (an option with value `''` counts as none), reset and a
+  disabled fieldset work as with native fields.
+- **Named** by `label` as written (its uppercase styling never reaches the name), or by
+  `aria-label`; `helper` and `error` describe it.
+
+<Controls of={SelectStories.Default} />
+
+## Do
+
+```js
+select.options = lists.map(list => ({ value: list.id, label: list.name }));
+select.value = item.listId;
+```
+
+## Don't
+
+```html
+<!-- Don't use it for two to five choices that fit on screen: use pastis-segmented-control -->
+```

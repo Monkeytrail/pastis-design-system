@@ -134,4 +134,19 @@ describe('pastis-kanban-board', () => {
       container.remove();
     }
   });
+
+  it('announces picking up and where a move put the card', async () => {
+    const m = await mountBoard();
+    container = m.container;
+    const said = async () => {
+      await new Promise(resolve => setTimeout(resolve, 80));
+      return document.querySelector('[data-pastis-announcer]').textContent;
+    };
+    await userEvent.click(m.handle('Milk'));
+    expect(await said()).toBe("Milk picked up. Choose its place with another handle or a column's Move here, or press Escape.");
+    await userEvent.keyboard('{Escape}');
+    m.handle('Milk').focus();
+    await userEvent.keyboard('{ArrowRight}');
+    expect(await said()).toBe('Milk, Doing, 2 of 2');
+  });
 });

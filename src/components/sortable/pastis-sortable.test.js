@@ -151,6 +151,43 @@ describe('pastis-sortable', () => {
     expect(m.rows[1].hasAttribute('data-picked')).toBe(false);
   });
 
+  it('announces picking up, each move and putting back, outside the list', async () => {
+    const m = await mountRows();
+    container = m.container;
+    const said = async () => {
+      await new Promise(resolve => setTimeout(resolve, 80));
+      const live = document.querySelector('[data-pastis-announcer]');
+      expect(live.getAttribute('aria-live')).toBe('polite');
+      expect(m.sortable.contains(live)).toBe(false);
+      return live.textContent;
+    };
+    await userEvent.click(m.handle(0));
+    expect(await said()).toBe('Milk picked up. Choose its place with another handle, or press Escape.');
+    await userEvent.click(m.handle(0));
+    expect(await said()).toBe('Milk put back');
+    m.handle(1).focus();
+    await userEvent.keyboard('{ArrowDown}');
+    expect(await said()).toBe('Bread, 3 of 4');
+  });
+
+  it('gives focus back to the handle when the app moves the row', async () => {
+    const m = await mountRows();
+    container = m.container;
+    m.sortable.addEventListener('pastis-reorder', ({ detail }) => {
+      const rows = [...m.sortable.children];
+      const moved = rows[detail.from];
+      rows.splice(detail.from, 1);
+      rows.splice(detail.to, 0, moved);
+      m.sortable.append(...rows);
+    });
+    m.handle(0).focus();
+    await userEvent.keyboard('{ArrowDown}');
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+    expect(m.sortable.children[1]).toBe(m.rows[0]);
+    expect(m.rows[0].shadowRoot.activeElement).toBe(m.handle(0));
+  });
+
   it('axe (all rules) is clean in both themes, with a row picked up', async () => {
     for (const [theme, bg] of [['dark', '#110d0a'], ['light', '#f4f1ea']]) {
       const m = await mountRows('', s => `<main data-theme="${theme}" style="background:${bg};color:var(--text-primary)"><h1>Groceries</h1>${s}</main>`);

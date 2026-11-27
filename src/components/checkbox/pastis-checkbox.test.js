@@ -52,10 +52,13 @@ describe('pastis-checkbox', () => {
     await expect.element(page.getByRole('checkbox', { name: 'Buy oat milk' })).toBeInTheDocument();
   });
 
-  it('renders helper text inside the label', async () => {
+  it('renders helper text under the label, describing the checkbox rather than naming it', async () => {
     el.helper = 'Due tomorrow';
     await el.updateComplete;
     expect(el.shadowRoot.querySelector('.helper').textContent).toBe('Due tomorrow');
+    const box = page.getByRole('checkbox', { name: 'Buy oat milk', exact: true });
+    await expect.element(box).toBeInTheDocument();
+    await expect.element(box).toHaveAccessibleDescription('Due tomorrow');
   });
 
   // ─── Hidden input (1 px clip) and target size ─────────────────────────────

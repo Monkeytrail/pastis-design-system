@@ -399,6 +399,8 @@ export class PastisInput extends LitElement {
     const helperId = `${inputId}-helper`;
     const required = this.required || (slotted && this._slotted.required);
 
+    // The built-in input is named by aria-label with the label as written: a name taken from the
+    // <label> would follow its uppercase styling in Chrome ("NEW ITEM").
     // In slotted mode the label and helper are presentational: their text reaches the slotted
     // input as aria-label / aria-description (the error stays a live alert).
     return html`
@@ -439,7 +441,7 @@ export class PastisInput extends LitElement {
               enterkeyhint=${this.enterkeyhint || nothing}
               spellcheck=${this.spellcheck ?? nothing}
               autocapitalize=${this.autocapitalize || nothing}
-              aria-label=${!this.label && this.ariaLabel ? this.ariaLabel : nothing}
+              aria-label=${this.label || this.ariaLabel || nothing}
               aria-invalid="${hasError}"
               aria-describedby="${hasError ? errorId : this.helper ? helperId : ''}"
               @input="${this._handleInput}"

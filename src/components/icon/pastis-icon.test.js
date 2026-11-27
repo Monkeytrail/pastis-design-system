@@ -23,7 +23,7 @@ async function axNodes() {
 
 const INITIAL_SET = [
   'today', 'calendar', 'list', 'search', 'flag', 'repeat', 'clock', 'tag', 'subtasks', 'alert',
-  'plus', 'check', 'close', 'more', 'edit', 'trash', 'chevron-right', 'chevron-left', 'inbox',
+  'plus', 'check', 'close', 'more', 'edit', 'trash', 'chevron-right', 'chevron-left', 'chevron-down', 'inbox',
   'trash-restore', 'grip',
 ];
 

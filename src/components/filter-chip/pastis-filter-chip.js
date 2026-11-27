@@ -9,6 +9,8 @@ export class PastisFilterChip extends LitElement {
     removable: { type: Boolean, reflect: true },
     icon:     { type: String },
     count:    { type: Number },
+    /** `upper` (the default) or `none`: the label as written, for user content such as tag names. */
+    labelCase: { type: String, attribute: 'label-case', reflect: true },
   };
 
   static styles = css`
@@ -41,12 +43,19 @@ export class PastisFilterChip extends LitElement {
       border-right: none;
     }
 
+    :host([label-case="none"]) .chip {
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
     .chip:hover {
       border-color: var(--action-primary, #fcba28);
       color: var(--text-secondary, #fff);
     }
 
-    :host([selected]) .chip {
+    /* Hovered too: the hover colour above is for the unselected chip and is unreadable here. */
+    :host([selected]) .chip,
+    :host([selected]) .chip:hover {
       background: var(--action-primary, #fcba28);
       border-color: var(--action-primary, #fcba28);
       color: var(--action-primary-text, #000);
@@ -114,15 +123,21 @@ export class PastisFilterChip extends LitElement {
     this.selected = false;
     this.disabled = false;
     this.removable = false;
+    this.labelCase = 'upper';
   }
 
+  /**
+   * `pastis-toggle` carries the new state and is cancelable: `preventDefault()` keeps `selected`
+   * as it was, so an app can keep the chip controlled.
+   */
   _toggle() {
     if (this.disabled) return;
-    this.selected = !this.selected;
-    this.dispatchEvent(new CustomEvent('pastis-toggle', {
-      detail: { selected: this.selected, value: this.value },
-      bubbles: true, composed: true,
+    const next = !this.selected;
+    const accepted = this.dispatchEvent(new CustomEvent('pastis-toggle', {
+      detail: { selected: next, value: this.value },
+      bubbles: true, composed: true, cancelable: true,
     }));
+    if (accepted) this.selected = next;
   }
 
   _remove(e) {

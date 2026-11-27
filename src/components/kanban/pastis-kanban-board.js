@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import './pastis-kanban-column.js';
+import { announce, itemName } from '../sortable/announcer.js';
 
 /** Pointer travel (px) before a press on a handle becomes a drag rather than a tap. */
 const DRAG_THRESHOLD = 6;
@@ -126,13 +127,24 @@ export class PastisKanbanBoard extends LitElement {
 
   _move(from, to) {
     if (from.column === to.column && from.index === to.index) return;
+    const source = this._columns().find(column => column.value === from.column);
+    const target = this._columns().find(column => column.value === to.column);
+    const card = source ? this._cards(source)[from.index] : null;
     this.dispatchEvent(new CustomEvent('pastis-kanban-move', {
       detail: { from, to }, bubbles: true, composed: true,
     }));
+    if (card && target) {
+      // Its count in the target afterwards: one more when it comes from another column.
+      const total = this._cards(target).length + (source === target ? 0 : 1);
+      announce(`${itemName(card)}, ${target.label || target.value}, ${to.index + 1} of ${total}`);
+    }
   }
 
   _setPicked(picked) {
     if (this._picked) this._picked.card.removeAttribute('data-picked');
+    if (picked) {
+      announce(`${itemName(picked.card)} picked up. Choose its place with another handle or a column's Move here, or press Escape.`);
+    }
     this._picked = picked;
     if (picked) picked.card.setAttribute('data-picked', '');
     for (const column of this._columns()) {

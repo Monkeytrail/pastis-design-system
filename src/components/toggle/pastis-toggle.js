@@ -113,13 +113,22 @@ export class PastisToggle extends LitElement {
     `;
   }
 
+  /**
+   * `pastis-change` carries the new state and is cancelable: `preventDefault()` keeps `checked`
+   * as it was, so an app can keep the toggle controlled (and set `checked` itself once saved).
+   */
   _handleChange(e) {
     if (this.disabled) return;
-    this.checked = e.target.checked;
-    this.dispatchEvent(new CustomEvent('pastis-change', {
-      detail: { checked: this.checked },
-      bubbles: true, composed: true
+    const next = e.target.checked;
+    const accepted = this.dispatchEvent(new CustomEvent('pastis-change', {
+      detail: { checked: next },
+      bubbles: true, composed: true, cancelable: true,
     }));
+    if (accepted) {
+      this.checked = next;
+    } else {
+      e.target.checked = this.checked;
+    }
   }
 }
 
