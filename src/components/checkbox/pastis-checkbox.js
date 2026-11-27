@@ -207,6 +207,7 @@ export class PastisCheckbox extends LitElement {
           value="${this.value || ''}"
           aria-label=${!this.label && this.ariaLabel ? this.ariaLabel : nothing}
           aria-checked="${this.indeterminate ? 'mixed' : this.checked}"
+          aria-describedby=${this.helper && this.label ? 'helper' : nothing}
           @change="${this._handleChange}"
         />
         <span class="box">
@@ -216,7 +217,10 @@ export class PastisCheckbox extends LitElement {
         ${this.label ? html`
           <span class="label-content">
             <span>${this.label}</span>
-            ${this.helper ? html`<span class="helper">${this.helper}</span>` : ''}
+            ${this.helper
+              // Hidden from the label's name; the input is described by it instead.
+              ? html`<span class="helper" id="helper" aria-hidden="true">${this.helper}</span>`
+              : ''}
           </span>
         ` : ''}
       </label>

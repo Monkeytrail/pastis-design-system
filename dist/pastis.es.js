@@ -741,7 +741,7 @@ var u = (e) => e instanceof HTMLButtonElement || e instanceof HTMLInputElement, 
               enterkeyhint=${this.enterkeyhint || r}
               spellcheck=${this.spellcheck ?? r}
               autocapitalize=${this.autocapitalize || r}
-              aria-label=${!this.label && this.ariaLabel ? this.ariaLabel : r}
+              aria-label=${this.label || this.ariaLabel || r}
               aria-invalid="${e}"
               aria-describedby="${e ? c : this.helper ? l : ""}"
               @input="${this._handleInput}"
@@ -987,6 +987,7 @@ var ee = class extends e {
           value="${this.value || ""}"
           aria-label=${!this.label && this.ariaLabel ? this.ariaLabel : r}
           aria-checked="${this.indeterminate ? "mixed" : this.checked}"
+          aria-describedby=${this.helper && this.label ? "helper" : r}
           @change="${this._handleChange}"
         />
         <span class="box">
@@ -996,7 +997,7 @@ var ee = class extends e {
         ${this.label ? n`
           <span class="label-content">
             <span>${this.label}</span>
-            ${this.helper ? n`<span class="helper">${this.helper}</span>` : ""}
+            ${this.helper ? n`<span class="helper" id="helper" aria-hidden="true">${this.helper}</span>` : ""}
           </span>
         ` : ""}
       </label>
@@ -1023,11 +1024,11 @@ customElements.define("pastis-checkbox", ee);
 //#endregion
 //#region node_modules/lit-html/lit-html.js
 var f = globalThis, te = (e) => e, p = f.trustedTypes, ne = p ? p.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, re = "$lit$", m = `lit$${Math.random().toFixed(9).slice(2)}$`, h = "?" + m, ie = `<${h}>`, g = document, _ = () => g.createComment(""), v = (e) => e === null || typeof e != "object" && typeof e != "function", y = Array.isArray, ae = (e) => y(e) || typeof e?.[Symbol.iterator] == "function", b = "[ 	\n\f\r]", x = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, S = /-->/g, C = />/g, w = RegExp(`>|${b}(?:([^\\s"'>=/]+)(${b}*=${b}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), oe = /'/g, se = /"/g, ce = /^(?:script|style|textarea|title)$/i, T = Symbol.for("lit-noChange"), E = Symbol.for("lit-nothing"), le = /* @__PURE__ */ new WeakMap(), D = g.createTreeWalker(g, 129);
-function O(e, t) {
+function ue(e, t) {
 	if (!y(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
 	return ne === void 0 ? t : ne.createHTML(t);
 }
-var ue = (e, t) => {
+var de = (e, t) => {
 	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = x;
 	for (let t = 0; t < n; t++) {
 		let n = e[t], s, c, l = -1, u = 0;
@@ -1035,12 +1036,12 @@ var ue = (e, t) => {
 		let d = o === w && e[t + 1].startsWith("/>") ? " " : "";
 		a += o === x ? n + ie : l >= 0 ? (r.push(s), n.slice(0, l) + re + n.slice(l) + m + d) : n + m + (l === -2 ? t : d);
 	}
-	return [O(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
-}, k = class e {
+	return [ue(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
+}, O = class e {
 	constructor({ strings: t, _$litType$: n }, r) {
 		let i;
 		this.parts = [];
-		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = ue(t, n);
+		let a = 0, o = 0, s = t.length - 1, c = this.parts, [l, u] = de(t, n);
 		if (this.el = e.createElement(l, r), D.currentNode = this.el.content, n === 2 || n === 3) {
 			let e = this.el.content.firstChild;
 			e.replaceWith(...e.childNodes);
@@ -1054,7 +1055,7 @@ var ue = (e, t) => {
 						index: a,
 						name: r[2],
 						strings: n,
-						ctor: r[1] === "." ? fe : r[1] === "?" ? pe : r[1] === "@" ? me : M
+						ctor: r[1] === "." ? pe : r[1] === "?" ? me : r[1] === "@" ? he : j
 					}), i.removeAttribute(e);
 				} else e.startsWith(m) && (c.push({
 					type: 6,
@@ -1090,12 +1091,12 @@ var ue = (e, t) => {
 		return n.innerHTML = e, n;
 	}
 };
-function A(e, t, n = e, r) {
+function k(e, t, n = e, r) {
 	if (t === T) return t;
 	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = v(t) ? void 0 : t._$litDirective$;
-	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = A(e, i._$AS(e, t.values), i, r)), t;
+	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = k(e, i._$AS(e, t.values), i, r)), t;
 }
-var de = class {
+var fe = class {
 	constructor(e, t) {
 		this._$AV = [], this._$AN = void 0, this._$AD = e, this._$AM = t;
 	}
@@ -1112,7 +1113,7 @@ var de = class {
 		for (; s !== void 0;) {
 			if (a === s.index) {
 				let t;
-				s.type === 2 ? t = new j(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new he(i, this, e)), this._$AV.push(t), s = n[++o];
+				s.type === 2 ? t = new A(i, i.nextSibling, this, e) : s.type === 1 ? t = new s.ctor(i, s.name, s.strings, this, e) : s.type === 6 && (t = new ge(i, this, e)), this._$AV.push(t), s = n[++o];
 			}
 			a !== s?.index && (i = D.nextNode(), a++);
 		}
@@ -1122,7 +1123,7 @@ var de = class {
 		let t = 0;
 		for (let n of this._$AV) n !== void 0 && (n.strings === void 0 ? n._$AI(e[t]) : (n._$AI(e, n, t), t += n.strings.length - 2)), t++;
 	}
-}, j = class e {
+}, A = class e {
 	get _$AU() {
 		return this._$AM?._$AU ?? this._$Cv;
 	}
@@ -1140,7 +1141,7 @@ var de = class {
 		return this._$AB;
 	}
 	_$AI(e, t = this) {
-		e = A(this, e, t), v(e) ? e === E || e == null || e === "" ? (this._$AH !== E && this._$AR(), this._$AH = E) : e !== this._$AH && e !== T && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? ae(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
+		e = k(this, e, t), v(e) ? e === E || e == null || e === "" ? (this._$AH !== E && this._$AR(), this._$AH = E) : e !== this._$AH && e !== T && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? ae(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
 	}
 	O(e) {
 		return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -1152,16 +1153,16 @@ var de = class {
 		this._$AH !== E && v(this._$AH) ? this._$AA.nextSibling.data = e : this.T(g.createTextNode(e)), this._$AH = e;
 	}
 	$(e) {
-		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = k.createElement(O(n.h, n.h[0]), this.options)), n);
+		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = O.createElement(ue(n.h, n.h[0]), this.options)), n);
 		if (this._$AH?._$AD === r) this._$AH.p(t);
 		else {
-			let e = new de(r, this), n = e.u(this.options);
+			let e = new fe(r, this), n = e.u(this.options);
 			e.p(t), this.T(n), this._$AH = e;
 		}
 	}
 	_$AC(e) {
 		let t = le.get(e.strings);
-		return t === void 0 && le.set(e.strings, t = new k(e)), t;
+		return t === void 0 && le.set(e.strings, t = new O(e)), t;
 	}
 	k(t) {
 		y(this._$AH) || (this._$AH = [], this._$AR());
@@ -1178,7 +1179,7 @@ var de = class {
 	setConnected(e) {
 		this._$AM === void 0 && (this._$Cv = e, this._$AP?.(e));
 	}
-}, M = class {
+}, j = class {
 	get tagName() {
 		return this.element.tagName;
 	}
@@ -1190,43 +1191,43 @@ var de = class {
 	}
 	_$AI(e, t = this, n, r) {
 		let i = this.strings, a = !1;
-		if (i === void 0) e = A(this, e, t, 0), a = !v(e) || e !== this._$AH && e !== T, a && (this._$AH = e);
+		if (i === void 0) e = k(this, e, t, 0), a = !v(e) || e !== this._$AH && e !== T, a && (this._$AH = e);
 		else {
 			let r = e, o, s;
-			for (e = i[0], o = 0; o < i.length - 1; o++) s = A(this, r[n + o], t, o), s === T && (s = this._$AH[o]), a ||= !v(s) || s !== this._$AH[o], s === E ? e = E : e !== E && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
+			for (e = i[0], o = 0; o < i.length - 1; o++) s = k(this, r[n + o], t, o), s === T && (s = this._$AH[o]), a ||= !v(s) || s !== this._$AH[o], s === E ? e = E : e !== E && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
 		}
 		a && !r && this.j(e);
 	}
 	j(e) {
 		e === E ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, e ?? "");
 	}
-}, fe = class extends M {
+}, pe = class extends j {
 	constructor() {
 		super(...arguments), this.type = 3;
 	}
 	j(e) {
 		this.element[this.name] = e === E ? void 0 : e;
 	}
-}, pe = class extends M {
+}, me = class extends j {
 	constructor() {
 		super(...arguments), this.type = 4;
 	}
 	j(e) {
 		this.element.toggleAttribute(this.name, !!e && e !== E);
 	}
-}, me = class extends M {
+}, he = class extends j {
 	constructor(e, t, n, r, i) {
 		super(e, t, n, r, i), this.type = 5;
 	}
 	_$AI(e, t = this) {
-		if ((e = A(this, e, t, 0) ?? E) === T) return;
+		if ((e = k(this, e, t, 0) ?? E) === T) return;
 		let n = this._$AH, r = e === E && n !== E || e.capture !== n.capture || e.once !== n.once || e.passive !== n.passive, i = e !== E && (n === E || r);
 		r && this.element.removeEventListener(this.name, this, n), i && this.element.addEventListener(this.name, this, e), this._$AH = e;
 	}
 	handleEvent(e) {
 		typeof this._$AH == "function" ? this._$AH.call(this.options?.host ?? this.element, e) : this._$AH.handleEvent(e);
 	}
-}, he = class {
+}, ge = class {
 	constructor(e, t, n) {
 		this.element = e, this.type = 6, this._$AN = void 0, this._$AM = t, this.options = n;
 	}
@@ -1234,13 +1235,13 @@ var de = class {
 		return this._$AM._$AU;
 	}
 	_$AI(e) {
-		A(this, e);
+		k(this, e);
 	}
-}, ge = f.litHtmlPolyfillSupport;
-ge?.(k, j), (f.litHtmlVersions ??= []).push("3.3.2");
+}, _e = f.litHtmlPolyfillSupport;
+_e?.(O, A), (f.litHtmlVersions ??= []).push("3.3.2");
 //#endregion
 //#region node_modules/lit-html/directives/if-defined.js
-var N = (e) => e ?? E, P = class extends e {
+var M = (e) => e ?? E, N = class extends e {
 	static properties = {
 		checked: {
 			type: Boolean,
@@ -1345,7 +1346,7 @@ var N = (e) => e ?? E, P = class extends e {
           name="${this.name || ""}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${N(t)}"
+          aria-label="${M(t)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -1356,17 +1357,20 @@ var N = (e) => e ?? E, P = class extends e {
     `;
 	}
 	_handleChange(e) {
-		this.disabled || (this.checked = e.target.checked, this.dispatchEvent(new CustomEvent("pastis-change", {
-			detail: { checked: this.checked },
+		if (this.disabled) return;
+		let t = e.target.checked;
+		this.dispatchEvent(new CustomEvent("pastis-change", {
+			detail: { checked: t },
 			bubbles: !0,
-			composed: !0
-		})));
+			composed: !0,
+			cancelable: !0
+		})) ? this.checked = t : e.target.checked = this.checked;
 	}
 };
-customElements.define("pastis-toggle", P);
+customElements.define("pastis-toggle", N);
 //#endregion
 //#region src/components/badge/pastis-badge.js
-var F = class extends e {
+var P = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -1488,10 +1492,10 @@ var F = class extends e {
     `;
 	}
 };
-customElements.define("pastis-badge", F);
+customElements.define("pastis-badge", P);
 //#endregion
 //#region src/components/avatar/pastis-avatar.js
-var I = class extends e {
+var F = class extends e {
 	static properties = {
 		src: { type: String },
 		alt: { type: String },
@@ -1619,10 +1623,10 @@ var I = class extends e {
     `;
 	}
 };
-customElements.define("pastis-avatar", I);
+customElements.define("pastis-avatar", F);
 //#endregion
 //#region src/components/card/pastis-card.js
-var L = class extends e {
+var I = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -1911,10 +1915,10 @@ var L = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-card", L);
+customElements.define("pastis-card", I);
 //#endregion
 //#region src/components/alert/pastis-alert.js
-var R = class extends e {
+var L = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -2037,22 +2041,22 @@ var R = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-alert", R);
+customElements.define("pastis-alert", L);
 //#endregion
 //#region src/components/modal/pastis-modal.js
-function z() {
+function R() {
 	let e = document.activeElement;
 	for (; e?.shadowRoot?.activeElement;) e = e.shadowRoot.activeElement;
 	return e;
 }
-function _e(e) {
-	for (let t = z(); t; t = t.getRootNode().host) if (t === e || e.contains(t)) return !0;
+function ve(e) {
+	for (let t = R(); t; t = t.getRootNode().host) if (t === e || e.contains(t)) return !0;
 	return !1;
 }
-function ve(e) {
+function ye(e) {
 	return e.tabIndex < 0 || e.localName === "slot" || e.localName === "a" && !e.hasAttribute("href") && !e.hasAttribute("tabindex") || e.disabled || e.matches(":disabled") || e.inert || e.closest("[inert]") ? !1 : typeof e.checkVisibility == "function" ? e.checkVisibility({ visibilityProperty: !0 }) : e.getClientRects().length > 0;
 }
-function ye(e) {
+function be(e) {
 	let t = (e) => e instanceof HTMLInputElement && e.type === "radio" && e.name ? e.name : null, n = /* @__PURE__ */ new Map();
 	for (let r of e) {
 		let e = t(r);
@@ -2066,13 +2070,13 @@ function ye(e) {
 	for (let e of n.values()) for (let t of e.values()) r.add(t.find((e) => e.checked) ?? t[0]);
 	return e.filter((e) => !t(e) || r.has(e));
 }
-function* B(e) {
-	for (let t of e) if (t instanceof HTMLElement) if (ve(t) && (yield t), t.localName === "slot") {
+function* z(e) {
+	for (let t of e) if (t instanceof HTMLElement) if (ye(t) && (yield t), t.localName === "slot") {
 		let e = t.assignedElements({ flatten: !0 });
-		yield* B(e.length ? e : t.children);
-	} else t.shadowRoot ? yield* B(t.shadowRoot.children) : yield* B(t.children);
+		yield* z(e.length ? e : t.children);
+	} else t.shadowRoot ? yield* z(t.shadowRoot.children) : yield* z(t.children);
 }
-var V = class extends e {
+var B = class extends e {
 	static properties = {
 		open: {
 			type: Boolean,
@@ -2229,22 +2233,22 @@ var V = class extends e {
 	}
 	_getFocusableElements() {
 		let e = this.shadowRoot?.querySelector(".dialog");
-		return e ? ye([...B(e.children)]) : [];
+		return e ? be([...z(e.children)]) : [];
 	}
 	willUpdate(e) {
 		e.has("open") && !this.open && this._dialog?.close();
 	}
 	updated(e) {
 		if (e.has("open")) if (this._openGeneration++, this.open) {
-			this._previousFocus = z(), document.body.style.overflow = "hidden";
+			this._previousFocus = R(), document.body.style.overflow = "hidden";
 			let e = this._dialog;
-			e && !e.open && e.isConnected && e.showModal(), this._dialogFocus = z(), this._focusInitialWhenReady();
-		} else e.get("open") && (document.body.style.overflow = "", this._previousFocus?.isConnected && z() !== this._previousFocus && this._previousFocus.focus(), this._previousFocus = null, this._dialogFocus = null);
+			e && !e.open && e.isConnected && e.showModal(), this._dialogFocus = R(), this._focusInitialWhenReady();
+		} else e.get("open") && (document.body.style.overflow = "", this._previousFocus?.isConnected && R() !== this._previousFocus && this._previousFocus.focus(), this._previousFocus = null, this._dialogFocus = null);
 	}
 	async _focusInitialWhenReady() {
 		let e = this._openGeneration, t = [...this.querySelectorAll("*")].map((e) => e.updateComplete).filter((e) => e && typeof e.then == "function");
 		if (t.length && await Promise.all(t), e !== this._openGeneration || !this.open || !this.isConnected) return;
-		let n = z();
+		let n = R();
 		n && (this.contains(n) || this.shadowRoot.contains(n) || this.contains(n.getRootNode().host)) && n !== this._dialogFocus && n !== this._dialog || this._focusInitial();
 	}
 	_focusInitial() {
@@ -2254,7 +2258,7 @@ var V = class extends e {
 			this.shadowRoot.querySelector(".close-btn"),
 			this.shadowRoot.querySelector(".modal-body")
 		];
-		for (let e of t) if (e && (e.focus(), _e(e))) return;
+		for (let e of t) if (e && (e.focus(), ve(e))) return;
 	}
 	render() {
 		if (!this.open) return n``;
@@ -2306,7 +2310,7 @@ var V = class extends e {
 			e.preventDefault();
 			return;
 		}
-		let n = t[0], r = t[t.length - 1], i = z(), a = t.includes(i);
+		let n = t[0], r = t[t.length - 1], i = R(), a = t.includes(i);
 		e.shiftKey && (i === n || !a) ? (e.preventDefault(), r.focus()) : !e.shiftKey && (i === r || !a) && (e.preventDefault(), n.focus());
 	}
 	open_() {
@@ -2322,10 +2326,10 @@ var V = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-modal", V);
+customElements.define("pastis-modal", B);
 //#endregion
 //#region src/components/toast/pastis-toast.js
-var H = class extends e {
+var V = class extends e {
 	static properties = {
 		message: { type: String },
 		variant: {
@@ -2498,10 +2502,10 @@ var H = class extends e {
     ` : n``;
 	}
 };
-customElements.define("pastis-toast", H);
+customElements.define("pastis-toast", V);
 //#endregion
 //#region src/components/spinner/pastis-spinner.js
-var U = class extends e {
+var H = class extends e {
 	static properties = {
 		size: {
 			type: String,
@@ -2612,10 +2616,10 @@ var U = class extends e {
     `;
 	}
 };
-customElements.define("pastis-spinner", U);
+customElements.define("pastis-spinner", H);
 //#endregion
 //#region src/components/skeleton/pastis-skeleton.js
-var W = class extends e {
+var U = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -2701,10 +2705,10 @@ var W = class extends e {
 		return n`<div class="skeleton" style="${e || "width:100%;height:16px"}" part="skeleton"></div>`;
 	}
 };
-customElements.define("pastis-skeleton", W);
+customElements.define("pastis-skeleton", U);
 //#endregion
 //#region src/components/tooltip/pastis-tooltip.js
-var G = class extends e {
+var xe = class extends e {
 	static properties = {
 		content: { type: String },
 		position: {
@@ -2827,10 +2831,10 @@ var G = class extends e {
 		}, 100);
 	}
 };
-customElements.define("pastis-tooltip", G);
+customElements.define("pastis-tooltip", xe);
 //#endregion
 //#region src/components/dropdown/pastis-dropdown.js
-var K = class extends e {
+var Se = class extends e {
 	static properties = {
 		label: { type: String },
 		placeholder: { type: String },
@@ -3131,10 +3135,10 @@ var K = class extends e {
     `;
 	}
 };
-customElements.define("pastis-dropdown", K);
+customElements.define("pastis-dropdown", Se);
 //#endregion
 //#region src/components/tabs/pastis-tabs.js
-var be = class extends e {
+var Ce = class extends e {
 	static properties = {
 		tabs: { type: Array },
 		active: {
@@ -3332,10 +3336,10 @@ var be = class extends e {
     `;
 	}
 };
-customElements.define("pastis-tabs", be);
+customElements.define("pastis-tabs", Ce);
 //#endregion
 //#region src/components/accordion/pastis-accordion.js
-var xe = class extends e {
+var we = class extends e {
 	static properties = {
 		items: { type: Array },
 		multiple: {
@@ -3515,10 +3519,10 @@ var xe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-accordion", xe);
+customElements.define("pastis-accordion", we);
 //#endregion
 //#region src/components/breadcrumb/pastis-breadcrumb.js
-var Se = class extends e {
+var Te = class extends e {
 	static properties = {
 		items: { type: Array },
 		separator: { type: String },
@@ -3645,10 +3649,10 @@ var Se = class extends e {
     `;
 	}
 };
-customElements.define("pastis-breadcrumb", Se);
+customElements.define("pastis-breadcrumb", Te);
 //#endregion
 //#region src/components/pagination/pastis-pagination.js
-var Ce = class extends e {
+var Ee = class extends e {
 	static properties = {
 		total: { type: Number },
 		page: {
@@ -3844,10 +3848,10 @@ var Ce = class extends e {
     `;
 	}
 };
-customElements.define("pastis-pagination", Ce);
+customElements.define("pastis-pagination", Ee);
 //#endregion
 //#region src/components/progress/pastis-progress.js
-var we = class extends e {
+var De = class extends e {
 	static properties = {
 		value: {
 			type: Number,
@@ -4060,10 +4064,10 @@ var we = class extends e {
     `;
 	}
 };
-customElements.define("pastis-progress", we);
+customElements.define("pastis-progress", De);
 //#endregion
 //#region src/components/tag/pastis-tag.js
-var Te = class extends e {
+var Oe = class extends e {
 	static properties = {
 		variant: {
 			type: String,
@@ -4206,10 +4210,10 @@ var Te = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-tag", Te);
+customElements.define("pastis-tag", Oe);
 //#endregion
 //#region src/components/divider/pastis-divider.js
-var Ee = class extends e {
+var ke = class extends e {
 	static properties = {
 		orientation: {
 			type: String,
@@ -4336,10 +4340,10 @@ var Ee = class extends e {
     `;
 	}
 };
-customElements.define("pastis-divider", Ee);
+customElements.define("pastis-divider", ke);
 //#endregion
 //#region src/components/hero/pastis-hero.js
-var De = class extends e {
+var Ae = class extends e {
 	static properties = {
 		heading: { type: String },
 		subheading: { type: String },
@@ -4566,10 +4570,10 @@ var De = class extends e {
     `;
 	}
 };
-customElements.define("pastis-hero", De);
+customElements.define("pastis-hero", Ae);
 //#endregion
 //#region src/components/search/pastis-search.js
-var Oe = class extends e {
+var je = class extends e {
 	static properties = {
 		placeholder: { type: String },
 		value: {
@@ -4827,7 +4831,7 @@ var Oe = class extends e {
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${N(this._focusedIndex >= 0 ? this._optionId(this._focusedIndex) : void 0)}"
+            aria-activedescendant="${M(this._focusedIndex >= 0 ? this._optionId(this._focusedIndex) : void 0)}"
             @input="${this._handleInput}"
             @focus="${() => {
 			this.value.length >= this.minChars && (this.open = !0);
@@ -4864,10 +4868,10 @@ var Oe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-search", Oe);
+customElements.define("pastis-search", je);
 //#endregion
 //#region src/components/drawer/pastis-drawer.js
-var ke = class extends e {
+var Me = class extends e {
 	static properties = {
 		open: {
 			type: Boolean,
@@ -5102,10 +5106,10 @@ var ke = class extends e {
     ` : n``;
 	}
 };
-customElements.define("pastis-drawer", ke);
+customElements.define("pastis-drawer", Me);
 //#endregion
 //#region src/components/file-upload/pastis-file-upload.js
-var Ae = class extends e {
+var Ne = class extends e {
 	static properties = {
 		accept: { type: String },
 		multiple: {
@@ -5412,10 +5416,10 @@ var Ae = class extends e {
     `;
 	}
 };
-customElements.define("pastis-file-upload", Ae);
+customElements.define("pastis-file-upload", Ne);
 //#endregion
 //#region src/components/cookie-banner/pastis-cookie-banner.js
-var je = class extends e {
+var Pe = class extends e {
 	static properties = {
 		visible: {
 			type: Boolean,
@@ -5737,10 +5741,10 @@ var je = class extends e {
     `;
 	}
 };
-customElements.define("pastis-cookie-banner", je);
+customElements.define("pastis-cookie-banner", Pe);
 //#endregion
 //#region src/components/radio/pastis-radio.js
-var Me = class extends e {
+var Fe = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5852,10 +5856,10 @@ var Me = class extends e {
 		(e.key === " " || e.key === "Enter") && (e.preventDefault(), this.disabled || (this.checked = !0, this._handleChange({ target: { checked: !0 } })));
 	}
 };
-customElements.define("pastis-radio", Me);
+customElements.define("pastis-radio", Fe);
 //#endregion
 //#region src/components/stat-card/pastis-stat-card.js
-var Ne = class extends e {
+var Ie = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -5961,10 +5965,10 @@ var Ne = class extends e {
     `;
 	}
 };
-customElements.define("pastis-stat-card", Ne);
+customElements.define("pastis-stat-card", Ie);
 //#endregion
 //#region src/components/table-row/pastis-table-row.js
-var Pe = class extends e {
+var Le = class extends e {
 	static properties = {
 		columns: { type: Array },
 		rows: { type: Array },
@@ -6175,10 +6179,10 @@ var Pe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-table", Pe);
+customElements.define("pastis-table", Le);
 //#endregion
 //#region src/components/code-block/pastis-code-block.js
-var Fe = class extends e {
+var Re = class extends e {
 	static properties = {
 		code: { type: String },
 		language: { type: String },
@@ -6338,10 +6342,10 @@ var Fe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-code-block", Fe);
+customElements.define("pastis-code-block", Re);
 //#endregion
 //#region src/components/empty-state/pastis-empty-state.js
-var Ie = class extends e {
+var ze = class extends e {
 	static properties = {
 		icon: { type: String },
 		heading: { type: String },
@@ -6483,10 +6487,10 @@ var Ie = class extends e {
     `;
 	}
 };
-customElements.define("pastis-empty-state", Ie);
+customElements.define("pastis-empty-state", ze);
 //#endregion
 //#region src/components/filter-chip/pastis-filter-chip.js
-var Le = class extends e {
+var Be = class extends e {
 	static properties = {
 		label: { type: String },
 		value: { type: String },
@@ -6503,7 +6507,12 @@ var Le = class extends e {
 			reflect: !0
 		},
 		icon: { type: String },
-		count: { type: Number }
+		count: { type: Number },
+		labelCase: {
+			type: String,
+			attribute: "label-case",
+			reflect: !0
+		}
 	};
 	static styles = t`
     :host { display: inline-block; }
@@ -6535,12 +6544,19 @@ var Le = class extends e {
       border-right: none;
     }
 
+    :host([label-case="none"]) .chip {
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
     .chip:hover {
       border-color: var(--action-primary, #fcba28);
       color: var(--text-secondary, #fff);
     }
 
-    :host([selected]) .chip {
+    /* Hovered too: the hover colour above is for the unselected chip and is unreadable here. */
+    :host([selected]) .chip,
+    :host([selected]) .chip:hover {
       background: var(--action-primary, #fcba28);
       border-color: var(--action-primary, #fcba28);
       color: var(--action-primary-text, #000);
@@ -6603,17 +6619,20 @@ var Le = class extends e {
     .remove:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
   `;
 	constructor() {
-		super(), this.selected = !1, this.disabled = !1, this.removable = !1;
+		super(), this.selected = !1, this.disabled = !1, this.removable = !1, this.labelCase = "upper";
 	}
 	_toggle() {
-		this.disabled || (this.selected = !this.selected, this.dispatchEvent(new CustomEvent("pastis-toggle", {
+		if (this.disabled) return;
+		let e = !this.selected;
+		this.dispatchEvent(new CustomEvent("pastis-toggle", {
 			detail: {
-				selected: this.selected,
+				selected: e,
 				value: this.value
 			},
 			bubbles: !0,
-			composed: !0
-		})));
+			composed: !0,
+			cancelable: !0
+		})) && (this.selected = e);
 	}
 	_remove(e) {
 		e.stopPropagation(), this.dispatchEvent(new CustomEvent("pastis-remove", {
@@ -6638,8 +6657,8 @@ var Le = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-chip", Le);
-var Re = class extends e {
+customElements.define("pastis-filter-chip", Be);
+var Ve = class extends e {
 	static properties = {
 		filters: { type: Array },
 		active: { type: Array },
@@ -6726,10 +6745,10 @@ var Re = class extends e {
     `;
 	}
 };
-customElements.define("pastis-filter-bar", Re);
+customElements.define("pastis-filter-bar", Ve);
 //#endregion
 //#region src/components/theme-toggle/pastis-theme-toggle.js
-var ze = class extends e {
+var He = class extends e {
 	static properties = {
 		theme: {
 			type: String,
@@ -6836,10 +6855,10 @@ var ze = class extends e {
     `;
 	}
 };
-customElements.define("pastis-theme-toggle", ze);
+customElements.define("pastis-theme-toggle", He);
 //#endregion
 //#region src/components/carousel/pastis-carousel.js
-var Be = class extends e {
+var Ue = class extends e {
 	static properties = {
 		slides: { type: Array },
 		active: {
@@ -7155,10 +7174,10 @@ var Be = class extends e {
     `;
 	}
 };
-customElements.define("pastis-carousel", Be);
+customElements.define("pastis-carousel", Ue);
 //#endregion
 //#region src/components/timeline/pastis-timeline.js
-var Ve = class extends e {
+var We = class extends e {
 	static properties = {
 		items: { type: Array },
 		variant: {
@@ -7253,10 +7272,10 @@ var Ve = class extends e {
     `;
 	}
 };
-customElements.define("pastis-timeline", Ve);
+customElements.define("pastis-timeline", We);
 //#endregion
 //#region src/components/testimonial/pastis-testimonial.js
-var He = class extends e {
+var Ge = class extends e {
 	static properties = {
 		quote: { type: String },
 		name: { type: String },
@@ -7432,10 +7451,10 @@ var He = class extends e {
     `;
 	}
 };
-customElements.define("pastis-testimonial", He);
+customElements.define("pastis-testimonial", Ge);
 //#endregion
 //#region src/components/section/pastis-section.js
-var Ue = class extends e {
+var Ke = class extends e {
 	static properties = {
 		label: { type: String },
 		heading: { type: String },
@@ -7566,10 +7585,10 @@ var Ue = class extends e {
     `;
 	}
 };
-customElements.define("pastis-section", Ue);
+customElements.define("pastis-section", Ke);
 //#endregion
 //#region src/components/footer/pastis-footer.js
-var We = class extends e {
+var qe = class extends e {
 	static properties = {
 		brand: { type: String },
 		tagline: { type: String },
@@ -7797,10 +7816,10 @@ var We = class extends e {
     `;
 	}
 };
-customElements.define("pastis-footer", We);
+customElements.define("pastis-footer", qe);
 //#endregion
 //#region src/components/nav/pastis-nav.js
-var Ge = class extends e {
+var Je = class extends e {
 	static properties = {
 		brand: { type: String },
 		items: { type: Array },
@@ -8272,10 +8291,10 @@ var Ge = class extends e {
     `;
 	}
 };
-customElements.define("pastis-nav", Ge);
+customElements.define("pastis-nav", Je);
 //#endregion
 //#region src/components/project-card/pastis-project-card.js
-var Ke = class extends e {
+var Ye = class extends e {
 	static properties = {
 		href: { type: String },
 		heading: { type: String },
@@ -8533,10 +8552,10 @@ var Ke = class extends e {
     `;
 	}
 };
-customElements.define("pastis-project-card", Ke);
+customElements.define("pastis-project-card", Ye);
 //#endregion
 //#region src/components/statement/pastis-statement.js
-var qe = class extends e {
+var Xe = class extends e {
 	static properties = {
 		eyebrow: { type: String },
 		size: {
@@ -8636,10 +8655,10 @@ var qe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-statement", qe);
+customElements.define("pastis-statement", Xe);
 //#endregion
 //#region src/components/token-swatch/pastis-token-swatch.js
-var Je = class extends e {
+var Ze = class extends e {
 	static properties = {
 		token: { type: String },
 		label: { type: String },
@@ -8713,10 +8732,10 @@ var Je = class extends e {
     `;
 	}
 };
-customElements.define("pastis-token-swatch", Je);
+customElements.define("pastis-token-swatch", Ze);
 //#endregion
 //#region src/components/spec-table/pastis-spec-table.js
-var Ye = class extends e {
+var Qe = class extends e {
 	static properties = {
 		tokens: { type: Array },
 		kind: {
@@ -8882,10 +8901,10 @@ var Ye = class extends e {
     `;
 	}
 };
-customElements.define("pastis-spec-table", Ye);
+customElements.define("pastis-spec-table", Qe);
 //#endregion
 //#region src/components/shelf/pastis-shelf.js
-var Xe = class extends e {
+var $e = class extends e {
 	static properties = {
 		label: { type: String },
 		stagger: { type: Number },
@@ -9080,10 +9099,10 @@ var Xe = class extends e {
     `;
 	}
 };
-customElements.define("pastis-shelf", Xe);
+customElements.define("pastis-shelf", $e);
 //#endregion
 //#region src/components/icon/icons.js
-var q = {
+var W = {
 	today: i`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,
 	calendar: i`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,
 	list: i`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,
@@ -9103,9 +9122,10 @@ var q = {
 	trash: i`<path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />`,
 	"chevron-right": i`<path d="m9 18 6-6-6-6" />`,
 	"chevron-left": i`<path d="m15 18-6-6 6-6" />`,
+	"chevron-down": i`<path d="m6 9 6 6 6-6" />`,
 	inbox: i`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,
 	"trash-restore": i`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`
-}, Ze = Object.keys(q), Qe = class extends e {
+}, et = Object.keys(W), tt = class extends e {
 	static properties = {
 		name: {
 			type: String,
@@ -9136,10 +9156,10 @@ var q = {
 		super(), this.size = "md";
 	}
 	willUpdate(e) {
-		e.has("name") && !Object.hasOwn(q, this.name ?? "") && console.warn(`pastis-icon: unknown icon name "${this.name ?? ""}"`), this.label ? (this.setAttribute("role", "img"), this.setAttribute("aria-label", this.label), this.removeAttribute("aria-hidden")) : (this.removeAttribute("role"), this.removeAttribute("aria-label"), this.setAttribute("aria-hidden", "true"));
+		e.has("name") && !Object.hasOwn(W, this.name ?? "") && console.warn(`pastis-icon: unknown icon name "${this.name ?? ""}"`), this.label ? (this.setAttribute("role", "img"), this.setAttribute("aria-label", this.label), this.removeAttribute("aria-hidden")) : (this.removeAttribute("role"), this.removeAttribute("aria-label"), this.setAttribute("aria-hidden", "true"));
 	}
 	render() {
-		let e = Object.hasOwn(q, this.name ?? "") ? q[this.name] : null;
+		let e = Object.hasOwn(W, this.name ?? "") ? W[this.name] : null;
 		return e ? n`<svg
       part="svg"
       viewBox="0 0 24 24"
@@ -9153,15 +9173,15 @@ var q = {
     >${e}</svg>` : r;
 	}
 };
-customElements.define("pastis-icon", Qe);
+customElements.define("pastis-icon", tt);
 //#endregion
 //#region src/components/task-row/pastis-task-row.js
-var $e = [
+var nt = [
 	"",
 	"low",
 	"medium",
 	"high"
-], et = "Untitled task", tt = class extends e {
+], rt = "Untitled task", it = class extends e {
 	static properties = {
 		taskTitle: {
 			type: String,
@@ -9426,7 +9446,7 @@ var $e = [
 		});
 		let t = Math.trunc(Number(this.priority));
 		t >= 1 && t <= 3 && e.push({
-			text: `Priority ${$e[t]}`,
+			text: `Priority ${nt[t]}`,
 			view: n`<span class="meta-item priority">${"!".repeat(t)}</span>`
 		}), this.subtasks && e.push({
 			text: `Subtasks ${this.subtasks}`,
@@ -9443,7 +9463,7 @@ var $e = [
 		}), e;
 	}
 	render() {
-		let e = this._metaItems(), t = !!String(this.taskTitle ?? "").trim(), i = t ? this.taskTitle : et;
+		let e = this._metaItems(), t = !!String(this.taskTitle ?? "").trim(), i = t ? this.taskTitle : rt;
 		return n`
       <div class="row" part="row">
         <button
@@ -9466,7 +9486,7 @@ var $e = [
             class="title"
             part="title"
             type="button"
-            aria-label=${t ? r : et}
+            aria-label=${t ? r : rt}
             aria-describedby=${e.length ? "description" : r}
             ?disabled=${this.disabled}
             @click=${this._onOpen}
@@ -9509,10 +9529,10 @@ var $e = [
 		}));
 	}
 };
-customElements.define("pastis-task-row", tt);
+customElements.define("pastis-task-row", it);
 //#endregion
 //#region src/components/tab-bar/pastis-tab-bar.js
-var nt = class extends e {
+var at = class extends e {
 	static properties = { label: { type: String } };
 	static styles = t`
     :host {
@@ -9541,7 +9561,7 @@ var nt = class extends e {
 	render() {
 		return n`<nav part="nav" aria-label=${this.label || r}><slot></slot></nav>`;
 	}
-}, rt = class extends e {
+}, ot = class extends e {
 	static properties = {
 		href: { type: String },
 		icon: { type: String },
@@ -9663,17 +9683,17 @@ var nt = class extends e {
 		this.dispatchEvent(t) || e.preventDefault();
 	}
 };
-customElements.define("pastis-tab-bar", nt), customElements.define("pastis-tab-bar-item", rt);
+customElements.define("pastis-tab-bar", at), customElements.define("pastis-tab-bar-item", ot);
 //#endregion
 //#region src/components/date-field/pastis-date-time-field-base.js
-var it = 0, J = {};
-function Y(e, t) {
-	return t == null || t === "" ? "" : (J[e] ??= Object.assign(document.createElement("input"), { type: e }), J[e].value = String(t), J[e].value);
+var st = 0, G = {};
+function K(e, t) {
+	return t == null || t === "" ? "" : (G[e] ??= Object.assign(document.createElement("input"), { type: e }), G[e].value = String(t), G[e].value);
 }
-function at(e) {
+function ct(e) {
 	return Array.from(e.elements).find((e) => e.type === "submit" || e instanceof HTMLInputElement && e.type === "image");
 }
-var X = class extends e {
+var q = class extends e {
 	static formAssociated = !0;
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
@@ -9854,7 +9874,7 @@ var X = class extends e {
     }
   `;
 	constructor() {
-		super(), this.value = "", this.disabled = !1, this.required = !1, this.chips = [], this._formDisabled = !1, this._id = `pastis-dt-field-${++it}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
+		super(), this.value = "", this.disabled = !1, this.required = !1, this.chips = [], this._formDisabled = !1, this._id = `pastis-dt-field-${++st}`, this._internals = this.attachInternals(), this.addEventListener("keydown", (e) => this._onKeydown(e));
 	}
 	get form() {
 		return this._internals.form;
@@ -9893,7 +9913,7 @@ var X = class extends e {
 		return this.disabled || this._formDisabled;
 	}
 	willUpdate(e) {
-		e.has("value") && (this.value = Y(this.constructor.inputType, this.value)), this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
+		e.has("value") && (this.value = K(this.constructor.inputType, this.value)), this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
 	}
 	updated() {
 		this._syncForm();
@@ -9952,7 +9972,7 @@ var X = class extends e {
                 class="chip"
                 part="chip"
                 type="button"
-                aria-pressed=${Y(this.constructor.inputType, e.value) === this.value ? "true" : "false"}
+                aria-pressed=${K(this.constructor.inputType, e.value) === this.value ? "true" : "false"}
                 ?disabled=${i}
                 @click=${() => this._pick(e.value)}
               >${e.label}</button>
@@ -9976,7 +9996,7 @@ var X = class extends e {
 		this.value = e.target.value, this._syncForm(), this._emit("pastis-change");
 	}
 	_setByUser(e) {
-		let t = Y(this.constructor.inputType, e);
+		let t = K(this.constructor.inputType, e);
 		return t === this.value && (!this._input || this._input.value === t) ? !1 : (this.value = t, this._input && (this._input.value = t), this._syncForm(), this._emit("pastis-input"), this._emit("pastis-change"), !0);
 	}
 	_pick(e) {
@@ -9990,30 +10010,30 @@ var X = class extends e {
 		let t = this.form;
 		t && setTimeout(() => {
 			if (e.defaultPrevented) return;
-			let n = at(t);
+			let n = ct(t);
 			n ? !n.disabled && !n.matches(":disabled") && n.click() : t.requestSubmit();
 		});
 	}
-}, ot = class extends X {
+}, lt = class extends q {
 	static inputType = "date";
 };
-customElements.define("pastis-date-field", ot);
+customElements.define("pastis-date-field", lt);
 //#endregion
 //#region src/components/time-field/pastis-time-field.js
-var Z = class extends X {
+var ut = class extends q {
 	static inputType = "time";
 	static properties = {
-		...X.properties,
+		...q.properties,
 		step: { type: Number }
 	};
 	_inputAttributes() {
 		return { step: this.step };
 	}
 };
-customElements.define("pastis-time-field", Z);
+customElements.define("pastis-time-field", ut);
 //#endregion
 //#region src/components/quick-add/pastis-quick-add.js
-var st = 0, ct = class extends e {
+var dt = 0, ft = class extends e {
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
 		delegatesFocus: !0
@@ -10170,7 +10190,7 @@ var st = 0, ct = class extends e {
     }
   `;
 	constructor() {
-		super(), this.value = "", this.tokens = [], this.disabled = !1, this._id = `pastis-quick-add-${++st}`;
+		super(), this.value = "", this.tokens = [], this.disabled = !1, this._id = `pastis-quick-add-${++dt}`;
 	}
 	focus(e) {
 		let t = this.shadowRoot?.querySelector("input");
@@ -10251,21 +10271,21 @@ var st = 0, ct = class extends e {
 		})), this.focus();
 	}
 };
-customElements.define("pastis-quick-add", ct);
+customElements.define("pastis-quick-add", ft);
 //#endregion
 //#region src/components/recurrence-picker/pastis-recurrence-picker.js
-var lt = 0, ut = [
+var pt = 0, mt = [
 	["", "Never"],
 	["daily", "Daily"],
 	["weekly", "Weekly"],
 	["monthly", "Monthly"],
 	["yearly", "Yearly"]
-], dt = {
+], ht = {
 	daily: ["day", "days"],
 	weekly: ["week", "weeks"],
 	monthly: ["month", "months"],
 	yearly: ["year", "years"]
-}, ft = [
+}, gt = [
 	"MO",
 	"TU",
 	"WE",
@@ -10273,10 +10293,10 @@ var lt = 0, ut = [
 	"FR",
 	"SA",
 	"SU"
-], Q = 99;
-function $(e) {
-	if (!e || !dt[e.freq]) return null;
-	let t = Math.min(Q, Math.max(1, Math.trunc(Number(e.interval)) || 1)), n = ft.filter((t) => Array.isArray(e.byDay) && e.byDay.includes(t));
+], J = 99;
+function Y(e) {
+	if (!e || !ht[e.freq]) return null;
+	let t = Math.min(J, Math.max(1, Math.trunc(Number(e.interval)) || 1)), n = gt.filter((t) => Array.isArray(e.byDay) && e.byDay.includes(t));
 	return {
 		freq: e.freq,
 		interval: t,
@@ -10285,7 +10305,7 @@ function $(e) {
 		until: typeof e.until == "string" && /^\d{4}-\d{2}-\d{2}$/.test(e.until) ? e.until : null
 	};
 }
-var pt = class extends e {
+var _t = class extends e {
 	static shadowRootOptions = {
 		...e.shadowRootOptions,
 		delegatesFocus: !0
@@ -10429,7 +10449,7 @@ var pt = class extends e {
     }
   `;
 	constructor() {
-		super(), this.value = null, this.disabled = !1, this._id = `pastis-recurrence-${++lt}`;
+		super(), this.value = null, this.disabled = !1, this._id = `pastis-recurrence-${++pt}`;
 	}
 	_labels() {
 		return Array.isArray(this.weekdayLabels) && this.weekdayLabels.length === 7 ? this.weekdayLabels : [
@@ -10457,13 +10477,13 @@ var pt = class extends e {
     `;
 	}
 	render() {
-		let e = this._id, t = $(this.value), i = t?.freq ?? "", a = t ? dt[t.freq] : null, o = this._labels();
+		let e = this._id, t = Y(this.value), i = t?.freq ?? "", a = t ? ht[t.freq] : null, o = this._labels();
 		return n`
       <div class="picker">
         <!-- aria-label on each fieldset: Chrome would name it by the uppercased legend -->
         <fieldset part="group" aria-label=${this.label || "Repeat"}>
           <legend>${this.label || "Repeat"}</legend>
-          ${ut.map(([t, n]) => this._choice({
+          ${mt.map(([t, n]) => this._choice({
 			type: "radio",
 			name: `${e}-freq`,
 			value: t,
@@ -10479,7 +10499,7 @@ var pt = class extends e {
               id="${e}-interval"
               type="number"
               min="1"
-              max="${Q}"
+              max="${J}"
               inputmode="numeric"
               .value=${String(t.interval)}
               aria-describedby="${e}-unit"
@@ -10510,7 +10530,7 @@ var pt = class extends e {
           ${t.freq === "weekly" && t.mode === "schedule" ? n`
             <fieldset part="group" aria-label="On">
               <legend>On</legend>
-              ${ft.map((n, r) => this._choice({
+              ${gt.map((n, r) => this._choice({
 			type: "checkbox",
 			name: `${e}-day`,
 			value: n,
@@ -10561,8 +10581,8 @@ var pt = class extends e {
 		}));
 	}
 	_update(e) {
-		let t = $(this.value);
-		t && this._emit($({
+		let t = Y(this.value);
+		t && this._emit(Y({
 			...t,
 			...e
 		}));
@@ -10572,8 +10592,8 @@ var pt = class extends e {
 			this._emit(null);
 			return;
 		}
-		let t = $(this.value);
-		this._emit($({
+		let t = Y(this.value);
+		this._emit(Y({
 			interval: 1,
 			byDay: [],
 			mode: "schedule",
@@ -10584,11 +10604,11 @@ var pt = class extends e {
 		}));
 	}
 	_onInterval(e) {
-		let t = Math.min(Q, Math.max(1, Math.trunc(Number(e.target.value)) || 1));
+		let t = Math.min(J, Math.max(1, Math.trunc(Number(e.target.value)) || 1));
 		e.target.value = String(t), this._update({ interval: t });
 	}
 	_toggleDay(e, t) {
-		let n = $(this.value);
+		let n = Y(this.value);
 		if (!n) return;
 		let r = t ? [...n.byDay, e] : n.byDay.filter((t) => t !== e);
 		this._update({ byDay: r });
@@ -10601,16 +10621,41 @@ var pt = class extends e {
 	}
 	_onUntil(e) {
 		if (!e.target.value) {
-			e.target.value = $(this.value)?.until ?? "";
+			e.target.value = Y(this.value)?.until ?? "";
 			return;
 		}
 		this._update({ until: e.target.value });
 	}
 };
-customElements.define("pastis-recurrence-picker", pt);
+customElements.define("pastis-recurrence-picker", _t);
+//#endregion
+//#region src/components/sortable/announcer.js
+var X = null;
+function vt() {
+	return X?.isConnected ? X : (X = document.createElement("div"), X.setAttribute("aria-live", "polite"), X.setAttribute("aria-atomic", "true"), X.dataset.pastisAnnouncer = "", Object.assign(X.style, {
+		position: "absolute",
+		width: "1px",
+		height: "1px",
+		padding: "0",
+		margin: "-1px",
+		overflow: "hidden",
+		clip: "rect(0, 0, 0, 0)",
+		whiteSpace: "nowrap",
+		border: "0"
+	}), document.body.append(X), X);
+}
+function Z(e) {
+	let t = vt();
+	t.textContent = "", setTimeout(() => {
+		t.textContent = e;
+	}, 50);
+}
+function Q(e) {
+	return e.getAttribute("data-sortable-label") || e.getAttribute("aria-label") || e.taskTitle || e.textContent.trim().replace(/\s+/g, " ") || "Item";
+}
 //#endregion
 //#region src/components/sortable/pastis-sortable.js
-var mt = 6, ht = class extends e {
+var yt = 6, bt = class extends e {
 	static properties = { disabled: {
 		type: Boolean,
 		reflect: !0
@@ -10668,17 +10713,18 @@ var mt = 6, ht = class extends e {
 	}
 	_move(e, t) {
 		let n = this._items();
-		e === t || e < 0 || t < 0 || t >= n.length || this.dispatchEvent(new CustomEvent("pastis-reorder", {
+		e === t || e < 0 || t < 0 || t >= n.length || (this.dispatchEvent(new CustomEvent("pastis-reorder", {
 			detail: {
 				from: e,
 				to: t
 			},
 			bubbles: !0,
 			composed: !0
-		}));
+		})), Z(`${Q(n[e])}, ${t + 1} of ${n.length}`));
 	}
-	_setPicked(e) {
-		this._picked?.removeAttribute("data-picked"), this._picked = e, e?.setAttribute("data-picked", "");
+	_setPicked(e, { announced: t = !0 } = {}) {
+		let n = this._picked;
+		n?.removeAttribute("data-picked"), this._picked = e, e?.setAttribute("data-picked", ""), t && (e ? Z(`${Q(e)} picked up. Choose its place with another handle, or press Escape.`) : n && Z(`${Q(n)} put back`));
 	}
 	_onClick(e) {
 		if (this.disabled) return;
@@ -10693,7 +10739,7 @@ var mt = 6, ht = class extends e {
 			return;
 		}
 		let n = this._items(), r = n.indexOf(this._picked), i = n.indexOf(t);
-		this._setPicked(null), r !== i && this._move(r, i);
+		this._setPicked(null, { announced: r === i }), r !== i && this._move(r, i);
 	}
 	_onKeydown(e) {
 		if (this.disabled) return;
@@ -10705,8 +10751,10 @@ var mt = 6, ht = class extends e {
 		let t = this._childOfHandle(e);
 		if (!t) return;
 		e.preventDefault();
-		let n = this._items().indexOf(t);
-		this._move(n, n + (e.key === "ArrowUp" ? -1 : 1));
+		let n = e.composedPath()[0], r = this._items().indexOf(t);
+		this._move(r, r + (e.key === "ArrowUp" ? -1 : 1)), requestAnimationFrame(() => {
+			n instanceof HTMLElement && n.isConnected && !n.matches(":focus") && n.focus();
+		});
 	}
 	_onPointerDown(e) {
 		if (this.disabled || e.button !== 0 || this._press) return;
@@ -10724,12 +10772,12 @@ var mt = 6, ht = class extends e {
 		if (!t || e.pointerId !== t.pointerId) return;
 		let n = e.clientY - t.startY;
 		if (!t.dragging) {
-			if (Math.abs(n) < mt) return;
+			if (Math.abs(n) < yt) return;
 			t.dragging = !0;
 			try {
 				this.setPointerCapture(t.pointerId);
 			} catch {}
-			this._setPicked(null), t.child.setAttribute("data-dragging", "");
+			this._setPicked(null, { announced: !1 }), t.child.setAttribute("data-dragging", "");
 		}
 		e.preventDefault(), t.child.style.transform = `translateY(${n}px)`, t.to = this._dropIndex(e.clientY, t.child), this._showIndicator(t.to, t.child);
 	}
@@ -10765,10 +10813,10 @@ var mt = 6, ht = class extends e {
 		n.style.top = `${a - i.top}px`, n.removeAttribute("hidden");
 	}
 };
-customElements.define("pastis-sortable", ht);
+customElements.define("pastis-sortable", bt);
 //#endregion
 //#region src/components/editor/pastis-editor.js
-var gt = class extends e {
+var xt = class extends e {
 	static properties = {
 		label: { type: String },
 		helper: { type: String },
@@ -10879,10 +10927,10 @@ var gt = class extends e {
 		t !== this._toolbarFilled && (this._toolbarFilled = t, this.requestUpdate());
 	}
 };
-customElements.define("pastis-editor", gt);
+customElements.define("pastis-editor", xt);
 //#endregion
 //#region src/components/kanban/pastis-kanban-column.js
-var _t = class extends e {
+var St = class extends e {
 	static properties = {
 		value: {
 			type: String,
@@ -10992,10 +11040,10 @@ var _t = class extends e {
 		}));
 	}
 };
-customElements.define("pastis-kanban-column", _t);
+customElements.define("pastis-kanban-column", St);
 //#endregion
 //#region src/components/kanban/pastis-kanban-board.js
-var vt = 6, yt = class extends e {
+var Ct = 6, wt = class extends e {
 	static properties = { disabled: {
 		type: Boolean,
 		reflect: !0
@@ -11066,17 +11114,22 @@ var vt = 6, yt = class extends e {
 		};
 	}
 	_move(e, t) {
-		e.column === t.column && e.index === t.index || this.dispatchEvent(new CustomEvent("pastis-kanban-move", {
+		if (e.column === t.column && e.index === t.index) return;
+		let n = this._columns().find((t) => t.value === e.column), r = this._columns().find((e) => e.value === t.column), i = n ? this._cards(n)[e.index] : null;
+		if (this.dispatchEvent(new CustomEvent("pastis-kanban-move", {
 			detail: {
 				from: e,
 				to: t
 			},
 			bubbles: !0,
 			composed: !0
-		}));
+		})), i && r) {
+			let e = this._cards(r).length + (n === r ? 0 : 1);
+			Z(`${Q(i)}, ${r.label || r.value}, ${t.index + 1} of ${e}`);
+		}
 	}
 	_setPicked(e) {
-		this._picked && this._picked.card.removeAttribute("data-picked"), this._picked = e, e && e.card.setAttribute("data-picked", "");
+		this._picked && this._picked.card.removeAttribute("data-picked"), e && Z(`${Q(e.card)} picked up. Choose its place with another handle or a column's Move here, or press Escape.`), this._picked = e, e && e.card.setAttribute("data-picked", "");
 		for (let t of this._columns()) t.dropTarget = !!e && t !== e.column;
 	}
 	_onClick(e) {
@@ -11153,7 +11206,7 @@ var vt = 6, yt = class extends e {
 		let t = this._press;
 		if (!t || e.pointerId !== t.pointerId) return;
 		if (!t.dragging) {
-			if (Math.hypot(e.clientX - t.startX, e.clientY - t.startY) < vt) return;
+			if (Math.hypot(e.clientX - t.startX, e.clientY - t.startY) < Ct) return;
 			t.dragging = !0;
 			try {
 				this.setPointerCapture(t.pointerId);
@@ -11214,6 +11267,417 @@ var vt = 6, yt = class extends e {
 		r.style.top = `${s - a.top}px`, r.style.left = `${o.left - a.left + 8}px`, r.style.width = `${o.width - 16}px`, r.removeAttribute("hidden");
 	}
 };
-customElements.define("pastis-kanban-board", yt);
+customElements.define("pastis-kanban-board", wt);
 //#endregion
-export { xe as PastisAccordion, R as PastisAlert, I as PastisAvatar, F as PastisBadge, Se as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, L as PastisCard, Be as PastisCarousel, ee as PastisCheckbox, Fe as PastisCodeBlock, je as PastisCookieBanner, ot as PastisDateField, Ee as PastisDivider, ke as PastisDrawer, K as PastisDropdown, gt as PastisEditor, Ie as PastisEmptyState, Ae as PastisFileUpload, Re as PastisFilterBar, Le as PastisFilterChip, We as PastisFooter, De as PastisHero, Qe as PastisIcon, d as PastisInput, yt as PastisKanbanBoard, _t as PastisKanbanColumn, V as PastisModal, Ge as PastisNav, Ce as PastisPagination, we as PastisProgress, Ke as PastisProjectCard, ct as PastisQuickAdd, Me as PastisRadio, pt as PastisRecurrencePicker, Oe as PastisSearch, Ue as PastisSection, Xe as PastisShelf, W as PastisSkeleton, ht as PastisSortable, Ye as PastisSpecTable, U as PastisSpinner, Ne as PastisStatCard, qe as PastisStatement, nt as PastisTabBar, rt as PastisTabBarItem, Pe as PastisTable, be as PastisTabs, Te as PastisTag, tt as PastisTaskRow, He as PastisTestimonial, ze as PastisThemeToggle, Z as PastisTimeField, Ve as PastisTimeline, H as PastisToast, P as PastisToggle, Je as PastisTokenSwatch, G as PastisTooltip, Ze as iconNames, q as icons };
+//#region src/components/select/pastis-select.js
+var Tt = 0, $ = class extends e {
+	static formAssociated = !0;
+	static properties = {
+		label: { type: String },
+		value: { type: String },
+		options: {
+			type: Array,
+			attribute: !1
+		},
+		required: {
+			type: Boolean,
+			reflect: !0
+		},
+		disabled: {
+			type: Boolean,
+			reflect: !0
+		},
+		helper: { type: String },
+		error: { type: String },
+		name: {
+			type: String,
+			reflect: !0
+		},
+		ariaLabel: {
+			type: String,
+			attribute: "aria-label"
+		},
+		_formDisabled: { state: !0 }
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .field { display: flex; flex-direction: column; gap: var(--space-xs, 6px); }
+
+    label {
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      font-size: var(--font-size-caption, 11px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
+    }
+
+    .wrap { position: relative; display: flex; align-items: center; }
+
+    select {
+      appearance: none;
+      width: 100%;
+      min-height: 44px;
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      font-size: var(--font-size-body-sm, 14px);
+      font-weight: 700;
+      color: var(--text-secondary, #fff);
+      background: var(--bg-primary, #0d0d0d);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
+      padding: var(--space-sm, 8px) 40px var(--space-sm, 8px) var(--space-md, 12px);
+      margin: 0;
+      cursor: pointer;
+      transition: border-color 120ms ease;
+    }
+
+    select:hover { border-color: var(--text-tertiary, #909498); }
+
+    select:focus-visible {
+      outline: none;
+      border-color: var(--border-focus, #fcba28);
+      box-shadow: 4px 4px 0 var(--border-focus, #fcba28);
+    }
+
+    select:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .has-error select { border-color: var(--status-error, #f0505e); }
+
+    pastis-icon {
+      position: absolute;
+      right: var(--space-md, 12px);
+      color: var(--text-tertiary, #909498);
+      pointer-events: none;
+    }
+
+    .helper, .error {
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      font-size: var(--font-size-caption, 11px);
+      margin: 0;
+    }
+    .helper { color: var(--text-tertiary, #909498); }
+    .error { color: var(--status-error, #f0505e); }
+  `;
+	constructor() {
+		super(), this.label = "", this.value = "", this.options = [], this.required = !1, this.disabled = !1, this._formDisabled = !1, this._id = `pastis-select-${++Tt}`, this._internals = this.attachInternals();
+	}
+	get form() {
+		return this._internals.form;
+	}
+	get validity() {
+		return this._internals.validity;
+	}
+	get validationMessage() {
+		return this._internals.validationMessage;
+	}
+	checkValidity() {
+		return this._internals.checkValidity();
+	}
+	reportValidity() {
+		return this._internals.reportValidity();
+	}
+	formResetCallback() {
+		this.value = this._defaultValue ?? "";
+	}
+	formDisabledCallback(e) {
+		this._formDisabled = e;
+	}
+	formStateRestoreCallback(e) {
+		typeof e == "string" && (this.value = e);
+	}
+	focus(e) {
+		this.shadowRoot?.querySelector("select")?.focus(e);
+	}
+	willUpdate(e) {
+		this.hasUpdated || (this._defaultValue = this.value), e.has("disabled") && this.toggleAttribute("disabled", this.disabled);
+	}
+	updated() {
+		let e = this.shadowRoot.querySelector("select");
+		e.value !== (this.value ?? "") && (e.value = this.value ?? ""), this._internals.setFormValue(this.value ?? "", this.value ?? ""), e.validity.valid || e.disabled ? this._internals.setValidity({}) : this._internals.setValidity(e.validity, e.validationMessage || "Choose an option", e);
+	}
+	render() {
+		let e = this.error ? `${this._id}-error` : this.helper ? `${this._id}-helper` : null;
+		return n`
+      <div class="field ${this.error ? "has-error" : ""}">
+        ${this.label ? n`<label for=${this._id}>${this.label}</label>` : ""}
+        <div class="wrap">
+          <select
+            id=${this._id}
+            part="select"
+            name=${this.name || r}
+            ?required=${this.required}
+            ?disabled=${this.disabled || this._formDisabled}
+            aria-label=${this.label || this.ariaLabel || r}
+            aria-invalid=${this.error ? "true" : r}
+            aria-describedby=${e ?? r}
+            @change=${this._onChange}
+          >
+            ${this.options.map((e) => n`
+              <option
+                value=${e.value}
+                ?disabled=${e.disabled}
+                ?selected=${e.value === this.value}
+              >${e.label}</option>
+            `)}
+          </select>
+          <pastis-icon name="chevron-down" size="sm" aria-hidden="true"></pastis-icon>
+        </div>
+        ${this.error ? n`<p class="error" id="${this._id}-error" role="alert">${this.error}</p>` : this.helper ? n`<p class="helper" id="${this._id}-helper">${this.helper}</p>` : ""}
+      </div>
+    `;
+	}
+	_onChange(e) {
+		this.value = e.target.value, this.dispatchEvent(new CustomEvent("pastis-change", {
+			detail: { value: this.value },
+			bubbles: !0,
+			composed: !0
+		}));
+	}
+};
+customElements.define("pastis-select", $);
+//#endregion
+//#region src/components/segmented-control/pastis-segmented-control.js
+var Et = class extends e {
+	static properties = {
+		label: { type: String },
+		labelHidden: {
+			type: Boolean,
+			attribute: "label-hidden",
+			reflect: !0
+		},
+		value: { type: String },
+		options: {
+			type: Array,
+			attribute: !1
+		},
+		disabled: {
+			type: Boolean,
+			reflect: !0
+		}
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .label {
+      display: block;
+      margin-bottom: var(--space-xs, 6px);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      font-size: var(--font-size-caption, 11px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      color: var(--text-primary, #f9f4da);
+    }
+
+    :host([label-hidden]) .label {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    .group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
+      overflow: hidden;
+      background: var(--bg-card, #1e1e1e);
+    }
+
+    button {
+      min-height: 44px;
+      min-width: 44px;
+      padding: 0 var(--space-md, 16px);
+      margin: 0;
+      border: 0;
+      border-inline-start: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      background: transparent;
+      color: var(--text-secondary, #fff);
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      font-size: var(--font-size-body-sm, 14px);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 120ms ease, color 120ms ease;
+    }
+
+    button:first-child { border-inline-start: 0; }
+    button:hover { background: var(--bg-elevated, #383c44); }
+
+    button[aria-checked="true"],
+    button[aria-checked="true"]:hover {
+      background: var(--action-primary, #fcba28);
+      color: var(--action-primary-text, #0d0d0d);
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -4px;
+    }
+    button[aria-checked="true"]:focus-visible { outline-color: var(--action-primary-text, #0d0d0d); }
+
+    :host([disabled]) button { opacity: 0.3; cursor: not-allowed; }
+  `;
+	constructor() {
+		super(), this.label = "", this.labelHidden = !1, this.value = "", this.options = [], this.disabled = !1;
+	}
+	focus(e) {
+		let t = this._buttons();
+		(t.find((e) => e.getAttribute("aria-checked") === "true") ?? t[0])?.focus(e);
+	}
+	_buttons() {
+		return [...this.shadowRoot?.querySelectorAll("button") ?? []];
+	}
+	render() {
+		let e = this.options.findIndex((e) => e.value === this.value), t = e === -1 ? 0 : e;
+		return n`
+      ${this.label ? n`<span class="label" id="label">${this.label}</span>` : ""}
+      <div
+        class="group"
+        role="radiogroup"
+        aria-labelledby=${this.label ? "label" : r}
+        aria-disabled=${this.disabled ? "true" : r}
+        @keydown=${this._onKeydown}
+      >
+        ${this.options.map((e, r) => n`
+          <button
+            type="button"
+            role="radio"
+            part="segment"
+            aria-checked=${e.value === this.value ? "true" : "false"}
+            tabindex=${r === t ? "0" : "-1"}
+            ?disabled=${this.disabled}
+            @click=${() => this._choose(r)}
+          >${e.label}</button>
+        `)}
+      </div>
+    `;
+	}
+	_choose(e, { focus: t = !1 } = {}) {
+		let n = this.options[e];
+		!n || this.disabled || (t && this._buttons()[e]?.focus(), n.value !== this.value && this.dispatchEvent(new CustomEvent("pastis-change", {
+			detail: { value: n.value },
+			bubbles: !0,
+			composed: !0,
+			cancelable: !0
+		})) && (this.value = n.value));
+	}
+	_onKeydown(e) {
+		let t = this._buttons(), n = t.indexOf(e.composedPath()[0]);
+		if (n === -1) return;
+		let r = t.length - 1, i = getComputedStyle(this).direction === "rtl", a = {
+			ArrowRight: i ? n - 1 : n + 1,
+			ArrowLeft: i ? n + 1 : n - 1,
+			ArrowDown: n + 1,
+			ArrowUp: n - 1,
+			Home: 0,
+			End: r
+		}[e.key];
+		a !== void 0 && (e.preventDefault(), this._choose((a + t.length) % t.length, { focus: !0 }));
+	}
+};
+customElements.define("pastis-segmented-control", Et);
+//#endregion
+//#region src/components/list-row/pastis-list-row.js
+var Dt = class extends e {
+	static styles = t`
+    :host {
+      display: block;
+      background: var(--bg-card, #1e1e1e);
+      border: var(--border-width, 1px) solid var(--border-subtle, #383c44);
+      border-radius: var(--radius-md, 6px);
+      overflow: hidden;
+    }
+    :host([hidden]) { display: none; }
+  `;
+	render() {
+		return n`<slot></slot>`;
+	}
+}, Ot = class extends e {
+	static properties = {
+		label: { type: String },
+		href: { type: String },
+		icon: { type: String },
+		marker: { type: String },
+		count: { type: Number },
+		meta: { type: String },
+		linkLabel: {
+			type: String,
+			attribute: "link-label"
+		}
+	};
+	static styles = t`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+    :host(:not(:last-child)) .row { border-bottom: var(--border-width, 1px) solid var(--border-subtle, #383c44); }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm, 8px);
+      min-height: 44px;
+      padding: var(--space-xs, 4px) var(--space-md, 16px);
+      box-sizing: border-box;
+      color: var(--text-primary, #f9f4da);
+      text-decoration: none;
+      font-family: var(--font-family-sans, system-ui, sans-serif);
+      font-size: var(--font-size-body, 16px);
+    }
+
+    a.row:hover { background: var(--bg-elevated, #383c44); }
+    a.row:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .lead { flex: none; display: inline-flex; width: 20px; justify-content: center; }
+    pastis-icon { color: var(--text-accent, #fcba28); }
+    .marker { font-family: var(--font-family-mono, 'Fira Code', monospace); color: var(--text-secondary, #fff); }
+
+    .text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .label { overflow-wrap: anywhere; }
+    .meta {
+      font-size: var(--font-size-caption, 12px);
+      color: var(--text-tertiary, #909498);
+      overflow-wrap: anywhere;
+    }
+
+    .count {
+      flex: none;
+      font-family: var(--font-family-mono, 'Fira Code', monospace);
+      color: var(--text-tertiary, #909498);
+    }
+
+    .wrap { display: flex; align-items: center; }
+    .wrap > .row { flex: 1; min-width: 0; }
+    ::slotted([slot="trailing"]) { flex: none; margin-inline-end: var(--space-sm, 8px); }
+  `;
+	connectedCallback() {
+		super.connectedCallback(), this.hasAttribute("role") || this.setAttribute("role", "listitem");
+	}
+	render() {
+		let e = n`
+      ${this.icon ? n`<span class="lead" aria-hidden="true"><pastis-icon name=${this.icon}></pastis-icon></span>` : this.marker ? n`<span class="lead marker" aria-hidden="true">${this.marker}</span>` : ""}
+      <span class="text">
+        <span class="label">${this.label}</span>
+        ${this.meta ? n`<span class="meta">${this.meta}</span>` : ""}
+      </span>
+      ${this.count == null ? "" : n`<span class="count" aria-hidden=${this.linkLabel ? "true" : r}>${this.count}</span>`}
+    `;
+		return n`<div class="wrap">${this.href ? n`<a class="row" part="row" href=${this.href} aria-label=${this.linkLabel || r} @click=${this._onClick}>${e}</a>` : n`<div class="row" part="row">${e}</div>`}<slot name="trailing"></slot></div>`;
+	}
+	_onClick(e) {
+		if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+		let t = new CustomEvent("pastis-navigate", {
+			detail: { href: this.href },
+			bubbles: !0,
+			composed: !0,
+			cancelable: !0
+		});
+		this.dispatchEvent(t) || e.preventDefault();
+	}
+};
+customElements.define("pastis-list-group", Dt), customElements.define("pastis-list-row", Ot);
+//#endregion
+export { we as PastisAccordion, L as PastisAlert, F as PastisAvatar, P as PastisBadge, Te as PastisBreadcrumb, o as PastisButton, s as PastisButtonSplit, I as PastisCard, Ue as PastisCarousel, ee as PastisCheckbox, Re as PastisCodeBlock, Pe as PastisCookieBanner, lt as PastisDateField, ke as PastisDivider, Me as PastisDrawer, Se as PastisDropdown, xt as PastisEditor, ze as PastisEmptyState, Ne as PastisFileUpload, Ve as PastisFilterBar, Be as PastisFilterChip, qe as PastisFooter, Ae as PastisHero, tt as PastisIcon, d as PastisInput, wt as PastisKanbanBoard, St as PastisKanbanColumn, Dt as PastisListGroup, Ot as PastisListRow, B as PastisModal, Je as PastisNav, Ee as PastisPagination, De as PastisProgress, Ye as PastisProjectCard, ft as PastisQuickAdd, Fe as PastisRadio, _t as PastisRecurrencePicker, je as PastisSearch, Ke as PastisSection, Et as PastisSegmentedControl, $ as PastisSelect, $e as PastisShelf, U as PastisSkeleton, bt as PastisSortable, Qe as PastisSpecTable, H as PastisSpinner, Ie as PastisStatCard, Xe as PastisStatement, at as PastisTabBar, ot as PastisTabBarItem, Le as PastisTable, Ce as PastisTabs, Oe as PastisTag, it as PastisTaskRow, Ge as PastisTestimonial, He as PastisThemeToggle, ut as PastisTimeField, We as PastisTimeline, V as PastisToast, N as PastisToggle, Ze as PastisTokenSwatch, xe as PastisTooltip, et as iconNames, W as icons };

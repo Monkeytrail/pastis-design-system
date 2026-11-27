@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SegmentedStories from '../../components/segmented-control/pastis-segmented-control.stories.js';
+
+<Meta of={SegmentedStories} name="Usage" />
+
+# Segmented control
+
+`<pastis-segmented-control>` is one choice among a few (two to five), all visible.
+
+<Canvas of={SegmentedStories.Default} />
+
+## Usage
+
+- **A radio group** named by `label` (`label-hidden` keeps it for assistive technology only).
+  Tab reaches the chosen segment; the arrow keys, Home and End move and choose; segments are at
+  least 44 px.
+- **Options:** `[{ value, label }]`; `value` is the chosen one.
+- **Event:** `pastis-change { value }`, cancelable: call `preventDefault()` to keep the control
+  controlled, then set `value` once the choice is saved.
+
+<Controls of={SegmentedStories.Default} />
+
+## Do
+
+```html
+<pastis-segmented-control label="Priority"></pastis-segmented-control>
+```
+
+## Don't
+
+```html
+<!-- Don't use it for long or growing lists: use pastis-select -->
+```

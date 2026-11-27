@@ -1,0 +1,37 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ListRowStories from '../../components/list-row/pastis-list-row.stories.js';
+
+<Meta of={ListRowStories} name="Usage" />
+
+# List row
+
+`<pastis-list-row>`s in a `<pastis-list-group>`: a grouped card of rows at least 44 px high.
+
+<Canvas of={ListRowStories.Navigation} />
+<Canvas of={ListRowStories.WithTrailingAction} />
+
+## Usage
+
+- **The group** is only the card. Give the element that holds the rows `role="list"` and a name:
+  the group, or a `<pastis-sortable role="list">` inside it for reorderable rows.
+- **A row** is a `listitem`. With `href` it is a link (`icon` or `marker`, `label`, `count`;
+  `link-label` names it when the label is not enough, such as "Inbox, 3 open items"); without,
+  it is static (`meta` adds a second line).
+- **Trailing actions** go in the `trailing` slot (a Restore button, a reorder handle).
+- **Routing:** a plain click fires a cancelable `pastis-navigate { href }`; a client-side router
+  cancels it and navigates itself.
+
+## Do
+
+```html
+<pastis-list-group role="list" aria-label="Lists">
+  <pastis-list-row href="/lists/1" icon="list" label="Groceries" count="4"
+    link-label="Groceries, 4 open items"></pastis-list-row>
+</pastis-list-group>
+```
+
+## Don't
+
+```html
+<!-- Don't put a link or button inside the label: one action per row, plus the trailing slot -->
+```
