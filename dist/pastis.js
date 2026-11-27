@@ -7127,4 +7127,107 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </div>
         ${e?M`<p class="error-text" role="alert">${this.error}</p>`:this.helper?M`<p class="helper-text">${this.helper}</p>`:F}
       </div>
-    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};return customElements.define(`pastis-editor`,Ut),e.PastisAccordion=Je,e.PastisAlert=Le,e.PastisAvatar=Fe,e.PastisBadge=Pe,e.PastisBreadcrumb=Ye,e.PastisButton=Te,e.PastisButtonSplit=Ee,e.PastisCard=Ie,e.PastisCarousel=pt,e.PastisCheckbox=je,e.PastisCodeBlock=ct,e.PastisCookieBanner=it,e.PastisDateField=Nt,e.PastisDivider=$e,e.PastisDrawer=nt,e.PastisDropdown=Ke,e.PastisEditor=Ut,e.PastisEmptyState=lt,e.PastisFileUpload=rt,e.PastisFilterBar=dt,e.PastisFilterChip=ut,e.PastisFooter=_t,e.PastisHero=et,e.PastisIcon=Tt,e.PastisInput=Ae,e.PastisModal=Ve,e.PastisNav=vt,e.PastisPagination=Xe,e.PastisProgress=Ze,e.PastisProjectCard=yt,e.PastisQuickAdd=Z,e.PastisRadio=at,e.PastisRecurrencePicker=Bt,e.PastisSearch=tt,e.PastisSection=gt,e.PastisShelf=Ct,e.PastisSkeleton=We,e.PastisSortable=Ht,e.PastisSpecTable=St,e.PastisSpinner=Ue,e.PastisStatCard=ot,e.PastisStatement=bt,e.PastisTabBar=kt,e.PastisTabBarItem=At,e.PastisTable=st,e.PastisTabs=qe,e.PastisTag=Qe,e.PastisTaskRow=Ot,e.PastisTestimonial=ht,e.PastisThemeToggle=ft,e.PastisTimeField=Pt,e.PastisTimeline=mt,e.PastisToast=He,e.PastisToggle=Ne,e.PastisTokenSwatch=xt,e.PastisTooltip=Ge,e.iconNames=wt,e.icons=q,e})({});
+    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};customElements.define(`pastis-editor`,Ut);var Wt=class extends W{static properties={value:{type:String,reflect:!0},label:{type:String},dropTarget:{type:Boolean,reflect:!0,attribute:`drop-target`},over:{type:Boolean,reflect:!0},_count:{state:!0}};static styles=s`
+    :host {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      border: var(--border-width, 1px) solid var(--border-subtle, #2a241f);
+      border-radius: var(--radius-lg, 10px);
+      background: var(--bg-secondary, #16110d);
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+    :host([hidden]) { display: none; }
+    :host([over]) { border-color: var(--action-primary, #fcba28); }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm, 8px);
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      padding: 0 var(--space-sm, 8px) 0 var(--space-md, 16px);
+      font-family: var(--font-family-mono, monospace);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+      color: var(--text-primary, #f4eee3);
+    }
+
+    .count {
+      color: var(--text-tertiary, #a39b90);
+      font-size: var(--font-size-caption, 12px);
+    }
+
+    .move {
+      margin: 0;
+      min-height: var(--space-xl, 32px);
+      padding: 0 var(--space-sm, 8px);
+      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
+      border-radius: var(--radius-full, 9999px);
+      background: none;
+      color: var(--text-primary, #f4eee3);
+      font: inherit;
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-bold, 700);
+      cursor: pointer;
+    }
+    .move:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
+
+    @media (pointer: coarse) {
+      .move { min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px)); }
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs, 4px);
+      flex: 1;
+      min-height: var(--space-2xl, 48px);
+      padding: 0 var(--space-xs, 4px) var(--space-xs, 4px);
+    }
+  `;constructor(){super(),this.dropTarget=!1,this.over=!1,this._count=0}render(){let e=this.label||this.value||``;return M`
+      <div class="header" part="header">
+        <h3>${e} <span class="count" aria-hidden="true">${this._count}</span></h3>
+        ${this.dropTarget?M`
+          <button class="move" type="button" aria-label="Move here: ${e}" @click=${this._moveHere}>Move here</button>
+        `:F}
+      </div>
+      <div class="cards" part="cards" role="list" aria-label="${e}, ${this._count} ${this._count===1?`item`:`items`}">
+        <slot @slotchange=${this._onSlotChange}></slot>
+      </div>
+    `}_onSlotChange(e){this._count=e.target.assignedElements().length}_moveHere(){this.dispatchEvent(new CustomEvent(`pastis-kanban-move-here`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-kanban-column`,Wt);var Gt=6,Kt=class extends W{static properties={disabled:{type:Boolean,reflect:!0}};static styles=s`
+    :host { display: block; position: relative; }
+    :host([hidden]) { display: none; }
+
+    .columns {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(16rem, 1fr);
+      gap: var(--space-sm, 8px);
+      overflow-x: auto;
+      padding-bottom: var(--space-xs, 4px);
+      scroll-snap-type: x proximity;
+    }
+
+    ::slotted(pastis-kanban-column) { scroll-snap-align: start; }
+
+    ::slotted([data-dragging]) { opacity: 0.4; }
+
+    .indicator {
+      position: absolute;
+      height: 2px;
+      margin-top: -1px;
+      background: var(--action-primary, #fcba28);
+      pointer-events: none;
+    }
+    .indicator[hidden] { display: none; }
+  `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this),this._onMoveHere=this._onMoveHere.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown),this.addEventListener(`pastis-kanban-move-here`,this._onMoveHere)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this.removeEventListener(`pastis-kanban-move-here`,this._onMoveHere),this._endPress()}render(){return M`
+      <div class="columns"><slot></slot></div>
+      <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
+    `}_columns(){return[...this.children].filter(e=>e.localName===`pastis-kanban-column`&&!e.hidden)}_cards(e){return[...e.children].filter(e=>!e.hidden)}_cardOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));if(n===-1||t[n].disabled)return null;let r=t.slice(n),i=r.find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`&&e.parentElement===this);if(!i)return null;let a=r.find(e=>e instanceof Element&&e.parentElement===i);return a?{card:a,column:i}:null}_where(e,t){return{column:t.value,index:this._cards(t).indexOf(e)}}_move(e,t){e.column===t.column&&e.index===t.index||this.dispatchEvent(new CustomEvent(`pastis-kanban-move`,{detail:{from:e,to:t},bubbles:!0,composed:!0}))}_setPicked(e){this._picked&&this._picked.card.removeAttribute(`data-picked`),this._picked=e,e&&e.card.setAttribute(`data-picked`,``);for(let t of this._columns())t.dropTarget=!!e&&t!==e.column}_onClick(e){if(this.disabled)return;let t=this._cardOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._picked;if(this._setPicked(null),n.card===t.card)return;let r=this._where(n.card,n.column),i=this._where(t.card,t.column);this._move(r,i)}_onMoveHere(e){if(this.disabled||!this._picked)return;let t=e.composedPath().find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`);if(!t)return;let n=this._picked;this._setPicked(null),this._move(this._where(n.card,n.column),{column:t.value,index:this._cards(t).length})}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key))return;let t=this._cardOfHandle(e);if(!t)return;e.preventDefault();let n=this._where(t.card,t.column);if(e.key===`ArrowUp`||e.key===`ArrowDown`){let r=n.index+(e.key===`ArrowUp`?-1:1);if(r<0||r>=this._cards(t.column).length)return;this._move(n,{column:n.column,index:r});return}let r=this._columns(),i=r[r.indexOf(t.column)+(e.key===`ArrowLeft`?-1:1)];i&&this._move(n,{column:i.value,index:this._cards(i).length})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._cardOfHandle(e);t&&(this._press={...t,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;if(!t.dragging){if(Math.hypot(e.clientX-t.startX,e.clientY-t.startY)<Gt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null),t.card.setAttribute(`data-dragging`,``)}e.preventDefault();let n=this._columnAt(e.clientX);for(let e of this._columns())e.over=e===n;if(!n){t.to=null,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``);return}let r=this._dropIndex(n,e.clientY,t.card);t.to={column:n.value,index:r},this._showIndicator(n,r,t.card)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{card:n,column:r,dragging:i,to:a}=t;this._endPress(),i&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||!a)&&this._move(this._where(n,r),a))}_endPress(){let e=this._press;if(e){this._press=null,e.card.removeAttribute(`data-dragging`);for(let e of this._columns())e.over=!1;this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_columnAt(e){return this._columns().find(t=>{let n=t.getBoundingClientRect();return e>=n.left&&e<=n.right})??null}_dropIndex(e,t,n){let r=0;for(let i of this._cards(e)){if(i===n)continue;let e=i.getBoundingClientRect();t>e.top+e.height/2&&r++}return r}_showIndicator(e,t,n){let r=this.shadowRoot?.querySelector(`.indicator`);if(!r)return;let i=this._cards(e).filter(e=>e!==n),a=this.getBoundingClientRect(),o=e.getBoundingClientRect(),s=t<i.length?i[t].getBoundingClientRect().top:i.at(-1)?.getBoundingClientRect().bottom??o.top+o.height/2;r.style.top=`${s-a.top}px`,r.style.left=`${o.left-a.left+8}px`,r.style.width=`${o.width-16}px`,r.removeAttribute(`hidden`)}};return customElements.define(`pastis-kanban-board`,Kt),e.PastisAccordion=Je,e.PastisAlert=Le,e.PastisAvatar=Fe,e.PastisBadge=Pe,e.PastisBreadcrumb=Ye,e.PastisButton=Te,e.PastisButtonSplit=Ee,e.PastisCard=Ie,e.PastisCarousel=pt,e.PastisCheckbox=je,e.PastisCodeBlock=ct,e.PastisCookieBanner=it,e.PastisDateField=Nt,e.PastisDivider=$e,e.PastisDrawer=nt,e.PastisDropdown=Ke,e.PastisEditor=Ut,e.PastisEmptyState=lt,e.PastisFileUpload=rt,e.PastisFilterBar=dt,e.PastisFilterChip=ut,e.PastisFooter=_t,e.PastisHero=et,e.PastisIcon=Tt,e.PastisInput=Ae,e.PastisKanbanBoard=Kt,e.PastisKanbanColumn=Wt,e.PastisModal=Ve,e.PastisNav=vt,e.PastisPagination=Xe,e.PastisProgress=Ze,e.PastisProjectCard=yt,e.PastisQuickAdd=Z,e.PastisRadio=at,e.PastisRecurrencePicker=Bt,e.PastisSearch=tt,e.PastisSection=gt,e.PastisShelf=Ct,e.PastisSkeleton=We,e.PastisSortable=Ht,e.PastisSpecTable=St,e.PastisSpinner=Ue,e.PastisStatCard=ot,e.PastisStatement=bt,e.PastisTabBar=kt,e.PastisTabBarItem=At,e.PastisTable=st,e.PastisTabs=qe,e.PastisTag=Qe,e.PastisTaskRow=Ot,e.PastisTestimonial=ht,e.PastisThemeToggle=ft,e.PastisTimeField=Pt,e.PastisTimeline=mt,e.PastisToast=He,e.PastisToggle=Ne,e.PastisTokenSwatch=xt,e.PastisTooltip=Ge,e.iconNames=wt,e.icons=q,e})({});

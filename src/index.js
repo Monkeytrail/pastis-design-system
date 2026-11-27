@@ -52,3 +52,5 @@ export * from './components/quick-add/pastis-quick-add.js';
 export * from './components/recurrence-picker/pastis-recurrence-picker.js';
 export * from './components/sortable/pastis-sortable.js';
 export * from './components/editor/pastis-editor.js';
+export * from './components/kanban/pastis-kanban-column.js';
+export * from './components/kanban/pastis-kanban-board.js';

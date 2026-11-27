@@ -493,8 +493,8 @@
           </span>
         `:``}
       </label>
-    `}_handleClick(e){if(this.disabled||this._formDisabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,l);var u=globalThis,d=e=>e,f=u.trustedTypes,ee=f?f.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,te=`$lit$`,p=`lit$${Math.random().toFixed(9).slice(2)}$`,m=`?`+p,ne=`<${m}>`,h=document,g=()=>h.createComment(``),_=e=>e===null||typeof e!=`object`&&typeof e!=`function`,v=Array.isArray,re=e=>v(e)||typeof e?.[Symbol.iterator]==`function`,y=`[ 	
-\f\r]`,b=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,x=/-->/g,S=/>/g,C=RegExp(`>|${y}(?:([^\\s"'>=/]+)(${y}*=${y}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),w=/'/g,ie=/"/g,ae=/^(?:script|style|textarea|title)$/i,T=Symbol.for(`lit-noChange`),E=Symbol.for(`lit-nothing`),oe=new WeakMap,D=h.createTreeWalker(h,129);function se(e,t){if(!v(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return ee===void 0?t:ee.createHTML(t)}var ce=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=b;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===b?c[1]===`!--`?o=x:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=C):(ae.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=C):o=S:o===C?c[0]===`>`?(o=i??b,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?C:c[3]===`"`?ie:w):o===ie||o===w?o=C:o===x||o===S?o=b:(o=C,i=void 0);let d=o===C&&e[t+1].startsWith(`/>`)?` `:``;a+=o===b?n+ne:l>=0?(r.push(s),n.slice(0,l)+te+n.slice(l)+p+d):n+p+(l===-2?t:d)}return[se(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},O=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=ce(t,n);if(this.el=e.createElement(l,r),D.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=D.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(te)){let t=u[o++],n=i.getAttribute(e).split(p),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?ue:r[1]===`?`?de:r[1]===`@`?fe:j}),i.removeAttribute(e)}else e.startsWith(p)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(ae.test(i.tagName)){let e=i.textContent.split(p),t=e.length-1;if(t>0){i.textContent=f?f.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],g()),D.nextNode(),c.push({type:2,index:++a});i.append(e[t],g())}}}else if(i.nodeType===8)if(i.data===m)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(p,e+1))!==-1;)c.push({type:7,index:a}),e+=p.length-1}a++}}static createElement(e,t){let n=h.createElement(`template`);return n.innerHTML=e,n}};function k(e,t,n=e,r){if(t===T)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=_(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=k(e,i._$AS(e,t.values),i,r)),t}var le=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??h).importNode(t,!0);D.currentNode=r;let i=D.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new A(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new pe(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=D.nextNode(),a++)}return D.currentNode=h,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},A=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=E,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=k(this,e,t),_(e)?e===E||e==null||e===``?(this._$AH!==E&&this._$AR(),this._$AH=E):e!==this._$AH&&e!==T&&this._(e):e._$litType$===void 0?e.nodeType===void 0?re(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==E&&_(this._$AH)?this._$AA.nextSibling.data=e:this.T(h.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=O.createElement(se(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new le(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=oe.get(e.strings);return t===void 0&&oe.set(e.strings,t=new O(e)),t}k(t){v(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(g()),this.O(g()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=d(e).nextSibling;d(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},j=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=E,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=E}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=k(this,e,t,0),a=!_(e)||e!==this._$AH&&e!==T,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=k(this,r[n+o],t,o),s===T&&(s=this._$AH[o]),a||=!_(s)||s!==this._$AH[o],s===E?e=E:e!==E&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===E?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},ue=class extends j{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===E?void 0:e}},de=class extends j{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==E)}},fe=class extends j{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=k(this,e,t,0)??E)===T)return;let n=this._$AH,r=e===E&&n!==E||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==E&&(n===E||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},pe=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){k(this,e)}},me=u.litHtmlPolyfillSupport;me?.(O,A),(u.litHtmlVersions??=[]).push(`3.3.2`);var M=e=>e??E,N=class extends t.LitElement{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=t.css`
+    `}_handleClick(e){if(this.disabled||this._formDisabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,l);var u=globalThis,d=e=>e,f=u.trustedTypes,p=f?f.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,ee=`$lit$`,m=`lit$${Math.random().toFixed(9).slice(2)}$`,h=`?`+m,te=`<${h}>`,g=document,_=()=>g.createComment(``),v=e=>e===null||typeof e!=`object`&&typeof e!=`function`,y=Array.isArray,ne=e=>y(e)||typeof e?.[Symbol.iterator]==`function`,b=`[ 	
+\f\r]`,x=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,S=/-->/g,C=/>/g,w=RegExp(`>|${b}(?:([^\\s"'>=/]+)(${b}*=${b}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),T=/'/g,re=/"/g,ie=/^(?:script|style|textarea|title)$/i,E=Symbol.for(`lit-noChange`),D=Symbol.for(`lit-nothing`),ae=new WeakMap,O=g.createTreeWalker(g,129);function oe(e,t){if(!y(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return p===void 0?t:p.createHTML(t)}var se=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=x;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===x?c[1]===`!--`?o=S:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=w):(ie.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=w):o=C:o===w?c[0]===`>`?(o=i??x,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?w:c[3]===`"`?re:T):o===re||o===T?o=w:o===S||o===C?o=x:(o=w,i=void 0);let d=o===w&&e[t+1].startsWith(`/>`)?` `:``;a+=o===x?n+te:l>=0?(r.push(s),n.slice(0,l)+ee+n.slice(l)+m+d):n+m+(l===-2?t:d)}return[oe(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},k=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=se(t,n);if(this.el=e.createElement(l,r),O.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=O.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(ee)){let t=u[o++],n=i.getAttribute(e).split(m),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?le:r[1]===`?`?ue:r[1]===`@`?de:M}),i.removeAttribute(e)}else e.startsWith(m)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(ie.test(i.tagName)){let e=i.textContent.split(m),t=e.length-1;if(t>0){i.textContent=f?f.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],_()),O.nextNode(),c.push({type:2,index:++a});i.append(e[t],_())}}}else if(i.nodeType===8)if(i.data===h)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(m,e+1))!==-1;)c.push({type:7,index:a}),e+=m.length-1}a++}}static createElement(e,t){let n=g.createElement(`template`);return n.innerHTML=e,n}};function A(e,t,n=e,r){if(t===E)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=v(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=A(e,i._$AS(e,t.values),i,r)),t}var ce=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??g).importNode(t,!0);O.currentNode=r;let i=O.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new j(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new fe(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=O.nextNode(),a++)}return O.currentNode=g,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},j=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=D,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=A(this,e,t),v(e)?e===D||e==null||e===``?(this._$AH!==D&&this._$AR(),this._$AH=D):e!==this._$AH&&e!==E&&this._(e):e._$litType$===void 0?e.nodeType===void 0?ne(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==D&&v(this._$AH)?this._$AA.nextSibling.data=e:this.T(g.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=k.createElement(oe(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new ce(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=ae.get(e.strings);return t===void 0&&ae.set(e.strings,t=new k(e)),t}k(t){y(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(_()),this.O(_()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=d(e).nextSibling;d(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},M=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=D,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=D}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=A(this,e,t,0),a=!v(e)||e!==this._$AH&&e!==E,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=A(this,r[n+o],t,o),s===E&&(s=this._$AH[o]),a||=!v(s)||s!==this._$AH[o],s===D?e=D:e!==D&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===D?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},le=class extends M{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===D?void 0:e}},ue=class extends M{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==D)}},de=class extends M{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=A(this,e,t,0)??D)===E)return;let n=this._$AH,r=e===D&&n!==D||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==D&&(n===D||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},fe=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){A(this,e)}},pe=u.litHtmlPolyfillSupport;pe?.(k,j),(u.litHtmlVersions??=[]).push(`3.3.2`);var N=e=>e??D,P=class extends t.LitElement{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     label {
@@ -572,7 +572,7 @@
           name="${this.name||``}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${M(n)}"
+          aria-label="${N(n)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -580,7 +580,7 @@
         </span>
         ${this.labelPosition===`left`?``:e}
       </label>
-    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,N);var P=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=t.css`
+    `}_handleChange(e){this.disabled||(this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked},bubbles:!0,composed:!0})))}};customElements.define(`pastis-toggle`,P);var F=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     .badge {
@@ -674,7 +674,7 @@
       <span class="badge" part="badge">
         ${e===void 0?t.html`<slot></slot>`:e}
       </span>
-    `}};customElements.define(`pastis-badge`,P);var F=class extends t.LitElement{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-badge`,F);var I=class extends t.LitElement{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=t.css`
     :host {
       display: inline-flex;
       position: relative;
@@ -752,7 +752,7 @@
         ${this.src?t.html`<img src="${this.src}" alt="${this.alt||this.name||`User avatar`}" />`:this.name?t.html`<span>${this._getInitials()}</span>`:t.html`<span class="icon">👤</span>`}
       </div>
       ${this.status?t.html`<span class="status-dot" aria-hidden="true"></span>`:``}
-    `}};customElements.define(`pastis-avatar`,F);var I=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-avatar`,I);var L=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=t.css`
     :host {
       display: block;
     }
@@ -1000,7 +1000,7 @@
         </div>
         <slot name="footer" class="card-footer"></slot>
       </div>
-    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,I);var L=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=t.css`
+    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,L);var R=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=t.css`
     :host { display: block; }
     :host([visible="false"]) { display: none; }
 
@@ -1084,7 +1084,7 @@
           <button class="dismiss-btn" @click="${this._dismiss}" aria-label="Dismiss">✕</button>
         `:``}
       </div>
-    `:t.html``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,L);function R(){let e=document.activeElement;for(;e?.shadowRoot?.activeElement;)e=e.shadowRoot.activeElement;return e}function he(e){for(let t=R();t;t=t.getRootNode().host)if(t===e||e.contains(t))return!0;return!1}function ge(e){return e.tabIndex<0||e.localName===`slot`||e.localName===`a`&&!e.hasAttribute(`href`)&&!e.hasAttribute(`tabindex`)||e.disabled||e.matches(`:disabled`)||e.inert||e.closest(`[inert]`)?!1:typeof e.checkVisibility==`function`?e.checkVisibility({visibilityProperty:!0}):e.getClientRects().length>0}function _e(e){let t=e=>e instanceof HTMLInputElement&&e.type===`radio`&&e.name?e.name:null,n=new Map;for(let r of e){let e=t(r);if(!e)continue;let i=r.form??r.getRootNode(),a=n.get(i)??new Map;n.set(i,a);let o=a.get(e)??[];a.set(e,o),o.push(r)}let r=new Set;for(let e of n.values())for(let t of e.values())r.add(t.find(e=>e.checked)??t[0]);return e.filter(e=>!t(e)||r.has(e))}function*z(e){for(let t of e)if(t instanceof HTMLElement)if(ge(t)&&(yield t),t.localName===`slot`){let e=t.assignedElements({flatten:!0});yield*z(e.length?e:t.children)}else t.shadowRoot?yield*z(t.shadowRoot.children):yield*z(t.children)}var B=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},role:{type:String}};static styles=t.css`
+    `:t.html``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,R);function z(){let e=document.activeElement;for(;e?.shadowRoot?.activeElement;)e=e.shadowRoot.activeElement;return e}function me(e){for(let t=z();t;t=t.getRootNode().host)if(t===e||e.contains(t))return!0;return!1}function he(e){return e.tabIndex<0||e.localName===`slot`||e.localName===`a`&&!e.hasAttribute(`href`)&&!e.hasAttribute(`tabindex`)||e.disabled||e.matches(`:disabled`)||e.inert||e.closest(`[inert]`)?!1:typeof e.checkVisibility==`function`?e.checkVisibility({visibilityProperty:!0}):e.getClientRects().length>0}function ge(e){let t=e=>e instanceof HTMLInputElement&&e.type===`radio`&&e.name?e.name:null,n=new Map;for(let r of e){let e=t(r);if(!e)continue;let i=r.form??r.getRootNode(),a=n.get(i)??new Map;n.set(i,a);let o=a.get(e)??[];a.set(e,o),o.push(r)}let r=new Set;for(let e of n.values())for(let t of e.values())r.add(t.find(e=>e.checked)??t[0]);return e.filter(e=>!t(e)||r.has(e))}function*B(e){for(let t of e)if(t instanceof HTMLElement)if(he(t)&&(yield t),t.localName===`slot`){let e=t.assignedElements({flatten:!0});yield*B(e.length?e:t.children)}else t.shadowRoot?yield*B(t.shadowRoot.children):yield*B(t.children)}var V=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},role:{type:String}};static styles=t.css`
     :host { display: contents; }
     :host(:not([open])) { display: none; }
 
@@ -1194,7 +1194,7 @@
       justify-content: flex-end;
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this.role=`dialog`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null,this._dialogFocus=null,this._openGeneration=0}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown),this.open&&this.hasUpdated&&this.updateComplete.then(()=>{if(!this.open||!this.isConnected)return;let e=this._dialog;e&&!e.matches(`:modal`)&&(e.removeAttribute(`open`),e.showModal()),document.body.style.overflow=`hidden`,this._focusInitial()})}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown),this.open&&(document.body.style.overflow=``)}attributeChangedCallback(e,t,n){if(e!==`role`){super.attributeChangedCallback(e,t,n);return}this._consumingRole||(this.role=n??`dialog`,n!==null&&(this._consumingRole=!0,this.removeAttribute(`role`),this._consumingRole=!1))}get _dialog(){return this.shadowRoot?.querySelector(`dialog`)??null}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);return e?_e([...z(e.children)]):[]}willUpdate(e){e.has(`open`)&&!this.open&&this._dialog?.close()}updated(e){if(e.has(`open`))if(this._openGeneration++,this.open){this._previousFocus=R(),document.body.style.overflow=`hidden`;let e=this._dialog;e&&!e.open&&e.isConnected&&e.showModal(),this._dialogFocus=R(),this._focusInitialWhenReady()}else e.get(`open`)&&(document.body.style.overflow=``,this._previousFocus?.isConnected&&R()!==this._previousFocus&&this._previousFocus.focus(),this._previousFocus=null,this._dialogFocus=null)}async _focusInitialWhenReady(){let e=this._openGeneration,t=[...this.querySelectorAll(`*`)].map(e=>e.updateComplete).filter(e=>e&&typeof e.then==`function`);if(t.length&&await Promise.all(t),e!==this._openGeneration||!this.open||!this.isConnected)return;let n=R();n&&(this.contains(n)||this.shadowRoot.contains(n)||this.contains(n.getRootNode().host))&&n!==this._dialogFocus&&n!==this._dialog||this._focusInitial()}_focusInitial(){let e=this._getFocusableElements().filter(e=>e.getRootNode()!==this.shadowRoot),t=[...this.querySelectorAll(`[autofocus]`),...e,this.shadowRoot.querySelector(`.close-btn`),this.shadowRoot.querySelector(`.modal-body`)];for(let e of t)if(e&&(e.focus(),he(e)))return}render(){if(!this.open)return t.html``;let e=this.role===`alertdialog`?`alertdialog`:`dialog`;return t.html`
+  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this.role=`dialog`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null,this._dialogFocus=null,this._openGeneration=0}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown),this.open&&this.hasUpdated&&this.updateComplete.then(()=>{if(!this.open||!this.isConnected)return;let e=this._dialog;e&&!e.matches(`:modal`)&&(e.removeAttribute(`open`),e.showModal()),document.body.style.overflow=`hidden`,this._focusInitial()})}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown),this.open&&(document.body.style.overflow=``)}attributeChangedCallback(e,t,n){if(e!==`role`){super.attributeChangedCallback(e,t,n);return}this._consumingRole||(this.role=n??`dialog`,n!==null&&(this._consumingRole=!0,this.removeAttribute(`role`),this._consumingRole=!1))}get _dialog(){return this.shadowRoot?.querySelector(`dialog`)??null}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);return e?ge([...B(e.children)]):[]}willUpdate(e){e.has(`open`)&&!this.open&&this._dialog?.close()}updated(e){if(e.has(`open`))if(this._openGeneration++,this.open){this._previousFocus=z(),document.body.style.overflow=`hidden`;let e=this._dialog;e&&!e.open&&e.isConnected&&e.showModal(),this._dialogFocus=z(),this._focusInitialWhenReady()}else e.get(`open`)&&(document.body.style.overflow=``,this._previousFocus?.isConnected&&z()!==this._previousFocus&&this._previousFocus.focus(),this._previousFocus=null,this._dialogFocus=null)}async _focusInitialWhenReady(){let e=this._openGeneration,t=[...this.querySelectorAll(`*`)].map(e=>e.updateComplete).filter(e=>e&&typeof e.then==`function`);if(t.length&&await Promise.all(t),e!==this._openGeneration||!this.open||!this.isConnected)return;let n=z();n&&(this.contains(n)||this.shadowRoot.contains(n)||this.contains(n.getRootNode().host))&&n!==this._dialogFocus&&n!==this._dialog||this._focusInitial()}_focusInitial(){let e=this._getFocusableElements().filter(e=>e.getRootNode()!==this.shadowRoot),t=[...this.querySelectorAll(`[autofocus]`),...e,this.shadowRoot.querySelector(`.close-btn`),this.shadowRoot.querySelector(`.modal-body`)];for(let e of t)if(e&&(e.focus(),me(e)))return}render(){if(!this.open)return t.html``;let e=this.role===`alertdialog`?`alertdialog`:`dialog`;return t.html`
       <dialog
         class="backdrop"
         @click="${this._handleBackdropClick}"
@@ -1220,7 +1220,7 @@
           <slot name="footer" class="modal-footer"></slot>
         </div>
       </dialog>
-    `}_handleBackdropClick(e){e.target===e.currentTarget&&(this.persistent||this.close())}_handleKeydown(e){!this.open||e.key!==`Escape`||e.defaultPrevented||(e.preventDefault(),this.persistent||this.close())}_handleCancel(e){e.preventDefault(),this.persistent||this.close()}_handleNativeClose(e){e.target!==this._dialog||e.target.open||this.open&&this.close()}_handleTab(e){if(e.key!==`Tab`||e.altKey||e.ctrlKey||e.metaKey)return;let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1],i=R(),a=t.includes(i);e.shiftKey&&(i===n||!a)?(e.preventDefault(),r.focus()):!e.shiftKey&&(i===r||!a)&&(e.preventDefault(),n.focus())}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,B);var V=class extends t.LitElement{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=t.css`
+    `}_handleBackdropClick(e){e.target===e.currentTarget&&(this.persistent||this.close())}_handleKeydown(e){!this.open||e.key!==`Escape`||e.defaultPrevented||(e.preventDefault(),this.persistent||this.close())}_handleCancel(e){e.preventDefault(),this.persistent||this.close()}_handleNativeClose(e){e.target!==this._dialog||e.target.open||this.open&&this.close()}_handleTab(e){if(e.key!==`Tab`||e.altKey||e.ctrlKey||e.metaKey)return;let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1],i=z(),a=t.includes(i);e.shiftKey&&(i===n||!a)?(e.preventDefault(),r.focus()):!e.shiftKey&&(i===r||!a)&&(e.preventDefault(),n.focus())}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,V);var H=class extends t.LitElement{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     .toast-container {
@@ -1336,7 +1336,7 @@
           `:``}
         </div>
       </div>
-    `:t.html``}};customElements.define(`pastis-toast`,V);var H=class extends t.LitElement{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=t.css`
+    `:t.html``}};customElements.define(`pastis-toast`,H);var U=class extends t.LitElement{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; justify-content: center; }
 
     .spinner-wrap {
@@ -1426,7 +1426,7 @@
         ${this.label?t.html`<span class="label">${this.label}</span>`:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-spinner`,H);var U=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=t.css`
+    `}};customElements.define(`pastis-spinner`,U);var W=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=t.css`
     :host { display: block; }
 
     .skeleton {
@@ -1476,7 +1476,7 @@
             ></div>
           `)}
         </div>
-      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return t.html`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return t.html`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,U);var W=class extends t.LitElement{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=t.css`
+      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return t.html`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return t.html`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,W);var G=class extends t.LitElement{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: inline-flex; position: relative; }
 
     .trigger { display: contents; }
@@ -1560,7 +1560,7 @@
         ${this.content||``}
         <slot name="content"></slot>
       </div>
-    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,W);var G=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=t.css`
+    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,G);var K=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=t.css`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -1771,7 +1771,7 @@
         </div>
         ${this.error?t.html`<span class="error-text">⚠ ${this.error}</span>`:``}
       </div>
-    `}};customElements.define(`pastis-dropdown`,G);var K=class extends t.LitElement{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-dropdown`,K);var _e=class extends t.LitElement{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .tabs-container { display: flex; flex-direction: column; }
@@ -1916,7 +1916,7 @@
           ${e?.content?t.html`${e.content}`:t.html`<slot name="${this.active}"></slot>`}
         </div>
       </div>
-    `}};customElements.define(`pastis-tabs`,K);var ve=class extends t.LitElement{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=t.css`
+    `}};customElements.define(`pastis-tabs`,_e);var ve=class extends t.LitElement{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=t.css`
     :host { display: block; }
 
     .accordion {
@@ -3003,7 +3003,7 @@
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${M(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
+            aria-activedescendant="${N(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
             @input="${this._handleInput}"
             @focus="${()=>{this.value.length>=this.minChars&&(this.open=!0)}}"
             @keydown="${this._handleKeydown}"
@@ -7127,4 +7127,107 @@
         </div>
         ${e?t.html`<p class="error-text" role="alert">${this.error}</p>`:this.helper?t.html`<p class="helper-text">${this.helper}</p>`:t.nothing}
       </div>
-    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};customElements.define(`pastis-editor`,pt),e.PastisAccordion=ve,e.PastisAlert=L,e.PastisAvatar=F,e.PastisBadge=P,e.PastisBreadcrumb=ye,e.PastisButton=r,e.PastisButtonSplit=i,e.PastisCard=I,e.PastisCarousel=Le,e.PastisCheckbox=l,e.PastisCodeBlock=Me,e.PastisCookieBanner=Oe,e.PastisDateField=rt,e.PastisDivider=Ce,e.PastisDrawer=Ee,e.PastisDropdown=G,e.PastisEditor=pt,e.PastisEmptyState=Ne,e.PastisFileUpload=De,e.PastisFilterBar=Fe,e.PastisFilterChip=Pe,e.PastisFooter=Ve,e.PastisHero=we,e.PastisIcon=Ye,e.PastisInput=c,e.PastisModal=B,e.PastisNav=He,e.PastisPagination=be,e.PastisProgress=xe,e.PastisProjectCard=Ue,e.PastisQuickAdd=at,e.PastisRadio=ke,e.PastisRecurrencePicker=ut,e.PastisSearch=Te,e.PastisSection=Be,e.PastisShelf=qe,e.PastisSkeleton=U,e.PastisSortable=ft,e.PastisSpecTable=Ke,e.PastisSpinner=H,e.PastisStatCard=Ae,e.PastisStatement=We,e.PastisTabBar=$e,e.PastisTabBarItem=et,e.PastisTable=je,e.PastisTabs=K,e.PastisTag=Se,e.PastisTaskRow=Qe,e.PastisTestimonial=ze,e.PastisThemeToggle=Ie,e.PastisTimeField=Z,e.PastisTimeline=Re,e.PastisToast=V,e.PastisToggle=N,e.PastisTokenSwatch=Ge,e.PastisTooltip=W,e.iconNames=Je,e.icons=q});
+    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};customElements.define(`pastis-editor`,pt);var mt=class extends t.LitElement{static properties={value:{type:String,reflect:!0},label:{type:String},dropTarget:{type:Boolean,reflect:!0,attribute:`drop-target`},over:{type:Boolean,reflect:!0},_count:{state:!0}};static styles=t.css`
+    :host {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      border: var(--border-width, 1px) solid var(--border-subtle, #2a241f);
+      border-radius: var(--radius-lg, 10px);
+      background: var(--bg-secondary, #16110d);
+      transition: border-color var(--transition-fast, 120ms ease);
+    }
+    :host([hidden]) { display: none; }
+    :host([over]) { border-color: var(--action-primary, #fcba28); }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm, 8px);
+      min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px));
+      padding: 0 var(--space-sm, 8px) 0 var(--space-md, 16px);
+      font-family: var(--font-family-mono, monospace);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: var(--font-size-micro, 11px);
+      font-weight: var(--font-weight-bold, 700);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      text-transform: uppercase;
+      color: var(--text-primary, #f4eee3);
+    }
+
+    .count {
+      color: var(--text-tertiary, #a39b90);
+      font-size: var(--font-size-caption, 12px);
+    }
+
+    .move {
+      margin: 0;
+      min-height: var(--space-xl, 32px);
+      padding: 0 var(--space-sm, 8px);
+      border: var(--border-width, 1px) solid var(--action-primary, #fcba28);
+      border-radius: var(--radius-full, 9999px);
+      background: none;
+      color: var(--text-primary, #f4eee3);
+      font: inherit;
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-bold, 700);
+      cursor: pointer;
+    }
+    .move:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
+
+    @media (pointer: coarse) {
+      .move { min-height: calc(var(--space-2xl, 48px) - var(--space-xs, 4px)); }
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs, 4px);
+      flex: 1;
+      min-height: var(--space-2xl, 48px);
+      padding: 0 var(--space-xs, 4px) var(--space-xs, 4px);
+    }
+  `;constructor(){super(),this.dropTarget=!1,this.over=!1,this._count=0}render(){let e=this.label||this.value||``;return t.html`
+      <div class="header" part="header">
+        <h3>${e} <span class="count" aria-hidden="true">${this._count}</span></h3>
+        ${this.dropTarget?t.html`
+          <button class="move" type="button" aria-label="Move here: ${e}" @click=${this._moveHere}>Move here</button>
+        `:t.nothing}
+      </div>
+      <div class="cards" part="cards" role="list" aria-label="${e}, ${this._count} ${this._count===1?`item`:`items`}">
+        <slot @slotchange=${this._onSlotChange}></slot>
+      </div>
+    `}_onSlotChange(e){this._count=e.target.assignedElements().length}_moveHere(){this.dispatchEvent(new CustomEvent(`pastis-kanban-move-here`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-kanban-column`,mt);var ht=6,gt=class extends t.LitElement{static properties={disabled:{type:Boolean,reflect:!0}};static styles=t.css`
+    :host { display: block; position: relative; }
+    :host([hidden]) { display: none; }
+
+    .columns {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(16rem, 1fr);
+      gap: var(--space-sm, 8px);
+      overflow-x: auto;
+      padding-bottom: var(--space-xs, 4px);
+      scroll-snap-type: x proximity;
+    }
+
+    ::slotted(pastis-kanban-column) { scroll-snap-align: start; }
+
+    ::slotted([data-dragging]) { opacity: 0.4; }
+
+    .indicator {
+      position: absolute;
+      height: 2px;
+      margin-top: -1px;
+      background: var(--action-primary, #fcba28);
+      pointer-events: none;
+    }
+    .indicator[hidden] { display: none; }
+  `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this),this._onMoveHere=this._onMoveHere.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown),this.addEventListener(`pastis-kanban-move-here`,this._onMoveHere)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this.removeEventListener(`pastis-kanban-move-here`,this._onMoveHere),this._endPress()}render(){return t.html`
+      <div class="columns"><slot></slot></div>
+      <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
+    `}_columns(){return[...this.children].filter(e=>e.localName===`pastis-kanban-column`&&!e.hidden)}_cards(e){return[...e.children].filter(e=>!e.hidden)}_cardOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));if(n===-1||t[n].disabled)return null;let r=t.slice(n),i=r.find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`&&e.parentElement===this);if(!i)return null;let a=r.find(e=>e instanceof Element&&e.parentElement===i);return a?{card:a,column:i}:null}_where(e,t){return{column:t.value,index:this._cards(t).indexOf(e)}}_move(e,t){e.column===t.column&&e.index===t.index||this.dispatchEvent(new CustomEvent(`pastis-kanban-move`,{detail:{from:e,to:t},bubbles:!0,composed:!0}))}_setPicked(e){this._picked&&this._picked.card.removeAttribute(`data-picked`),this._picked=e,e&&e.card.setAttribute(`data-picked`,``);for(let t of this._columns())t.dropTarget=!!e&&t!==e.column}_onClick(e){if(this.disabled)return;let t=this._cardOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._picked;if(this._setPicked(null),n.card===t.card)return;let r=this._where(n.card,n.column),i=this._where(t.card,t.column);this._move(r,i)}_onMoveHere(e){if(this.disabled||!this._picked)return;let t=e.composedPath().find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`);if(!t)return;let n=this._picked;this._setPicked(null),this._move(this._where(n.card,n.column),{column:t.value,index:this._cards(t).length})}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key))return;let t=this._cardOfHandle(e);if(!t)return;e.preventDefault();let n=this._where(t.card,t.column);if(e.key===`ArrowUp`||e.key===`ArrowDown`){let r=n.index+(e.key===`ArrowUp`?-1:1);if(r<0||r>=this._cards(t.column).length)return;this._move(n,{column:n.column,index:r});return}let r=this._columns(),i=r[r.indexOf(t.column)+(e.key===`ArrowLeft`?-1:1)];i&&this._move(n,{column:i.value,index:this._cards(i).length})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._cardOfHandle(e);t&&(this._press={...t,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;if(!t.dragging){if(Math.hypot(e.clientX-t.startX,e.clientY-t.startY)<ht)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null),t.card.setAttribute(`data-dragging`,``)}e.preventDefault();let n=this._columnAt(e.clientX);for(let e of this._columns())e.over=e===n;if(!n){t.to=null,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``);return}let r=this._dropIndex(n,e.clientY,t.card);t.to={column:n.value,index:r},this._showIndicator(n,r,t.card)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{card:n,column:r,dragging:i,to:a}=t;this._endPress(),i&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||!a)&&this._move(this._where(n,r),a))}_endPress(){let e=this._press;if(e){this._press=null,e.card.removeAttribute(`data-dragging`);for(let e of this._columns())e.over=!1;this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_columnAt(e){return this._columns().find(t=>{let n=t.getBoundingClientRect();return e>=n.left&&e<=n.right})??null}_dropIndex(e,t,n){let r=0;for(let i of this._cards(e)){if(i===n)continue;let e=i.getBoundingClientRect();t>e.top+e.height/2&&r++}return r}_showIndicator(e,t,n){let r=this.shadowRoot?.querySelector(`.indicator`);if(!r)return;let i=this._cards(e).filter(e=>e!==n),a=this.getBoundingClientRect(),o=e.getBoundingClientRect(),s=t<i.length?i[t].getBoundingClientRect().top:i.at(-1)?.getBoundingClientRect().bottom??o.top+o.height/2;r.style.top=`${s-a.top}px`,r.style.left=`${o.left-a.left+8}px`,r.style.width=`${o.width-16}px`,r.removeAttribute(`hidden`)}};customElements.define(`pastis-kanban-board`,gt),e.PastisAccordion=ve,e.PastisAlert=R,e.PastisAvatar=I,e.PastisBadge=F,e.PastisBreadcrumb=ye,e.PastisButton=r,e.PastisButtonSplit=i,e.PastisCard=L,e.PastisCarousel=Le,e.PastisCheckbox=l,e.PastisCodeBlock=Me,e.PastisCookieBanner=Oe,e.PastisDateField=rt,e.PastisDivider=Ce,e.PastisDrawer=Ee,e.PastisDropdown=K,e.PastisEditor=pt,e.PastisEmptyState=Ne,e.PastisFileUpload=De,e.PastisFilterBar=Fe,e.PastisFilterChip=Pe,e.PastisFooter=Ve,e.PastisHero=we,e.PastisIcon=Ye,e.PastisInput=c,e.PastisKanbanBoard=gt,e.PastisKanbanColumn=mt,e.PastisModal=V,e.PastisNav=He,e.PastisPagination=be,e.PastisProgress=xe,e.PastisProjectCard=Ue,e.PastisQuickAdd=at,e.PastisRadio=ke,e.PastisRecurrencePicker=ut,e.PastisSearch=Te,e.PastisSection=Be,e.PastisShelf=qe,e.PastisSkeleton=W,e.PastisSortable=ft,e.PastisSpecTable=Ke,e.PastisSpinner=U,e.PastisStatCard=Ae,e.PastisStatement=We,e.PastisTabBar=$e,e.PastisTabBarItem=et,e.PastisTable=je,e.PastisTabs=_e,e.PastisTag=Se,e.PastisTaskRow=Qe,e.PastisTestimonial=ze,e.PastisThemeToggle=Ie,e.PastisTimeField=Z,e.PastisTimeline=Re,e.PastisToast=H,e.PastisToggle=P,e.PastisTokenSwatch=Ge,e.PastisTooltip=G,e.iconNames=Je,e.icons=q});
