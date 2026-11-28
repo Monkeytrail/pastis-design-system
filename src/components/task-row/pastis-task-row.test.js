@@ -415,4 +415,198 @@ describe('pastis-task-row', () => {
       container.remove();
     }
   });
+  // ─── Compact density and selection (v2.11) ────────────────────────────────
+
+  describe('density="compact"', () => {
+    const columns = '[status] 4rem [due] 6rem [list] 7rem';
+    const compactList = (rows) => `<div role="list" aria-label="Work" style="background:#110d0a;width:640px;--pastis-task-row-columns:${columns}">${rows}</div>`;
+    const rows = () => [...container.querySelectorAll('pastis-task-row')];
+    const sr = (r) => r.shadowRoot;
+
+    it('the default row has no meta slot, columns or selection styling', async () => {
+      container = await mount(inList('<pastis-task-row task-title="Buy oat milk"></pastis-task-row>'));
+      expect(row().density).toBeUndefined();
+      expect(row().hasAttribute('density')).toBe(false);
+      expect(row().selected).toBe(false);
+      expect(sr(row()).querySelector('slot[name="meta"]')).toBeNull();
+      expect(sr(row()).querySelector('.columns')).toBeNull();
+      expect(getComputedStyle(sr(row()).querySelector('.row')).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    });
+
+    it('is one line of about 32 px: the title ends in an ellipsis', async () => {
+      container = await mount(compactList(`<pastis-task-row density="compact" task-title="${'Prepare the quarterly review for the leadership team '.repeat(3)}"></pastis-task-row>`));
+      const r = row();
+      expect(r.getAttribute('density')).toBe('compact');
+      const height = sr(r).querySelector('.row').getBoundingClientRect().height;
+      expect(height).toBeGreaterThanOrEqual(32);
+      expect(height).toBeLessThanOrEqual(34);
+      const text = sr(r).querySelector('.title-text');
+      expect(getComputedStyle(text).whiteSpace).toBe('nowrap');
+      expect(getComputedStyle(text).textOverflow).toBe('ellipsis');
+      expect(text.scrollWidth).toBeGreaterThan(text.clientWidth);
+    });
+
+    it('keeps the roles, names and events of the default row', async () => {
+      container = await mount(compactList('<pastis-task-row density="compact" task-title="Buy oat milk" due="Today"></pastis-task-row>'));
+      await expect.element(page.getByRole('checkbox', { name: 'Complete Buy oat milk' })).toBeInTheDocument();
+      await expect.element(page.getByRole('button', { name: 'Buy oat milk' })).toHaveAccessibleDescription('Today');
+      const toggled = vi.fn();
+      const opened = vi.fn();
+      row().addEventListener('pastis-toggle', toggled);
+      row().addEventListener('pastis-open', opened);
+      await userEvent.click(page.getByRole('checkbox', { name: 'Complete Buy oat milk' }));
+      await userEvent.click(page.getByRole('button', { name: 'Buy oat milk' }));
+      expect(toggled.mock.calls[0][0].detail).toEqual({ done: true });
+      expect(opened).toHaveBeenCalledTimes(1);
+    });
+
+    it('the toggle and handle are 32 × 32 px targets', async () => {
+      container = await mount(compactList('<pastis-task-row density="compact" reorderable task-title="Buy oat milk"></pastis-task-row>'));
+      for (const el of [sr(row()).querySelector('.toggle'), sr(row()).querySelector('.handle')]) {
+        const rect = el.getBoundingClientRect();
+        expect(rect.width).toBe(32);
+        expect(rect.height).toBe(32);
+      }
+    });
+
+    it('without slotted meta, the built-in meta shows on the title line', async () => {
+      container = await mount(compactList('<pastis-task-row density="compact" task-title="Buy oat milk" due="Today 14:00" flagged></pastis-task-row>'));
+      const meta = sr(row()).querySelector('.meta');
+      expect(getComputedStyle(meta).display).toBe('flex');
+      const title = sr(row()).querySelector('.title').getBoundingClientRect();
+      const box = meta.getBoundingClientRect();
+      expect(box.left).toBeGreaterThanOrEqual(title.right);
+      expect(Math.abs((box.top + box.bottom) / 2 - (title.top + title.bottom) / 2)).toBeLessThan(2);
+    });
+
+    it('slotted meta cells line up in the named tracks down the list, with ellipsis', async () => {
+      container = await mount(compactList(`
+        <pastis-task-row density="compact" task-title="Short" due="Today">
+          <span slot="meta" aria-hidden="true" style="grid-column: status">Doing</span>
+          <span slot="meta" aria-hidden="true" style="grid-column: due">Today</span>
+          <span slot="meta" aria-hidden="true" style="grid-column: list">Platform</span>
+        </pastis-task-row>
+        <pastis-task-row density="compact" task-title="A considerably longer title for the second row" due="Fri 25 Dec">
+          <span slot="meta" aria-hidden="true" style="grid-column: due">Fri 25 Dec</span>
+          <span slot="meta" aria-hidden="true" style="grid-column: list">A list name far too long for its column</span>
+        </pastis-task-row>`));
+      const [a, b] = rows();
+      const cell = (r, i) => r.querySelectorAll('[slot="meta"]')[i];
+      // The same track starts at the same x in both rows
+      expect(cell(a, 1).getBoundingClientRect().left).toBe(cell(b, 0).getBoundingClientRect().left);
+      expect(cell(a, 2).getBoundingClientRect().left).toBe(cell(b, 1).getBoundingClientRect().left);
+      // Tracks have their fixed widths (rem = 16 px)
+      expect(cell(a, 0).getBoundingClientRect().width).toBe(64);
+      expect(cell(a, 1).getBoundingClientRect().width).toBe(96);
+      // Overflow ends in an ellipsis
+      const long = cell(b, 1);
+      expect(getComputedStyle(long).textOverflow).toBe('ellipsis');
+      expect(long.scrollWidth).toBeGreaterThan(long.clientWidth);
+      // Slotted cells replace the built-in visible meta; the description stays
+      expect(getComputedStyle(sr(a).querySelector('.meta')).display).toBe('none');
+      await expect.element(page.getByRole('button', { name: 'Short' })).toHaveAccessibleDescription('Today');
+    });
+
+    it('cells without a named column fill the tracks in order', async () => {
+      container = await mount(compactList(`
+        <pastis-task-row density="compact" task-title="Buy oat milk">
+          <span slot="meta">Doing</span><span slot="meta">Today</span>
+        </pastis-task-row>`));
+      const [first, second] = row().querySelectorAll('[slot="meta"]');
+      expect(first.getBoundingClientRect().width).toBe(64);
+      expect(second.getBoundingClientRect().width).toBe(96);
+      expect(second.getBoundingClientRect().left).toBeGreaterThan(first.getBoundingClientRect().right);
+    });
+
+    it('actions are hidden until hover or focus, and stay in the Tab order', async () => {
+      container = await mount(`<button>Before</button>${compactList(`
+        <pastis-task-row density="compact" task-title="Buy oat milk">
+          <span slot="meta" style="grid-column: due">Today</span>
+          <pastis-button slot="actions" variant="ghost" size="sm" aria-label="Flag Buy oat milk">Flag</pastis-button>
+        </pastis-task-row>`)}<button>After</button>`);
+      await new Promise(requestAnimationFrame);
+      const actions = sr(row()).querySelector('.actions');
+      const columnsEl = sr(row()).querySelector('.columns');
+      await userEvent.hover(container.querySelector('button'));
+      expect(getComputedStyle(actions).opacity).toBe('0');
+      expect(getComputedStyle(columnsEl).visibility).toBe('visible');
+
+      await userEvent.hover(page.getByRole('button', { name: 'Buy oat milk', exact: true }));
+      expect(getComputedStyle(actions).opacity).toBe('1');
+      expect(getComputedStyle(columnsEl).visibility).toBe('hidden');
+      await userEvent.hover(container.querySelector('button'));
+
+      container.querySelector('button').focus();
+      await userEvent.tab();
+      await userEvent.tab();
+      await userEvent.tab();
+      const flag = row().querySelector('pastis-button');
+      expect(document.activeElement).toBe(flag);
+      expect(getComputedStyle(actions).opacity).toBe('1');
+      // The actions sit at the end of the row, over the meta cells
+      expect(Math.round(actions.getBoundingClientRect().right)).toBe(Math.round(columnsEl.getBoundingClientRect().right));
+      await userEvent.tab();
+      expect(document.activeElement.textContent).toBe('After');
+    });
+
+    it('without actions, hovering keeps the meta cells visible', async () => {
+      container = await mount(compactList(`
+        <pastis-task-row density="compact" task-title="Buy oat milk"><span slot="meta">Today</span></pastis-task-row>`));
+      await userEvent.hover(page.getByRole('button', { name: 'Buy oat milk' }));
+      expect(getComputedStyle(sr(row()).querySelector('.columns')).visibility).toBe('visible');
+    });
+
+    it('switching density re-renders both ways', async () => {
+      container = await mount(inList('<pastis-task-row task-title="Buy oat milk"><span slot="meta">Today</span></pastis-task-row>'));
+      row().density = 'compact';
+      await row().updateComplete;
+      await new Promise(requestAnimationFrame);
+      expect(sr(row()).querySelector('.row.compact')).toBeTruthy();
+      expect(row().querySelector('[slot="meta"]').assignedSlot).toBeTruthy();
+      row().density = undefined;
+      await row().updateComplete;
+      expect(sr(row()).querySelector('.row.compact')).toBeNull();
+      expect(row().querySelector('[slot="meta"]').assignedSlot).toBeNull();
+    });
+  });
+
+  describe('selected', () => {
+    it('reflects, highlights the row with an accent bar and adds no aria-selected', async () => {
+      for (const density of ['', 'density="compact"']) {
+        container = await mount(inList(`<pastis-task-row ${density} task-title="Buy oat milk"></pastis-task-row>`));
+        const inner = row().shadowRoot.querySelector('.row');
+        const before = getComputedStyle(inner).backgroundColor;
+        row().selected = true;
+        await row().updateComplete;
+        expect(row().hasAttribute('selected')).toBe(true);
+        expect(getComputedStyle(inner).backgroundColor).not.toBe(before);
+        expect(getComputedStyle(inner).backgroundColor).toBe('rgb(37, 31, 26)');
+        expect(getComputedStyle(inner).boxShadow).toContain('rgb(252, 186, 40)');
+        expect(row().hasAttribute('aria-selected')).toBe(false);
+        expect(row().shadowRoot.querySelector('[aria-selected]')).toBeNull();
+        container.remove();
+      }
+    });
+  });
+
+  it.each([
+    ['plain', 'task-title="Buy oat milk"'],
+    ['selected, every meta item', `task-title="Prepare the quarterly review" selected due="Fri 10:00" overdue repeats flagged priority="2" subtasks="2/5" tags='["work"]'`],
+    ['done', 'task-title="Pay the electricity bill" done'],
+    ['disabled', 'task-title="Renew passport" disabled'],
+  ])('axe (all rules) is clean, compact: %s, hovered, in both themes', async (_name, attrs) => {
+    for (const [theme, bg] of [['dark', '#110d0a'], ['light', '#f4f1ea']]) {
+      container = await mount(`<main data-theme="${theme}" style="background:${bg};color:var(--text-primary)"><h1>Work</h1>
+        <div role="list" aria-label="Work" style="--pastis-task-row-columns:[status] 4rem [due] 6rem"><pastis-task-row density="compact" ${attrs}>
+          <span slot="meta" aria-hidden="true">Doing</span>
+          <span slot="meta" aria-hidden="true">Fri 10:00</span>
+          <pastis-button slot="actions" variant="ghost" size="sm" aria-label="Delete this task">Delete</pastis-button>
+        </pastis-task-row></div></main>`);
+      await userEvent.hover(row().shadowRoot.querySelector('.title'), { force: true });
+      await new Promise(resolve => setTimeout(resolve, 200));
+      const results = await axe.run(container);
+      expect(results.violations, theme).toEqual([]);
+      container.remove();
+    }
+  });
 });

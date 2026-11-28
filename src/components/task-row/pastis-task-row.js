@@ -31,16 +31,36 @@ const UNTITLED = 'Untitled task';
  *
  * Keyboard order: toggle, title, then the slotted actions.
  *
+ * - **Compact density** (`density="compact"`, for desktop lists): one line of about 32 px:
+ *   toggle · title (one line, ellipsis) · the `meta` slot · actions. The `meta` slot's elements
+ *   are cells of a CSS grid whose tracks come from `--pastis-task-row-columns`; set it once on the
+ *   list (e.g. `[status] 5rem [due] 7rem [list] 8rem`) and every row's cells line up. A cell goes
+ *   to a named track with `grid-column` (`<span slot="meta" style="grid-column: due">`), else to
+ *   the next one; a cell's overflow ends in an ellipsis. Slotted cells replace the built-in
+ *   visible meta (without them, the built-in meta shows on the same line as the title); the meta
+ *   properties still make the title's description, so mark the cells `aria-hidden="true"` when
+ *   they repeat it. The actions appear on hover and while focus is inside the row (always on
+ *   touch screens without hover), over the meta cells; they stay in the Tab order.
+ * - **Selected** (`selected`): a highlighted background with an accent bar, for the row whose
+ *   details are open. Styling only: a `listitem` takes no `aria-selected`, so mark the current
+ *   item in words where it matters (the detail pane's heading names it).
+ *
  * @fires pastis-toggle - The user toggled completion, detail { done } (the new value). Cancelable:
  *   `preventDefault()` keeps `done` unchanged.
  * @fires pastis-open - The user activated the title
- * @slot actions - Buttons for the row (Rename, Delete), after the title
+ * @slot actions - Buttons for the row (Rename, Delete), after the title. Compact: shown on hover
+ *   and focus-within
+ * @slot meta - Compact density only: the cells of the aligned meta columns
  * @csspart row - The row container
  * @csspart toggle - The completion toggle (the 44 × 44 px target)
  * @csspart circle - The visible circle inside the toggle
  * @csspart title - The title button
  * @csspart meta - The meta line
  * @csspart actions - The wrapper of the actions slot
+ * @csspart columns - Compact density: the grid of meta cells
+ * @cssprop --pastis-task-row-columns - Compact density: the meta cells' grid tracks
+ *   (`grid-template-columns`), set on the list so rows align. Default: one auto track per cell
+ * @cssprop --pastis-task-row-column-gap - Compact density: the gap between meta cells (default `--space-md`)
  */
 export class PastisTaskRow extends LitElement {
   static properties = {
@@ -75,6 +95,12 @@ export class PastisTaskRow extends LitElement {
     reorderable: { type: Boolean, reflect: true },
     /** The handle's accessible name (default “Reorder <title>”). */
     reorderLabel: { type: String, attribute: 'reorder-label' },
+    /** `compact`: one line with aligned meta columns and hover actions (desktop lists). Unset: the default row. */
+    density: { type: String, reflect: true },
+    /** The selected row (its details are open): highlighted background. Styling only, no `aria-selected`. */
+    selected: { type: Boolean, reflect: true },
+    _hasMeta: { state: true },
+    _hasActions: { state: true },
   };
 
   static styles = css`
@@ -265,8 +291,106 @@ export class PastisTaskRow extends LitElement {
     :host([disabled][done]) .circle { background: var(--text-disabled, #4a4139); }
     :host([disabled]) .toggle:hover .circle { border-color: var(--text-disabled, #4a4139); }
 
+    /* ── Selected ── */
+    :host([selected]) .row {
+      background: var(--bg-elevated, #251f1a);
+      box-shadow: inset calc(var(--border-width, 1px) * 2) 0 0 var(--action-primary, #fcba28);
+    }
+
+    /* ── Compact density: one line, aligned meta columns, hover actions ── */
+    .row.compact {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-auto-columns: auto;
+      align-items: center;
+      gap: 0 var(--space-sm, 8px);
+      padding-block: 0;
+    }
+    .row.compact:hover { background: var(--bg-card, #1b1612); }
+    :host([selected]) .row.compact,
+    :host([selected]) .row.compact:hover { background: var(--bg-elevated, #251f1a); }
+
+    .compact .toggle,
+    .compact .handle {
+      width: var(--space-xl, 32px);
+      height: var(--space-xl, 32px);
+    }
+    .compact .circle {
+      width: var(--space-md, 16px);
+      height: var(--space-md, 16px);
+    }
+
+    .compact .body {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-sm, 8px);
+      min-height: var(--space-xl, 32px);
+      padding-block: 0;
+    }
+    .compact .title {
+      flex: 0 1 auto;
+      width: auto;
+      min-width: 0;
+      font-size: var(--font-size-body-sm, 14px);
+      line-height: var(--line-height-body-sm, 1.5);
+    }
+    .compact .title-text {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .compact .meta {
+      flex: none;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+    .compact .meta.slotted { display: none; }
+
+    .trail { display: grid; align-items: center; min-width: 0; }
+    .trail > * { grid-area: 1 / 1; }
+
+    .columns {
+      display: grid;
+      grid-template-columns: var(--pastis-task-row-columns, none);
+      grid-auto-flow: column;
+      grid-auto-columns: auto;
+      align-items: center;
+      column-gap: var(--pastis-task-row-column-gap, var(--space-md, 16px));
+      min-width: 0;
+      font-size: var(--font-size-caption, 12px);
+      line-height: var(--line-height-caption, 1.4);
+      color: var(--text-tertiary, #a39b90);
+    }
+    ::slotted([slot="meta"]) {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .compact .actions {
+      justify-self: end;
+      opacity: 0;
+      pointer-events: none;
+    }
+    :host(:hover) .compact .actions,
+    :host(:focus-within) .compact .actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    :host(:hover) .compact.with-actions .columns,
+    :host(:focus-within) .compact.with-actions .columns { visibility: hidden; }
+
+    @media (hover: none) {
+      .compact .actions { opacity: 1; pointer-events: auto; }
+      .compact.with-actions .columns { visibility: hidden; }
+    }
+
     @media (forced-colors: active) {
       :host([done]) .circle { background: CanvasText; border-color: CanvasText; color: Canvas; }
+      :host([selected]) .row { outline: 2px solid Highlight; outline-offset: -2px; }
     }
   `;
 
@@ -282,6 +406,9 @@ export class PastisTaskRow extends LitElement {
     this.indent = false;
     this.disabled = false;
     this.reorderable = false;
+    this.selected = false;
+    this._hasMeta = false;
+    this._hasActions = false;
   }
 
   connectedCallback() {
@@ -341,6 +468,7 @@ export class PastisTaskRow extends LitElement {
   }
 
   render() {
+    if (this.density === 'compact') return this._renderCompact();
     const meta = this._metaItems();
     const hasTitle = Boolean(String(this.taskTitle ?? '').trim());
     const name = hasTitle ? this.taskTitle : UNTITLED;
@@ -388,6 +516,68 @@ export class PastisTaskRow extends LitElement {
         ` : nothing}
       </div>
     `;
+  }
+
+  /** Compact density: one line, the meta slot's cells in aligned columns, actions on hover. */
+  _renderCompact() {
+    const meta = this._metaItems();
+    const hasTitle = Boolean(String(this.taskTitle ?? '').trim());
+    const name = hasTitle ? this.taskTitle : UNTITLED;
+    return html`
+      <div class="row compact ${this._hasActions ? 'with-actions' : ''}" part="row">
+        <button
+          class="toggle"
+          part="toggle"
+          type="button"
+          role="checkbox"
+          aria-checked=${this.done ? 'true' : 'false'}
+          aria-label=${this.toggleLabel || `Complete ${name}`}
+          ?disabled=${this.disabled}
+          @click=${this._onToggle}
+          @keydown=${this._onToggleKeydown}
+        >
+          <span class="circle" part="circle">
+            ${this.done ? html`<pastis-icon name="check"></pastis-icon>` : nothing}
+          </span>
+        </button>
+        <div class="body">
+          <button
+            class="title"
+            part="title"
+            type="button"
+            aria-label=${hasTitle ? nothing : UNTITLED}
+            aria-describedby=${meta.length ? 'description' : nothing}
+            ?disabled=${this.disabled}
+            @click=${this._onOpen}
+          ><span class="title-text">${this.taskTitle}</span></button>
+          ${meta.length ? html`
+            <div class="meta ${this._hasMeta ? 'slotted' : ''}" part="meta" aria-hidden="true">${meta.map(item => item.view)}</div>
+            <span id="description" hidden>${meta.map(item => item.text).join(', ')}</span>
+          ` : nothing}
+        </div>
+        <div class="trail">
+          <div class="columns" part="columns"><slot name="meta" @slotchange=${this._onMetaSlotChange}></slot></div>
+          <div class="actions" part="actions"><slot name="actions" @slotchange=${this._onActionsSlotChange}></slot></div>
+        </div>
+        ${this.reorderable ? html`
+          <button
+            class="handle"
+            part="handle"
+            type="button"
+            aria-label=${this.reorderLabel || `Reorder ${name}`}
+            ?disabled=${this.disabled}
+          ><pastis-icon name="grip"></pastis-icon></button>
+        ` : nothing}
+      </div>
+    `;
+  }
+
+  _onMetaSlotChange(e) {
+    this._hasMeta = e.target.assignedElements().length > 0;
+  }
+
+  _onActionsSlotChange(e) {
+    this._hasActions = e.target.assignedElements().length > 0;
   }
 
   // A checkbox toggles with Space only; a native button would also click on Enter
