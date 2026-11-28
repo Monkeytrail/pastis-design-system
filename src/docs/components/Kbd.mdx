@@ -1,0 +1,36 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as KbdStories from '../../components/kbd/pastis-kbd.stories.js';
+
+<Meta of={KbdStories} name="Usage" />
+
+# Kbd
+
+`<pastis-kbd>` is one key cap in a keyboard shortcut or hint, a `<kbd>` element on tokens.
+
+<Canvas of={KbdStories.Default} />
+<Canvas of={KbdStories.ShortcutSheet} />
+
+## Usage
+
+- **One key per element.** Write sequences and chords with words between the keys: “`g` then
+  `t`”, “`Shift` + `?`”.
+- **Symbols:** give `↑`, `⌘` and the like a `label` (“Up arrow”, “Command”); screen readers then
+  read the label instead of the symbol.
+- A shortcut sheet is the app's: a `pastis-modal` with a description list of keys and actions.
+
+<Controls of={KbdStories.Default} />
+
+## Do
+
+```html
+<p>Press <pastis-kbd>j</pastis-kbd> or <pastis-kbd label="Down arrow">↓</pastis-kbd> for the next item.</p>
+```
+
+## Don't
+
+```html
+<!-- Don't put a whole shortcut in one cap -->
+<pastis-kbd>g then t</pastis-kbd>
+
+<!-- Don't make a key cap a button: it describes a key, it does nothing -->
+```

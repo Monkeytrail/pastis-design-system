@@ -1,0 +1,60 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as AppLayoutStories from '../../components/app-layout/pastis-app-layout.stories.js';
+
+<Meta of={AppLayoutStories} name="Usage" />
+
+# App layout
+
+`<pastis-app-layout>` is a desktop app's frame: a sidebar, the main pane and a detail pane side
+by side, each as tall as the viewport and scrolling on its own. Below its `breakpoint` (a window
+width, 1024 px by default) only the main pane renders, in the page's own scroll.
+
+<Canvas of={AppLayoutStories.Default} />
+
+## Usage
+
+- **Slots:** `sidebar` (a [`<pastis-sidebar>`](?path=/docs/navigation-sidebar--usage)), the
+  default slot (the list or view) and `detail` (the open item). The layout supplies the
+  landmarks: `nav` (`sidebar-label`, default “Sidebar”), `main` and `aside` (`detail-label`,
+  default “Details”). Don't put another `main` inside.
+- **Folding:** `sidebar-collapsed` removes the sidebar, `detail-open` shows the detail pane. The
+  app owns both (a sidebar button, `[`, a Close button, `Esc`) and remembers them if it wants.
+- **Width:** `detail-width` (px) is kept between 380 px and 60 % of the layout. The splitter on
+  the pane's edge is a `separator` whose value is the width: drag it, use Left/Right (Shift for
+  64 px steps), Home and End, or double-click it to switch between the widest and the narrowest.
+  The layout applies the width and fires `pastis-resize { width }`; store it, and set
+  `detail-width` from it on the next start.
+- **Mode:** read the reflected `mode` (`wide` or `narrow`); `pastis-layout-change { mode }` fires
+  when the window crosses the breakpoint. Slotted sidebar and detail content stays in the DOM
+  when narrow, but is not rendered.
+- `--pastis-app-layout-sidebar-width` (260 px) and `--pastis-app-layout-height` (100dvh) size
+  the panes. Each pane is padded by the safe-area insets on its outer edges.
+
+<Controls of={AppLayoutStories.Default} />
+
+<Canvas of={AppLayoutStories.NothingSelected} />
+
+## Do
+
+```html
+<pastis-app-layout detail-open detail-width="440">
+  <pastis-sidebar slot="sidebar" label="Views and lists">…</pastis-sidebar>
+  <section aria-labelledby="list-title"><h1 id="list-title">Platform</h1>…</section>
+  <article slot="detail" aria-labelledby="item-title"><h2 id="item-title">Ship the release</h2>…</article>
+</pastis-app-layout>
+```
+
+```js
+layout.addEventListener('pastis-resize', (e) => {
+  localStorage.setItem('detail-width', String(e.detail.width));
+});
+```
+
+## Don't
+
+```html
+<!-- Don't wrap the panes in your own landmarks: the layout already provides nav, main and aside -->
+<pastis-app-layout><main>…</main></pastis-app-layout>
+
+<!-- Don't size the panes with your own grid around the slots: use the properties and custom properties -->
+```
