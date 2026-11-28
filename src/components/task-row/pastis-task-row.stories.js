@@ -50,6 +50,8 @@ export default {
     tags: { control: 'object' },
     indent: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    selected: { control: 'boolean' },
+    density: { control: 'inline-radio', options: ['default', 'compact'] },
   },
   args: {
     taskTitle: 'Buy oat milk',
@@ -63,6 +65,8 @@ export default {
     tags: [],
     indent: false,
     disabled: false,
+    selected: false,
+    density: 'default',
   },
   render: (args) => {
     const wrap = document.createElement('div');
@@ -78,6 +82,8 @@ export default {
       ${args.repeats ? 'repeats' : ''}
       ${args.flagged ? 'flagged' : ''}
       ${args.indent ? 'indent' : ''}
+      ${args.selected ? 'selected' : ''}
+      ${args.density === 'compact' ? 'density="compact"' : ''}
       ${args.disabled ? 'disabled' : ''}
     ></pastis-task-row>
   `);
@@ -180,3 +186,47 @@ export const Controlled = {
     return wrap;
   },
 };
+
+const backlog = [
+  ['Doing', 'Ship the 2.11 release', 'Today', 'Platform', '!!!'],
+  ['To do', 'Write release notes for the spring update and the store listing', 'Tomorrow', 'Platform', ''],
+  ['Verify', 'Check the sync fix on the phone', 'Yesterday', 'Quality assurance and release', '!'],
+  ['Inbox', 'Triage the crash report', '', 'Platform', ''],
+];
+
+const compactRows = (theme) => `
+  <div role="list" aria-label="Platform (${theme})" style="max-width:720px;background:var(--bg-primary);--pastis-task-row-columns:[status] 4rem [due] 6rem [list] 7rem [priority] 2rem">
+    ${backlog.map(([status, title, due, list, priority], i) => `
+      <pastis-task-row density="compact" task-title="${esc(title)}" ${due ? `due="${due}"` : ''} ${i === 0 ? 'selected' : ''}>
+        <span slot="meta" aria-hidden="true" style="grid-column: status">${status}</span>
+        <span slot="meta" aria-hidden="true" style="grid-column: due">${due}</span>
+        <span slot="meta" aria-hidden="true" style="grid-column: list">${list}</span>
+        <span slot="meta" aria-hidden="true" style="grid-column: priority;color:var(--text-accent)">${priority}</span>
+        <pastis-button slot="actions" variant="ghost" size="sm" aria-label="Flag ${esc(title)}">Flag</pastis-button>
+        <pastis-button slot="actions" variant="ghost" size="sm" aria-label="More for ${esc(title)}">More</pastis-button>
+      </pastis-task-row>`).join('')}
+  </div>`;
+
+/**
+ * Compact density for desktop lists: one line per row, the `meta` slot's cells in the tracks of
+ * `--pastis-task-row-columns` (set on the list, so they line up), actions on hover and focus. The
+ * first row is `selected`.
+ */
+export const Compact = { render: () => compactRows('dark') };
+
+/** Compact rows without slotted cells: the built-in meta follows the title on its line. */
+export const CompactBuiltInMeta = {
+  render: () => list(`
+    <pastis-task-row density="compact" task-title="Buy oat milk" due="Today 14:00" flagged tags='["errands"]'></pastis-task-row>
+    <pastis-task-row density="compact" task-title="Renew passport" due="Yesterday" overdue priority="3"></pastis-task-row>
+    <pastis-task-row density="compact" task-title="Pay the electricity bill" done></pastis-task-row>
+  `),
+};
+
+/** Compact rows in both themes. */
+export const CompactBothThemes = {
+  render: () => `<div style="display:flex;flex-wrap:wrap">${panel('dark', compactRows('dark'))}${panel('light', compactRows('light'))}</div>`,
+};
+
+/** A selected row in the default density (its details are open). */
+export const Selected = { args: { taskTitle: 'Buy oat milk', due: 'Today 14:00', selected: true } };
