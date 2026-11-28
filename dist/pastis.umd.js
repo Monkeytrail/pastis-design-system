@@ -1561,7 +1561,7 @@
         ${this.content||``}
         <slot name="content"></slot>
       </div>
-    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,H);var U=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=t.css`
+    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,H);var be=class extends t.LitElement{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=t.css`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -1772,7 +1772,7 @@
         </div>
         ${this.error?t.html`<span class="error-text">⚠ ${this.error}</span>`:``}
       </div>
-    `}};customElements.define(`pastis-dropdown`,U);var be=class extends t.LitElement{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-dropdown`,be);var xe=class extends t.LitElement{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .tabs-container { display: flex; flex-direction: column; }
@@ -1917,7 +1917,7 @@
           ${e?.content?t.html`${e.content}`:t.html`<slot name="${this.active}"></slot>`}
         </div>
       </div>
-    `}};customElements.define(`pastis-tabs`,be);var xe=class extends t.LitElement{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=t.css`
+    `}};customElements.define(`pastis-tabs`,xe);var Se=class extends t.LitElement{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=t.css`
     :host { display: block; }
 
     .accordion {
@@ -2054,7 +2054,7 @@
           </div>
         `)}
       </div>
-    `}};customElements.define(`pastis-accordion`,xe);var Se=class extends t.LitElement{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=t.css`
+    `}};customElements.define(`pastis-accordion`,Se);var Ce=class extends t.LitElement{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=t.css`
     :host { display: block; }
 
     nav {
@@ -2148,7 +2148,7 @@
             `})}
         </ol>
       </nav>
-    `}};customElements.define(`pastis-breadcrumb`,Se);var Ce=class extends t.LitElement{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=t.css`
+    `}};customElements.define(`pastis-breadcrumb`,Ce);var we=class extends t.LitElement{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=t.css`
     :host { display: block; }
 
     .pagination {
@@ -2290,7 +2290,7 @@
           `:``}
         </div>
       </nav>
-    `}};customElements.define(`pastis-pagination`,Ce);var we=class extends t.LitElement{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=t.css`
+    `}};customElements.define(`pastis-pagination`,we);var Te=class extends t.LitElement{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=t.css`
     :host { display: block; }
 
     .progress-wrap {
@@ -2450,7 +2450,7 @@
           ></div>
         </div>
       </div>
-    `}};customElements.define(`pastis-progress`,we);var Te=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-progress`,Te);var Ee=class extends t.LitElement{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=t.css`
     :host { display: inline-flex; align-items: center; }
 
     .tag {
@@ -2557,7 +2557,7 @@
           >✕</button>
         `:``}
       </span>
-    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Te);var Ee=class extends t.LitElement{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=t.css`
+    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,Ee);var De=class extends t.LitElement{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=t.css`
     :host { display: block; }
 
     :host([orientation="vertical"]) {
@@ -2654,7 +2654,7 @@
         ${this.label?t.html`<span class="label">${this.label}</span>`:t.html`<slot></slot>`}
         ${n?t.html`<span class="line" style="${e}"></span>`:``}
       </div>
-    `}};customElements.define(`pastis-divider`,Ee);var De=class extends t.LitElement{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-divider`,De);var Oe=class extends t.LitElement{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .hero {
@@ -2830,7 +2830,7 @@
           `:t.html`<slot name="image"></slot>`}
         </div>
       </section>
-    `}};customElements.define(`pastis-hero`,De);var W=class extends t.LitElement{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=t.css`
+    `}};customElements.define(`pastis-hero`,Oe);var ke=class extends t.LitElement{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=t.css`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3036,7 +3036,7 @@
           `:``}
         </div>
       </div>
-    `}};customElements.define(`pastis-search`,W);var Oe=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-search`,ke);var Ae=class extends t.LitElement{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: contents; }
 
     .backdrop {
@@ -3188,7 +3188,7 @@
           <slot name="footer" class="drawer-footer"></slot>
         </div>
       </div>
-    `:t.html``}};customElements.define(`pastis-drawer`,Oe);var ke=class extends t.LitElement{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=t.css`
+    `:t.html``}};customElements.define(`pastis-drawer`,Ae);var je=class extends t.LitElement{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=t.css`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3398,7 +3398,7 @@
         ${this.error?t.html`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
         ${this.helper&&!this.error?t.html`<p class="helper-text">${this.helper}</p>`:``}
       </div>
-    `}};customElements.define(`pastis-file-upload`,ke);var Ae=class extends t.LitElement{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=t.css`
+    `}};customElements.define(`pastis-file-upload`,je);var Me=class extends t.LitElement{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=t.css`
     :host { display: block; }
     :host(:not([visible])) { display: none; }
 
@@ -3616,7 +3616,7 @@
           </div>
         `}
       </div>
-    `}};customElements.define(`pastis-cookie-banner`,Ae);var je=class extends t.LitElement{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-cookie-banner`,Me);var Ne=class extends t.LitElement{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=t.css`
     :host { display: block; }
 
     label {
@@ -3692,7 +3692,7 @@
           </span>
         `:``}
       </label>
-    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,je);var Me=class extends t.LitElement{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,Ne);var Pe=class extends t.LitElement{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .stat-card {
@@ -3773,7 +3773,7 @@
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-stat-card`,Me);var Ne=class extends t.LitElement{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-stat-card`,Pe);var Fe=class extends t.LitElement{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=t.css`
     :host { display: block; overflow-x: auto; }
 
     table {
@@ -3928,7 +3928,7 @@
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-table`,Ne);var Pe=class extends t.LitElement{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-table`,Fe);var Ie=class extends t.LitElement{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=t.css`
     :host { display: block; }
 
     .code-block {
@@ -4053,7 +4053,7 @@
           </slot></pre>
         </div>
       </div>
-    `}};customElements.define(`pastis-code-block`,Pe);var Fe=class extends t.LitElement{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-code-block`,Ie);var Le=class extends t.LitElement{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .empty-state {
@@ -4160,7 +4160,7 @@
         `:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-empty-state`,Fe);var Ie=class extends t.LitElement{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number},labelCase:{type:String,attribute:`label-case`,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-empty-state`,Le);var Re=class extends t.LitElement{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number},labelCase:{type:String,attribute:`label-case`,reflect:!0}};static styles=t.css`
     :host { display: inline-block; }
 
     .chip {
@@ -4274,7 +4274,7 @@
           <button class="remove" @click=${this._remove} aria-label="Remove ${e}" ?disabled=${this.disabled}>✕</button>
         `:``}
       </span>
-    `}};customElements.define(`pastis-filter-chip`,Ie);var Le=class extends t.LitElement{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-filter-chip`,Re);var ze=class extends t.LitElement{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=t.css`
     :host { display: block; }
 
     .filter-bar {
@@ -4329,7 +4329,7 @@
           <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
         `:``}
       </div>
-    `}};customElements.define(`pastis-filter-bar`,Le);var Re=class extends t.LitElement{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-filter-bar`,ze);var Be=class extends t.LitElement{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=t.css`
     :host { display: inline-block; }
 
     button {
@@ -4371,7 +4371,7 @@
         <span class="icon" aria-hidden="true">${n}</span>
         ${this.label?t.html`<span class="label-text">${r} Mode</span>`:``}
       </button>
-    `}};customElements.define(`pastis-theme-toggle`,Re);var ze=class extends t.LitElement{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-theme-toggle`,Be);var Ve=class extends t.LitElement{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     .carousel {
@@ -4614,7 +4614,7 @@
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-carousel`,ze);var Be=class extends t.LitElement{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-carousel`,Ve);var He=class extends t.LitElement{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
     :host {
       display: block;
       container-type: inline-size;
@@ -4690,7 +4690,7 @@
             </li>
           `})}
       </ol>
-    `}};customElements.define(`pastis-timeline`,Be);var Ve=class extends t.LitElement{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-timeline`,He);var Ue=class extends t.LitElement{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     .testimonial {
@@ -4833,7 +4833,7 @@
           </div>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-testimonial`,Ve);var He=class extends t.LitElement{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=t.css`
+    `}};customElements.define(`pastis-testimonial`,Ue);var We=class extends t.LitElement{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=t.css`
     :host { display: block; }
 
     section {
@@ -4928,7 +4928,7 @@
           <slot></slot>
         </div>
       </section>
-    `}};customElements.define(`pastis-section`,He);var Ue=class extends t.LitElement{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-section`,We);var Ge=class extends t.LitElement{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=t.css`
     :host { display: block; }
 
     footer {
@@ -5136,7 +5136,7 @@
           </div>
         </div>
       </footer>
-    `}};customElements.define(`pastis-footer`,Ue);var We=class extends t.LitElement{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-footer`,Ge);var Ke=class extends t.LitElement{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     nav {
@@ -5546,7 +5546,7 @@
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};customElements.define(`pastis-nav`,We);var Ge=class extends t.LitElement{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-nav`,Ke);var qe=class extends t.LitElement{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=t.css`
     :host {
       display: block;
       --_ratio: 1 / 1;
@@ -5745,7 +5745,7 @@
           ${this.summary?t.html`<p class="summary">${this.summary}</p>`:``}
         </div>
       </a>
-    `}};customElements.define(`pastis-project-card`,Ge);var Ke=class extends t.LitElement{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-project-card`,qe);var Je=class extends t.LitElement{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=t.css`
     :host {
       display: block;
       --_size: var(--font-size-statement-lg, clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem));
@@ -5815,7 +5815,7 @@
   `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return t.html`
       ${this.eyebrow?t.html`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
       <div class="body ${e}" part="body"><slot></slot></div>
-    `}};customElements.define(`pastis-statement`,Ke);var qe=class extends t.LitElement{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-statement`,Je);var Ye=class extends t.LitElement{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     figure {
@@ -5863,7 +5863,7 @@
           <code class="value">${this._value||`—`}</code>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-token-swatch`,qe);var Je=class extends t.LitElement{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-token-swatch`,Ye);var Xe=class extends t.LitElement{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=t.css`
     :host { display: block; }
 
     table {
@@ -5978,7 +5978,7 @@
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-spec-table`,Je);var Ye=class extends t.LitElement{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=t.css`
+    `}};customElements.define(`pastis-spec-table`,Xe);var Ze=class extends t.LitElement{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=t.css`
     :host {
       display: block;
       --_inset: var(--pastis-shelf-inset, var(--layout-gutter, 24px));
@@ -6094,7 +6094,7 @@
         <button aria-label="Previous" ?disabled=${this._atStart} @click=${()=>this._scrollByPage(-1)}>←</button>
         <button aria-label="Next" ?disabled=${this._atEnd} @click=${()=>this._scrollByPage(1)}>→</button>
       </div>
-    `}};customElements.define(`pastis-shelf`,Ye);var G={today:t.svg`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,calendar:t.svg`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,list:t.svg`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,search:t.svg`<path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" />`,grip:t.svg`<circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" /><circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />`,flag:t.svg`<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />`,repeat:t.svg`<path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" />`,clock:t.svg`<circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />`,tag:t.svg`<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />`,subtasks:t.svg`<path d="M8 5h13" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="M3 10a2 2 0 0 0 2 2h3" /><path d="M3 5v12a2 2 0 0 0 2 2h3" />`,alert:t.svg`<circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" />`,plus:t.svg`<path d="M5 12h14" /><path d="M12 5v14" />`,check:t.svg`<path d="M20 6 9 17l-5-5" />`,close:t.svg`<path d="M18 6 6 18" /><path d="m6 6 12 12" />`,more:t.svg`<circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />`,edit:t.svg`<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" />`,trash:t.svg`<path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />`,"chevron-right":t.svg`<path d="m9 18 6-6-6-6" />`,"chevron-left":t.svg`<path d="m15 18-6-6 6-6" />`,"chevron-down":t.svg`<path d="m6 9 6 6 6-6" />`,inbox:t.svg`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,"trash-restore":t.svg`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`},Xe=Object.keys(G),Ze=class extends t.LitElement{static properties={name:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:String}};static styles=t.css`
+    `}};customElements.define(`pastis-shelf`,Ze);var U={today:t.svg`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,calendar:t.svg`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,list:t.svg`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,search:t.svg`<path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" />`,grip:t.svg`<circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" /><circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />`,flag:t.svg`<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />`,repeat:t.svg`<path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" />`,clock:t.svg`<circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />`,tag:t.svg`<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />`,subtasks:t.svg`<path d="M8 5h13" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="M3 10a2 2 0 0 0 2 2h3" /><path d="M3 5v12a2 2 0 0 0 2 2h3" />`,alert:t.svg`<circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" />`,plus:t.svg`<path d="M5 12h14" /><path d="M12 5v14" />`,check:t.svg`<path d="M20 6 9 17l-5-5" />`,close:t.svg`<path d="M18 6 6 18" /><path d="m6 6 12 12" />`,more:t.svg`<circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />`,edit:t.svg`<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" />`,trash:t.svg`<path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />`,"chevron-right":t.svg`<path d="m9 18 6-6-6-6" />`,"chevron-left":t.svg`<path d="m15 18-6-6 6-6" />`,"chevron-down":t.svg`<path d="m6 9 6 6 6-6" />`,inbox:t.svg`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,"trash-restore":t.svg`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`,"panel-left":t.svg`<rect width="18" height="18" x="3" y="3" rx="2" /><path d="M9 3v18" />`,settings:t.svg`<path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx="12" cy="12" r="3" />`,board:t.svg`<rect width="18" height="18" x="3" y="3" rx="2" /><path d="M8 7v7" /><path d="M12 7v4" /><path d="M16 7v9" />`,layers:t.svg`<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />`,keyboard:t.svg`<path d="M10 8h.01" /><path d="M12 12h.01" /><path d="M14 8h.01" /><path d="M16 12h.01" /><path d="M18 8h.01" /><path d="M6 8h.01" /><path d="M7 16h10" /><path d="M8 12h.01" /><rect width="20" height="16" x="2" y="4" rx="2" />`},Qe=Object.keys(U),$e=class extends t.LitElement{static properties={name:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:String}};static styles=t.css`
     :host {
       --_size: calc(var(--space-md, 16px) + var(--space-xs, 4px));
       display: inline-flex;
@@ -6108,7 +6108,7 @@
     :host([hidden]) { display: none; }
 
     svg { display: block; width: 100%; height: 100%; }
-  `;constructor(){super(),this.size=`md`}willUpdate(e){e.has(`name`)&&!Object.hasOwn(G,this.name??``)&&console.warn(`pastis-icon: unknown icon name "${this.name??``}"`),this.label?(this.setAttribute(`role`,`img`),this.setAttribute(`aria-label`,this.label),this.removeAttribute(`aria-hidden`)):(this.removeAttribute(`role`),this.removeAttribute(`aria-label`),this.setAttribute(`aria-hidden`,`true`))}render(){let e=Object.hasOwn(G,this.name??``)?G[this.name]:null;return e?t.html`<svg
+  `;constructor(){super(),this.size=`md`}willUpdate(e){e.has(`name`)&&!Object.hasOwn(U,this.name??``)&&console.warn(`pastis-icon: unknown icon name "${this.name??``}"`),this.label?(this.setAttribute(`role`,`img`),this.setAttribute(`aria-label`,this.label),this.removeAttribute(`aria-hidden`)):(this.removeAttribute(`role`),this.removeAttribute(`aria-label`),this.setAttribute(`aria-hidden`,`true`))}render(){let e=Object.hasOwn(U,this.name??``)?U[this.name]:null;return e?t.html`<svg
       part="svg"
       viewBox="0 0 24 24"
       fill="none"
@@ -6118,7 +6118,7 @@
       stroke-linejoin="round"
       aria-hidden="true"
       focusable="false"
-    >${e}</svg>`:t.nothing}};customElements.define(`pastis-icon`,Ze);var Qe=[``,`low`,`medium`,`high`],$e=`Untitled task`,et=class extends t.LitElement{static properties={taskTitle:{type:String,attribute:`task-title`},done:{type:Boolean,reflect:!0},toggleLabel:{type:String,attribute:`toggle-label`},due:{type:String},overdue:{type:Boolean,reflect:!0},repeats:{type:Boolean,reflect:!0},flagged:{type:Boolean,reflect:!0},priority:{type:Number,reflect:!0},subtasks:{type:String},tags:{type:Array},indent:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},reorderable:{type:Boolean,reflect:!0},reorderLabel:{type:String,attribute:`reorder-label`}};static styles=t.css`
+    >${e}</svg>`:t.nothing}};customElements.define(`pastis-icon`,$e);var et=[``,`low`,`medium`,`high`],W=`Untitled task`,tt=class extends t.LitElement{static properties={taskTitle:{type:String,attribute:`task-title`},done:{type:Boolean,reflect:!0},toggleLabel:{type:String,attribute:`toggle-label`},due:{type:String},overdue:{type:Boolean,reflect:!0},repeats:{type:Boolean,reflect:!0},flagged:{type:Boolean,reflect:!0},priority:{type:Number,reflect:!0},subtasks:{type:String},tags:{type:Array},indent:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},reorderable:{type:Boolean,reflect:!0},reorderLabel:{type:String,attribute:`reorder-label`},density:{type:String,reflect:!0},selected:{type:Boolean,reflect:!0},_hasMeta:{state:!0},_hasActions:{state:!0}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6306,17 +6306,115 @@
     :host([disabled][done]) .circle { background: var(--text-disabled, #4a4139); }
     :host([disabled]) .toggle:hover .circle { border-color: var(--text-disabled, #4a4139); }
 
+    /* ── Selected ── */
+    :host([selected]) .row {
+      background: var(--bg-elevated, #251f1a);
+      box-shadow: inset calc(var(--border-width, 1px) * 2) 0 0 var(--action-primary, #fcba28);
+    }
+
+    /* ── Compact density: one line, aligned meta columns, hover actions ── */
+    .row.compact {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-auto-columns: auto;
+      align-items: center;
+      gap: 0 var(--space-sm, 8px);
+      padding-block: 0;
+    }
+    .row.compact:hover { background: var(--bg-card, #1b1612); }
+    :host([selected]) .row.compact,
+    :host([selected]) .row.compact:hover { background: var(--bg-elevated, #251f1a); }
+
+    .compact .toggle,
+    .compact .handle {
+      width: var(--space-xl, 32px);
+      height: var(--space-xl, 32px);
+    }
+    .compact .circle {
+      width: var(--space-md, 16px);
+      height: var(--space-md, 16px);
+    }
+
+    .compact .body {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-sm, 8px);
+      min-height: var(--space-xl, 32px);
+      padding-block: 0;
+    }
+    .compact .title {
+      flex: 0 1 auto;
+      width: auto;
+      min-width: 0;
+      font-size: var(--font-size-body-sm, 14px);
+      line-height: var(--line-height-body-sm, 1.5);
+    }
+    .compact .title-text {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .compact .meta {
+      flex: none;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+    .compact .meta.slotted { display: none; }
+
+    .trail { display: grid; align-items: center; min-width: 0; }
+    .trail > * { grid-area: 1 / 1; }
+
+    .columns {
+      display: grid;
+      grid-template-columns: var(--pastis-task-row-columns, none);
+      grid-auto-flow: column;
+      grid-auto-columns: auto;
+      align-items: center;
+      column-gap: var(--pastis-task-row-column-gap, var(--space-md, 16px));
+      min-width: 0;
+      font-size: var(--font-size-caption, 12px);
+      line-height: var(--line-height-caption, 1.4);
+      color: var(--text-tertiary, #a39b90);
+    }
+    ::slotted([slot="meta"]) {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .compact .actions {
+      justify-self: end;
+      opacity: 0;
+      pointer-events: none;
+    }
+    :host(:hover) .compact .actions,
+    :host(:focus-within) .compact .actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    :host(:hover) .compact.with-actions .columns,
+    :host(:focus-within) .compact.with-actions .columns { visibility: hidden; }
+
+    @media (hover: none) {
+      .compact .actions { opacity: 1; pointer-events: auto; }
+      .compact.with-actions .columns { visibility: hidden; }
+    }
+
     @media (forced-colors: active) {
       :host([done]) .circle { background: CanvasText; border-color: CanvasText; color: Canvas; }
+      :host([selected]) .row { outline: 2px solid Highlight; outline-offset: -2px; }
     }
-  `;constructor(){super(),this.taskTitle=``,this.done=!1,this.overdue=!1,this.repeats=!1,this.flagged=!1,this.priority=0,this.tags=[],this.indent=!1,this.disabled=!1,this.reorderable=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}_metaItems(){let e=[];(this.due||this.overdue)&&e.push({text:this.overdue?this.due?`Overdue: ${this.due}`:`Overdue`:this.due,view:t.html`<span class="meta-item due ${this.overdue?`overdue`:``}">
+  `;constructor(){super(),this.taskTitle=``,this.done=!1,this.overdue=!1,this.repeats=!1,this.flagged=!1,this.priority=0,this.tags=[],this.indent=!1,this.disabled=!1,this.reorderable=!1,this.selected=!1,this._hasMeta=!1,this._hasActions=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}_metaItems(){let e=[];(this.due||this.overdue)&&e.push({text:this.overdue?this.due?`Overdue: ${this.due}`:`Overdue`:this.due,view:t.html`<span class="meta-item due ${this.overdue?`overdue`:``}">
           <pastis-icon name=${this.overdue?`alert`:`clock`} size="sm"></pastis-icon>
           <span>${this.due||`Overdue`}</span>
-        </span>`}),this.repeats&&e.push({text:`Repeats`,view:t.html`<span class="meta-item repeats"><pastis-icon name="repeat" size="sm"></pastis-icon></span>`}),this.flagged&&e.push({text:`Flagged`,view:t.html`<span class="meta-item flagged"><pastis-icon name="flag" size="sm"></pastis-icon></span>`});let n=Math.trunc(Number(this.priority));n>=1&&n<=3&&e.push({text:`Priority ${Qe[n]}`,view:t.html`<span class="meta-item priority">${`!`.repeat(n)}</span>`}),this.subtasks&&e.push({text:`Subtasks ${this.subtasks}`,view:t.html`<span class="meta-item subtasks">
+        </span>`}),this.repeats&&e.push({text:`Repeats`,view:t.html`<span class="meta-item repeats"><pastis-icon name="repeat" size="sm"></pastis-icon></span>`}),this.flagged&&e.push({text:`Flagged`,view:t.html`<span class="meta-item flagged"><pastis-icon name="flag" size="sm"></pastis-icon></span>`});let n=Math.trunc(Number(this.priority));n>=1&&n<=3&&e.push({text:`Priority ${et[n]}`,view:t.html`<span class="meta-item priority">${`!`.repeat(n)}</span>`}),this.subtasks&&e.push({text:`Subtasks ${this.subtasks}`,view:t.html`<span class="meta-item subtasks">
           <pastis-icon name="subtasks" size="sm"></pastis-icon><span>${this.subtasks}</span>
         </span>`});let r=Array.isArray(this.tags)?this.tags.filter(Boolean).map(String):[];return r.length&&e.push({text:`Tags: ${r.join(`, `)}`,view:t.html`<span class="meta-item tags">
           ${r.map(e=>t.html`<pastis-tag size="sm">${e}</pastis-tag>`)}
-        </span>`}),e}render(){let e=this._metaItems(),n=!!String(this.taskTitle??``).trim(),r=n?this.taskTitle:$e;return t.html`
+        </span>`}),e}render(){if(this.density===`compact`)return this._renderCompact();let e=this._metaItems(),n=!!String(this.taskTitle??``).trim(),r=n?this.taskTitle:W;return t.html`
       <div class="row" part="row">
         <button
           class="toggle"
@@ -6338,7 +6436,7 @@
             class="title"
             part="title"
             type="button"
-            aria-label=${n?t.nothing:$e}
+            aria-label=${n?t.nothing:W}
             aria-describedby=${e.length?`description`:t.nothing}
             ?disabled=${this.disabled}
             @click=${this._onOpen}
@@ -6359,7 +6457,53 @@
           ><pastis-icon name="grip"></pastis-icon></button>
         `:t.nothing}
       </div>
-    `}_onToggleKeydown(e){e.key===`Enter`&&e.preventDefault()}_onToggle(){if(this.disabled)return;let e=!this.done,t=new CustomEvent(`pastis-toggle`,{detail:{done:e},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)&&(this.done=e)}_onOpen(){this.disabled||this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-task-row`,et);var tt=class extends t.LitElement{static properties={label:{type:String}};static styles=t.css`
+    `}_renderCompact(){let e=this._metaItems(),n=!!String(this.taskTitle??``).trim(),r=n?this.taskTitle:W;return t.html`
+      <div class="row compact ${this._hasActions?`with-actions`:``}" part="row">
+        <button
+          class="toggle"
+          part="toggle"
+          type="button"
+          role="checkbox"
+          aria-checked=${this.done?`true`:`false`}
+          aria-label=${this.toggleLabel||`Complete ${r}`}
+          ?disabled=${this.disabled}
+          @click=${this._onToggle}
+          @keydown=${this._onToggleKeydown}
+        >
+          <span class="circle" part="circle">
+            ${this.done?t.html`<pastis-icon name="check"></pastis-icon>`:t.nothing}
+          </span>
+        </button>
+        <div class="body">
+          <button
+            class="title"
+            part="title"
+            type="button"
+            aria-label=${n?t.nothing:W}
+            aria-describedby=${e.length?`description`:t.nothing}
+            ?disabled=${this.disabled}
+            @click=${this._onOpen}
+          ><span class="title-text">${this.taskTitle}</span></button>
+          ${e.length?t.html`
+            <div class="meta ${this._hasMeta?`slotted`:``}" part="meta" aria-hidden="true">${e.map(e=>e.view)}</div>
+            <span id="description" hidden>${e.map(e=>e.text).join(`, `)}</span>
+          `:t.nothing}
+        </div>
+        <div class="trail">
+          <div class="columns" part="columns"><slot name="meta" @slotchange=${this._onMetaSlotChange}></slot></div>
+          <div class="actions" part="actions"><slot name="actions" @slotchange=${this._onActionsSlotChange}></slot></div>
+        </div>
+        ${this.reorderable?t.html`
+          <button
+            class="handle"
+            part="handle"
+            type="button"
+            aria-label=${this.reorderLabel||`Reorder ${r}`}
+            ?disabled=${this.disabled}
+          ><pastis-icon name="grip"></pastis-icon></button>
+        `:t.nothing}
+      </div>
+    `}_onMetaSlotChange(e){this._hasMeta=e.target.assignedElements().length>0}_onActionsSlotChange(e){this._hasActions=e.target.assignedElements().length>0}_onToggleKeydown(e){e.key===`Enter`&&e.preventDefault()}_onToggle(){if(this.disabled)return;let e=!this.done,t=new CustomEvent(`pastis-toggle`,{detail:{done:e},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)&&(this.done=e)}_onOpen(){this.disabled||this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-task-row`,tt);var nt=class extends t.LitElement{static properties={label:{type:String}};static styles=t.css`
     :host {
       position: fixed;
       inset-inline: 0;
@@ -6382,7 +6526,7 @@
     }
 
     ::slotted(*) { flex: 1 1 0; min-width: 0; }
-  `;render(){return t.html`<nav part="nav" aria-label=${this.label||t.nothing}><slot></slot></nav>`}},nt=class extends t.LitElement{static properties={href:{type:String},icon:{type:String},label:{type:String},current:{type:Boolean,reflect:!0},badge:{type:String},badgeLabel:{type:String,attribute:`badge-label`}};static styles=t.css`
+  `;render(){return t.html`<nav part="nav" aria-label=${this.label||t.nothing}><slot></slot></nav>`}},rt=class extends t.LitElement{static properties={href:{type:String},icon:{type:String},label:{type:String},current:{type:Boolean,reflect:!0},badge:{type:String},badgeLabel:{type:String,attribute:`badge-label`}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6461,7 +6605,7 @@
         </span>
         <span class="label" part="label">${this.label}</span>
       </a>
-    `}_onKeydown(e){e.key!==`Enter`||this.href||(e.preventDefault(),e.currentTarget.click())}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-tab-bar`,tt),customElements.define(`pastis-tab-bar-item`,nt);var rt=0,K={};function q(e,t){return t==null||t===``?``:(K[e]??=Object.assign(document.createElement(`input`),{type:e}),K[e].value=String(t),K[e].value)}function it(e){return Array.from(e.elements).find(e=>e.type===`submit`||e instanceof HTMLInputElement&&e.type===`image`)}var J=class extends t.LitElement{static formAssociated=!0;static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static inputType=`text`;static properties={label:{type:String},value:{type:String,reflect:!0},min:{type:String},max:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},name:{type:String},chips:{type:Array},_formDisabled:{state:!0}};static styles=t.css`
+    `}_onKeydown(e){e.key!==`Enter`||this.href||(e.preventDefault(),e.currentTarget.click())}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-tab-bar`,nt),customElements.define(`pastis-tab-bar-item`,rt);var it=0,G={};function K(e,t){return t==null||t===``?``:(G[e]??=Object.assign(document.createElement(`input`),{type:e}),G[e].value=String(t),G[e].value)}function at(e){return Array.from(e.elements).find(e=>e.type===`submit`||e instanceof HTMLInputElement&&e.type===`image`)}var q=class extends t.LitElement{static formAssociated=!0;static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static inputType=`text`;static properties={label:{type:String},value:{type:String,reflect:!0},min:{type:String},max:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},name:{type:String},chips:{type:Array},_formDisabled:{state:!0}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6611,7 +6755,7 @@
     @media (forced-colors: active) {
       .chip[aria-pressed="true"] { background: Highlight; color: HighlightText; border-color: Highlight; }
     }
-  `;constructor(){super(),this.value=``,this.disabled=!1,this.required=!1,this.chips=[],this._formDisabled=!1,this._id=`pastis-dt-field-${++rt}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``,this._input&&(this._input.value=this.value),this._syncForm()}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._input?this._input.focus(e):super.focus(e)}get _input(){return this.shadowRoot?.querySelector(`input`)??null}get _isDisabled(){return this.disabled||this._formDisabled}willUpdate(e){e.has(`value`)&&(this.value=q(this.constructor.inputType,this.value)),this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){this._syncForm()}_syncForm(){let e=this._input;e&&(this._internals.setFormValue(this.value,this.value),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e))}_inputAttributes(){return{}}render(){let e=this._id,n=!!this.error,r=this._isDisabled,i=Array.isArray(this.chips)?this.chips.filter(e=>e&&e.label):[],a=!this.required&&!r&&this.value!==``,o=this._inputAttributes();return t.html`
+  `;constructor(){super(),this.value=``,this.disabled=!1,this.required=!1,this.chips=[],this._formDisabled=!1,this._id=`pastis-dt-field-${++it}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``,this._input&&(this._input.value=this.value),this._syncForm()}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._input?this._input.focus(e):super.focus(e)}get _input(){return this.shadowRoot?.querySelector(`input`)??null}get _isDisabled(){return this.disabled||this._formDisabled}willUpdate(e){e.has(`value`)&&(this.value=K(this.constructor.inputType,this.value)),this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){this._syncForm()}_syncForm(){let e=this._input;e&&(this._internals.setFormValue(this.value,this.value),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e))}_inputAttributes(){return{}}render(){let e=this._id,n=!!this.error,r=this._isDisabled,i=Array.isArray(this.chips)?this.chips.filter(e=>e&&e.label):[],a=!this.required&&!r&&this.value!==``,o=this._inputAttributes();return t.html`
       <div class="field ${n?`has-error`:``}">
         ${this.label?t.html`
           <label for="${e}">
@@ -6656,7 +6800,7 @@
                 class="chip"
                 part="chip"
                 type="button"
-                aria-pressed=${q(this.constructor.inputType,e.value)===this.value?`true`:`false`}
+                aria-pressed=${K(this.constructor.inputType,e.value)===this.value?`true`:`false`}
                 ?disabled=${r}
                 @click=${()=>this._pick(e.value)}
               >${e.label}</button>
@@ -6664,7 +6808,7 @@
           </div>
         `:t.nothing}
       </div>
-    `}_emit(e){this.dispatchEvent(new CustomEvent(e,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onInput(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-input`)}_onChange(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-change`)}_setByUser(e){let t=q(this.constructor.inputType,e);return t===this.value&&(!this._input||this._input.value===t)?!1:(this.value=t,this._input&&(this._input.value=t),this._syncForm(),this._emit(`pastis-input`),this._emit(`pastis-change`),!0)}_pick(e){this._isDisabled||this._setByUser(e)}_onClear(){this._isDisabled||(this._setByUser(``),this._input?.focus())}_onKeydown(e){if(e.key!==`Enter`||e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||e.composedPath()[0]!==this._input)return;let t=this.form;t&&setTimeout(()=>{if(e.defaultPrevented)return;let n=it(t);n?!n.disabled&&!n.matches(`:disabled`)&&n.click():t.requestSubmit()})}},at=class extends J{static inputType=`date`};customElements.define(`pastis-date-field`,at);var ot=class extends J{static inputType=`time`;static properties={...J.properties,step:{type:Number}};_inputAttributes(){return{step:this.step}}};customElements.define(`pastis-time-field`,ot);var st=0,ct=class extends t.LitElement{static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:String},placeholder:{type:String},maxlength:{type:Number},submitLabel:{type:String,attribute:`submit-label`},tokensLabel:{type:String,attribute:`tokens-label`},tokens:{type:Array},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}_emit(e){this.dispatchEvent(new CustomEvent(e,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onInput(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-input`)}_onChange(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-change`)}_setByUser(e){let t=K(this.constructor.inputType,e);return t===this.value&&(!this._input||this._input.value===t)?!1:(this.value=t,this._input&&(this._input.value=t),this._syncForm(),this._emit(`pastis-input`),this._emit(`pastis-change`),!0)}_pick(e){this._isDisabled||this._setByUser(e)}_onClear(){this._isDisabled||(this._setByUser(``),this._input?.focus())}_onKeydown(e){if(e.key!==`Enter`||e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||e.composedPath()[0]!==this._input)return;let t=this.form;t&&setTimeout(()=>{if(e.defaultPrevented)return;let n=at(t);n?!n.disabled&&!n.matches(`:disabled`)&&n.click():t.requestSubmit()})}},ot=class extends q{static inputType=`date`};customElements.define(`pastis-date-field`,ot);var st=class extends q{static inputType=`time`;static properties={...q.properties,step:{type:Number}};_inputAttributes(){return{step:this.step}}};customElements.define(`pastis-time-field`,st);var ct=0,lt=class extends t.LitElement{static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:String},placeholder:{type:String},maxlength:{type:Number},submitLabel:{type:String,attribute:`submit-label`},tokensLabel:{type:String,attribute:`tokens-label`},tokens:{type:Array},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6795,7 +6939,7 @@
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.value=``,this.tokens=[],this.disabled=!1,this._id=`pastis-quick-add-${++st}`}focus(e){let t=this.shadowRoot?.querySelector(`input`);t?t.focus(e):super.focus(e)}_tokens(){return Array.isArray(this.tokens)?this.tokens.filter(e=>e&&e.label):[]}render(){let e=this._id,n=this._tokens(),r=this.tokensLabel||`Will set`;return t.html`
+  `;constructor(){super(),this.value=``,this.tokens=[],this.disabled=!1,this._id=`pastis-quick-add-${++ct}`}focus(e){let t=this.shadowRoot?.querySelector(`input`);t?t.focus(e):super.focus(e)}_tokens(){return Array.isArray(this.tokens)?this.tokens.filter(e=>e&&e.label):[]}render(){let e=this._id,n=this._tokens(),r=this.tokensLabel||`Will set`;return t.html`
       <form @submit=${this._onSubmit} novalidate>
         ${this.label?t.html`<label for="${e}">${this.label}</label>`:t.nothing}
         <div class="control">
@@ -6841,7 +6985,7 @@
           </ul>
         `:t.nothing}
       </form>
-    `}_onInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onSubmit(e){e.preventDefault(),!(this.disabled||(this.value??``).trim()===``)&&this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_remove(e){this.dispatchEvent(new CustomEvent(`pastis-token-remove`,{detail:{id:e},bubbles:!0,composed:!0})),this.focus()}};customElements.define(`pastis-quick-add`,ct);var lt=0,ut=[[``,`Never`],[`daily`,`Daily`],[`weekly`,`Weekly`],[`monthly`,`Monthly`],[`yearly`,`Yearly`]],dt={daily:[`day`,`days`],weekly:[`week`,`weeks`],monthly:[`month`,`months`],yearly:[`year`,`years`]},ft=[`MO`,`TU`,`WE`,`TH`,`FR`,`SA`,`SU`],Y=99;function X(e){if(!e||!dt[e.freq])return null;let t=Math.min(Y,Math.max(1,Math.trunc(Number(e.interval))||1)),n=ft.filter(t=>Array.isArray(e.byDay)&&e.byDay.includes(t));return{freq:e.freq,interval:t,byDay:n,mode:e.mode===`completion`?`completion`:`schedule`,until:typeof e.until==`string`&&/^\d{4}-\d{2}-\d{2}$/.test(e.until)?e.until:null}}var pt=class extends t.LitElement{static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:Object},weekdayLabels:{type:Array,attribute:`weekday-labels`},helper:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}_onInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onSubmit(e){e.preventDefault(),!(this.disabled||(this.value??``).trim()===``)&&this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_remove(e){this.dispatchEvent(new CustomEvent(`pastis-token-remove`,{detail:{id:e},bubbles:!0,composed:!0})),this.focus()}};customElements.define(`pastis-quick-add`,lt);var ut=0,dt=[[``,`Never`],[`daily`,`Daily`],[`weekly`,`Weekly`],[`monthly`,`Monthly`],[`yearly`,`Yearly`]],ft={daily:[`day`,`days`],weekly:[`week`,`weeks`],monthly:[`month`,`months`],yearly:[`year`,`years`]},pt=[`MO`,`TU`,`WE`,`TH`,`FR`,`SA`,`SU`],J=99;function Y(e){if(!e||!ft[e.freq])return null;let t=Math.min(J,Math.max(1,Math.trunc(Number(e.interval))||1)),n=pt.filter(t=>Array.isArray(e.byDay)&&e.byDay.includes(t));return{freq:e.freq,interval:t,byDay:n,mode:e.mode===`completion`?`completion`:`schedule`,until:typeof e.until==`string`&&/^\d{4}-\d{2}-\d{2}$/.test(e.until)?e.until:null}}var mt=class extends t.LitElement{static shadowRootOptions={...t.LitElement.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:Object},weekdayLabels:{type:Array,attribute:`weekday-labels`},helper:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6965,7 +7109,7 @@
     @media (forced-colors: active) {
       .choice input:checked + span { background: Highlight; color: HighlightText; border-color: Highlight; }
     }
-  `;constructor(){super(),this.value=null,this.disabled=!1,this._id=`pastis-recurrence-${++lt}`}_labels(){return Array.isArray(this.weekdayLabels)&&this.weekdayLabels.length===7?this.weekdayLabels:[`Mon`,`Tue`,`Wed`,`Thu`,`Fri`,`Sat`,`Sun`]}_choice({type:e,name:n,checked:r,label:i,onChange:a,value:o=``}){return t.html`
+  `;constructor(){super(),this.value=null,this.disabled=!1,this._id=`pastis-recurrence-${++ut}`}_labels(){return Array.isArray(this.weekdayLabels)&&this.weekdayLabels.length===7?this.weekdayLabels:[`Mon`,`Tue`,`Wed`,`Thu`,`Fri`,`Sat`,`Sun`]}_choice({type:e,name:n,checked:r,label:i,onChange:a,value:o=``}){return t.html`
       <label class="choice">
         <input
           type=${e}
@@ -6976,12 +7120,12 @@
           @change=${a}
         /><span>${i}</span>
       </label>
-    `}render(){let e=this._id,n=X(this.value),r=n?.freq??``,i=n?dt[n.freq]:null,a=this._labels();return t.html`
+    `}render(){let e=this._id,n=Y(this.value),r=n?.freq??``,i=n?ft[n.freq]:null,a=this._labels();return t.html`
       <div class="picker">
         <!-- aria-label on each fieldset: Chrome would name it by the uppercased legend -->
         <fieldset part="group" aria-label=${this.label||`Repeat`}>
           <legend>${this.label||`Repeat`}</legend>
-          ${ut.map(([t,n])=>this._choice({type:`radio`,name:`${e}-freq`,value:t,checked:r===t,label:n,onChange:()=>this._setFreq(t)}))}
+          ${dt.map(([t,n])=>this._choice({type:`radio`,name:`${e}-freq`,value:t,checked:r===t,label:n,onChange:()=>this._setFreq(t)}))}
         </fieldset>
         ${n?t.html`
           <div class="every">
@@ -6990,7 +7134,7 @@
               id="${e}-interval"
               type="number"
               min="1"
-              max="${Y}"
+              max="${J}"
               inputmode="numeric"
               .value=${String(n.interval)}
               aria-describedby="${e}-unit"
@@ -7007,7 +7151,7 @@
           ${n.freq===`weekly`&&n.mode===`schedule`?t.html`
             <fieldset part="group" aria-label="On">
               <legend>On</legend>
-              ${ft.map((t,r)=>this._choice({type:`checkbox`,name:`${e}-day`,value:t,checked:n.byDay.includes(t),label:a[r],onChange:e=>this._toggleDay(t,e.target.checked)}))}
+              ${pt.map((t,r)=>this._choice({type:`checkbox`,name:`${e}-day`,value:t,checked:n.byDay.includes(t),label:a[r],onChange:e=>this._toggleDay(t,e.target.checked)}))}
             </fieldset>
           `:t.nothing}
           <fieldset part="group" aria-label="Ends">
@@ -7027,7 +7171,7 @@
         `:t.nothing}
         ${this.helper?t.html`<p class="helper">${this.helper}</p>`:t.nothing}
       </div>
-    `}_emit(e){this.value=e,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:e},bubbles:!0,composed:!0}))}_update(e){let t=X(this.value);t&&this._emit(X({...t,...e}))}_setFreq(e){if(!e){this._emit(null);return}let t=X(this.value);this._emit(X({interval:1,byDay:[],mode:`schedule`,until:null,...t,freq:e,...e===`weekly`?{}:{byDay:[]}}))}_onInterval(e){let t=Math.min(Y,Math.max(1,Math.trunc(Number(e.target.value))||1));e.target.value=String(t),this._update({interval:t})}_toggleDay(e,t){let n=X(this.value);if(!n)return;let r=t?[...n.byDay,e]:n.byDay.filter(t=>t!==e);this._update({byDay:r})}_endOn(){let e=new Date;e.setDate(e.getDate()+28);let t=`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}-${String(e.getDate()).padStart(2,`0`)}`;this._update({until:t})}_onUntil(e){if(!e.target.value){e.target.value=X(this.value)?.until??``;return}this._update({until:e.target.value})}};customElements.define(`pastis-recurrence-picker`,pt);var Z=null;function mt(){return Z?.isConnected?Z:(Z=document.createElement(`div`),Z.setAttribute(`aria-live`,`polite`),Z.setAttribute(`aria-atomic`,`true`),Z.dataset.pastisAnnouncer=``,Object.assign(Z.style,{position:`absolute`,width:`1px`,height:`1px`,padding:`0`,margin:`-1px`,overflow:`hidden`,clip:`rect(0, 0, 0, 0)`,whiteSpace:`nowrap`,border:`0`}),document.body.append(Z),Z)}function Q(e){let t=mt();t.textContent=``,setTimeout(()=>{t.textContent=e},50)}function $(e){return e.getAttribute(`data-sortable-label`)||e.getAttribute(`aria-label`)||e.taskTitle||e.textContent.trim().replace(/\s+/g,` `)||`Item`}var ht=6,gt=class extends t.LitElement{static properties={disabled:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}_emit(e){this.value=e,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:e},bubbles:!0,composed:!0}))}_update(e){let t=Y(this.value);t&&this._emit(Y({...t,...e}))}_setFreq(e){if(!e){this._emit(null);return}let t=Y(this.value);this._emit(Y({interval:1,byDay:[],mode:`schedule`,until:null,...t,freq:e,...e===`weekly`?{}:{byDay:[]}}))}_onInterval(e){let t=Math.min(J,Math.max(1,Math.trunc(Number(e.target.value))||1));e.target.value=String(t),this._update({interval:t})}_toggleDay(e,t){let n=Y(this.value);if(!n)return;let r=t?[...n.byDay,e]:n.byDay.filter(t=>t!==e);this._update({byDay:r})}_endOn(){let e=new Date;e.setDate(e.getDate()+28);let t=`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}-${String(e.getDate()).padStart(2,`0`)}`;this._update({until:t})}_onUntil(e){if(!e.target.value){e.target.value=Y(this.value)?.until??``;return}this._update({until:e.target.value})}};customElements.define(`pastis-recurrence-picker`,mt);var X=null;function ht(){return X?.isConnected?X:(X=document.createElement(`div`),X.setAttribute(`aria-live`,`polite`),X.setAttribute(`aria-atomic`,`true`),X.dataset.pastisAnnouncer=``,Object.assign(X.style,{position:`absolute`,width:`1px`,height:`1px`,padding:`0`,margin:`-1px`,overflow:`hidden`,clip:`rect(0, 0, 0, 0)`,whiteSpace:`nowrap`,border:`0`}),document.body.append(X),X)}function Z(e){let t=ht();t.textContent=``,setTimeout(()=>{t.textContent=e},50)}function Q(e){return e.getAttribute(`data-sortable-label`)||e.getAttribute(`aria-label`)||e.taskTitle||e.textContent.trim().replace(/\s+/g,` `)||`Item`}var gt=6,_t=class extends t.LitElement{static properties={disabled:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; position: relative; }
     :host([hidden]) { display: none; }
 
@@ -7058,7 +7202,7 @@
   `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this._endPress()}render(){return t.html`
       <slot></slot>
       <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
-    `}_items(){return[...this.children].filter(e=>!e.hidden)}_childOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));return n===-1||t[n].disabled?null:t.slice(n).find(e=>e instanceof Element&&e.parentElement===this)??null}_move(e,t){let n=this._items();e===t||e<0||t<0||t>=n.length||(this.dispatchEvent(new CustomEvent(`pastis-reorder`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),Q(`${$(n[e])}, ${t+1} of ${n.length}`))}_setPicked(e,{announced:t=!0}={}){let n=this._picked;n?.removeAttribute(`data-picked`),this._picked=e,e?.setAttribute(`data-picked`,``),t&&(e?Q(`${$(e)} picked up. Choose its place with another handle, or press Escape.`):n&&Q(`${$(n)} put back`))}_onClick(e){if(this.disabled)return;let t=this._childOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._items(),r=n.indexOf(this._picked),i=n.indexOf(t);this._setPicked(null,{announced:r===i}),r!==i&&this._move(r,i)}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(e.key!==`ArrowUp`&&e.key!==`ArrowDown`)return;let t=this._childOfHandle(e);if(!t)return;e.preventDefault();let n=e.composedPath()[0],r=this._items().indexOf(t);this._move(r,r+(e.key===`ArrowUp`?-1:1)),requestAnimationFrame(()=>{n instanceof HTMLElement&&n.isConnected&&!n.matches(`:focus`)&&n.focus()})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._childOfHandle(e);t&&(this._press={child:t,pointerId:e.pointerId,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let n=e.clientY-t.startY;if(!t.dragging){if(Math.abs(n)<ht)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null,{announced:!1}),t.child.setAttribute(`data-dragging`,``)}e.preventDefault(),t.child.style.transform=`translateY(${n}px)`,t.to=this._dropIndex(e.clientY,t.child),this._showIndicator(t.to,t.child)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{child:n,dragging:r,to:i}=t;this._endPress(),r&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||i===null)&&this._move(this._items().indexOf(n),i))}_endPress(){let e=this._press;if(e){this._press=null,e.child.removeAttribute(`data-dragging`),e.child.style.transform=``,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_dropIndex(e,t){let n=this._items().filter(e=>e!==t),r=0;for(let t of n){let n=t.getBoundingClientRect();e>n.top+n.height/2&&r++}return r}_showIndicator(e,t){let n=this.shadowRoot?.querySelector(`.indicator`);if(!n)return;let r=this._items().filter(e=>e!==t),i=this.getBoundingClientRect(),a=e<r.length?r[e].getBoundingClientRect().top:r.at(-1)?.getBoundingClientRect().bottom??i.top;n.style.top=`${a-i.top}px`,n.removeAttribute(`hidden`)}};customElements.define(`pastis-sortable`,gt);var _t=class extends t.LitElement{static properties={label:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}_items(){return[...this.children].filter(e=>!e.hidden)}_childOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));return n===-1||t[n].disabled?null:t.slice(n).find(e=>e instanceof Element&&e.parentElement===this)??null}_move(e,t){let n=this._items();e===t||e<0||t<0||t>=n.length||(this.dispatchEvent(new CustomEvent(`pastis-reorder`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),Z(`${Q(n[e])}, ${t+1} of ${n.length}`))}_setPicked(e,{announced:t=!0}={}){let n=this._picked;n?.removeAttribute(`data-picked`),this._picked=e,e?.setAttribute(`data-picked`,``),t&&(e?Z(`${Q(e)} picked up. Choose its place with another handle, or press Escape.`):n&&Z(`${Q(n)} put back`))}_onClick(e){if(this.disabled)return;let t=this._childOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._items(),r=n.indexOf(this._picked),i=n.indexOf(t);this._setPicked(null,{announced:r===i}),r!==i&&this._move(r,i)}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(e.key!==`ArrowUp`&&e.key!==`ArrowDown`)return;let t=this._childOfHandle(e);if(!t)return;e.preventDefault();let n=e.composedPath()[0],r=this._items().indexOf(t);this._move(r,r+(e.key===`ArrowUp`?-1:1)),requestAnimationFrame(()=>{n instanceof HTMLElement&&n.isConnected&&!n.matches(`:focus`)&&n.focus()})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._childOfHandle(e);t&&(this._press={child:t,pointerId:e.pointerId,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let n=e.clientY-t.startY;if(!t.dragging){if(Math.abs(n)<gt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null,{announced:!1}),t.child.setAttribute(`data-dragging`,``)}e.preventDefault(),t.child.style.transform=`translateY(${n}px)`,t.to=this._dropIndex(e.clientY,t.child),this._showIndicator(t.to,t.child)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{child:n,dragging:r,to:i}=t;this._endPress(),r&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||i===null)&&this._move(this._items().indexOf(n),i))}_endPress(){let e=this._press;if(e){this._press=null,e.child.removeAttribute(`data-dragging`),e.child.style.transform=``,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_dropIndex(e,t){let n=this._items().filter(e=>e!==t),r=0;for(let t of n){let n=t.getBoundingClientRect();e>n.top+n.height/2&&r++}return r}_showIndicator(e,t){let n=this.shadowRoot?.querySelector(`.indicator`);if(!n)return;let r=this._items().filter(e=>e!==t),i=this.getBoundingClientRect(),a=e<r.length?r[e].getBoundingClientRect().top:r.at(-1)?.getBoundingClientRect().bottom??i.top;n.style.top=`${a-i.top}px`,n.removeAttribute(`hidden`)}};customElements.define(`pastis-sortable`,_t);var vt=class extends t.LitElement{static properties={label:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -7135,7 +7279,7 @@
         </div>
         ${e?t.html`<p class="error-text" role="alert">${this.error}</p>`:this.helper?t.html`<p class="helper-text">${this.helper}</p>`:t.nothing}
       </div>
-    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};customElements.define(`pastis-editor`,_t);var vt=class extends t.LitElement{static properties={value:{type:String,reflect:!0},label:{type:String},dropTarget:{type:Boolean,reflect:!0,attribute:`drop-target`},over:{type:Boolean,reflect:!0},_count:{state:!0}};static styles=t.css`
+    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};customElements.define(`pastis-editor`,vt);var yt=class extends t.LitElement{static properties={value:{type:String,reflect:!0},label:{type:String},dropTarget:{type:Boolean,reflect:!0,attribute:`drop-target`},over:{type:Boolean,reflect:!0},_count:{state:!0}};static styles=t.css`
     :host {
       display: flex;
       flex-direction: column;
@@ -7209,7 +7353,7 @@
       <div class="cards" part="cards" role="list" aria-label="${e}, ${this._count} ${this._count===1?`item`:`items`}">
         <slot @slotchange=${this._onSlotChange}></slot>
       </div>
-    `}_onSlotChange(e){this._count=e.target.assignedElements().length}_moveHere(){this.dispatchEvent(new CustomEvent(`pastis-kanban-move-here`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-kanban-column`,vt);var yt=6,bt=class extends t.LitElement{static properties={disabled:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}_onSlotChange(e){this._count=e.target.assignedElements().length}_moveHere(){this.dispatchEvent(new CustomEvent(`pastis-kanban-move-here`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-kanban-column`,yt);var bt=6,xt=class extends t.LitElement{static properties={disabled:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; position: relative; }
     :host([hidden]) { display: none; }
 
@@ -7238,7 +7382,7 @@
   `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this),this._onMoveHere=this._onMoveHere.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown),this.addEventListener(`pastis-kanban-move-here`,this._onMoveHere)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this.removeEventListener(`pastis-kanban-move-here`,this._onMoveHere),this._endPress()}render(){return t.html`
       <div class="columns"><slot></slot></div>
       <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
-    `}_columns(){return[...this.children].filter(e=>e.localName===`pastis-kanban-column`&&!e.hidden)}_cards(e){return[...e.children].filter(e=>!e.hidden)}_cardOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));if(n===-1||t[n].disabled)return null;let r=t.slice(n),i=r.find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`&&e.parentElement===this);if(!i)return null;let a=r.find(e=>e instanceof Element&&e.parentElement===i);return a?{card:a,column:i}:null}_where(e,t){return{column:t.value,index:this._cards(t).indexOf(e)}}_move(e,t){if(e.column===t.column&&e.index===t.index)return;let n=this._columns().find(t=>t.value===e.column),r=this._columns().find(e=>e.value===t.column),i=n?this._cards(n)[e.index]:null;if(this.dispatchEvent(new CustomEvent(`pastis-kanban-move`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),i&&r){let e=this._cards(r).length+(n===r?0:1);Q(`${$(i)}, ${r.label||r.value}, ${t.index+1} of ${e}`)}}_setPicked(e){this._picked&&this._picked.card.removeAttribute(`data-picked`),e&&Q(`${$(e.card)} picked up. Choose its place with another handle or a column's Move here, or press Escape.`),this._picked=e,e&&e.card.setAttribute(`data-picked`,``);for(let t of this._columns())t.dropTarget=!!e&&t!==e.column}_onClick(e){if(this.disabled)return;let t=this._cardOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._picked;if(this._setPicked(null),n.card===t.card)return;let r=this._where(n.card,n.column),i=this._where(t.card,t.column);this._move(r,i)}_onMoveHere(e){if(this.disabled||!this._picked)return;let t=e.composedPath().find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`);if(!t)return;let n=this._picked;this._setPicked(null),this._move(this._where(n.card,n.column),{column:t.value,index:this._cards(t).length})}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key))return;let t=this._cardOfHandle(e);if(!t)return;e.preventDefault();let n=this._where(t.card,t.column);if(e.key===`ArrowUp`||e.key===`ArrowDown`){let r=n.index+(e.key===`ArrowUp`?-1:1);if(r<0||r>=this._cards(t.column).length)return;this._move(n,{column:n.column,index:r});return}let r=this._columns(),i=r[r.indexOf(t.column)+(e.key===`ArrowLeft`?-1:1)];i&&this._move(n,{column:i.value,index:this._cards(i).length})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._cardOfHandle(e);t&&(this._press={...t,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;if(!t.dragging){if(Math.hypot(e.clientX-t.startX,e.clientY-t.startY)<yt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null),t.card.setAttribute(`data-dragging`,``)}e.preventDefault();let n=this._columnAt(e.clientX);for(let e of this._columns())e.over=e===n;if(!n){t.to=null,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``);return}let r=this._dropIndex(n,e.clientY,t.card);t.to={column:n.value,index:r},this._showIndicator(n,r,t.card)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{card:n,column:r,dragging:i,to:a}=t;this._endPress(),i&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||!a)&&this._move(this._where(n,r),a))}_endPress(){let e=this._press;if(e){this._press=null,e.card.removeAttribute(`data-dragging`);for(let e of this._columns())e.over=!1;this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_columnAt(e){return this._columns().find(t=>{let n=t.getBoundingClientRect();return e>=n.left&&e<=n.right})??null}_dropIndex(e,t,n){let r=0;for(let i of this._cards(e)){if(i===n)continue;let e=i.getBoundingClientRect();t>e.top+e.height/2&&r++}return r}_showIndicator(e,t,n){let r=this.shadowRoot?.querySelector(`.indicator`);if(!r)return;let i=this._cards(e).filter(e=>e!==n),a=this.getBoundingClientRect(),o=e.getBoundingClientRect(),s=t<i.length?i[t].getBoundingClientRect().top:i.at(-1)?.getBoundingClientRect().bottom??o.top+o.height/2;r.style.top=`${s-a.top}px`,r.style.left=`${o.left-a.left+8}px`,r.style.width=`${o.width-16}px`,r.removeAttribute(`hidden`)}};customElements.define(`pastis-kanban-board`,bt);var xt=0,St=class extends t.LitElement{static formAssociated=!0;static properties={label:{type:String},value:{type:String},options:{type:Array,attribute:!1},required:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String},error:{type:String},name:{type:String,reflect:!0},ariaLabel:{type:String,attribute:`aria-label`},_formDisabled:{state:!0}};static styles=t.css`
+    `}_columns(){return[...this.children].filter(e=>e.localName===`pastis-kanban-column`&&!e.hidden)}_cards(e){return[...e.children].filter(e=>!e.hidden)}_cardOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));if(n===-1||t[n].disabled)return null;let r=t.slice(n),i=r.find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`&&e.parentElement===this);if(!i)return null;let a=r.find(e=>e instanceof Element&&e.parentElement===i);return a?{card:a,column:i}:null}_where(e,t){return{column:t.value,index:this._cards(t).indexOf(e)}}_move(e,t){if(e.column===t.column&&e.index===t.index)return;let n=this._columns().find(t=>t.value===e.column),r=this._columns().find(e=>e.value===t.column),i=n?this._cards(n)[e.index]:null;if(this.dispatchEvent(new CustomEvent(`pastis-kanban-move`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),i&&r){let e=this._cards(r).length+(n===r?0:1);Z(`${Q(i)}, ${r.label||r.value}, ${t.index+1} of ${e}`)}}_setPicked(e){this._picked&&this._picked.card.removeAttribute(`data-picked`),e&&Z(`${Q(e.card)} picked up. Choose its place with another handle or a column's Move here, or press Escape.`),this._picked=e,e&&e.card.setAttribute(`data-picked`,``);for(let t of this._columns())t.dropTarget=!!e&&t!==e.column}_onClick(e){if(this.disabled)return;let t=this._cardOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._picked;if(this._setPicked(null),n.card===t.card)return;let r=this._where(n.card,n.column),i=this._where(t.card,t.column);this._move(r,i)}_onMoveHere(e){if(this.disabled||!this._picked)return;let t=e.composedPath().find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`);if(!t)return;let n=this._picked;this._setPicked(null),this._move(this._where(n.card,n.column),{column:t.value,index:this._cards(t).length})}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key))return;let t=this._cardOfHandle(e);if(!t)return;e.preventDefault();let n=this._where(t.card,t.column);if(e.key===`ArrowUp`||e.key===`ArrowDown`){let r=n.index+(e.key===`ArrowUp`?-1:1);if(r<0||r>=this._cards(t.column).length)return;this._move(n,{column:n.column,index:r});return}let r=this._columns(),i=r[r.indexOf(t.column)+(e.key===`ArrowLeft`?-1:1)];i&&this._move(n,{column:i.value,index:this._cards(i).length})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._cardOfHandle(e);t&&(this._press={...t,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;if(!t.dragging){if(Math.hypot(e.clientX-t.startX,e.clientY-t.startY)<bt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null),t.card.setAttribute(`data-dragging`,``)}e.preventDefault();let n=this._columnAt(e.clientX);for(let e of this._columns())e.over=e===n;if(!n){t.to=null,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``);return}let r=this._dropIndex(n,e.clientY,t.card);t.to={column:n.value,index:r},this._showIndicator(n,r,t.card)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{card:n,column:r,dragging:i,to:a}=t;this._endPress(),i&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||!a)&&this._move(this._where(n,r),a))}_endPress(){let e=this._press;if(e){this._press=null,e.card.removeAttribute(`data-dragging`);for(let e of this._columns())e.over=!1;this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_columnAt(e){return this._columns().find(t=>{let n=t.getBoundingClientRect();return e>=n.left&&e<=n.right})??null}_dropIndex(e,t,n){let r=0;for(let i of this._cards(e)){if(i===n)continue;let e=i.getBoundingClientRect();t>e.top+e.height/2&&r++}return r}_showIndicator(e,t,n){let r=this.shadowRoot?.querySelector(`.indicator`);if(!r)return;let i=this._cards(e).filter(e=>e!==n),a=this.getBoundingClientRect(),o=e.getBoundingClientRect(),s=t<i.length?i[t].getBoundingClientRect().top:i.at(-1)?.getBoundingClientRect().bottom??o.top+o.height/2;r.style.top=`${s-a.top}px`,r.style.left=`${o.left-a.left+8}px`,r.style.width=`${o.width-16}px`,r.removeAttribute(`hidden`)}};customElements.define(`pastis-kanban-board`,xt);var St=0,Ct=class extends t.LitElement{static formAssociated=!0;static properties={label:{type:String},value:{type:String},options:{type:Array,attribute:!1},required:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String},error:{type:String},name:{type:String,reflect:!0},ariaLabel:{type:String,attribute:`aria-label`},_formDisabled:{state:!0}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -7298,7 +7442,7 @@
     }
     .helper { color: var(--text-tertiary, #909498); }
     .error { color: var(--status-error, #f0505e); }
-  `;constructor(){super(),this.label=``,this.value=``,this.options=[],this.required=!1,this.disabled=!1,this._formDisabled=!1,this._id=`pastis-select-${++xt}`,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this.shadowRoot?.querySelector(`select`)?.focus(e)}willUpdate(e){this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){let e=this.shadowRoot.querySelector(`select`);e.value!==(this.value??``)&&(e.value=this.value??``),this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid||e.disabled?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage||`Choose an option`,e)}render(){let e=this.error?`${this._id}-error`:this.helper?`${this._id}-helper`:null;return t.html`
+  `;constructor(){super(),this.label=``,this.value=``,this.options=[],this.required=!1,this.disabled=!1,this._formDisabled=!1,this._id=`pastis-select-${++St}`,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this.shadowRoot?.querySelector(`select`)?.focus(e)}willUpdate(e){this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){let e=this.shadowRoot.querySelector(`select`);e.value!==(this.value??``)&&(e.value=this.value??``),this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid||e.disabled?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage||`Choose an option`,e)}render(){let e=this.error?`${this._id}-error`:this.helper?`${this._id}-helper`:null;return t.html`
       <div class="field ${this.error?`has-error`:``}">
         ${this.label?t.html`<label for=${this._id}>${this.label}</label>`:``}
         <div class="wrap">
@@ -7325,7 +7469,7 @@
         </div>
         ${this.error?t.html`<p class="error" id="${this._id}-error" role="alert">${this.error}</p>`:this.helper?t.html`<p class="helper" id="${this._id}-helper">${this.helper}</p>`:``}
       </div>
-    `}_onChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-select`,St);var Ct=class extends t.LitElement{static properties={label:{type:String},labelHidden:{type:Boolean,attribute:`label-hidden`,reflect:!0},value:{type:String},options:{type:Array,attribute:!1},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
+    `}_onChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-select`,Ct);var wt=class extends t.LitElement{static properties={label:{type:String},labelHidden:{type:Boolean,attribute:`label-hidden`,reflect:!0},value:{type:String},options:{type:Array,attribute:!1},disabled:{type:Boolean,reflect:!0}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -7407,7 +7551,7 @@
           >${e.label}</button>
         `)}
       </div>
-    `}_choose(e,{focus:t=!1}={}){let n=this.options[e];!n||this.disabled||(t&&this._buttons()[e]?.focus(),n.value!==this.value&&this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:n.value},bubbles:!0,composed:!0,cancelable:!0}))&&(this.value=n.value))}_onKeydown(e){let t=this._buttons(),n=t.indexOf(e.composedPath()[0]);if(n===-1)return;let r=t.length-1,i=getComputedStyle(this).direction===`rtl`,a={ArrowRight:i?n-1:n+1,ArrowLeft:i?n+1:n-1,ArrowDown:n+1,ArrowUp:n-1,Home:0,End:r}[e.key];a!==void 0&&(e.preventDefault(),this._choose((a+t.length)%t.length,{focus:!0}))}};customElements.define(`pastis-segmented-control`,Ct);var wt=class extends t.LitElement{static styles=t.css`
+    `}_choose(e,{focus:t=!1}={}){let n=this.options[e];!n||this.disabled||(t&&this._buttons()[e]?.focus(),n.value!==this.value&&this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:n.value},bubbles:!0,composed:!0,cancelable:!0}))&&(this.value=n.value))}_onKeydown(e){let t=this._buttons(),n=t.indexOf(e.composedPath()[0]);if(n===-1)return;let r=t.length-1,i=getComputedStyle(this).direction===`rtl`,a={ArrowRight:i?n-1:n+1,ArrowLeft:i?n+1:n-1,ArrowDown:n+1,ArrowUp:n-1,Home:0,End:r}[e.key];a!==void 0&&(e.preventDefault(),this._choose((a+t.length)%t.length,{focus:!0}))}};customElements.define(`pastis-segmented-control`,wt);var Tt=class extends t.LitElement{static styles=t.css`
     :host {
       display: block;
       background: var(--bg-card, #1e1e1e);
@@ -7416,7 +7560,7 @@
       overflow: hidden;
     }
     :host([hidden]) { display: none; }
-  `;render(){return t.html`<slot></slot>`}},Tt=class extends t.LitElement{static properties={label:{type:String},href:{type:String},icon:{type:String},marker:{type:String},count:{type:Number},meta:{type:String},linkLabel:{type:String,attribute:`link-label`}};static styles=t.css`
+  `;render(){return t.html`<slot></slot>`}},$=class extends t.LitElement{static properties={label:{type:String},href:{type:String},icon:{type:String},marker:{type:String},count:{type:Number},meta:{type:String},linkLabel:{type:String,attribute:`link-label`}};static styles=t.css`
     :host { display: block; }
     :host([hidden]) { display: none; }
     :host(:not(:last-child)) .row { border-bottom: var(--border-width, 1px) solid var(--border-subtle, #383c44); }
@@ -7468,4 +7612,341 @@
         ${this.meta?t.html`<span class="meta">${this.meta}</span>`:``}
       </span>
       ${this.count==null?``:t.html`<span class="count" aria-hidden=${this.linkLabel?`true`:t.nothing}>${this.count}</span>`}
-    `;return t.html`<div class="wrap">${this.href?t.html`<a class="row" part="row" href=${this.href} aria-label=${this.linkLabel||t.nothing} @click=${this._onClick}>${e}</a>`:t.html`<div class="row" part="row">${e}</div>`}<slot name="trailing"></slot></div>`}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-list-group`,wt),customElements.define(`pastis-list-row`,Tt),e.PastisAccordion=xe,e.PastisAlert=F,e.PastisAvatar=N,e.PastisBadge=M,e.PastisBreadcrumb=Se,e.PastisButton=r,e.PastisButtonSplit=i,e.PastisCard=P,e.PastisCarousel=ze,e.PastisCheckbox=l,e.PastisCodeBlock=Pe,e.PastisCookieBanner=Ae,e.PastisDateField=at,e.PastisDivider=Ee,e.PastisDrawer=Oe,e.PastisDropdown=U,e.PastisEditor=_t,e.PastisEmptyState=Fe,e.PastisFileUpload=ke,e.PastisFilterBar=Le,e.PastisFilterChip=Ie,e.PastisFooter=Ue,e.PastisHero=De,e.PastisIcon=Ze,e.PastisInput=c,e.PastisKanbanBoard=bt,e.PastisKanbanColumn=vt,e.PastisListGroup=wt,e.PastisListRow=Tt,e.PastisModal=R,e.PastisNav=We,e.PastisPagination=Ce,e.PastisProgress=we,e.PastisProjectCard=Ge,e.PastisQuickAdd=ct,e.PastisRadio=je,e.PastisRecurrencePicker=pt,e.PastisSearch=W,e.PastisSection=He,e.PastisSegmentedControl=Ct,e.PastisSelect=St,e.PastisShelf=Ye,e.PastisSkeleton=V,e.PastisSortable=gt,e.PastisSpecTable=Je,e.PastisSpinner=B,e.PastisStatCard=Me,e.PastisStatement=Ke,e.PastisTabBar=tt,e.PastisTabBarItem=nt,e.PastisTable=Ne,e.PastisTabs=be,e.PastisTag=Te,e.PastisTaskRow=et,e.PastisTestimonial=Ve,e.PastisThemeToggle=Re,e.PastisTimeField=ot,e.PastisTimeline=Be,e.PastisToast=z,e.PastisToggle=j,e.PastisTokenSwatch=qe,e.PastisTooltip=H,e.iconNames=Xe,e.icons=G});
+    `;return t.html`<div class="wrap">${this.href?t.html`<a class="row" part="row" href=${this.href} aria-label=${this.linkLabel||t.nothing} @click=${this._onClick}>${e}</a>`:t.html`<div class="row" part="row">${e}</div>`}<slot name="trailing"></slot></div>`}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-list-group`,Tt),customElements.define(`pastis-list-row`,$);var Et=380,Dt=.6,Ot=16,kt=64,At=class extends t.LitElement{static properties={sidebarCollapsed:{type:Boolean,reflect:!0,attribute:`sidebar-collapsed`},detailOpen:{type:Boolean,reflect:!0,attribute:`detail-open`},detailWidth:{type:Number,attribute:`detail-width`},breakpoint:{type:Number},sidebarLabel:{type:String,attribute:`sidebar-label`},detailLabel:{type:String,attribute:`detail-label`},splitterLabel:{type:String,attribute:`splitter-label`},mode:{type:String,reflect:!0},_width:{state:!0}};static styles=t.css`
+    :host {
+      display: block;
+      box-sizing: border-box;
+      height: var(--pastis-app-layout-height, 100dvh);
+      color: var(--text-primary, #f4eee3);
+    }
+    :host([hidden]) { display: none; }
+    :host([mode="narrow"]) { height: auto; }
+
+    .layout {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      height: 100%;
+      min-height: 0;
+    }
+    :host([mode="narrow"]) .layout { display: block; height: auto; }
+
+    nav, main, aside {
+      box-sizing: border-box;
+      min-width: 0;
+      min-height: 0;
+      padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-inline-start: env(safe-area-inset-left, 0px);
+      border-inline-end: var(--border-width, 1px) solid var(--border-subtle, #221c17);
+      background: var(--bg-secondary, #16110d);
+    }
+    ::slotted([slot="sidebar"]) { flex: 1; min-height: 0; }
+
+    main {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    main.first { padding-inline-start: env(safe-area-inset-left, 0px); }
+    main.last { padding-inline-end: env(safe-area-inset-right, 0px); }
+    :host([mode="narrow"]) main {
+      overflow: visible;
+      padding-block: 0;
+      padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+    }
+
+    aside {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding-inline-end: env(safe-area-inset-right, 0px);
+      border-inline-start: var(--border-width, 1px) solid var(--border-subtle, #221c17);
+    }
+    .detail {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* The splitter: an 8 px strip on the detail pane's leading edge; a line shows on hover and focus */
+    .splitter {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: calc(var(--border-width, 1px) * -1);
+      z-index: 1;
+      width: var(--space-sm, 8px);
+      cursor: col-resize;
+      touch-action: none;
+    }
+    .splitter::before {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 0;
+      width: calc(var(--border-width, 1px) * 2);
+      background: transparent;
+      transition: background var(--transition-fast, 120ms ease);
+    }
+    .splitter:hover::before,
+    :host([data-dragging]) .splitter::before { background: var(--border-default, #3a322b); }
+    .splitter:focus-visible { outline: none; }
+    .splitter:focus-visible::before {
+      width: calc(var(--border-width, 1px) * 3);
+      background: var(--border-focus, #fcba28);
+    }
+    :host([data-dragging]) { cursor: col-resize; user-select: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .splitter::before { transition: none; }
+    }
+
+    @media (forced-colors: active) {
+      .splitter:focus-visible::before { background: Highlight; }
+    }
+  `;constructor(){super(),this.sidebarCollapsed=!1,this.detailOpen=!1,this.detailWidth=420,this.breakpoint=1024,this._width=0,this._onMediaChange=this._onMediaChange.bind(this)}connectedCallback(){super.connectedCallback(),this._watchMedia(),this._resizeObserver=new ResizeObserver(e=>{this._width=e[0].contentRect.width}),this._resizeObserver.observe(this)}disconnectedCallback(){super.disconnectedCallback(),this._unwatchMedia(),this._resizeObserver?.disconnect(),this._resizeObserver=void 0}willUpdate(e){e.has(`breakpoint`)&&this.hasUpdated&&this._watchMedia()}get detailMaxWidth(){let e=this._width||window.innerWidth;return Math.max(380,Math.floor(e*Dt))}get detailEffectiveWidth(){return this._clamp(Number(this.detailWidth)||380)}_clamp(e){return Math.round(Math.min(Math.max(e,380),this.detailMaxWidth))}_watchMedia(){this._unwatchMedia();let e=Number.isFinite(Number(this.breakpoint))?Number(this.breakpoint):1024;this._media=window.matchMedia(`(min-width: ${e}px)`),this._media.addEventListener(`change`,this._onMediaChange),this._setMode(this._media.matches?`wide`:`narrow`)}_unwatchMedia(){this._media?.removeEventListener(`change`,this._onMediaChange),this._media=void 0}_onMediaChange(e){this._setMode(e.matches?`wide`:`narrow`)}_setMode(e){let t=this.mode;t!==e&&(this.mode=e,t!==void 0&&this.dispatchEvent(new CustomEvent(`pastis-layout-change`,{detail:{mode:e},bubbles:!0,composed:!0})))}render(){if(this.mode!==`wide`)return t.html`<div class="layout" part="layout"><main part="main"><slot></slot></main></div>`;let e=!this.sidebarCollapsed,n=this.detailOpen;return t.html`
+      <div class="layout" part="layout" style="grid-template-columns: ${[e?`var(--pastis-app-layout-sidebar-width, 260px)`:``,`minmax(0, 1fr)`,n?`${this.detailEffectiveWidth}px`:``].filter(Boolean).join(` `)}">
+        ${e?t.html`
+          <nav part="sidebar" aria-label=${this.sidebarLabel||`Sidebar`}><slot name="sidebar"></slot></nav>
+        `:t.nothing}
+        <main part="main" class="${e?``:`first`} ${n?``:`last`}"><slot></slot></main>
+        ${n?t.html`
+          <aside id="detail" part="detail" aria-label=${this.detailLabel||`Details`}>
+            <div
+              class="splitter"
+              part="splitter"
+              role="separator"
+              tabindex="0"
+              aria-orientation="vertical"
+              aria-label=${this.splitterLabel||`Resize details`}
+              aria-controls="detail"
+              aria-valuenow=${this.detailEffectiveWidth}
+              aria-valuemin=${380}
+              aria-valuemax=${this.detailMaxWidth}
+              @keydown=${this._onSplitterKeydown}
+              @dblclick=${this._onSplitterDoubleClick}
+              @pointerdown=${this._onPointerDown}
+              @pointermove=${this._onPointerMove}
+              @pointerup=${this._onPointerUp}
+              @pointercancel=${this._onPointerUp}
+              @lostpointercapture=${this._onPointerUp}
+            ></div>
+            <div class="detail"><slot name="detail"></slot></div>
+          </aside>
+        `:t.nothing}
+      </div>
+    `}_resize(e){let t=this._clamp(e),n=t!==this.detailEffectiveWidth;return this.detailWidth=t,n}_emitResize(){this.dispatchEvent(new CustomEvent(`pastis-resize`,{detail:{width:this.detailEffectiveWidth},bubbles:!0,composed:!0}))}_onSplitterKeydown(e){let t=e.shiftKey?kt:Ot,n=this.detailEffectiveWidth,r;if(e.key===`ArrowLeft`)r=n+t;else if(e.key===`ArrowRight`)r=n-t;else if(e.key===`Home`)r=380;else if(e.key===`End`)r=this.detailMaxWidth;else return;e.preventDefault(),this._resize(r)&&this._emitResize()}_onSplitterDoubleClick(){let e=this.detailMaxWidth;this._resize(this.detailEffectiveWidth>=e?380:e)&&this._emitResize()}_onPointerDown(e){if(e.button===0){e.preventDefault();try{e.currentTarget.setPointerCapture(e.pointerId)}catch{}this._drag={x:e.clientX,width:this.detailEffectiveWidth},this.toggleAttribute(`data-dragging`,!0)}}_onPointerMove(e){this._drag&&this._resize(this._drag.width+(this._drag.x-e.clientX))}_onPointerUp(){if(!this._drag)return;let e=this._drag.width;this._drag=void 0,this.removeAttribute(`data-dragging`),this.detailEffectiveWidth!==e&&this._emitResize()}};customElements.define(`pastis-app-layout`,At);var jt=class extends t.LitElement{static properties={label:{type:String},_filled:{state:!0}};static styles=t.css`
+    :host {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+      min-height: 0;
+      background: var(--bg-secondary, #16110d);
+      color: var(--text-primary, #f4eee3);
+      font-family: var(--font-family-body, sans-serif);
+    }
+    :host([hidden]) { display: none; }
+
+    .header, .footer {
+      flex: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm, 8px);
+      padding: var(--space-sm, 8px);
+    }
+    .header:not(.filled), .footer:not(.filled) { display: none; }
+    .footer { border-top: var(--border-width, 1px) solid var(--border-subtle, #221c17); }
+
+    .list {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-xs, 4px) var(--space-sm, 8px) var(--space-sm, 8px);
+    }
+  `;constructor(){super(),this._filled={header:!1,footer:!1}}render(){return t.html`
+      <div class="header ${this._filled.header?`filled`:``}" part="header">
+        <slot name="header" @slotchange=${this._onSlotChange}></slot>
+      </div>
+      <div class="list" part="list" role="list" aria-label=${this.label||t.nothing}><slot></slot></div>
+      <div class="footer ${this._filled.footer?`filled`:``}" part="footer">
+        <slot name="footer" @slotchange=${this._onSlotChange}></slot>
+      </div>
+    `}_onSlotChange(e){let t=e.target;this._filled={...this._filled,[t.name]:t.assignedNodes({flatten:!0}).length>0}}},Mt=class extends t.LitElement{static properties={label:{type:String},collapsed:{type:Boolean,reflect:!0}};static styles=t.css`
+    :host { display: block; margin-block-start: var(--space-sm, 8px); }
+    :host([hidden]) { display: none; }
+
+    .head { display: flex; align-items: center; gap: var(--space-xs, 4px); }
+
+    .heading {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs, 4px);
+      box-sizing: border-box;
+      min-height: calc(var(--space-lg, 24px) + var(--space-xs, 4px));
+      margin: 0;
+      padding: 0 var(--space-sm, 8px);
+      border: 0;
+      border-radius: var(--radius-md, 6px);
+      background: none;
+      color: var(--text-tertiary, #a39b90);
+      font-family: inherit;
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-semibold, 600);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      line-height: var(--line-height-caption, 1.4);
+      text-align: start;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .heading:hover { color: var(--text-primary, #f4eee3); }
+    .heading:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .chevron { flex: none; display: inline-flex; transition: transform var(--transition-fast, 120ms ease); }
+    :host([collapsed]) .chevron { transform: rotate(-90deg); }
+
+    .items { display: flex; flex-direction: column; }
+    .items[hidden] { display: none; }
+
+    ::slotted([slot="trailing"]) { flex: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chevron { transition: none; }
+    }
+  `;constructor(){super(),this.collapsed=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}render(){return t.html`
+      <div class="head">
+        <button
+          class="heading"
+          part="heading"
+          type="button"
+          aria-expanded=${this.collapsed?`false`:`true`}
+          aria-controls="items"
+          @click=${this._onToggle}
+        >
+          <span class="chevron" aria-hidden="true"><pastis-icon name="chevron-down" size="sm"></pastis-icon></span>
+          <span class="label">${this.label}</span>
+        </button>
+        <slot name="trailing"></slot>
+      </div>
+      <div id="items" class="items" part="items" role="list" aria-label=${this.label||t.nothing} ?hidden=${this.collapsed}>
+        <slot></slot>
+      </div>
+    `}_onToggle(){let e=!this.collapsed,t=new CustomEvent(`pastis-toggle`,{detail:{collapsed:e},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)&&(this.collapsed=e)}},Nt=class extends t.LitElement{static properties={href:{type:String},icon:{type:String},marker:{type:String},label:{type:String},count:{type:Number},countLabel:{type:String,attribute:`count-label`},current:{type:Boolean,reflect:!0}};static styles=t.css`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .wrap {
+      display: flex;
+      align-items: center;
+      border-radius: var(--radius-md, 6px);
+    }
+    .wrap:hover { background: var(--bg-elevated, #2a231d); }
+    :host([current]) .wrap { background: var(--bg-elevated, #2a231d); }
+
+    a {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm, 8px);
+      box-sizing: border-box;
+      min-height: var(--space-xl, 32px);
+      padding: 0 var(--space-sm, 8px);
+      border-radius: var(--radius-md, 6px);
+      color: var(--text-secondary, #d8d0c4);
+      font-family: inherit;
+      font-size: var(--font-size-body-sm, 14px);
+      line-height: var(--line-height-body-sm, 1.5);
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a:not([href]) { cursor: pointer; }
+    a:hover { color: var(--text-primary, #f4eee3); }
+    :host([current]) a {
+      color: var(--text-primary, #f4eee3);
+      font-weight: var(--font-weight-semibold, 600);
+    }
+    a:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .lead { flex: none; display: inline-flex; width: var(--space-md, 16px); justify-content: center; }
+    :host([current]) .lead { color: var(--text-accent, #fcba28); }
+    .marker { font-family: var(--font-family-mono, monospace); }
+
+    .label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .count {
+      flex: none;
+      font-family: var(--font-family-mono, monospace);
+      font-size: var(--font-size-caption, 12px);
+      color: var(--text-tertiary, #a39b90);
+    }
+
+    ::slotted([slot="trailing"]) { flex: none; margin-inline-end: var(--space-xs, 4px); }
+  `;constructor(){super(),this.current=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}willUpdate(e){!this.href&&(!this.hasUpdated||e.has(`href`))&&console.warn(`pastis-sidebar-item: "${this.label??``}" has no href; it is rendered as role="link" with tabindex="0"`)}get _hasCount(){return this.count!==void 0&&this.count!==null&&String(this.count)!==``&&Number(this.count)!==0}render(){let e=this._hasCount,n=this.icon?t.html`<span class="lead" aria-hidden="true"><pastis-icon part="icon" name=${this.icon} size="sm"></pastis-icon></span>`:this.marker?t.html`<span class="lead marker" aria-hidden="true">${this.marker}</span>`:t.nothing;return t.html`
+      <div class="wrap">
+        <a
+          part="link"
+          href=${this.href||t.nothing}
+          role=${this.href?t.nothing:`link`}
+          tabindex=${this.href?t.nothing:`0`}
+          aria-current=${this.current?`page`:t.nothing}
+          aria-label=${e?`${this.label??``}, ${this.countLabel||this.count}`:t.nothing}
+          @click=${this._onClick}
+          @keydown=${this._onKeydown}
+        >
+          ${n}
+          <span class="label" part="label">${this.label}</span>
+          ${e?t.html`<span class="count" part="count" aria-hidden="true">${this.count}</span>`:t.nothing}
+        </a>
+        <slot name="trailing"></slot>
+      </div>
+    `}_onKeydown(e){e.key!==`Enter`||this.href||(e.preventDefault(),e.currentTarget.click())}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-sidebar`,jt),customElements.define(`pastis-sidebar-section`,Mt),customElements.define(`pastis-sidebar-item`,Nt);var Pt=class extends t.LitElement{static properties={label:{type:String}};static styles=t.css`
+    :host { display: inline-flex; vertical-align: baseline; }
+    :host([hidden]) { display: none; }
+
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      min-width: calc(var(--space-md, 16px) + var(--space-xs, 4px));
+      padding: 0 var(--space-xs, 4px);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-bottom-width: calc(var(--border-width, 1px) * 2);
+      border-radius: var(--radius-sm, 4px);
+      background: var(--bg-elevated, #2a231d);
+      color: var(--text-primary, #f4eee3);
+      font-family: var(--font-family-mono, monospace);
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-medium, 500);
+      line-height: var(--line-height-caption, 1.4);
+      white-space: nowrap;
+    }
+
+    .sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  `;render(){return this.label?t.html`<kbd part="kbd"><span aria-hidden="true"><slot></slot></span><span class="sr">${this.label}</span></kbd>`:t.html`<kbd part="kbd"><slot></slot></kbd>`}};customElements.define(`pastis-kbd`,Pt),e.DETAIL_MAX_RATIO=Dt,e.DETAIL_MIN_WIDTH=Et,e.PastisAccordion=Se,e.PastisAlert=F,e.PastisAppLayout=At,e.PastisAvatar=N,e.PastisBadge=M,e.PastisBreadcrumb=Ce,e.PastisButton=r,e.PastisButtonSplit=i,e.PastisCard=P,e.PastisCarousel=Ve,e.PastisCheckbox=l,e.PastisCodeBlock=Ie,e.PastisCookieBanner=Me,e.PastisDateField=ot,e.PastisDivider=De,e.PastisDrawer=Ae,e.PastisDropdown=be,e.PastisEditor=vt,e.PastisEmptyState=Le,e.PastisFileUpload=je,e.PastisFilterBar=ze,e.PastisFilterChip=Re,e.PastisFooter=Ge,e.PastisHero=Oe,e.PastisIcon=$e,e.PastisInput=c,e.PastisKanbanBoard=xt,e.PastisKanbanColumn=yt,e.PastisKbd=Pt,e.PastisListGroup=Tt,e.PastisListRow=$,e.PastisModal=R,e.PastisNav=Ke,e.PastisPagination=we,e.PastisProgress=Te,e.PastisProjectCard=qe,e.PastisQuickAdd=lt,e.PastisRadio=Ne,e.PastisRecurrencePicker=mt,e.PastisSearch=ke,e.PastisSection=We,e.PastisSegmentedControl=wt,e.PastisSelect=Ct,e.PastisShelf=Ze,e.PastisSidebar=jt,e.PastisSidebarItem=Nt,e.PastisSidebarSection=Mt,e.PastisSkeleton=V,e.PastisSortable=_t,e.PastisSpecTable=Xe,e.PastisSpinner=B,e.PastisStatCard=Pe,e.PastisStatement=Je,e.PastisTabBar=nt,e.PastisTabBarItem=rt,e.PastisTable=Fe,e.PastisTabs=xe,e.PastisTag=Ee,e.PastisTaskRow=tt,e.PastisTestimonial=Ue,e.PastisThemeToggle=Be,e.PastisTimeField=st,e.PastisTimeline=He,e.PastisToast=z,e.PastisToggle=j,e.PastisTokenSwatch=Ye,e.PastisTooltip=H,e.iconNames=Qe,e.icons=U});
