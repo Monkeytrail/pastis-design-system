@@ -31,6 +31,17 @@ Reminders-style list, not a form control; use `<pastis-checkbox>` in forms.
   `reorder-label` overrides it) for [`<pastis-sortable>`](?path=/docs/basics-sortable--usage),
   which turns drags, taps and arrow keys on it into `pastis-reorder`.
 - **Actions.** Put buttons in the `actions` slot; they come after the title in the Tab order.
+- **Compact density** (`density="compact"`) for desktop lists: one 32 px line of toggle · title
+  (ellipsis) · aligned meta columns · actions. Put the cells in the `meta` slot and set the tracks
+  once on the list with `--pastis-task-row-columns` (`[status] 4rem [due] 6rem [list] 7rem`); a
+  cell picks its track with `grid-column` (`style="grid-column: due"`), or takes the next one.
+  Slotted cells replace the built-in visible meta, but the meta properties still describe the
+  title, so mark repeating cells `aria-hidden="true"`. The actions show on hover and while focus
+  is inside the row (always on touch screens), over the cells.
+- **Selected** (`selected`) highlights the row whose details are open. It is styling only: a
+  list item takes no `aria-selected`.
+
+<Canvas of={TaskRowStories.Compact} />
 
 <Controls of={TaskRowStories.Plain} />
 
@@ -54,11 +65,24 @@ row.addEventListener('pastis-toggle', async (e) => {
 });
 ```
 
+```html
+<div role="list" aria-label="Platform" style="--pastis-task-row-columns: [status] 4rem [due] 6rem">
+  <pastis-task-row density="compact" task-title="Ship the release" due="Today" selected>
+    <span slot="meta" aria-hidden="true" style="grid-column: status">Doing</span>
+    <span slot="meta" aria-hidden="true" style="grid-column: due">Today</span>
+    <pastis-button slot="actions" variant="ghost" size="sm" aria-label="Flag Ship the release">Flag</pastis-button>
+  </pastis-task-row>
+</div>
+```
+
 ## Don't
 
 ```html
 <!-- Don't use title for the text: it is a tooltip and the row shows nothing -->
 <pastis-task-row title="Buy oat milk"></pastis-task-row>
+
+<!-- Don't set the column tracks per row: rows only line up when they share one definition -->
+<pastis-task-row density="compact" style="--pastis-task-row-columns: auto auto"></pastis-task-row>
 
 <!-- Don't render rows outside a list -->
 <div><pastis-task-row task-title="Buy oat milk"></pastis-task-row></div>

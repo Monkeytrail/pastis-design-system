@@ -57,3 +57,6 @@ export * from './components/kanban/pastis-kanban-board.js';
 export * from './components/select/pastis-select.js';
 export * from './components/segmented-control/pastis-segmented-control.js';
 export * from './components/list-row/pastis-list-row.js';
+export * from './components/app-layout/pastis-app-layout.js';
+export * from './components/sidebar/pastis-sidebar.js';
+export * from './components/kbd/pastis-kbd.js';

@@ -122,7 +122,7 @@ export const NothingSelected = {
   render: () => {
     const wrap = appLayout();
     const detail = wrap.querySelector('[slot="detail"]');
-    detail.innerHTML = '<pastis-empty-state heading="No item selected" body="Pick an item in the list to see it here."></pastis-empty-state>';
+    detail.innerHTML = '<h2 style="margin:0 0 16px;font-size:var(--font-size-h5)">Details</h2><pastis-empty-state heading="No item selected" body="Pick an item in the list to see it here."></pastis-empty-state>';
     for (const row of wrap.querySelectorAll('pastis-task-row')) row.removeAttribute('selected');
     return wrap;
   },

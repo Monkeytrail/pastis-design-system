@@ -1,5 +1,5 @@
-var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Module`});var t=globalThis,n=t.ShadowRoot&&(t.ShadyCSS===void 0||t.ShadyCSS.nativeShadow)&&`adoptedStyleSheets`in Document.prototype&&`replace`in CSSStyleSheet.prototype,r=Symbol(),i=new WeakMap,a=class{constructor(e,t,n){if(this._$cssResult$=!0,n!==r)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o,t=this.t;if(n&&e===void 0){let n=t!==void 0&&t.length===1;n&&(e=i.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),n&&i.set(t,e))}return e}toString(){return this.cssText}},o=e=>new a(typeof e==`string`?e:e+``,void 0,r),s=(e,...t)=>new a(e.length===1?e[0]:t.reduce((t,n,r)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if(typeof e==`number`)return e;throw Error(`Value passed to 'css' function must be a 'css' function result: `+e+`. Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.`)})(n)+e[r+1],e[0]),e,r),c=(e,r)=>{if(n)e.adoptedStyleSheets=r.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(let n of r){let r=document.createElement(`style`),i=t.litNonce;i!==void 0&&r.setAttribute(`nonce`,i),r.textContent=n.cssText,e.appendChild(r)}},l=n?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t=``;for(let n of e.cssRules)t+=n.cssText;return o(t)})(e):e,{is:u,defineProperty:d,getOwnPropertyDescriptor:ee,getOwnPropertyNames:te,getOwnPropertySymbols:ne,getPrototypeOf:re}=Object,f=globalThis,ie=f.trustedTypes,ae=ie?ie.emptyScript:``,oe=f.reactiveElementPolyfillSupport,p=(e,t)=>e,m={toAttribute(e,t){switch(t){case Boolean:e=e?ae:null;break;case Object:case Array:e=e==null?e:JSON.stringify(e)}return e},fromAttribute(e,t){let n=e;switch(t){case Boolean:n=e!==null;break;case Number:n=e===null?null:Number(e);break;case Object:case Array:try{n=JSON.parse(e)}catch{n=null}}return n}},h=(e,t)=>!u(e,t),se={attribute:!0,type:String,converter:m,reflect:!1,useDefault:!1,hasChanged:h};Symbol.metadata??=Symbol(`metadata`),f.litPropertyMetadata??=new WeakMap;var g=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=se){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){let n=Symbol(),r=this.getPropertyDescriptor(e,n,t);r!==void 0&&d(this.prototype,e,r)}}static getPropertyDescriptor(e,t,n){let{get:r,set:i}=ee(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:r,set(t){let a=r?.call(this);i?.call(this,t),this.requestUpdate(e,a,n)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??se}static _$Ei(){if(this.hasOwnProperty(p(`elementProperties`)))return;let e=re(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(p(`finalized`)))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(p(`properties`))){let e=this.properties,t=[...te(e),...ne(e)];for(let n of t)this.createProperty(n,e[n])}let e=this[Symbol.metadata];if(e!==null){let t=litPropertyMetadata.get(e);if(t!==void 0)for(let[e,n]of t)this.elementProperties.set(e,n)}this._$Eh=new Map;for(let[e,t]of this.elementProperties){let n=this._$Eu(e,t);n!==void 0&&this._$Eh.set(n,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){let t=[];if(Array.isArray(e)){let n=new Set(e.flat(1/0).reverse());for(let e of n)t.unshift(l(e))}else e!==void 0&&t.push(l(e));return t}static _$Eu(e,t){let n=t.attribute;return!1===n?void 0:typeof n==`string`?n:typeof e==`string`?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){let e=new Map,t=this.constructor.elementProperties;for(let n of t.keys())this.hasOwnProperty(n)&&(e.set(n,this[n]),delete this[n]);e.size>0&&(this._$Ep=e)}createRenderRoot(){let e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return c(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,n){this._$AK(e,n)}_$ET(e,t){let n=this.constructor.elementProperties.get(e),r=this.constructor._$Eu(e,n);if(r!==void 0&&!0===n.reflect){let i=(n.converter?.toAttribute===void 0?m:n.converter).toAttribute(t,n.type);this._$Em=e,i==null?this.removeAttribute(r):this.setAttribute(r,i),this._$Em=null}}_$AK(e,t){let n=this.constructor,r=n._$Eh.get(e);if(r!==void 0&&this._$Em!==r){let e=n.getPropertyOptions(r),i=typeof e.converter==`function`?{fromAttribute:e.converter}:e.converter?.fromAttribute===void 0?m:e.converter;this._$Em=r;let a=i.fromAttribute(t,e.type);this[r]=a??this._$Ej?.get(r)??a,this._$Em=null}}requestUpdate(e,t,n,r=!1,i){if(e!==void 0){let a=this.constructor;if(!1===r&&(i=this[e]),n??=a.getPropertyOptions(e),!((n.hasChanged??h)(i,t)||n.useDefault&&n.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(a._$Eu(e,n))))return;this.C(e,t,n)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:n,reflect:r,wrapped:i},a){n&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,a??t??this[e]),!0!==i||a!==void 0)||(this._$AL.has(e)||(this.hasUpdated||n||(t=void 0),this._$AL.set(e,t)),!0===r&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}let e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(let[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}let e=this.constructor.elementProperties;if(e.size>0)for(let[t,n]of e){let{wrapped:e}=n,r=this[t];!0!==e||this._$AL.has(t)||r===void 0||this.C(t,void 0,n,r)}}let e=!1,t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}};g.elementStyles=[],g.shadowRootOptions={mode:`open`},g[p(`elementProperties`)]=new Map,g[p(`finalized`)]=new Map,oe?.({ReactiveElement:g}),(f.reactiveElementVersions??=[]).push(`2.1.2`);var _=globalThis,ce=e=>e,v=_.trustedTypes,le=v?v.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,y=`$lit$`,b=`lit$${Math.random().toFixed(9).slice(2)}$`,x=`?`+b,ue=`<${x}>`,S=document,C=()=>S.createComment(``),w=e=>e===null||typeof e!=`object`&&typeof e!=`function`,T=Array.isArray,de=e=>T(e)||typeof e?.[Symbol.iterator]==`function`,E=`[ 	
-\f\r]`,D=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,fe=/-->/g,pe=/>/g,O=RegExp(`>|${E}(?:([^\\s"'>=/]+)(${E}*=${E}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),me=/'/g,he=/"/g,ge=/^(?:script|style|textarea|title)$/i,_e=e=>(t,...n)=>({_$litType$:e,strings:t,values:n}),k=_e(1),A=_e(2),j=Symbol.for(`lit-noChange`),M=Symbol.for(`lit-nothing`),N=new WeakMap,P=S.createTreeWalker(S,129);function F(e,t){if(!T(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return le===void 0?t:le.createHTML(t)}var ve=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=D;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===D?c[1]===`!--`?o=fe:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=O):(ge.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=O):o=pe:o===O?c[0]===`>`?(o=i??D,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?O:c[3]===`"`?he:me):o===he||o===me?o=O:o===fe||o===pe?o=D:(o=O,i=void 0);let d=o===O&&e[t+1].startsWith(`/>`)?` `:``;a+=o===D?n+ue:l>=0?(r.push(s),n.slice(0,l)+y+n.slice(l)+b+d):n+b+(l===-2?t:d)}return[F(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},I=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=ve(t,n);if(this.el=e.createElement(l,r),P.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=P.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(y)){let t=u[o++],n=i.getAttribute(e).split(b),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?be:r[1]===`?`?xe:r[1]===`@`?Se:z}),i.removeAttribute(e)}else e.startsWith(b)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(ge.test(i.tagName)){let e=i.textContent.split(b),t=e.length-1;if(t>0){i.textContent=v?v.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],C()),P.nextNode(),c.push({type:2,index:++a});i.append(e[t],C())}}}else if(i.nodeType===8)if(i.data===x)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(b,e+1))!==-1;)c.push({type:7,index:a}),e+=b.length-1}a++}}static createElement(e,t){let n=S.createElement(`template`);return n.innerHTML=e,n}};function L(e,t,n=e,r){if(t===j)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=w(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=L(e,i._$AS(e,t.values),i,r)),t}var ye=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??S).importNode(t,!0);P.currentNode=r;let i=P.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new R(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new Ce(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=P.nextNode(),a++)}return P.currentNode=S,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},R=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=M,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=L(this,e,t),w(e)?e===M||e==null||e===``?(this._$AH!==M&&this._$AR(),this._$AH=M):e!==this._$AH&&e!==j&&this._(e):e._$litType$===void 0?e.nodeType===void 0?de(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==M&&w(this._$AH)?this._$AA.nextSibling.data=e:this.T(S.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=I.createElement(F(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new ye(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=N.get(e.strings);return t===void 0&&N.set(e.strings,t=new I(e)),t}k(t){T(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(C()),this.O(C()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=ce(e).nextSibling;ce(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},z=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=M,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=M}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=L(this,e,t,0),a=!w(e)||e!==this._$AH&&e!==j,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=L(this,r[n+o],t,o),s===j&&(s=this._$AH[o]),a||=!w(s)||s!==this._$AH[o],s===M?e=M:e!==M&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===M?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},be=class extends z{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===M?void 0:e}},xe=class extends z{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==M)}},Se=class extends z{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=L(this,e,t,0)??M)===j)return;let n=this._$AH,r=e===M&&n!==M||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==M&&(n===M||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},Ce=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){L(this,e)}},we=_.litHtmlPolyfillSupport;we?.(I,R),(_.litHtmlVersions??=[]).push(`3.3.2`);var Te=(e,t,n)=>{let r=n?.renderBefore??t,i=r._$litPart$;if(i===void 0){let e=n?.renderBefore??null;r._$litPart$=i=new R(t.insertBefore(C(),e),e,void 0,n??{})}return i._$AI(e),i},B=globalThis,V=class extends g{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){let e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){let t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Te(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return j}};V._$litElement$=!0,V.finalized=!0,B.litElementHydrateSupport?.({LitElement:V});var Ee=B.litElementPolyfillSupport;Ee?.({LitElement:V}),(B.litElementVersions??=[]).push(`4.2.2`);var De={ariaLabelledby:`ariaLabelledByElements`,ariaDescribedby:`ariaDescribedByElements`,ariaControls:`ariaControlsElements`},Oe=class extends V{static formAssociated=!0;static shadowRootOptions={...V.shadowRootOptions,delegatesFocus:!0};static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},disabled:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},href:{type:String},target:{type:String},copy:{type:String},type:{type:String},name:{type:String},value:{type:String},ariaLabel:{type:String,attribute:`aria-label`},ariaLabelledby:{type:String,attribute:`aria-labelledby`},ariaDescribedby:{type:String,attribute:`aria-describedby`},ariaPressed:{type:String,attribute:`aria-pressed`},ariaExpanded:{type:String,attribute:`aria-expanded`},ariaControls:{type:String,attribute:`aria-controls`},ariaHasPopup:{type:String,attribute:`aria-haspopup`},ariaCurrent:{type:String,attribute:`aria-current`},_copied:{type:Boolean,state:!0},_formDisabled:{type:Boolean,state:!0}};static styles=s`
+var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Module`});var t=globalThis,n=t.ShadowRoot&&(t.ShadyCSS===void 0||t.ShadyCSS.nativeShadow)&&`adoptedStyleSheets`in Document.prototype&&`replace`in CSSStyleSheet.prototype,r=Symbol(),i=new WeakMap,a=class{constructor(e,t,n){if(this._$cssResult$=!0,n!==r)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o,t=this.t;if(n&&e===void 0){let n=t!==void 0&&t.length===1;n&&(e=i.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),n&&i.set(t,e))}return e}toString(){return this.cssText}},o=e=>new a(typeof e==`string`?e:e+``,void 0,r),s=(e,...t)=>new a(e.length===1?e[0]:t.reduce((t,n,r)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if(typeof e==`number`)return e;throw Error(`Value passed to 'css' function must be a 'css' function result: `+e+`. Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.`)})(n)+e[r+1],e[0]),e,r),c=(e,r)=>{if(n)e.adoptedStyleSheets=r.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(let n of r){let r=document.createElement(`style`),i=t.litNonce;i!==void 0&&r.setAttribute(`nonce`,i),r.textContent=n.cssText,e.appendChild(r)}},l=n?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t=``;for(let n of e.cssRules)t+=n.cssText;return o(t)})(e):e,{is:u,defineProperty:d,getOwnPropertyDescriptor:ee,getOwnPropertyNames:te,getOwnPropertySymbols:ne,getPrototypeOf:re}=Object,f=globalThis,ie=f.trustedTypes,ae=ie?ie.emptyScript:``,oe=f.reactiveElementPolyfillSupport,p=(e,t)=>e,m={toAttribute(e,t){switch(t){case Boolean:e=e?ae:null;break;case Object:case Array:e=e==null?e:JSON.stringify(e)}return e},fromAttribute(e,t){let n=e;switch(t){case Boolean:n=e!==null;break;case Number:n=e===null?null:Number(e);break;case Object:case Array:try{n=JSON.parse(e)}catch{n=null}}return n}},h=(e,t)=>!u(e,t),se={attribute:!0,type:String,converter:m,reflect:!1,useDefault:!1,hasChanged:h};Symbol.metadata??=Symbol(`metadata`),f.litPropertyMetadata??=new WeakMap;var g=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=se){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){let n=Symbol(),r=this.getPropertyDescriptor(e,n,t);r!==void 0&&d(this.prototype,e,r)}}static getPropertyDescriptor(e,t,n){let{get:r,set:i}=ee(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:r,set(t){let a=r?.call(this);i?.call(this,t),this.requestUpdate(e,a,n)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??se}static _$Ei(){if(this.hasOwnProperty(p(`elementProperties`)))return;let e=re(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(p(`finalized`)))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(p(`properties`))){let e=this.properties,t=[...te(e),...ne(e)];for(let n of t)this.createProperty(n,e[n])}let e=this[Symbol.metadata];if(e!==null){let t=litPropertyMetadata.get(e);if(t!==void 0)for(let[e,n]of t)this.elementProperties.set(e,n)}this._$Eh=new Map;for(let[e,t]of this.elementProperties){let n=this._$Eu(e,t);n!==void 0&&this._$Eh.set(n,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){let t=[];if(Array.isArray(e)){let n=new Set(e.flat(1/0).reverse());for(let e of n)t.unshift(l(e))}else e!==void 0&&t.push(l(e));return t}static _$Eu(e,t){let n=t.attribute;return!1===n?void 0:typeof n==`string`?n:typeof e==`string`?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){let e=new Map,t=this.constructor.elementProperties;for(let n of t.keys())this.hasOwnProperty(n)&&(e.set(n,this[n]),delete this[n]);e.size>0&&(this._$Ep=e)}createRenderRoot(){let e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return c(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,n){this._$AK(e,n)}_$ET(e,t){let n=this.constructor.elementProperties.get(e),r=this.constructor._$Eu(e,n);if(r!==void 0&&!0===n.reflect){let i=(n.converter?.toAttribute===void 0?m:n.converter).toAttribute(t,n.type);this._$Em=e,i==null?this.removeAttribute(r):this.setAttribute(r,i),this._$Em=null}}_$AK(e,t){let n=this.constructor,r=n._$Eh.get(e);if(r!==void 0&&this._$Em!==r){let e=n.getPropertyOptions(r),i=typeof e.converter==`function`?{fromAttribute:e.converter}:e.converter?.fromAttribute===void 0?m:e.converter;this._$Em=r;let a=i.fromAttribute(t,e.type);this[r]=a??this._$Ej?.get(r)??a,this._$Em=null}}requestUpdate(e,t,n,r=!1,i){if(e!==void 0){let a=this.constructor;if(!1===r&&(i=this[e]),n??=a.getPropertyOptions(e),!((n.hasChanged??h)(i,t)||n.useDefault&&n.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(a._$Eu(e,n))))return;this.C(e,t,n)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:n,reflect:r,wrapped:i},a){n&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,a??t??this[e]),!0!==i||a!==void 0)||(this._$AL.has(e)||(this.hasUpdated||n||(t=void 0),this._$AL.set(e,t)),!0===r&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}let e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(let[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}let e=this.constructor.elementProperties;if(e.size>0)for(let[t,n]of e){let{wrapped:e}=n,r=this[t];!0!==e||this._$AL.has(t)||r===void 0||this.C(t,void 0,n,r)}}let e=!1,t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}};g.elementStyles=[],g.shadowRootOptions={mode:`open`},g[p(`elementProperties`)]=new Map,g[p(`finalized`)]=new Map,oe?.({ReactiveElement:g}),(f.reactiveElementVersions??=[]).push(`2.1.2`);var _=globalThis,ce=e=>e,v=_.trustedTypes,le=v?v.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,ue=`$lit$`,y=`lit$${Math.random().toFixed(9).slice(2)}$`,b=`?`+y,de=`<${b}>`,x=document,S=()=>x.createComment(``),C=e=>e===null||typeof e!=`object`&&typeof e!=`function`,w=Array.isArray,fe=e=>w(e)||typeof e?.[Symbol.iterator]==`function`,T=`[ 	
+\f\r]`,E=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,pe=/-->/g,me=/>/g,D=RegExp(`>|${T}(?:([^\\s"'>=/]+)(${T}*=${T}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),he=/'/g,ge=/"/g,_e=/^(?:script|style|textarea|title)$/i,ve=e=>(t,...n)=>({_$litType$:e,strings:t,values:n}),O=ve(1),k=ve(2),A=Symbol.for(`lit-noChange`),j=Symbol.for(`lit-nothing`),M=new WeakMap,N=x.createTreeWalker(x,129);function P(e,t){if(!w(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return le===void 0?t:le.createHTML(t)}var ye=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=E;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===E?c[1]===`!--`?o=pe:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=D):(_e.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=D):o=me:o===D?c[0]===`>`?(o=i??E,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?D:c[3]===`"`?ge:he):o===ge||o===he?o=D:o===pe||o===me?o=E:(o=D,i=void 0);let d=o===D&&e[t+1].startsWith(`/>`)?` `:``;a+=o===E?n+de:l>=0?(r.push(s),n.slice(0,l)+ue+n.slice(l)+y+d):n+y+(l===-2?t:d)}return[P(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},F=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=ye(t,n);if(this.el=e.createElement(l,r),N.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=N.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(ue)){let t=u[o++],n=i.getAttribute(e).split(y),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?xe:r[1]===`?`?Se:r[1]===`@`?Ce:R}),i.removeAttribute(e)}else e.startsWith(y)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(_e.test(i.tagName)){let e=i.textContent.split(y),t=e.length-1;if(t>0){i.textContent=v?v.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],S()),N.nextNode(),c.push({type:2,index:++a});i.append(e[t],S())}}}else if(i.nodeType===8)if(i.data===b)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(y,e+1))!==-1;)c.push({type:7,index:a}),e+=y.length-1}a++}}static createElement(e,t){let n=x.createElement(`template`);return n.innerHTML=e,n}};function I(e,t,n=e,r){if(t===A)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=C(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=I(e,i._$AS(e,t.values),i,r)),t}var be=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??x).importNode(t,!0);N.currentNode=r;let i=N.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new L(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new we(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=N.nextNode(),a++)}return N.currentNode=x,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},L=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=j,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=I(this,e,t),C(e)?e===j||e==null||e===``?(this._$AH!==j&&this._$AR(),this._$AH=j):e!==this._$AH&&e!==A&&this._(e):e._$litType$===void 0?e.nodeType===void 0?fe(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==j&&C(this._$AH)?this._$AA.nextSibling.data=e:this.T(x.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=F.createElement(P(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new be(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=M.get(e.strings);return t===void 0&&M.set(e.strings,t=new F(e)),t}k(t){w(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(S()),this.O(S()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=ce(e).nextSibling;ce(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},R=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=j,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=j}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=I(this,e,t,0),a=!C(e)||e!==this._$AH&&e!==A,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=I(this,r[n+o],t,o),s===A&&(s=this._$AH[o]),a||=!C(s)||s!==this._$AH[o],s===j?e=j:e!==j&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===j?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},xe=class extends R{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===j?void 0:e}},Se=class extends R{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==j)}},Ce=class extends R{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=I(this,e,t,0)??j)===A)return;let n=this._$AH,r=e===j&&n!==j||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==j&&(n===j||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},we=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){I(this,e)}},Te=_.litHtmlPolyfillSupport;Te?.(F,L),(_.litHtmlVersions??=[]).push(`3.3.2`);var Ee=(e,t,n)=>{let r=n?.renderBefore??t,i=r._$litPart$;if(i===void 0){let e=n?.renderBefore??null;r._$litPart$=i=new L(t.insertBefore(S(),e),e,void 0,n??{})}return i._$AI(e),i},z=globalThis,B=class extends g{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){let e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){let t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Ee(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return A}};B._$litElement$=!0,B.finalized=!0,z.litElementHydrateSupport?.({LitElement:B});var De=z.litElementPolyfillSupport;De?.({LitElement:B}),(z.litElementVersions??=[]).push(`4.2.2`);var Oe={ariaLabelledby:`ariaLabelledByElements`,ariaDescribedby:`ariaDescribedByElements`,ariaControls:`ariaControlsElements`},ke=class extends B{static formAssociated=!0;static shadowRootOptions={...B.shadowRootOptions,delegatesFocus:!0};static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},disabled:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},href:{type:String},target:{type:String},copy:{type:String},type:{type:String},name:{type:String},value:{type:String},ariaLabel:{type:String,attribute:`aria-label`},ariaLabelledby:{type:String,attribute:`aria-labelledby`},ariaDescribedby:{type:String,attribute:`aria-describedby`},ariaPressed:{type:String,attribute:`aria-pressed`},ariaExpanded:{type:String,attribute:`aria-expanded`},ariaControls:{type:String,attribute:`aria-controls`},ariaHasPopup:{type:String,attribute:`aria-haspopup`},ariaCurrent:{type:String,attribute:`aria-current`},_copied:{type:Boolean,state:!0},_formDisabled:{type:Boolean,state:!0}};static styles=s`
     :host { display: inline-block; }
 
     button, a {
@@ -94,16 +94,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 3px;
     }
-  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1,this._copied=!1,this._formDisabled=!1,this.type=`button`,this._internals=this.attachInternals()}get form(){return this._internals.form}click(){let e=this._inner;e?e.click():super.click()}formDisabledCallback(e){this._formDisabled=e}get _inner(){return this.shadowRoot?.querySelector(`[part="button"]`)??null}willUpdate(e){e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){this._syncIdRefs()}_syncIdRefs(){let e=this._inner;if(!e)return;let t=this.getRootNode(),n=e=>(e||``).split(/\s+/).filter(Boolean).map(e=>t.getElementById?t.getElementById(e):document.getElementById(e)).filter(Boolean),r=e=>e.map(e=>e.textContent.trim()).join(` `);for(let[t,r]of Object.entries(De)){let i=n(this[t]);r in e&&(e[r]=i.length?i:null)}if(!this.ariaLabel){let t=r(n(this.ariaLabelledby));t?e.setAttribute(`aria-label`,t):e.removeAttribute(`aria-label`)}let i=r(n(this.ariaDescribedby));i?e.setAttribute(`aria-description`,i):e.removeAttribute(`aria-description`)}_aria(){return{label:this.ariaLabel||M,pressed:this.ariaPressed||M,expanded:this.ariaExpanded||M,haspopup:this.ariaHasPopup||M,current:this.ariaCurrent||M}}render(){let e=k`
-      ${this.loading?k`<span class="spinner" aria-hidden="true"></span>`:``}
-      ${this.copy&&this._copied?`✓ Copied`:k`<slot></slot>`}
-    `,t=this._aria();if(this.href&&!this.copy){let n=this.disabled||this._formDisabled||this.loading;return k`
+  `;constructor(){super(),this.variant=`primary`,this.size=`md`,this.disabled=!1,this.loading=!1,this._copied=!1,this._formDisabled=!1,this.type=`button`,this._internals=this.attachInternals()}get form(){return this._internals.form}click(){let e=this._inner;e?e.click():super.click()}formDisabledCallback(e){this._formDisabled=e}get _inner(){return this.shadowRoot?.querySelector(`[part="button"]`)??null}willUpdate(e){e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){this._syncIdRefs()}_syncIdRefs(){let e=this._inner;if(!e)return;let t=this.getRootNode(),n=e=>(e||``).split(/\s+/).filter(Boolean).map(e=>t.getElementById?t.getElementById(e):document.getElementById(e)).filter(Boolean),r=e=>e.map(e=>e.textContent.trim()).join(` `);for(let[t,r]of Object.entries(Oe)){let i=n(this[t]);r in e&&(e[r]=i.length?i:null)}if(!this.ariaLabel){let t=r(n(this.ariaLabelledby));t?e.setAttribute(`aria-label`,t):e.removeAttribute(`aria-label`)}let i=r(n(this.ariaDescribedby));i?e.setAttribute(`aria-description`,i):e.removeAttribute(`aria-description`)}_aria(){return{label:this.ariaLabel||j,pressed:this.ariaPressed||j,expanded:this.ariaExpanded||j,haspopup:this.ariaHasPopup||j,current:this.ariaCurrent||j}}render(){let e=O`
+      ${this.loading?O`<span class="spinner" aria-hidden="true"></span>`:``}
+      ${this.copy&&this._copied?`✓ Copied`:O`<slot></slot>`}
+    `,t=this._aria();if(this.href&&!this.copy){let n=this.disabled||this._formDisabled||this.loading;return O`
         <a
-          href=${n?M:this.href}
-          target=${this.target||M}
-          rel=${this.target===`_blank`?`noopener noreferrer`:M}
-          aria-disabled=${n?`true`:M}
-          aria-busy=${this.loading?`true`:M}
+          href=${n?j:this.href}
+          target=${this.target||j}
+          rel=${this.target===`_blank`?`noopener noreferrer`:j}
+          aria-disabled=${n?`true`:j}
+          aria-busy=${this.loading?`true`:j}
           aria-label=${t.label}
           aria-expanded=${t.expanded}
           aria-haspopup=${t.haspopup}
@@ -111,7 +111,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           @click=${this._handleClick}
           part="button"
         >${e}</a>
-      `}return k`
+      `}return O`
       <button
         type="button"
         ?disabled=${this.disabled||this._formDisabled||this.loading}
@@ -124,7 +124,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         aria-current=${t.current}
         part="button"
       >${e}</button>
-    `}_handleClick(e){if(this.disabled||this._formDisabled||this.loading){e.preventDefault(),e.stopPropagation();return}if(!(this.href&&!this.copy)&&(this.type===`submit`||this.type===`reset`)&&this._activateAfterDispatch(e),this.copy){this._copyThenNotify();return}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}async _copyThenNotify(){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3),this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}_activateAfterDispatch(e){let t=!1,n=()=>{t||(t=!0,window.removeEventListener(`click`,r),clearTimeout(i),!e.defaultPrevented&&(this.type===`submit`?this._submit():this.type===`reset`&&this.form?.reset()))},r=t=>{t===e&&n()};window.addEventListener(`click`,r);let i=setTimeout(n)}_submit(){let e=this.form;if(!e)return;let t=document.createElement(`button`);t.type=`submit`,t.hidden=!0,this.name&&(t.name=this.name),this.value!=null&&(t.value=this.value),e.append(t);try{e.requestSubmit(t)}finally{t.remove()}}};customElements.define(`pastis-button`,Oe);var ke=class extends V{static properties={href:{type:String},copy:{type:String},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
+    `}_handleClick(e){if(this.disabled||this._formDisabled||this.loading){e.preventDefault(),e.stopPropagation();return}if(!(this.href&&!this.copy)&&(this.type===`submit`||this.type===`reset`)&&this._activateAfterDispatch(e),this.copy){this._copyThenNotify();return}this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}async _copyThenNotify(){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3),this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}_activateAfterDispatch(e){let t=!1,n=()=>{t||(t=!0,window.removeEventListener(`click`,r),clearTimeout(i),!e.defaultPrevented&&(this.type===`submit`?this._submit():this.type===`reset`&&this.form?.reset()))},r=t=>{t===e&&n()};window.addEventListener(`click`,r);let i=setTimeout(n)}_submit(){let e=this.form;if(!e)return;let t=document.createElement(`button`);t.type=`submit`,t.hidden=!0,this.name&&(t.name=this.name),this.value!=null&&(t.value=this.value),e.append(t);try{e.requestSubmit(t)}finally{t.remove()}}};customElements.define(`pastis-button`,ke);var Ae=class extends B{static properties={href:{type:String},copy:{type:String},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
     :host { display: inline-flex; }
 
     .split {
@@ -193,22 +193,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: -2px;
     }
-  `;constructor(){super(),this.variant=`ghost`,this._copied=!1}async _handleCopy(){if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-copy`,{bubbles:!0,composed:!0}))}render(){return k`
+  `;constructor(){super(),this.variant=`ghost`,this._copied=!1}async _handleCopy(){if(this.copy){try{await navigator.clipboard.writeText(this.copy)}catch{}this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}this.dispatchEvent(new CustomEvent(`pastis-copy`,{bubbles:!0,composed:!0}))}render(){return O`
       <div class="split" role="group">
-        ${this.href?k`
+        ${this.href?O`
           <a class="main" href=${this.href} part="main">
             <slot></slot>
           </a>
-        `:k`
+        `:O`
           <span class="main" part="main"><slot></slot></span>
         `}
         <div class="divider" aria-hidden="true"></div>
         <button class="action" part="action" @click=${this._handleCopy}
           aria-label=${this._copied?`Copied`:`Copy to clipboard`}>
-          ${this._copied?`✓`:k`<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="4" y="1" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M1 5v8h8" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
+          ${this._copied?`✓`:O`<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="4" y="1" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M1 5v8h8" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
         </button>
       </div>
-    `}};customElements.define(`pastis-button-split`,ke);var Ae=0;function je(e){return Array.from(e.elements).find(e=>e.type===`submit`||e instanceof HTMLInputElement&&e.type===`image`)}var Me=e=>e instanceof HTMLButtonElement||e instanceof HTMLInputElement,Ne=class extends V{static formAssociated=!0;static shadowRootOptions={...V.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String},maxlength:{type:Number},minlength:{type:Number},pattern:{type:String},autocomplete:{type:String},inputmode:{type:String},enterkeyhint:{type:String},autofocus:{type:Boolean},spellcheck:{type:String},autocapitalize:{type:String},ariaLabel:{type:String,attribute:`aria-label`},_slotted:{state:!0},_formDisabled:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-button-split`,Ae);var je=0;function Me(e){return Array.from(e.elements).find(e=>e.type===`submit`||e instanceof HTMLInputElement&&e.type===`image`)}var Ne=e=>e instanceof HTMLButtonElement||e instanceof HTMLInputElement,Pe=class extends B{static formAssociated=!0;static shadowRootOptions={...B.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},placeholder:{type:String},value:{type:String,reflect:!0},type:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},readonly:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},leadingIcon:{type:String,attribute:`leading-icon`},trailingIcon:{type:String,attribute:`trailing-icon`},name:{type:String},maxlength:{type:Number},minlength:{type:Number},pattern:{type:String},autocomplete:{type:String},inputmode:{type:String},enterkeyhint:{type:String},autofocus:{type:Boolean},spellcheck:{type:String},autocapitalize:{type:String},ariaLabel:{type:String,attribute:`aria-label`},_slotted:{state:!0},_formDisabled:{state:!0}};static styles=s`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -322,27 +322,27 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
-  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this.autofocus=!1,this._slotted=null,this._owned={},this._slottedObserver=new MutationObserver(()=>this.requestUpdate()),this._formDisabled=!1,this._inputId=`pastis-input-${++Ae}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._slotted?this._slotted.checkValidity():this._internals.checkValidity()}reportValidity(){return this._slotted?this._slotted.reportValidity():this._internals.reportValidity()}formResetCallback(){if(this._slotted){queueMicrotask(()=>{this._slotted&&(this.value=this._slotted.value)});return}this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._slotted?this._slotted.focus(e):super.focus(e)}get _control(){return this._slotted||this.shadowRoot?.querySelector(`input`)||null}willUpdate(e){this._slotted===null&&this._adoptSlotted(),this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled),e.has(`value`)&&this._slotted&&this._slotted.value!==(this.value??``)&&(this._slotted.value=this.value??``)}firstUpdated(){this.autofocus&&this.focus()}updated(){if(this._slotted){this._syncSlotted(),this._internals.setValidity({});return}let e=this.shadowRoot.querySelector(`input`);this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e)}connectedCallback(){super.connectedCallback(),this._slotted&&this._observeSlotted()}disconnectedCallback(){super.disconnectedCallback(),this._slottedObserver.disconnect()}_adoptSlotted(){let e=this.querySelector(`:scope > input[slot="input"]`)||!1;e!==this._slotted&&(this._slottedObserver.disconnect(),this._slotted=e,this._owned={},e&&(this.value=e.value,this._internals.setFormValue(null),this._observeSlotted()))}_observeSlotted(){this._slottedObserver.observe(this._slotted,{attributes:!0,attributeFilter:[`required`,`disabled`,`readonly`,`aria-label`,`aria-labelledby`,`aria-description`,`aria-invalid`]})}_syncSlotted(){let e=this._slotted,t=e.labels?.length>0||e.hasAttribute(`aria-labelledby`);this._setOwned(e,`aria-label`,t?null:this.label||this.ariaLabel||null),this._setOwned(e,`aria-description`,this.error||this.helper||null),this._setOwned(e,`aria-invalid`,this.error?`true`:null),this._setOwned(e,`required`,this.required?``:null),this._setOwned(e,`disabled`,this.disabled?``:null),this._setOwned(e,`readonly`,this.readonly?``:null),this._slottedObserver.takeRecords()}_setOwned(e,t,n){let r=e.getAttribute(t),i=Object.hasOwn(this._owned,t);r!==null&&!(i&&r===this._owned[t])||r!==n&&(n===null?(i&&e.removeAttribute(t),delete this._owned[t]):(e.setAttribute(t,n),this._owned[t]=n))}_focusSlotted(){this._slotted&&this._slotted.focus()}render(){let e=!!this.error,t=!!this.leadingIcon,n=!!this.trailingIcon,r=!!this._slotted,i=[`input-wrap`,e?`has-error`:``,t?`has-leading`:``,n?`has-trailing`:``].filter(Boolean).join(` `),a=this._inputId,o=`${a}-error`,s=`${a}-helper`,c=this.required||r&&this._slotted.required;return k`
+  `;constructor(){super(),this.type=`text`,this.value=``,this.disabled=!1,this.readonly=!1,this.required=!1,this.size=`md`,this.autofocus=!1,this._slotted=null,this._owned={},this._slottedObserver=new MutationObserver(()=>this.requestUpdate()),this._formDisabled=!1,this._inputId=`pastis-input-${++je}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._slotted?this._slotted.checkValidity():this._internals.checkValidity()}reportValidity(){return this._slotted?this._slotted.reportValidity():this._internals.reportValidity()}formResetCallback(){if(this._slotted){queueMicrotask(()=>{this._slotted&&(this.value=this._slotted.value)});return}this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._slotted?this._slotted.focus(e):super.focus(e)}get _control(){return this._slotted||this.shadowRoot?.querySelector(`input`)||null}willUpdate(e){this._slotted===null&&this._adoptSlotted(),this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled),e.has(`value`)&&this._slotted&&this._slotted.value!==(this.value??``)&&(this._slotted.value=this.value??``)}firstUpdated(){this.autofocus&&this.focus()}updated(){if(this._slotted){this._syncSlotted(),this._internals.setValidity({});return}let e=this.shadowRoot.querySelector(`input`);this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e)}connectedCallback(){super.connectedCallback(),this._slotted&&this._observeSlotted()}disconnectedCallback(){super.disconnectedCallback(),this._slottedObserver.disconnect()}_adoptSlotted(){let e=this.querySelector(`:scope > input[slot="input"]`)||!1;e!==this._slotted&&(this._slottedObserver.disconnect(),this._slotted=e,this._owned={},e&&(this.value=e.value,this._internals.setFormValue(null),this._observeSlotted()))}_observeSlotted(){this._slottedObserver.observe(this._slotted,{attributes:!0,attributeFilter:[`required`,`disabled`,`readonly`,`aria-label`,`aria-labelledby`,`aria-description`,`aria-invalid`]})}_syncSlotted(){let e=this._slotted,t=e.labels?.length>0||e.hasAttribute(`aria-labelledby`);this._setOwned(e,`aria-label`,t?null:this.label||this.ariaLabel||null),this._setOwned(e,`aria-description`,this.error||this.helper||null),this._setOwned(e,`aria-invalid`,this.error?`true`:null),this._setOwned(e,`required`,this.required?``:null),this._setOwned(e,`disabled`,this.disabled?``:null),this._setOwned(e,`readonly`,this.readonly?``:null),this._slottedObserver.takeRecords()}_setOwned(e,t,n){let r=e.getAttribute(t),i=Object.hasOwn(this._owned,t);r!==null&&!(i&&r===this._owned[t])||r!==n&&(n===null?(i&&e.removeAttribute(t),delete this._owned[t]):(e.setAttribute(t,n),this._owned[t]=n))}_focusSlotted(){this._slotted&&this._slotted.focus()}render(){let e=!!this.error,t=!!this.leadingIcon,n=!!this.trailingIcon,r=!!this._slotted,i=[`input-wrap`,e?`has-error`:``,t?`has-leading`:``,n?`has-trailing`:``].filter(Boolean).join(` `),a=this._inputId,o=`${a}-error`,s=`${a}-helper`,c=this.required||r&&this._slotted.required;return O`
       <div class="field">
-        ${this.label?k`
+        ${this.label?O`
           <label
-            for=${r?M:a}
-            aria-hidden=${r?`true`:M}
+            for=${r?j:a}
+            aria-hidden=${r?`true`:j}
             @click=${this._focusSlotted}
           >
             ${this.label}
-            ${c?k`<span class="required-dot" aria-hidden="true">*</span>`:``}
+            ${c?O`<span class="required-dot" aria-hidden="true">*</span>`:``}
           </label>
         `:``}
         <div class="${i}">
-          ${t?k`<span class="leading-icon" aria-hidden="true">${this.leadingIcon}</span>`:``}
+          ${t?O`<span class="leading-icon" aria-hidden="true">${this.leadingIcon}</span>`:``}
           <slot
             name="input"
             @slotchange=${this._adoptSlotted}
             @input=${this._handleSlottedInput}
             @change=${this._handleSlottedChange}
           ></slot>
-          ${r?``:k`
+          ${r?``:O`
             <input
               id="${a}"
               type="${this.type}"
@@ -352,15 +352,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               ?readonly="${this.readonly}"
               ?required="${this.required}"
               name="${this.name||``}"
-              maxlength=${this.maxlength??M}
-              minlength=${this.minlength??M}
-              pattern=${this.pattern||M}
-              autocomplete=${this.autocomplete||M}
-              inputmode=${this.inputmode||M}
-              enterkeyhint=${this.enterkeyhint||M}
-              spellcheck=${this.spellcheck??M}
-              autocapitalize=${this.autocapitalize||M}
-              aria-label=${this.label||this.ariaLabel||M}
+              maxlength=${this.maxlength??j}
+              minlength=${this.minlength??j}
+              pattern=${this.pattern||j}
+              autocomplete=${this.autocomplete||j}
+              inputmode=${this.inputmode||j}
+              enterkeyhint=${this.enterkeyhint||j}
+              spellcheck=${this.spellcheck??j}
+              autocapitalize=${this.autocapitalize||j}
+              aria-label=${this.label||this.ariaLabel||j}
               aria-invalid="${e}"
               aria-describedby="${e?o:this.helper?s:``}"
               @input="${this._handleInput}"
@@ -368,11 +368,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               part="input"
             />
           `}
-          ${n?k`<span class="trailing-icon" aria-hidden="true">${this.trailingIcon}</span>`:``}
+          ${n?O`<span class="trailing-icon" aria-hidden="true">${this.trailingIcon}</span>`:``}
         </div>
-        ${e?k`<p class="error-text" id="${o}" role="alert">⚠ ${this.error}</p>`:this.helper?k`<p class="helper-text" id="${s}" aria-hidden=${r?`true`:M}>${this.helper}</p>`:``}
+        ${e?O`<p class="error-text" id="${o}" role="alert">⚠ ${this.error}</p>`:this.helper?O`<p class="helper-text" id="${s}" aria-hidden=${r?`true`:j}>${this.helper}</p>`:``}
       </div>
-    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleSlottedInput(e){e.target===this._slotted&&this._handleInput(e)}_handleSlottedChange(e){e.target===this._slotted&&this._handleChange(e)}_onKeydown(e){if(e.key!==`Enter`||e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;let t=this._control;if(!t||e.composedPath()[0]!==t)return;let n=this._slotted?this._slotted.form:this.form;if(!n)return;let r=je(n);if(this._slotted){if(e.defaultPrevented||r&&Me(r))return;e.preventDefault(),this._submitVia(n,r);return}setTimeout(()=>{e.defaultPrevented||this._submitVia(n,r)})}_submitVia(e,t){if(!t){e.requestSubmit();return}t.disabled||t.matches(`:disabled`)||t.click()}};customElements.define(`pastis-input`,Ne);var Pe=class extends V{static formAssociated=!0;static shadowRootOptions={...V.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String},labelCase:{type:String,attribute:`label-case`},ariaLabel:{type:String,attribute:`aria-label`},_formDisabled:{state:!0}};static styles=s`
+    `}_handleInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleSlottedInput(e){e.target===this._slotted&&this._handleInput(e)}_handleSlottedChange(e){e.target===this._slotted&&this._handleChange(e)}_onKeydown(e){if(e.key!==`Enter`||e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;let t=this._control;if(!t||e.composedPath()[0]!==t)return;let n=this._slotted?this._slotted.form:this.form;if(!n)return;let r=Me(n);if(this._slotted){if(e.defaultPrevented||r&&Ne(r))return;e.preventDefault(),this._submitVia(n,r);return}setTimeout(()=>{e.defaultPrevented||this._submitVia(n,r)})}_submitVia(e,t){if(!t){e.requestSubmit();return}t.disabled||t.matches(`:disabled`)||t.click()}};customElements.define(`pastis-input`,Pe);var Fe=class extends B{static formAssociated=!0;static shadowRootOptions={...B.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},checked:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},name:{type:String},value:{type:String},helper:{type:String},labelCase:{type:String,attribute:`label-case`},ariaLabel:{type:String,attribute:`aria-label`},_formDisabled:{state:!0}};static styles=s`
     :host { display: inline-flex; align-items: flex-start; position: relative; }
 
     label {
@@ -470,7 +470,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-tertiary, #909498);
       text-transform: none;
     }
-  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``,this.required=!1,this.labelCase=`upper`,this._formDisabled=!1,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.checked=this._defaultChecked,this.indeterminate=!1}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){this.checked=e===`true`}willUpdate(e){this.hasUpdated||(this._defaultChecked=this.checked),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(e){let t=this.shadowRoot.querySelector(`input`);e.has(`indeterminate`)&&(t.indeterminate=this.indeterminate),this._internals.setFormValue(this.checked?this.value||`on`:null,String(this.checked)),t.validity.valid?this._internals.setValidity({}):this._internals.setValidity(t.validity,t.validationMessage,t)}render(){return k`
+  `;constructor(){super(),this.checked=!1,this.indeterminate=!1,this.disabled=!1,this.value=``,this.required=!1,this.labelCase=`upper`,this._formDisabled=!1,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.checked=this._defaultChecked,this.indeterminate=!1}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){this.checked=e===`true`}willUpdate(e){this.hasUpdated||(this._defaultChecked=this.checked),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(e){let t=this.shadowRoot.querySelector(`input`);e.has(`indeterminate`)&&(t.indeterminate=this.indeterminate),this._internals.setFormValue(this.checked?this.value||`on`:null,String(this.checked)),t.validity.valid?this._internals.setValidity({}):this._internals.setValidity(t.validity,t.validationMessage,t)}render(){return O`
       <label class=${this.labelCase===`none`?`case-none`:``} @click="${this._handleClick}">
         <input
           type="checkbox"
@@ -479,23 +479,23 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ?required="${this.required}"
           name="${this.name||``}"
           value="${this.value||``}"
-          aria-label=${!this.label&&this.ariaLabel?this.ariaLabel:M}
+          aria-label=${!this.label&&this.ariaLabel?this.ariaLabel:j}
           aria-checked="${this.indeterminate?`mixed`:this.checked}"
-          aria-describedby=${this.helper&&this.label?`helper`:M}
+          aria-describedby=${this.helper&&this.label?`helper`:j}
           @change="${this._handleChange}"
         />
         <span class="box">
           <span class="checkmark"></span>
           <span class="indeterminate-mark"></span>
         </span>
-        ${this.label?k`
+        ${this.label?O`
           <span class="label-content">
             <span>${this.label}</span>
-            ${this.helper?k`<span class="helper" id="helper" aria-hidden="true">${this.helper}</span>`:``}
+            ${this.helper?O`<span class="helper" id="helper" aria-hidden="true">${this.helper}</span>`:``}
           </span>
         `:``}
       </label>
-    `}_handleClick(e){if(this.disabled||this._formDisabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,Pe);var Fe=e=>e??M,Ie=class extends V{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=s`
+    `}_handleClick(e){if(this.disabled||this._formDisabled){e.preventDefault();return}}_handleChange(e){this.checked=e.target.checked,this.indeterminate=!1,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-checkbox`,Fe);var Ie=e=>e??j,Le=class extends B{static properties={checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},label:{type:String},labelPosition:{type:String,attribute:`label-position`},size:{type:String,reflect:!0},name:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; }
 
     label {
@@ -563,7 +563,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .label-text { line-height: 1.4; }
-  `;constructor(){super(),this.checked=!1,this.disabled=!1,this.labelPosition=`right`,this.size=`md`}render(){let e=this.label?k`<span class="label-text">${this.label}</span>`:``,t=this.label?void 0:this.getAttribute(`aria-label`)||`Toggle`;return k`
+  `;constructor(){super(),this.checked=!1,this.disabled=!1,this.labelPosition=`right`,this.size=`md`}render(){let e=this.label?O`<span class="label-text">${this.label}</span>`:``,t=this.label?void 0:this.getAttribute(`aria-label`)||`Toggle`;return O`
       <label>
         ${this.labelPosition===`left`?e:``}
         <input
@@ -573,7 +573,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           name="${this.name||``}"
           role="switch"
           aria-checked="${this.checked}"
-          aria-label="${Fe(t)}"
+          aria-label="${Ie(t)}"
           @change="${this._handleChange}"
         />
         <span class="track" aria-hidden="true">
@@ -581,7 +581,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </span>
         ${this.labelPosition===`left`?``:e}
       </label>
-    `}_handleChange(e){if(this.disabled)return;let t=e.target.checked;this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:t},bubbles:!0,composed:!0,cancelable:!0}))?this.checked=t:e.target.checked=this.checked}};customElements.define(`pastis-toggle`,Ie);var Le=class extends V{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=s`
+    `}_handleChange(e){if(this.disabled)return;let t=e.target.checked;this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:t},bubbles:!0,composed:!0,cancelable:!0}))?this.checked=t:e.target.checked=this.checked}};customElements.define(`pastis-toggle`,Le);var Re=class extends B{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},dot:{type:Boolean,reflect:!0},count:{type:Number},max:{type:Number},label:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; }
 
     .badge {
@@ -671,11 +671,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       background: currentColor;
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.dot=!1,this.max=99}render(){if(this.dot)return k`<span class="badge" role="status" part="badge" aria-label="${this.label||`indicator`}"></span>`;let e;return this.count!==void 0&&(e=this.count>this.max?`${this.max}+`:`${this.count}`),k`
+  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.dot=!1,this.max=99}render(){if(this.dot)return O`<span class="badge" role="status" part="badge" aria-label="${this.label||`indicator`}"></span>`;let e;return this.count!==void 0&&(e=this.count>this.max?`${this.max}+`:`${this.count}`),O`
       <span class="badge" part="badge">
-        ${e===void 0?k`<slot></slot>`:e}
+        ${e===void 0?O`<slot></slot>`:e}
       </span>
-    `}};customElements.define(`pastis-badge`,Le);var Re=class extends V{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-badge`,Re);var ze=class extends B{static properties={src:{type:String},alt:{type:String},name:{type:String},size:{type:String,reflect:!0},shape:{type:String,reflect:!0},status:{type:String,reflect:!0},color:{type:String}};static styles=s`
     :host {
       display: inline-flex;
       position: relative;
@@ -748,12 +748,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([status="offline"]) .status-dot { background: var(--text-tertiary, #909498); }
 
     .icon { font-size: 1.2em; }
-  `;constructor(){super(),this.size=`md`,this.shape=`circle`,this.alt=``}_getInitials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}_getColorFromName(){if(this.color)return this.color;let e=[`var(--avatar-color-1)`,`var(--avatar-color-2)`,`var(--avatar-color-3)`,`var(--avatar-color-4)`,`var(--avatar-color-5)`,`var(--avatar-color-6)`,`var(--avatar-color-7)`,`var(--avatar-color-8)`];if(!this.name)return e[0];let t=0;for(let e=0;e<this.name.length;e++)t=this.name.charCodeAt(e)+((t<<5)-t);return e[Math.abs(t)%e.length]}render(){let e=this._getColorFromName();return k`
+  `;constructor(){super(),this.size=`md`,this.shape=`circle`,this.alt=``}_getInitials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}_getColorFromName(){if(this.color)return this.color;let e=[`var(--avatar-color-1)`,`var(--avatar-color-2)`,`var(--avatar-color-3)`,`var(--avatar-color-4)`,`var(--avatar-color-5)`,`var(--avatar-color-6)`,`var(--avatar-color-7)`,`var(--avatar-color-8)`];if(!this.name)return e[0];let t=0;for(let e=0;e<this.name.length;e++)t=this.name.charCodeAt(e)+((t<<5)-t);return e[Math.abs(t)%e.length]}render(){let e=this._getColorFromName();return O`
       <div class="avatar" part="avatar" style="background:${this.src?`transparent`:e}" role="img" aria-label="${this.alt||this.name||`Avatar`}${this.status?`, status: `+this.status:``}">
-        ${this.src?k`<img src="${this.src}" alt="${this.alt||this.name||`User avatar`}" />`:this.name?k`<span>${this._getInitials()}</span>`:k`<span class="icon">👤</span>`}
+        ${this.src?O`<img src="${this.src}" alt="${this.alt||this.name||`User avatar`}" />`:this.name?O`<span>${this._getInitials()}</span>`:O`<span class="icon">👤</span>`}
       </div>
-      ${this.status?k`<span class="status-dot" aria-hidden="true"></span>`:``}
-    `}};customElements.define(`pastis-avatar`,Re);var ze=class extends V{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=s`
+      ${this.status?O`<span class="status-dot" aria-hidden="true"></span>`:``}
+    `}};customElements.define(`pastis-avatar`,ze);var Be=class extends B{static properties={variant:{type:String,reflect:!0},padding:{type:String,reflect:!0},hoverable:{type:Boolean,reflect:!0},clickable:{type:Boolean,reflect:!0},selected:{type:Boolean,reflect:!0}};static styles=s`
     :host {
       display: block;
     }
@@ -958,7 +958,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       transform: translate(-2px, -2px);
       box-shadow: var(--shadow-md, 5px 5px 0 #231f20);
     }
-  `;constructor(){super(),this.variant=`default`,this.padding=`md`,this.hoverable=!1,this.clickable=!1,this.selected=!1}render(){if(this.variant===`cover`){let e=k`
+  `;constructor(){super(),this.variant=`default`,this.padding=`md`,this.hoverable=!1,this.clickable=!1,this.selected=!1}render(){if(this.variant===`cover`){let e=O`
         <div class="cover-bg"><slot name="media"></slot></div>
         <div class="cover-overlay"></div>
         <div class="cover-content">
@@ -966,15 +966,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <div class="card-body"><slot></slot></div>
           <slot name="footer" class="card-footer"></slot>
         </div>
-      `;return this.clickable?k`
+      `;return this.clickable?O`
           <button class="card" part="card" aria-pressed="${this.selected}" @click="${this._handleClick}">
             ${e}
           </button>
-        `:k`
+        `:O`
         <div class="card" part="card" aria-selected="${this.selected||void 0}">
           ${e}
         </div>
-      `}return this.clickable?k`
+      `}return this.clickable?O`
         <button
           class="card"
           part="card"
@@ -988,7 +988,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
           <slot name="footer" class="card-footer"></slot>
         </button>
-      `:k`
+      `:O`
       <div
         class="card"
         part="card"
@@ -1001,7 +1001,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         </div>
         <slot name="footer" class="card-footer"></slot>
       </div>
-    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,ze);var Be=class extends V{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=s`
+    `}_handleClick(){this.clickable&&this.dispatchEvent(new CustomEvent(`pastis-click`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-card`,Be);var Ve=class extends B{static properties={variant:{type:String,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},visible:{type:Boolean,reflect:!0},icon:{type:String}};static styles=s`
     :host { display: block; }
     :host([visible="false"]) { display: none; }
 
@@ -1074,18 +1074,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       font-family: var(--font-family-mono, 'Fira Code', monospace);
     }
     .dismiss-btn:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
-  `;constructor(){super(),this.variant=`info`,this.dismissible=!1,this.visible=!0}_getIcon(){return this.icon?this.icon:{success:`✓`,warning:`⚠`,error:`✕`,info:`ℹ`}[this.variant]||`ℹ`}render(){return this.visible?k`
+  `;constructor(){super(),this.variant=`info`,this.dismissible=!1,this.visible=!0}_getIcon(){return this.icon?this.icon:{success:`✓`,warning:`⚠`,error:`✕`,info:`ℹ`}[this.variant]||`ℹ`}render(){return this.visible?O`
       <div class="alert" role="alert" part="alert">
         <span class="alert-icon" aria-hidden="true">${this._getIcon()}</span>
         <div class="alert-content">
-          ${this.title?k`<p class="alert-title">${this.title}</p>`:``}
+          ${this.title?O`<p class="alert-title">${this.title}</p>`:``}
           <div class="alert-body"><slot></slot></div>
         </div>
-        ${this.dismissible?k`
+        ${this.dismissible?O`
           <button class="dismiss-btn" @click="${this._dismiss}" aria-label="Dismiss">✕</button>
         `:``}
       </div>
-    `:k``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,Be);function H(){let e=document.activeElement;for(;e?.shadowRoot?.activeElement;)e=e.shadowRoot.activeElement;return e}function Ve(e){for(let t=H();t;t=t.getRootNode().host)if(t===e||e.contains(t))return!0;return!1}function He(e){return e.tabIndex<0||e.localName===`slot`||e.localName===`a`&&!e.hasAttribute(`href`)&&!e.hasAttribute(`tabindex`)||e.disabled||e.matches(`:disabled`)||e.inert||e.closest(`[inert]`)?!1:typeof e.checkVisibility==`function`?e.checkVisibility({visibilityProperty:!0}):e.getClientRects().length>0}function Ue(e){let t=e=>e instanceof HTMLInputElement&&e.type===`radio`&&e.name?e.name:null,n=new Map;for(let r of e){let e=t(r);if(!e)continue;let i=r.form??r.getRootNode(),a=n.get(i)??new Map;n.set(i,a);let o=a.get(e)??[];a.set(e,o),o.push(r)}let r=new Set;for(let e of n.values())for(let t of e.values())r.add(t.find(e=>e.checked)??t[0]);return e.filter(e=>!t(e)||r.has(e))}function*U(e){for(let t of e)if(t instanceof HTMLElement)if(He(t)&&(yield t),t.localName===`slot`){let e=t.assignedElements({flatten:!0});yield*U(e.length?e:t.children)}else t.shadowRoot?yield*U(t.shadowRoot.children):yield*U(t.children)}var We=class extends V{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},role:{type:String}};static styles=s`
+    `:O``}_dismiss(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-dismiss`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-alert`,Ve);function V(){let e=document.activeElement;for(;e?.shadowRoot?.activeElement;)e=e.shadowRoot.activeElement;return e}function He(e){for(let t=V();t;t=t.getRootNode().host)if(t===e||e.contains(t))return!0;return!1}function Ue(e){return e.tabIndex<0||e.localName===`slot`||e.localName===`a`&&!e.hasAttribute(`href`)&&!e.hasAttribute(`tabindex`)||e.disabled||e.matches(`:disabled`)||e.inert||e.closest(`[inert]`)?!1:typeof e.checkVisibility==`function`?e.checkVisibility({visibilityProperty:!0}):e.getClientRects().length>0}function We(e){let t=e=>e instanceof HTMLInputElement&&e.type===`radio`&&e.name?e.name:null,n=new Map;for(let r of e){let e=t(r);if(!e)continue;let i=r.form??r.getRootNode(),a=n.get(i)??new Map;n.set(i,a);let o=a.get(e)??[];a.set(e,o),o.push(r)}let r=new Set;for(let e of n.values())for(let t of e.values())r.add(t.find(e=>e.checked)??t[0]);return e.filter(e=>!t(e)||r.has(e))}function*H(e){for(let t of e)if(t instanceof HTMLElement)if(Ue(t)&&(yield t),t.localName===`slot`){let e=t.assignedElements({flatten:!0});yield*H(e.length?e:t.children)}else t.shadowRoot?yield*H(t.shadowRoot.children):yield*H(t.children)}var Ge=class extends B{static properties={open:{type:Boolean,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},role:{type:String}};static styles=s`
     :host { display: contents; }
     :host(:not([open])) { display: none; }
 
@@ -1195,7 +1195,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       justify-content: flex-end;
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this.role=`dialog`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null,this._dialogFocus=null,this._openGeneration=0}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown),this.open&&this.hasUpdated&&this.updateComplete.then(()=>{if(!this.open||!this.isConnected)return;let e=this._dialog;e&&!e.matches(`:modal`)&&(e.removeAttribute(`open`),e.showModal()),document.body.style.overflow=`hidden`,this._focusInitial()})}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown),this.open&&(document.body.style.overflow=``)}attributeChangedCallback(e,t,n){if(e!==`role`){super.attributeChangedCallback(e,t,n);return}this._consumingRole||(this.role=n??`dialog`,n!==null&&(this._consumingRole=!0,this.removeAttribute(`role`),this._consumingRole=!1))}get _dialog(){return this.shadowRoot?.querySelector(`dialog`)??null}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);return e?Ue([...U(e.children)]):[]}willUpdate(e){e.has(`open`)&&!this.open&&this._dialog?.close()}updated(e){if(e.has(`open`))if(this._openGeneration++,this.open){this._previousFocus=H(),document.body.style.overflow=`hidden`;let e=this._dialog;e&&!e.open&&e.isConnected&&e.showModal(),this._dialogFocus=H(),this._focusInitialWhenReady()}else e.get(`open`)&&(document.body.style.overflow=``,this._previousFocus?.isConnected&&H()!==this._previousFocus&&this._previousFocus.focus(),this._previousFocus=null,this._dialogFocus=null)}async _focusInitialWhenReady(){let e=this._openGeneration,t=[...this.querySelectorAll(`*`)].map(e=>e.updateComplete).filter(e=>e&&typeof e.then==`function`);if(t.length&&await Promise.all(t),e!==this._openGeneration||!this.open||!this.isConnected)return;let n=H();n&&(this.contains(n)||this.shadowRoot.contains(n)||this.contains(n.getRootNode().host))&&n!==this._dialogFocus&&n!==this._dialog||this._focusInitial()}_focusInitial(){let e=this._getFocusableElements().filter(e=>e.getRootNode()!==this.shadowRoot),t=[...this.querySelectorAll(`[autofocus]`),...e,this.shadowRoot.querySelector(`.close-btn`),this.shadowRoot.querySelector(`.modal-body`)];for(let e of t)if(e&&(e.focus(),Ve(e)))return}render(){if(!this.open)return k``;let e=this.role===`alertdialog`?`alertdialog`:`dialog`;return k`
+  `;constructor(){super(),this.open=!1,this.closable=!0,this.persistent=!1,this.size=`md`,this.role=`dialog`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null,this._dialogFocus=null,this._openGeneration=0}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown),this.open&&this.hasUpdated&&this.updateComplete.then(()=>{if(!this.open||!this.isConnected)return;let e=this._dialog;e&&!e.matches(`:modal`)&&(e.removeAttribute(`open`),e.showModal()),document.body.style.overflow=`hidden`,this._focusInitial()})}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown),this.open&&(document.body.style.overflow=``)}attributeChangedCallback(e,t,n){if(e!==`role`){super.attributeChangedCallback(e,t,n);return}this._consumingRole||(this.role=n??`dialog`,n!==null&&(this._consumingRole=!0,this.removeAttribute(`role`),this._consumingRole=!1))}get _dialog(){return this.shadowRoot?.querySelector(`dialog`)??null}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.dialog`);return e?We([...H(e.children)]):[]}willUpdate(e){e.has(`open`)&&!this.open&&this._dialog?.close()}updated(e){if(e.has(`open`))if(this._openGeneration++,this.open){this._previousFocus=V(),document.body.style.overflow=`hidden`;let e=this._dialog;e&&!e.open&&e.isConnected&&e.showModal(),this._dialogFocus=V(),this._focusInitialWhenReady()}else e.get(`open`)&&(document.body.style.overflow=``,this._previousFocus?.isConnected&&V()!==this._previousFocus&&this._previousFocus.focus(),this._previousFocus=null,this._dialogFocus=null)}async _focusInitialWhenReady(){let e=this._openGeneration,t=[...this.querySelectorAll(`*`)].map(e=>e.updateComplete).filter(e=>e&&typeof e.then==`function`);if(t.length&&await Promise.all(t),e!==this._openGeneration||!this.open||!this.isConnected)return;let n=V();n&&(this.contains(n)||this.shadowRoot.contains(n)||this.contains(n.getRootNode().host))&&n!==this._dialogFocus&&n!==this._dialog||this._focusInitial()}_focusInitial(){let e=this._getFocusableElements().filter(e=>e.getRootNode()!==this.shadowRoot),t=[...this.querySelectorAll(`[autofocus]`),...e,this.shadowRoot.querySelector(`.close-btn`),this.shadowRoot.querySelector(`.modal-body`)];for(let e of t)if(e&&(e.focus(),He(e)))return}render(){if(!this.open)return O``;let e=this.role===`alertdialog`?`alertdialog`:`dialog`;return O`
       <dialog
         class="backdrop"
         @click="${this._handleBackdropClick}"
@@ -1211,7 +1211,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <div class="dialog" part="dialog">
           <div class="modal-header">
             <h2 class="modal-title">${this.title||``}</h2>
-            ${this.closable?k`
+            ${this.closable?O`
               <button class="close-btn" @click="${this.close}" aria-label="Close dialog">✕</button>
             `:``}
           </div>
@@ -1221,7 +1221,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="modal-footer"></slot>
         </div>
       </dialog>
-    `}_handleBackdropClick(e){e.target===e.currentTarget&&(this.persistent||this.close())}_handleKeydown(e){!this.open||e.key!==`Escape`||e.defaultPrevented||(e.preventDefault(),this.persistent||this.close())}_handleCancel(e){e.preventDefault(),this.persistent||this.close()}_handleNativeClose(e){e.target!==this._dialog||e.target.open||this.open&&this.close()}_handleTab(e){if(e.key!==`Tab`||e.altKey||e.ctrlKey||e.metaKey)return;let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1],i=H(),a=t.includes(i);e.shiftKey&&(i===n||!a)?(e.preventDefault(),r.focus()):!e.shiftKey&&(i===r||!a)&&(e.preventDefault(),n.focus())}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,We);var Ge=class extends V{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=s`
+    `}_handleBackdropClick(e){e.target===e.currentTarget&&(this.persistent||this.close())}_handleKeydown(e){!this.open||e.key!==`Escape`||e.defaultPrevented||(e.preventDefault(),this.persistent||this.close())}_handleCancel(e){e.preventDefault(),this.persistent||this.close()}_handleNativeClose(e){e.target!==this._dialog||e.target.open||this.open&&this.close()}_handleTab(e){if(e.key!==`Tab`||e.altKey||e.ctrlKey||e.metaKey)return;let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1],i=V(),a=t.includes(i);e.shiftKey&&(i===n||!a)?(e.preventDefault(),r.focus()):!e.shiftKey&&(i===r||!a)&&(e.preventDefault(),n.focus())}open_(){this.open=!0,this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}close(){this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-modal`,Ge);var Ke=class extends B{static properties={message:{type:String},variant:{type:String,reflect:!0},duration:{type:Number},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},title:{type:String},dismissible:{type:Boolean,reflect:!0},_hiding:{state:!0}};static styles=s`
     :host { display: block; }
 
     .toast-container {
@@ -1321,23 +1321,23 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       from { width: 100%; }
       to { width: 0%; }
     }
-  `;constructor(){super(),this.variant=`default`,this.duration=4e3,this.position=`top-right`,this.visible=!1,this.dismissible=!0,this._hiding=!1,this._timer=null,this._hideTimer=null}_getIcon(){return{success:`✓`,error:`✕`,warning:`⚠`,info:`ℹ`,default:`🔔`}[this.variant]||`🔔`}show(){this.visible=!0,this.duration>0&&(clearTimeout(this._timer),this._timer=setTimeout(()=>this.hide(),this.duration)),this.dispatchEvent(new CustomEvent(`pastis-show`,{bubbles:!0,composed:!0}))}hide(){clearTimeout(this._hideTimer),this._hiding=!0,this._hideTimer=setTimeout(()=>{this._hiding=!1,this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-hide`,{bubbles:!0,composed:!0}))},200)}disconnectedCallback(){super.disconnectedCallback(),clearTimeout(this._timer),clearTimeout(this._hideTimer)}render(){return this.visible?k`
+  `;constructor(){super(),this.variant=`default`,this.duration=4e3,this.position=`top-right`,this.visible=!1,this.dismissible=!0,this._hiding=!1,this._timer=null,this._hideTimer=null}_getIcon(){return{success:`✓`,error:`✕`,warning:`⚠`,info:`ℹ`,default:`🔔`}[this.variant]||`🔔`}show(){this.visible=!0,this.duration>0&&(clearTimeout(this._timer),this._timer=setTimeout(()=>this.hide(),this.duration)),this.dispatchEvent(new CustomEvent(`pastis-show`,{bubbles:!0,composed:!0}))}hide(){clearTimeout(this._hideTimer),this._hiding=!0,this._hideTimer=setTimeout(()=>{this._hiding=!1,this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-hide`,{bubbles:!0,composed:!0}))},200)}disconnectedCallback(){super.disconnectedCallback(),clearTimeout(this._timer),clearTimeout(this._hideTimer)}render(){return this.visible?O`
       <div class="toast-container" part="container">
         <div class="toast ${this._hiding?`hiding`:``}" role="alert" aria-live="${this.variant===`error`?`assertive`:`polite`}" part="toast">
           <span class="toast-icon" aria-hidden="true">${this._getIcon()}</span>
           <div class="toast-content">
-            ${this.title?k`<p class="toast-title">${this.title}</p>`:``}
+            ${this.title?O`<p class="toast-title">${this.title}</p>`:``}
             <p class="toast-message">${this.message||``}<slot></slot></p>
           </div>
-          ${this.dismissible?k`
+          ${this.dismissible?O`
             <button class="dismiss-btn" @click="${this.hide}" aria-label="Dismiss">✕</button>
           `:``}
-          ${this.duration>0?k`
+          ${this.duration>0?O`
             <div class="progress-bar" style="animation-duration:${this.duration}ms"></div>
           `:``}
         </div>
       </div>
-    `:k``}};customElements.define(`pastis-toast`,Ge);var Ke=class extends V{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=s`
+    `:O``}};customElements.define(`pastis-toast`,Ke);var qe=class extends B{static properties={size:{type:String,reflect:!0},color:{type:String},variant:{type:String,reflect:!0},label:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; justify-content: center; }
 
     .spinner-wrap {
@@ -1416,7 +1416,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       letter-spacing: var(--letter-spacing-wide, 0.05em);
       color: var(--text-tertiary, #909498);
     }
-  `;constructor(){super(),this.size=`md`,this.variant=`ring`}render(){return k`
+  `;constructor(){super(),this.size=`md`,this.variant=`ring`}render(){return O`
       <div class="spinner-wrap" role="status" aria-label="${this.label||`Loading`}">
         <span class="ring" style="${this.color?`border-top-color:${this.color}`:``}"></span>
         <span class="dots">
@@ -1424,10 +1424,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <span class="dot" style="${this.color?`background:${this.color}`:``}"></span>
           <span class="dot" style="${this.color?`background:${this.color}`:``}"></span>
         </span>
-        ${this.label?k`<span class="label">${this.label}</span>`:``}
+        ${this.label?O`<span class="label">${this.label}</span>`:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-spinner`,Ke);var qe=class extends V{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=s`
+    `}};customElements.define(`pastis-spinner`,qe);var Je=class extends B{static properties={variant:{type:String,reflect:!0},width:{type:String},height:{type:String},lines:{type:Number},animated:{type:Boolean,reflect:!0},borderRadius:{type:String,attribute:`border-radius`}};static styles=s`
     :host { display: block; }
 
     .skeleton {
@@ -1468,16 +1468,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     .line { height: 14px; border-radius: var(--radius-sm, 4px); border: var(--border-width, 1px) solid var(--border-subtle, #383c44); background: var(--bg-elevated, #383c44); }
     .line:last-child { width: 70% !important; }
-  `;constructor(){super(),this.variant=`rect`,this.animated=!0,this.lines=3}render(){if(this.variant===`lines`)return k`
+  `;constructor(){super(),this.variant=`rect`,this.animated=!0,this.lines=3}render(){if(this.variant===`lines`)return O`
         <div class="lines-wrap" part="skeleton">
-          ${Array.from({length:this.lines},(e,t)=>k`
+          ${Array.from({length:this.lines},(e,t)=>O`
             <div
               class="skeleton line"
               style="width:${t===this.lines-1?`70%`:`100%`}"
             ></div>
           `)}
         </div>
-      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return k`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return k`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,qe);var Je=class extends V{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=s`
+      `;let e=[this.width?`width:${this.width}`:``,this.height?`height:${this.height}`:``,this.borderRadius?`border-radius:${this.borderRadius}`:``].filter(Boolean).join(`;`);if(this.variant===`circle`){let e=this.width||this.height||`40px`;return O`<div class="skeleton" style="width:${e};height:${e};border-radius:50%${this.borderRadius?`;border-radius:`+this.borderRadius:``}" part="skeleton"></div>`}return O`<div class="skeleton" style="${e||`width:100%;height:16px`}" part="skeleton"></div>`}};customElements.define(`pastis-skeleton`,Je);var Ye=class extends B{static properties={content:{type:String},position:{type:String,reflect:!0},visible:{type:Boolean,reflect:!0},delay:{type:Number},maxWidth:{type:String,attribute:`max-width`},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: inline-flex; position: relative; }
 
     .trigger { display: contents; }
@@ -1541,7 +1541,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([visible]) .tooltip {
       opacity: 1;
     }
-  `;constructor(){super(),this.position=`top`,this.visible=!1,this.delay=300,this._showTimer=null,this._hideTimer=null}render(){return k`
+  `;constructor(){super(),this.position=`top`,this.visible=!1,this.delay=300,this._showTimer=null,this._hideTimer=null}render(){return O`
       <span
         class="trigger"
         @mouseenter="${this._show}"
@@ -1561,7 +1561,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         ${this.content||``}
         <slot name="content"></slot>
       </div>
-    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,Je);var Ye=class extends V{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=s`
+    `}_show(){clearTimeout(this._hideTimer),this._showTimer=setTimeout(()=>{this.visible=!0},this.delay)}_hide(){clearTimeout(this._showTimer),this._hideTimer=setTimeout(()=>{this.visible=!1},100)}};customElements.define(`pastis-tooltip`,Ye);var Xe=class extends B{static properties={label:{type:String},placeholder:{type:String},options:{type:Array},value:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},searchable:{type:Boolean,reflect:!0},multiple:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},error:{type:String}};static styles=s`
     :host { display: block; background: var(--bg-primary, #0d0d0d); }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -1714,9 +1714,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       text-transform: uppercase;
       letter-spacing: var(--letter-spacing-wide, 0.05em);
     }
-  `;constructor(){super(),this.options=[],this.open=!1,this.disabled=!1,this.searchable=!1,this.multiple=!1,this.size=`md`,this._search=``,this._selectedValues=[],this._boundClose=this._handleOutsideClick.bind(this),this._focusedIndex=-1,this._labelId=`pastis-dropdown-label-${Math.random().toString(36).slice(2,9)}`,this._listboxId=`pastis-dropdown-listbox-${Math.random().toString(36).slice(2,9)}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_toggle(){this.disabled||(this.open=!this.open,this.open&&(this._focusedIndex=-1,this.searchable?requestAnimationFrame(()=>this.shadowRoot?.querySelector(`.search-input`)?.focus()):requestAnimationFrame(()=>this._focusOptionAt(0))))}_getOptionElements(){return Array.from(this.shadowRoot?.querySelectorAll(`.option`)||[])}_focusOptionAt(e){let t=this._getOptionElements();if(!t.length)return;let n=Math.max(0,Math.min(e,t.length-1));this._focusedIndex=n,t[n]?.focus()}_handleTriggerKeydown(e){e.key===`ArrowDown`?(e.preventDefault(),this.open?this._focusOptionAt(this._focusedIndex+1):(this.open=!0,this._focusedIndex=-1,requestAnimationFrame(()=>this._focusOptionAt(0)))):e.key===`ArrowUp`?(e.preventDefault(),this.open&&this._focusOptionAt(this._focusedIndex-1)):e.key===`Escape`?this.open&&(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&this._toggle()}_handleOptionKeydown(e,t,n){e.key===`ArrowDown`?(e.preventDefault(),this._focusOptionAt(n+1)):e.key===`ArrowUp`?(e.preventDefault(),n===0?this.shadowRoot?.querySelector(`.trigger`)?.focus():this._focusOptionAt(n-1)):e.key===`Escape`?(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),this._selectOption(t))}_selectOption(e){e.disabled||(this.multiple?(this._selectedValues.indexOf(e.value)>-1?this._selectedValues=this._selectedValues.filter(t=>t!==e.value):this._selectedValues=[...this._selectedValues,e.value],this.requestUpdate()):(this.value=e.value,this.open=!1,this._search=``),this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.multiple?this._selectedValues:e.value,option:e},bubbles:!0,composed:!0})))}_getLabel(){return this.multiple?this._selectedValues.length?this._selectedValues.map(e=>this.options.find(t=>t.value===e)?.label||e).join(`, `):null:this.options.find(e=>e.value===this.value)?.label||null}_isSelected(e){return this.multiple?this._selectedValues.includes(e.value):e.value===this.value}_getFilteredOptions(){return this._search?this.options.filter(e=>e.label.toLowerCase().includes(this._search.toLowerCase())):this.options}render(){let e=this._getLabel(),t=this._getFilteredOptions();return k`
+  `;constructor(){super(),this.options=[],this.open=!1,this.disabled=!1,this.searchable=!1,this.multiple=!1,this.size=`md`,this._search=``,this._selectedValues=[],this._boundClose=this._handleOutsideClick.bind(this),this._focusedIndex=-1,this._labelId=`pastis-dropdown-label-${Math.random().toString(36).slice(2,9)}`,this._listboxId=`pastis-dropdown-listbox-${Math.random().toString(36).slice(2,9)}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_toggle(){this.disabled||(this.open=!this.open,this.open&&(this._focusedIndex=-1,this.searchable?requestAnimationFrame(()=>this.shadowRoot?.querySelector(`.search-input`)?.focus()):requestAnimationFrame(()=>this._focusOptionAt(0))))}_getOptionElements(){return Array.from(this.shadowRoot?.querySelectorAll(`.option`)||[])}_focusOptionAt(e){let t=this._getOptionElements();if(!t.length)return;let n=Math.max(0,Math.min(e,t.length-1));this._focusedIndex=n,t[n]?.focus()}_handleTriggerKeydown(e){e.key===`ArrowDown`?(e.preventDefault(),this.open?this._focusOptionAt(this._focusedIndex+1):(this.open=!0,this._focusedIndex=-1,requestAnimationFrame(()=>this._focusOptionAt(0)))):e.key===`ArrowUp`?(e.preventDefault(),this.open&&this._focusOptionAt(this._focusedIndex-1)):e.key===`Escape`?this.open&&(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&this._toggle()}_handleOptionKeydown(e,t,n){e.key===`ArrowDown`?(e.preventDefault(),this._focusOptionAt(n+1)):e.key===`ArrowUp`?(e.preventDefault(),n===0?this.shadowRoot?.querySelector(`.trigger`)?.focus():this._focusOptionAt(n-1)):e.key===`Escape`?(this.open=!1,this.shadowRoot?.querySelector(`.trigger`)?.focus()):(e.key===`Enter`||e.key===` `)&&(e.preventDefault(),this._selectOption(t))}_selectOption(e){e.disabled||(this.multiple?(this._selectedValues.indexOf(e.value)>-1?this._selectedValues=this._selectedValues.filter(t=>t!==e.value):this._selectedValues=[...this._selectedValues,e.value],this.requestUpdate()):(this.value=e.value,this.open=!1,this._search=``),this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.multiple?this._selectedValues:e.value,option:e},bubbles:!0,composed:!0})))}_getLabel(){return this.multiple?this._selectedValues.length?this._selectedValues.map(e=>this.options.find(t=>t.value===e)?.label||e).join(`, `):null:this.options.find(e=>e.value===this.value)?.label||null}_isSelected(e){return this.multiple?this._selectedValues.includes(e.value):e.value===this.value}_getFilteredOptions(){return this._search?this.options.filter(e=>e.label.toLowerCase().includes(this._search.toLowerCase())):this.options}render(){let e=this._getLabel(),t=this._getFilteredOptions();return O`
       <div class="field">
-        ${this.label?k`<label id="${this._labelId}">${this.label}</label>`:``}
+        ${this.label?O`<label id="${this._labelId}">${this.label}</label>`:``}
         <div class="wrap">
           <div
             class="trigger"
@@ -1731,14 +1731,14 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             part="trigger"
           >
             <span class="trigger-text">
-              ${e?k`${e}`:k`<span class="placeholder">${this.placeholder||`Select an option`}</span>`}
+              ${e?O`${e}`:O`<span class="placeholder">${this.placeholder||`Select an option`}</span>`}
             </span>
             <span class="chevron">▾</span>
           </div>
 
-          ${this.open?k`
+          ${this.open?O`
             <div class="dropdown" part="dropdown">
-              ${this.searchable?k`
+              ${this.searchable?O`
                 <div class="search-wrap">
                   <input
                     class="search-input"
@@ -1751,7 +1751,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                 </div>
               `:``}
               <div class="options-list" role="listbox" id="${this._listboxId}" aria-label="${this.label||`Options`}">
-                ${t.length?t.map((e,t)=>k`
+                ${t.length?t.map((e,t)=>O`
                   <div
                     class="option ${this._isSelected(e)?`selected`:``} ${e.disabled?`disabled`:``}"
                     role="option"
@@ -1761,18 +1761,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                     @keydown="${n=>this._handleOptionKeydown(n,e,t)}"
                     tabindex="${e.disabled?-1:0}"
                   >
-                    ${e.icon?k`<span>${e.icon}</span>`:``}
+                    ${e.icon?O`<span>${e.icon}</span>`:``}
                     ${e.label}
-                    ${this._isSelected(e)?k`<span class="check">✓</span>`:``}
+                    ${this._isSelected(e)?O`<span class="check">✓</span>`:``}
                   </div>
-                `):k`<div class="no-options">No options found</div>`}
+                `):O`<div class="no-options">No options found</div>`}
               </div>
             </div>
           `:``}
         </div>
-        ${this.error?k`<span class="error-text">⚠ ${this.error}</span>`:``}
+        ${this.error?O`<span class="error-text">⚠ ${this.error}</span>`:``}
       </div>
-    `}};customElements.define(`pastis-dropdown`,Ye);var Xe=class extends V{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-dropdown`,Xe);var Ze=class extends B{static properties={tabs:{type:Array},active:{type:String,reflect:!0},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},fullWidth:{type:Boolean,attribute:`full-width`,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .tabs-container { display: flex; flex-direction: column; }
@@ -1886,10 +1886,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-secondary, #fff);
       font-size: 14px;
     }
-  `;constructor(){super(),this.tabs=[],this.variant=`default`,this.size=`md`,this.fullWidth=!1}updated(e){if(e.has(`tabs`)&&this.tabs.length&&!this.active){let e=this.tabs.find(e=>!e.disabled);e&&(this.active=e.id)}}_selectTab(e){e.disabled||(this.active=e.id,this.dispatchEvent(new CustomEvent(`pastis-tab-change`,{detail:{tab:e.id},bubbles:!0,composed:!0})))}_handleKeydown(e,t){if(e.key===`Enter`||e.key===` `)e.preventDefault(),this._selectTab(t);else if(e.key===`ArrowRight`){let e=this.tabs.indexOf(t),n=this.tabs.find((t,n)=>n>e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}else if(e.key===`ArrowLeft`){let e=this.tabs.indexOf(t),n=[...this.tabs].reverse().find((t,n)=>this.tabs.length-1-n<e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}}render(){let e=this.tabs.find(e=>e.id===this.active);return k`
+  `;constructor(){super(),this.tabs=[],this.variant=`default`,this.size=`md`,this.fullWidth=!1}updated(e){if(e.has(`tabs`)&&this.tabs.length&&!this.active){let e=this.tabs.find(e=>!e.disabled);e&&(this.active=e.id)}}_selectTab(e){e.disabled||(this.active=e.id,this.dispatchEvent(new CustomEvent(`pastis-tab-change`,{detail:{tab:e.id},bubbles:!0,composed:!0})))}_handleKeydown(e,t){if(e.key===`Enter`||e.key===` `)e.preventDefault(),this._selectTab(t);else if(e.key===`ArrowRight`){let e=this.tabs.indexOf(t),n=this.tabs.find((t,n)=>n>e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}else if(e.key===`ArrowLeft`){let e=this.tabs.indexOf(t),n=[...this.tabs].reverse().find((t,n)=>this.tabs.length-1-n<e&&!t.disabled);n&&(this._selectTab(n),this.shadowRoot?.querySelector(`[data-id="${n.id}"]`)?.focus())}}render(){let e=this.tabs.find(e=>e.id===this.active);return O`
       <div class="tabs-container">
         <div class="tab-list" role="tablist" part="tablist">
-          ${this.tabs.map(e=>k`
+          ${this.tabs.map(e=>O`
             <button
               class="tab-btn ${e.id===this.active?`active`:``}"
               role="tab"
@@ -1902,9 +1902,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               tabindex="${e.id===this.active?0:-1}"
               part="tab"
             >
-              ${e.icon?k`<span aria-hidden="true">${e.icon}</span>`:``}
+              ${e.icon?O`<span aria-hidden="true">${e.icon}</span>`:``}
               ${e.label}
-              ${e.badge===void 0?``:k`<span class="badge">${e.badge}</span>`}
+              ${e.badge===void 0?``:O`<span class="badge">${e.badge}</span>`}
             </button>
           `)}
         </div>
@@ -1914,10 +1914,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           role="tabpanel"
           part="panel"
         >
-          ${e?.content?k`${e.content}`:k`<slot name="${this.active}"></slot>`}
+          ${e?.content?O`${e.content}`:O`<slot name="${this.active}"></slot>`}
         </div>
       </div>
-    `}};customElements.define(`pastis-tabs`,Xe);var Ze=class extends V{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-tabs`,Ze);var Qe=class extends B{static properties={items:{type:Array},multiple:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},openItems:{type:Array,attribute:!1}};static styles=s`
     :host { display: block; }
 
     .accordion {
@@ -2029,9 +2029,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       font-family: var(--font-family-mono, 'Fira Code', monospace);
       padding: 1px 6px;
     }
-  `;constructor(){super(),this.items=[],this.multiple=!1,this.openItems=[],this.variant=`default`}_isOpen(e){return this.openItems.includes(e)}_toggle(e){this.multiple?this.openItems=this._isOpen(e)?this.openItems.filter(t=>t!==e):[...this.openItems,e]:this.openItems=this._isOpen(e)?[]:[e],this.requestUpdate(),this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{id:e,open:this._isOpen(e)},bubbles:!0,composed:!0}))}updated(e){!e.has(`openItems`)&&!e.has(`items`)||this.shadowRoot?.querySelectorAll(`.body`).forEach(e=>{let t=e.closest(`.item`),n=e.querySelector(`.body-inner`);t?.classList.contains(`open`)?e.style.height=n.scrollHeight+`px`:e.style.height=`0px`})}render(){return k`
+  `;constructor(){super(),this.items=[],this.multiple=!1,this.openItems=[],this.variant=`default`}_isOpen(e){return this.openItems.includes(e)}_toggle(e){this.multiple?this.openItems=this._isOpen(e)?this.openItems.filter(t=>t!==e):[...this.openItems,e]:this.openItems=this._isOpen(e)?[]:[e],this.requestUpdate(),this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{id:e,open:this._isOpen(e)},bubbles:!0,composed:!0}))}updated(e){!e.has(`openItems`)&&!e.has(`items`)||this.shadowRoot?.querySelectorAll(`.body`).forEach(e=>{let t=e.closest(`.item`),n=e.querySelector(`.body-inner`);t?.classList.contains(`open`)?e.style.height=n.scrollHeight+`px`:e.style.height=`0px`})}render(){return O`
       <div class="accordion" part="accordion">
-        ${this.items.map(e=>k`
+        ${this.items.map(e=>O`
           <div class="item ${this._isOpen(e.id)?`open`:``}" part="item">
             <button
               id="header-${e.id}"
@@ -2042,9 +2042,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               part="header"
             >
               <span class="header-content">
-                ${e.icon?k`<span class="icon" aria-hidden="true">${e.icon}</span>`:``}
+                ${e.icon?O`<span class="icon" aria-hidden="true">${e.icon}</span>`:``}
                 <span>${e.title}</span>
-                ${e.badge===void 0?``:k`<span class="badge">${e.badge}</span>`}
+                ${e.badge===void 0?``:O`<span class="badge">${e.badge}</span>`}
               </span>
               <span class="chevron" aria-hidden="true">▾</span>
             </button>
@@ -2054,7 +2054,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `)}
       </div>
-    `}};customElements.define(`pastis-accordion`,Ze);var Qe=class extends V{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=s`
+    `}};customElements.define(`pastis-accordion`,Qe);var $e=class extends B{static properties={items:{type:Array},separator:{type:String},maxItems:{type:Number,attribute:`max-items`}};static styles=s`
     :host { display: block; }
 
     nav {
@@ -2135,20 +2135,20 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       outline: 2px solid var(--border-focus, #fcba28);
       outline-offset: 2px;
     }
-  `;constructor(){super(),this.items=[],this.separator=`/`,this._expanded=!1}_getVisibleItems(){return!this.maxItems||this.items.length<=this.maxItems||this._expanded?this.items:[this.items[0],{id:`__ellipsis__`,label:`…`},...this.items.slice(-Math.min(2,this.maxItems-1))]}render(){let e=this._getVisibleItems();return k`
+  `;constructor(){super(),this.items=[],this.separator=`/`,this._expanded=!1}_getVisibleItems(){return!this.maxItems||this.items.length<=this.maxItems||this._expanded?this.items:[this.items[0],{id:`__ellipsis__`,label:`…`},...this.items.slice(-Math.min(2,this.maxItems-1))]}render(){let e=this._getVisibleItems();return O`
       <nav aria-label="Breadcrumb">
         <ol>
-          ${e.map((t,n)=>{let r=n===e.length-1;return k`
+          ${e.map((t,n)=>{let r=n===e.length-1;return O`
               <li>
-                ${t.id===`__ellipsis__`?k`
+                ${t.id===`__ellipsis__`?O`
                     <button class="ellipsis" @click="${()=>{this._expanded=!0,this.requestUpdate()}}" aria-label="Show all breadcrumb items" aria-expanded="false">…</button>
-                  `:r?k`<span class="crumb active" aria-current="page">${t.icon?k`<span class="crumb-icon">${t.icon}</span>`:``}${t.label}</span>`:k`<a class="crumb" href="${t.href||`#`}">${t.icon?k`<span class="crumb-icon">${t.icon}</span>`:``}${t.label}</a>`}
-                ${r?``:k`<span class="separator" aria-hidden="true">${this.separator}</span>`}
+                  `:r?O`<span class="crumb active" aria-current="page">${t.icon?O`<span class="crumb-icon">${t.icon}</span>`:``}${t.label}</span>`:O`<a class="crumb" href="${t.href||`#`}">${t.icon?O`<span class="crumb-icon">${t.icon}</span>`:``}${t.label}</a>`}
+                ${r?``:O`<span class="separator" aria-hidden="true">${this.separator}</span>`}
               </li>
             `})}
         </ol>
       </nav>
-    `}};customElements.define(`pastis-breadcrumb`,Qe);var $e=class extends V{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=s`
+    `}};customElements.define(`pastis-breadcrumb`,$e);var et=class extends B{static properties={total:{type:Number},page:{type:Number,reflect:!0},pageSize:{type:Number,attribute:`page-size`},siblingCount:{type:Number,attribute:`sibling-count`},variant:{type:String,reflect:!0},showInfo:{type:Boolean,attribute:`show-info`}};static styles=s`
     :host { display: block; }
 
     .pagination {
@@ -2258,7 +2258,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.page=1,this.pageSize=10,this.total=0,this.siblingCount=1,this.variant=`default`,this.showInfo=!1}get totalPages(){return Math.max(1,Math.ceil(this.total/this.pageSize))}_getPages(){let e=this.totalPages,t=this.page,n=this.siblingCount;if(e<=7)return Array.from({length:e},(e,t)=>t+1);let r=Math.max(2,t-n),i=Math.min(e-1,t+n),a=[1];r>2&&a.push(`...`);for(let e=r;e<=i;e++)a.push(e);return i<e-1&&a.push(`...`),a.push(e),a}_goTo(e){e<1||e>this.totalPages||e===this.page||(this.page=e,this.dispatchEvent(new CustomEvent(`pastis-page-change`,{detail:{page:this.page,pageSize:this.pageSize},bubbles:!0,composed:!0})))}render(){let e=this._getPages(),t=(this.page-1)*this.pageSize+1,n=Math.min(this.page*this.pageSize,this.total);return k`
+  `;constructor(){super(),this.page=1,this.pageSize=10,this.total=0,this.siblingCount=1,this.variant=`default`,this.showInfo=!1}get totalPages(){return Math.max(1,Math.ceil(this.total/this.pageSize))}_getPages(){let e=this.totalPages,t=this.page,n=this.siblingCount;if(e<=7)return Array.from({length:e},(e,t)=>t+1);let r=Math.max(2,t-n),i=Math.min(e-1,t+n),a=[1];r>2&&a.push(`...`);for(let e=r;e<=i;e++)a.push(e);return i<e-1&&a.push(`...`),a.push(e),a}_goTo(e){e<1||e>this.totalPages||e===this.page||(this.page=e,this.dispatchEvent(new CustomEvent(`pastis-page-change`,{detail:{page:this.page,pageSize:this.pageSize},bubbles:!0,composed:!0})))}render(){let e=this._getPages(),t=(this.page-1)*this.pageSize+1,n=Math.min(this.page*this.pageSize,this.total);return O`
       <nav aria-label="Pagination">
         <span class="sr-only" aria-live="polite" aria-atomic="true">Page ${this.page} of ${this.totalPages}</span>
         <div class="pagination">
@@ -2269,7 +2269,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-label="Previous page"
           >←</button>
 
-          ${e.map(e=>e===`...`?k`<span class="ellipsis">…</span>`:k`
+          ${e.map(e=>e===`...`?O`<span class="ellipsis">…</span>`:O`
                 <button
                   class="btn ${e===this.page?`active`:``}"
                   @click="${()=>this._goTo(e)}"
@@ -2285,12 +2285,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-label="Next page"
           >→</button>
 
-          ${this.showInfo?k`
+          ${this.showInfo?O`
             <span class="info">${t}–${n} of ${this.total}</span>
           `:``}
         </div>
       </nav>
-    `}};customElements.define(`pastis-pagination`,$e);var et=class extends V{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=s`
+    `}};customElements.define(`pastis-pagination`,et);var tt=class extends B{static properties={value:{type:Number,reflect:!0},max:{type:Number},variant:{type:String,reflect:!0},size:{type:String,reflect:!0},color:{type:String},label:{type:String},showValue:{type:Boolean,attribute:`show-value`,reflect:!0},animated:{type:Boolean,reflect:!0},indeterminate:{type:Boolean,reflect:!0},radius:{type:Number},strokeWidth:{type:Number,attribute:`stroke-width`}};static styles=s`
     :host { display: block; }
 
     .progress-wrap {
@@ -2418,7 +2418,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         transition: none;
       }
     }
-  `;constructor(){super(),this.value=0,this.max=100,this.variant=`bar`,this.size=`md`,this.animated=!1,this.indeterminate=!1,this.showValue=!1,this.radius=36,this.strokeWidth=6}_getPercentage(){return Math.min(100,Math.max(0,this.value/this.max*100))}_renderRing(){let e=this.radius,t=this.strokeWidth,n=(e+t)*2,r=2*Math.PI*e,i=this._getPercentage(),a=r-i/100*r;return k`
+  `;constructor(){super(),this.value=0,this.max=100,this.variant=`bar`,this.size=`md`,this.animated=!1,this.indeterminate=!1,this.showValue=!1,this.radius=36,this.strokeWidth=6}_getPercentage(){return Math.min(100,Math.max(0,this.value/this.max*100))}_renderRing(){let e=this.radius,t=this.strokeWidth,n=(e+t)*2,r=2*Math.PI*e,i=this._getPercentage(),a=r-i/100*r;return O`
       <div class="ring-wrap" part="ring" role="progressbar" aria-valuenow="${this.indeterminate?void 0:Math.round(i)}" aria-valuemin="0" aria-valuemax="100" aria-label="${this.label||`Progress`}">
         <svg class="ring-svg" width="${n}" height="${n}" viewBox="0 0 ${n} ${n}" aria-hidden="true">
           <circle class="ring-track" cx="${n/2}" cy="${n/2}" r="${e}" stroke-width="${t}" />
@@ -2431,15 +2431,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             style="${this.color?`stroke:${this.color}`:``}"
           />
         </svg>
-        ${this.showValue&&!this.indeterminate?k`<span class="ring-value">${Math.round(i)}%</span>`:``}
+        ${this.showValue&&!this.indeterminate?O`<span class="ring-value">${Math.round(i)}%</span>`:``}
       </div>
-      ${this.label?k`<div class="progress-header"><span class="label">${this.label}</span></div>`:``}
-    `}render(){if(this.variant===`ring`)return this._renderRing();let e=this._getPercentage();return k`
+      ${this.label?O`<div class="progress-header"><span class="label">${this.label}</span></div>`:``}
+    `}render(){if(this.variant===`ring`)return this._renderRing();let e=this._getPercentage();return O`
       <div class="progress-wrap" part="progress">
-        ${this.label||this.showValue?k`
+        ${this.label||this.showValue?O`
           <div class="progress-header">
-            ${this.label?k`<span class="label">${this.label}</span>`:``}
-            ${this.showValue&&!this.indeterminate?k`<span>${Math.round(e)}%</span>`:``}
+            ${this.label?O`<span class="label">${this.label}</span>`:``}
+            ${this.showValue&&!this.indeterminate?O`<span>${Math.round(e)}%</span>`:``}
           </div>
         `:``}
         <div class="track" role="progressbar" aria-valuenow="${this.indeterminate?void 0:this.value}" aria-valuemin="0" aria-valuemax="${this.max}" aria-label="${this.label||`Progress`}" part="track">
@@ -2450,7 +2450,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           ></div>
         </div>
       </div>
-    `}};customElements.define(`pastis-progress`,et);var tt=class extends V{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-progress`,tt);var nt=class extends B{static properties={variant:{type:String,reflect:!0},size:{type:String,reflect:!0},removable:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},icon:{type:String},color:{type:String}};static styles=s`
     :host { display: inline-flex; align-items: center; }
 
     .tag {
@@ -2540,15 +2540,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .tag-icon { font-size: 11px; }
-  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.removable=!1,this.disabled=!1}render(){return k`
+  `;constructor(){super(),this.variant=`default`,this.size=`md`,this.removable=!1,this.disabled=!1}render(){return O`
       <span
         class="tag"
         part="tag"
         style="${this.color?`background:${this.color}20;color:${this.color};border:1.5px solid ${this.color}40`:``}"
       >
-        ${this.icon?k`<span class="tag-icon" aria-hidden="true">${this.icon}</span>`:``}
+        ${this.icon?O`<span class="tag-icon" aria-hidden="true">${this.icon}</span>`:``}
         <slot></slot>
-        ${this.removable?k`
+        ${this.removable?O`
           <button
             class="remove-btn"
             @click="${this._remove}"
@@ -2557,7 +2557,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           >✕</button>
         `:``}
       </span>
-    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,tt);var nt=class extends V{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=s`
+    `}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{bubbles:!0,composed:!0,detail:{value:this.textContent.trim()}}))}};customElements.define(`pastis-tag`,nt);var rt=class extends B{static properties={orientation:{type:String,reflect:!0},variant:{type:String,reflect:!0},label:{type:String},spacing:{type:String,reflect:!0},color:{type:String},thickness:{type:String}};static styles=s`
     :host { display: block; }
 
     :host([orientation="vertical"]) {
@@ -2648,13 +2648,13 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-tertiary, #909498);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.orientation=`horizontal`,this.variant=`solid`}_hasSlottedContent(){return this.querySelector(`*`)?!0:Array.from(this.childNodes).some(e=>e.nodeType===Node.TEXT_NODE&&e.textContent.trim().length>0)}render(){let e=[this.color?`background:${this.color};border-color:${this.color}`:``,this.thickness?`height:${this.thickness};width:${this.thickness}`:``].filter(Boolean).join(`;`),t=this.label||this._hasSlottedContent();return k`
+  `;constructor(){super(),this.orientation=`horizontal`,this.variant=`solid`}_hasSlottedContent(){return this.querySelector(`*`)?!0:Array.from(this.childNodes).some(e=>e.nodeType===Node.TEXT_NODE&&e.textContent.trim().length>0)}render(){let e=[this.color?`background:${this.color};border-color:${this.color}`:``,this.thickness?`height:${this.thickness};width:${this.thickness}`:``].filter(Boolean).join(`;`),t=this.label||this._hasSlottedContent();return O`
       <div class="divider" role="separator" aria-orientation="${this.orientation||`horizontal`}" part="divider">
         <span class="line" style="${e}"></span>
-        ${this.label?k`<span class="label">${this.label}</span>`:k`<slot></slot>`}
-        ${t?k`<span class="line" style="${e}"></span>`:``}
+        ${this.label?O`<span class="label">${this.label}</span>`:O`<slot></slot>`}
+        ${t?O`<span class="line" style="${e}"></span>`:``}
       </div>
-    `}};customElements.define(`pastis-divider`,nt);var rt=class extends V{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-divider`,rt);var it=class extends B{static properties={heading:{type:String},subheading:{type:String},cta:{type:String},ctaSecondary:{type:String,attribute:`cta-secondary`},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},align:{type:String,reflect:!0},variant:{type:String,reflect:!0},badge:{type:String},fullHeight:{type:Boolean,attribute:`full-height`,reflect:!0},bgColor:{type:String,attribute:`bg-color`},gradient:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .hero {
@@ -2806,31 +2806,31 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       .content { flex-direction: column !important; }
       .image-col { display: none; }
     }
-  `;constructor(){super(),this.align=`left`,this.variant=`light`,this.gradient=!1,this.fullHeight=!1}render(){return k`
+  `;constructor(){super(),this.align=`left`,this.variant=`light`,this.gradient=!1,this.fullHeight=!1}render(){return O`
       <section class="hero" part="hero" style="${this.bgColor?`background:${this.bgColor}`:``}">
         <div class="content">
           <div class="text-col">
-            ${this.badge?k`
+            ${this.badge?O`
               <div class="badge-wrap">
                 <span class="badge">✨ ${this.badge}</span>
               </div>
             `:``}
             <h1>${this.heading||``}<slot name="heading"></slot></h1>
-            ${this.subheading?k`<p>${this.subheading}</p>`:k`<slot name="subheading"></slot>`}
+            ${this.subheading?O`<p>${this.subheading}</p>`:O`<slot name="subheading"></slot>`}
             <div class="cta-group">
-              ${this.cta?k`<button class="cta-btn primary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}">${this.cta} <span aria-hidden="true">→</span></button>`:``}
-              ${this.ctaSecondary?k`<button class="cta-btn secondary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}">${this.ctaSecondary}</button>`:``}
+              ${this.cta?O`<button class="cta-btn primary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}">${this.cta} <span aria-hidden="true">→</span></button>`:``}
+              ${this.ctaSecondary?O`<button class="cta-btn secondary" @click="${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}">${this.ctaSecondary}</button>`:``}
               <slot name="cta"></slot>
             </div>
           </div>
-          ${this.image?k`
+          ${this.image?O`
             <div class="image-col">
               <img class="hero-image" src="${this.image}" alt="${this.imageAlt||this.heading||`Hero image`}" part="image" />
             </div>
-          `:k`<slot name="image"></slot>`}
+          `:O`<slot name="image"></slot>`}
         </div>
       </section>
-    `}};customElements.define(`pastis-hero`,rt);var it=class extends V{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=s`
+    `}};customElements.define(`pastis-hero`,it);var at=class extends B{static properties={placeholder:{type:String},value:{type:String,reflect:!0},suggestions:{type:Array},loading:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},size:{type:String,reflect:!0},open:{type:Boolean,reflect:!0},label:{type:String},minChars:{type:Number,attribute:`min-chars`},noResultsText:{type:String,attribute:`no-results-text`}};static styles=s`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -2988,9 +2988,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       padding: 0 2px;
       font-weight: 700;
     }
-  `;constructor(){super(),this.value=``,this.suggestions=[],this.open=!1,this.loading=!1,this.disabled=!1,this.size=`md`,this.minChars=1,this.noResultsText=`No results found`,this._focusedIndex=-1,this._boundClose=this._handleOutsideClick.bind(this),this._listboxId=`pastis-search-listbox-${Math.random().toString(36).slice(2,9)}`}_optionId(e){return`${this._listboxId}-option-${e}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_handleInput(e){this.value=e.target.value,this._focusedIndex=-1,this.open=this.value.length>=this.minChars,this.dispatchEvent(new CustomEvent(`pastis-search`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleKeydown(e){let t=this.suggestions;e.key===`ArrowDown`?(e.preventDefault(),this._focusedIndex=Math.min(this._focusedIndex+1,t.length-1),this.requestUpdate()):e.key===`ArrowUp`?(e.preventDefault(),this._focusedIndex=Math.max(this._focusedIndex-1,-1),this.requestUpdate()):e.key===`Enter`?this._focusedIndex>=0&&t[this._focusedIndex]?this._select(t[this._focusedIndex]):(this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0})),this.open=!1):e.key===`Escape`&&(this.open=!1)}_select(e){this.value=e.label||e.value||e,this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{item:e},bubbles:!0,composed:!0}))}_clear(){this.value=``,this.open=!1,this.shadowRoot?.querySelector(`.search-input`)?.focus(),this.dispatchEvent(new CustomEvent(`pastis-clear`,{bubbles:!0,composed:!0}))}_highlight(e){if(!this.value)return k`${e}`;let t=e.toLowerCase().indexOf(this.value.toLowerCase());return t===-1?k`${e}`:k`${e.slice(0,t)}<mark>${e.slice(t,t+this.value.length)}</mark>${e.slice(t+this.value.length)}`}render(){return k`
+  `;constructor(){super(),this.value=``,this.suggestions=[],this.open=!1,this.loading=!1,this.disabled=!1,this.size=`md`,this.minChars=1,this.noResultsText=`No results found`,this._focusedIndex=-1,this._boundClose=this._handleOutsideClick.bind(this),this._listboxId=`pastis-search-listbox-${Math.random().toString(36).slice(2,9)}`}_optionId(e){return`${this._listboxId}-option-${e}`}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this.open=!1)}_handleInput(e){this.value=e.target.value,this._focusedIndex=-1,this.open=this.value.length>=this.minChars,this.dispatchEvent(new CustomEvent(`pastis-search`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_handleKeydown(e){let t=this.suggestions;e.key===`ArrowDown`?(e.preventDefault(),this._focusedIndex=Math.min(this._focusedIndex+1,t.length-1),this.requestUpdate()):e.key===`ArrowUp`?(e.preventDefault(),this._focusedIndex=Math.max(this._focusedIndex-1,-1),this.requestUpdate()):e.key===`Enter`?this._focusedIndex>=0&&t[this._focusedIndex]?this._select(t[this._focusedIndex]):(this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0})),this.open=!1):e.key===`Escape`&&(this.open=!1)}_select(e){this.value=e.label||e.value||e,this.open=!1,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{item:e},bubbles:!0,composed:!0}))}_clear(){this.value=``,this.open=!1,this.shadowRoot?.querySelector(`.search-input`)?.focus(),this.dispatchEvent(new CustomEvent(`pastis-clear`,{bubbles:!0,composed:!0}))}_highlight(e){if(!this.value)return O`${e}`;let t=e.toLowerCase().indexOf(this.value.toLowerCase());return t===-1?O`${e}`:O`${e.slice(0,t)}<mark>${e.slice(t,t+this.value.length)}</mark>${e.slice(t+this.value.length)}`}render(){return O`
       <div class="field">
-        ${this.label?k`<label>${this.label}</label>`:``}
+        ${this.label?O`<label>${this.label}</label>`:``}
         <div class="wrap" @click="${e=>e.stopPropagation()}">
           <span class="icon-wrap search-icon" aria-hidden="true">🔍</span>
           <input
@@ -3004,20 +3004,20 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-expanded="${this.open}"
             aria-autocomplete="list"
             aria-controls="${this._listboxId}"
-            aria-activedescendant="${Fe(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
+            aria-activedescendant="${Ie(this._focusedIndex>=0?this._optionId(this._focusedIndex):void 0)}"
             @input="${this._handleInput}"
             @focus="${()=>{this.value.length>=this.minChars&&(this.open=!0)}}"
             @keydown="${this._handleKeydown}"
             part="input"
           />
-          ${this.loading?k`<span class="spinner-icon"></span>`:``}
-          ${this.value&&!this.loading?k`
+          ${this.loading?O`<span class="spinner-icon"></span>`:``}
+          ${this.value&&!this.loading?O`
             <button class="clear-btn" @click="${this._clear}" aria-label="Clear search">✕</button>
           `:``}
 
-          ${this.open?k`
+          ${this.open?O`
             <div class="dropdown" role="listbox" id="${this._listboxId}" part="dropdown">
-              ${this.suggestions.length?this.suggestions.map((e,t)=>k`
+              ${this.suggestions.length?this.suggestions.map((e,t)=>O`
                 <div
                   id="${this._optionId(t)}"
                   class="suggestion ${t===this._focusedIndex?`focused`:``}"
@@ -3025,18 +3025,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                   aria-selected="${t===this._focusedIndex}"
                   @click="${()=>this._select(e)}"
                 >
-                  ${e.icon?k`<span class="suggestion-icon">${e.icon}</span>`:``}
+                  ${e.icon?O`<span class="suggestion-icon">${e.icon}</span>`:``}
                   <span class="suggestion-label">${this._highlight(e.label||e)}</span>
-                  ${e.sub?k`<span class="suggestion-sub">${e.sub}</span>`:``}
+                  ${e.sub?O`<span class="suggestion-sub">${e.sub}</span>`:``}
                 </div>
-              `):k`
+              `):O`
                 <div class="no-results">${this.noResultsText}</div>
               `}
             </div>
           `:``}
         </div>
       </div>
-    `}};customElements.define(`pastis-search`,it);var at=class extends V{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-search`,at);var ot=class extends B{static properties={open:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},size:{type:String,reflect:!0},closable:{type:Boolean,reflect:!0},persistent:{type:Boolean,reflect:!0},overlay:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: contents; }
 
     .backdrop {
@@ -3169,16 +3169,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       border-top: var(--border-width, 1px) solid var(--border-default, #383c44);
       flex-shrink: 0;
     }
-  `;constructor(){super(),this.open=!1,this.position=`right`,this.closable=!0,this.persistent=!1,this.overlay=!0,this.size=`md`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown)}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.drawer`);if(!e)return[];let t=[`a[href]`,`button:not([disabled])`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`,`[tabindex]:not([tabindex="-1"])`].join(`,`);return Array.from(e.querySelectorAll(t)).filter(e=>!e.closest(`[hidden]`)&&e.offsetParent!==null)}updated(e){e.has(`open`)&&(this.open?(this._previousFocus=document.activeElement,document.body.style.overflow=`hidden`,requestAnimationFrame(()=>{(this._getFocusableElements()[0]||this.shadowRoot?.querySelector(`.close-btn`))?.focus()})):(document.body.style.overflow=``,this._previousFocus?.focus(),this._previousFocus=null))}close(){this.open=!1,document.body.style.overflow=``,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}render(){return this.open?k`
+  `;constructor(){super(),this.open=!1,this.position=`right`,this.closable=!0,this.persistent=!1,this.overlay=!0,this.size=`md`,this._boundKeydown=this._handleKeydown.bind(this),this._previousFocus=null}connectedCallback(){super.connectedCallback(),document.addEventListener(`keydown`,this._boundKeydown)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`keydown`,this._boundKeydown)}_getFocusableElements(){let e=this.shadowRoot?.querySelector(`.drawer`);if(!e)return[];let t=[`a[href]`,`button:not([disabled])`,`input:not([disabled])`,`select:not([disabled])`,`textarea:not([disabled])`,`[tabindex]:not([tabindex="-1"])`].join(`,`);return Array.from(e.querySelectorAll(t)).filter(e=>!e.closest(`[hidden]`)&&e.offsetParent!==null)}updated(e){e.has(`open`)&&(this.open?(this._previousFocus=document.activeElement,document.body.style.overflow=`hidden`,requestAnimationFrame(()=>{(this._getFocusableElements()[0]||this.shadowRoot?.querySelector(`.close-btn`))?.focus()})):(document.body.style.overflow=``,this._previousFocus?.focus(),this._previousFocus=null))}close(){this.open=!1,document.body.style.overflow=``,this.dispatchEvent(new CustomEvent(`pastis-close`,{bubbles:!0,composed:!0}))}_handleKeydown(e){if(this.open){if(e.key===`Escape`&&!this.persistent){this.close();return}if(e.key===`Tab`){let t=this._getFocusableElements();if(!t.length){e.preventDefault();return}let n=t[0],r=t[t.length-1];e.shiftKey?(document.activeElement===n||this.shadowRoot.activeElement===n)&&(e.preventDefault(),r.focus()):(document.activeElement===r||this.shadowRoot.activeElement===r)&&(e.preventDefault(),n.focus())}}}render(){return this.open?O`
       <div class="backdrop" part="backdrop">
-        ${this.overlay?k`
+        ${this.overlay?O`
           <div class="overlay" @click="${()=>!this.persistent&&this.close()}"></div>
         `:``}
         <div class="drawer" role="dialog" aria-modal="true" aria-label="${this.title||`Drawer`}" part="drawer">
-          ${this.position===`bottom`||this.position===`top`?k`<div class="handle"></div>`:``}
+          ${this.position===`bottom`||this.position===`top`?O`<div class="handle"></div>`:``}
           <div class="drawer-header">
             <h2 class="drawer-title">${this.title||``}</h2>
-            ${this.closable?k`
+            ${this.closable?O`
               <button class="close-btn" @click="${this.close}" aria-label="Close">✕</button>
             `:``}
           </div>
@@ -3188,7 +3188,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <slot name="footer" class="drawer-footer"></slot>
         </div>
       </div>
-    `:k``}};customElements.define(`pastis-drawer`,at);var ot=class extends V{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=s`
+    `:O``}};customElements.define(`pastis-drawer`,ot);var st=class extends B{static properties={accept:{type:String},multiple:{type:Boolean,reflect:!0},maxSize:{type:Number,attribute:`max-size`},disabled:{type:Boolean,reflect:!0},label:{type:String},helper:{type:String},dragover:{type:Boolean,reflect:!0},files:{type:Array,attribute:!1},variant:{type:String,reflect:!0},error:{type:String,attribute:!1},maxFiles:{type:Number,attribute:`max-files`}};static styles=s`
     :host { display: block; }
 
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -3343,9 +3343,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       border-radius: 0;
       transition: width 100ms steps(10);
     }
-  `;constructor(){super(),this.files=[],this.multiple=!1,this.disabled=!1,this.dragover=!1,this.maxSize=10,this.maxFiles=10,this.error=``}_formatSize(e){return e<1024?e+` B`:e<1024*1024?(e/1024).toFixed(1)+` KB`:(e/(1024*1024)).toFixed(1)+` MB`}_getFileIcon(e){let t=e.type;return t.startsWith(`image/`)?`🖼`:t.startsWith(`video/`)?`🎬`:t.startsWith(`audio/`)?`🎵`:t.includes(`pdf`)?`📄`:t.includes(`zip`)||t.includes(`rar`)?`📦`:t.includes(`spreadsheet`)||t.includes(`excel`)||t.name?.endsWith(`.xlsx`)?`📊`:`📎`}_processFiles(e){this.error=``;let t=Array.from(e);for(let e of t)if(e.size>this.maxSize*1024*1024){this.error=`File "${e.name}" exceeds the ${this.maxSize}MB limit.`;return}if(!this.multiple)this.files=t.slice(0,1);else{let e=[...this.files,...t];if(e.length>this.maxFiles){this.error=`Maximum ${this.maxFiles} files allowed.`;return}this.files=e}this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_handleDrop(e){e.preventDefault(),this.dragover=!1,!this.disabled&&this._processFiles(e.dataTransfer.files)}_handleFileInput(e){this._processFiles(e.target.files),e.target.value=``}_removeFile(e){this.files=this.files.filter((t,n)=>n!==e),this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_openPicker(){this.disabled||this.shadowRoot?.querySelector(`input[type="file"]`)?.click()}render(){return k`
+  `;constructor(){super(),this.files=[],this.multiple=!1,this.disabled=!1,this.dragover=!1,this.maxSize=10,this.maxFiles=10,this.error=``}_formatSize(e){return e<1024?e+` B`:e<1024*1024?(e/1024).toFixed(1)+` KB`:(e/(1024*1024)).toFixed(1)+` MB`}_getFileIcon(e){let t=e.type;return t.startsWith(`image/`)?`🖼`:t.startsWith(`video/`)?`🎬`:t.startsWith(`audio/`)?`🎵`:t.includes(`pdf`)?`📄`:t.includes(`zip`)||t.includes(`rar`)?`📦`:t.includes(`spreadsheet`)||t.includes(`excel`)||t.name?.endsWith(`.xlsx`)?`📊`:`📎`}_processFiles(e){this.error=``;let t=Array.from(e);for(let e of t)if(e.size>this.maxSize*1024*1024){this.error=`File "${e.name}" exceeds the ${this.maxSize}MB limit.`;return}if(!this.multiple)this.files=t.slice(0,1);else{let e=[...this.files,...t];if(e.length>this.maxFiles){this.error=`Maximum ${this.maxFiles} files allowed.`;return}this.files=e}this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_handleDrop(e){e.preventDefault(),this.dragover=!1,!this.disabled&&this._processFiles(e.dataTransfer.files)}_handleFileInput(e){this._processFiles(e.target.files),e.target.value=``}_removeFile(e){this.files=this.files.filter((t,n)=>n!==e),this.dispatchEvent(new CustomEvent(`pastis-files-change`,{detail:{files:this.files},bubbles:!0,composed:!0})),this.requestUpdate()}_openPicker(){this.disabled||this.shadowRoot?.querySelector(`input[type="file"]`)?.click()}render(){return O`
       <div class="field ${this.error?`has-error`:``}">
-        ${this.label?k`<span class="field-label">${this.label}</span>`:``}
+        ${this.label?O`<span class="field-label">${this.label}</span>`:``}
 
         <div
           class="dropzone"
@@ -3376,9 +3376,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           @change="${this._handleFileInput}"
         />
 
-        ${this.files.length?k`
+        ${this.files.length?O`
           <div class="file-list">
-            ${this.files.map((e,t)=>k`
+            ${this.files.map((e,t)=>O`
               <div class="file-item" part="file-item">
                 <span class="file-icon">${this._getFileIcon(e)}</span>
                 <div class="file-info">
@@ -3395,10 +3395,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
 
-        ${this.error?k`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
-        ${this.helper&&!this.error?k`<p class="helper-text">${this.helper}</p>`:``}
+        ${this.error?O`<p class="error-text" aria-live="polite" role="alert">⚠ ${this.error}</p>`:``}
+        ${this.helper&&!this.error?O`<p class="helper-text">${this.helper}</p>`:``}
       </div>
-    `}};customElements.define(`pastis-file-upload`,ot);var st=class extends V{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=s`
+    `}};customElements.define(`pastis-file-upload`,st);var ct=class extends B{static properties={visible:{type:Boolean,reflect:!0},position:{type:String,reflect:!0},title:{type:String},message:{type:String},acceptText:{type:String,attribute:`accept-text`},rejectText:{type:String,attribute:`reject-text`},settingsText:{type:String,attribute:`settings-text`},privacyUrl:{type:String,attribute:`privacy-url`},showSettings:{type:Boolean,attribute:`show-settings`,reflect:!0},categories:{type:Array},_showDetails:{type:Boolean,attribute:!1}};static styles=s`
     :host { display: block; }
     :host(:not([visible])) { display: none; }
 
@@ -3571,24 +3571,24 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       margin-bottom: 8px;
       display: block;
     }
-  `;constructor(){super(),this.visible=!0,this.position=`bottom-left`,this.title=`We use cookies 🍪`,this.message=`We use cookies to improve your experience and analyze site traffic. By clicking "Accept All", you consent to our use of cookies.`,this.acceptText=`Accept All`,this.rejectText=`Reject All`,this.settingsText=`Manage Preferences`,this.showSettings=!1,this._showDetails=!1,this._titleId=`pastis-cookie-banner-title-${Math.random().toString(36).slice(2,9)}`,this.categories=[{id:`necessary`,name:`Necessary`,description:`Required for the site to function.`,required:!0,enabled:!0},{id:`analytics`,name:`Analytics`,description:`Help us understand how visitors use the site.`,required:!1,enabled:!1},{id:`marketing`,name:`Marketing`,description:`Used for personalized advertisements.`,required:!1,enabled:!1}]}_accept(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-accept`,{detail:{categories:this.categories.map(e=>({...e,enabled:!0}))},bubbles:!0,composed:!0}))}_reject(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-reject`,{detail:{categories:this.categories.map(e=>({...e,enabled:e.required}))},bubbles:!0,composed:!0}))}_savePreferences(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-save`,{detail:{categories:this.categories},bubbles:!0,composed:!0}))}_toggleCategory(e){this.categories=this.categories.map(t=>t.id===e?{...t,enabled:!t.enabled}:t),this.requestUpdate()}render(){return k`
+  `;constructor(){super(),this.visible=!0,this.position=`bottom-left`,this.title=`We use cookies 🍪`,this.message=`We use cookies to improve your experience and analyze site traffic. By clicking "Accept All", you consent to our use of cookies.`,this.acceptText=`Accept All`,this.rejectText=`Reject All`,this.settingsText=`Manage Preferences`,this.showSettings=!1,this._showDetails=!1,this._titleId=`pastis-cookie-banner-title-${Math.random().toString(36).slice(2,9)}`,this.categories=[{id:`necessary`,name:`Necessary`,description:`Required for the site to function.`,required:!0,enabled:!0},{id:`analytics`,name:`Analytics`,description:`Help us understand how visitors use the site.`,required:!1,enabled:!1},{id:`marketing`,name:`Marketing`,description:`Used for personalized advertisements.`,required:!1,enabled:!1}]}_accept(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-accept`,{detail:{categories:this.categories.map(e=>({...e,enabled:!0}))},bubbles:!0,composed:!0}))}_reject(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-reject`,{detail:{categories:this.categories.map(e=>({...e,enabled:e.required}))},bubbles:!0,composed:!0}))}_savePreferences(){this.visible=!1,this.dispatchEvent(new CustomEvent(`pastis-cookie-save`,{detail:{categories:this.categories},bubbles:!0,composed:!0}))}_toggleCategory(e){this.categories=this.categories.map(t=>t.id===e?{...t,enabled:!t.enabled}:t),this.requestUpdate()}render(){return O`
       <div class="banner" role="region" aria-live="polite" aria-labelledby="${this._titleId}" part="banner">
         <span class="cookie-icon" aria-hidden="true">🍪</span>
         <h2 class="banner-title" id="${this._titleId}">${this.title}</h2>
         <p class="banner-message">
           ${this.message}
-          ${this.privacyUrl?k` <a class="privacy-link" href="${this.privacyUrl}" target="_blank">Privacy Policy</a>`:``}
+          ${this.privacyUrl?O` <a class="privacy-link" href="${this.privacyUrl}" target="_blank">Privacy Policy</a>`:``}
         </p>
 
-        ${this._showDetails?k`
+        ${this._showDetails?O`
           <div class="categories">
-            ${this.categories.map(e=>k`
+            ${this.categories.map(e=>O`
               <div class="category">
                 <div class="category-info">
                   <p class="category-name">${e.name}</p>
                   <p class="category-desc">${e.description}</p>
                 </div>
-                ${e.required?k`<span class="required-badge">Required</span>`:k`
+                ${e.required?O`<span class="required-badge">Required</span>`:O`
                     <pastis-toggle
                       size="sm"
                       aria-label="${e.name}"
@@ -3604,19 +3604,19 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               <button class="btn btn-primary" @click="${this._savePreferences}">Save Preferences</button>
             </div>
           </div>
-        `:k`
+        `:O`
           <div class="actions">
             <div class="btn-row">
               <button class="btn btn-secondary" @click="${this._reject}">${this.rejectText}</button>
               <button class="btn btn-primary" @click="${this._accept}">${this.acceptText}</button>
             </div>
-            ${this.showSettings?k`
+            ${this.showSettings?O`
               <button class="btn btn-ghost" @click="${()=>{this._showDetails=!0,this.requestUpdate()}}">${this.settingsText}</button>
             `:``}
           </div>
         `}
       </div>
-    `}};customElements.define(`pastis-cookie-banner`,st);var ct=class extends V{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-cookie-banner`,ct);var lt=class extends B{static properties={label:{type:String},value:{type:String},name:{type:String},checked:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String}};static styles=s`
     :host { display: block; }
 
     label {
@@ -3674,7 +3674,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     .label-wrap { display: flex; flex-direction: column; gap: 2px; }
     .label-text { line-height: 1.4; }
     .helper { font-size: 12px; color: var(--text-tertiary, #909498); margin: 0; }
-  `;constructor(){super(),this.checked=!1,this.disabled=!1}render(){return k`
+  `;constructor(){super(),this.checked=!1,this.disabled=!1}render(){return O`
       <label @keydown="${this._handleKey}">
         <input
           type="radio"
@@ -3685,14 +3685,14 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           @change=${this._handleChange}
         />
         <span class="radio-visual" aria-hidden="true"></span>
-        ${this.label||this.helper?k`
+        ${this.label||this.helper?O`
           <span class="label-wrap">
-            ${this.label?k`<span class="label-text">${this.label}</span>`:``}
-            ${this.helper?k`<span class="helper">${this.helper}</span>`:``}
+            ${this.label?O`<span class="label-text">${this.label}</span>`:``}
+            ${this.helper?O`<span class="helper">${this.helper}</span>`:``}
           </span>
         `:``}
       </label>
-    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,ct);var lt=class extends V{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}_handleChange(e){this.checked=e.target.checked,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{checked:this.checked,value:this.value},bubbles:!0,composed:!0}))}_handleKey(e){(e.key===` `||e.key===`Enter`)&&(e.preventDefault(),this.disabled||(this.checked=!0,this._handleChange({target:{checked:!0}})))}};customElements.define(`pastis-radio`,lt);var ut=class extends B{static properties={label:{type:String},value:{type:String},delta:{type:String},trend:{type:String},icon:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .stat-card {
@@ -3759,21 +3759,21 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     .trend-neutral { color: var(--text-tertiary, #909498); }
 
     .delta-label { color: var(--text-tertiary, #909498); }
-  `;constructor(){super(),this.variant=`default`,this.trend=`neutral`}render(){let e=this.trend===`up`?`▲`:this.trend===`down`?`▼`:`─`,t=`delta trend-${this.trend}`,n=this.delta?`${this.trend===`up`?`up`:this.trend===`down`?`down`:`no change`} ${this.delta} vs last period`:``;return k`
+  `;constructor(){super(),this.variant=`default`,this.trend=`neutral`}render(){let e=this.trend===`up`?`▲`:this.trend===`down`?`▼`:`─`,t=`delta trend-${this.trend}`,n=this.delta?`${this.trend===`up`?`up`:this.trend===`down`?`down`:`no change`} ${this.delta} vs last period`:``;return O`
       <div class="stat-card" part="stat-card" role="region" aria-label="${[this.label||`Metric`,this.value||`0`,n].filter(Boolean).join(`, `)}">
         <div class="header">
           <span class="label" aria-hidden="true">${this.label||`Metric`}</span>
-          ${this.icon?k`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
+          ${this.icon?O`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
         </div>
         <div class="value" aria-hidden="true">${this.value||`0`}</div>
-        ${this.delta?k`
+        ${this.delta?O`
           <div class="footer">
             <span class=${t} aria-hidden="true">${e} ${this.delta}</span>
             <span class="delta-label" aria-hidden="true">vs last period</span>
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-stat-card`,lt);var ut=class extends V{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-stat-card`,ut);var dt=class extends B{static properties={columns:{type:Array},rows:{type:Array},selectable:{type:Boolean,reflect:!0},selected:{type:Array},striped:{type:Boolean,reflect:!0},hoverable:{type:Boolean,reflect:!0},loading:{type:Boolean,reflect:!0},emptyText:{type:String}};static styles=s`
     :host { display: block; overflow-x: auto; }
 
     table {
@@ -3876,11 +3876,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       0%, 100% { opacity: 0.4; }
       50% { opacity: 1; }
     }
-  `;constructor(){super(),this.columns=[],this.rows=[],this.selected=[],this.striped=!1,this.hoverable=!1,this.loading=!1,this.emptyText=`No data found.`}_isSelected(e){return this.selected.includes(e)}_toggleRow(e){let t=this._isSelected(e)?this.selected.filter(t=>t!==e):[...this.selected,e];this.selected=t,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:t},bubbles:!0,composed:!0}))}_toggleAll(){let e=this.rows.map(e=>e.id);this.selected=e.every(e=>this.selected.includes(e))?[]:e,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:this.selected},bubbles:!0,composed:!0}))}render(){let e=this.rows.length>0&&this.rows.every(e=>this._isSelected(e.id));return k`
+  `;constructor(){super(),this.columns=[],this.rows=[],this.selected=[],this.striped=!1,this.hoverable=!1,this.loading=!1,this.emptyText=`No data found.`}_isSelected(e){return this.selected.includes(e)}_toggleRow(e){let t=this._isSelected(e)?this.selected.filter(t=>t!==e):[...this.selected,e];this.selected=t,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:t},bubbles:!0,composed:!0}))}_toggleAll(){let e=this.rows.map(e=>e.id);this.selected=e.every(e=>this.selected.includes(e))?[]:e,this.dispatchEvent(new CustomEvent(`pastis-select`,{detail:{selected:this.selected},bubbles:!0,composed:!0}))}render(){let e=this.rows.length>0&&this.rows.every(e=>this._isSelected(e.id));return O`
       <table part="table">
         <thead>
           <tr>
-            ${this.selectable?k`
+            ${this.selectable?O`
               <th class="checkbox-cell">
                 <label class="checkbox-wrapper">
                   <input
@@ -3894,22 +3894,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                 </label>
               </th>
             `:``}
-            ${this.columns.map(e=>k`<th>${e.label||e.key}</th>`)}
+            ${this.columns.map(e=>O`<th>${e.label||e.key}</th>`)}
           </tr>
         </thead>
         <tbody>
-          ${this.loading?[,,,,].fill(0).map(()=>k`
+          ${this.loading?[,,,,].fill(0).map(()=>O`
             <tr>
-              ${this.selectable?k`<td class="checkbox-cell"></td>`:``}
-              ${this.columns.map(()=>k`<td><div class="skeleton-cell"></div></td>`)}
+              ${this.selectable?O`<td class="checkbox-cell"></td>`:``}
+              ${this.columns.map(()=>O`<td><div class="skeleton-cell"></div></td>`)}
             </tr>
-          `):this.rows.length===0?k`
+          `):this.rows.length===0?O`
             <tr class="empty-row">
               <td colspan=${this.columns.length+(this.selectable?1:0)}>${this.emptyText}</td>
             </tr>
-          `:this.rows.map(e=>k`
+          `:this.rows.map(e=>O`
             <tr class=${this._isSelected(e.id)?`row-selected`:``}>
-              ${this.selectable?k`
+              ${this.selectable?O`
                 <td class="checkbox-cell">
                   <label class="checkbox-wrapper">
                     <input
@@ -3923,12 +3923,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
                   </label>
                 </td>
               `:``}
-              ${this.columns.map(t=>k`<td>${e[t.key]??`—`}</td>`)}
+              ${this.columns.map(t=>O`<td>${e[t.key]??`—`}</td>`)}
             </tr>
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-table`,ut);var dt=class extends V{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
+    `}};customElements.define(`pastis-table`,dt);var ft=class extends B{static properties={code:{type:String},language:{type:String},filename:{type:String},copyable:{type:Boolean,reflect:!0},lineNumbers:{type:Boolean,reflect:!0},_copied:{type:Boolean,state:!0}};static styles=s`
     :host { display: block; }
 
     .code-block {
@@ -4020,15 +4020,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     code { white-space: pre; flex: 1; }
   `;constructor(){super(),this.code=``,this.language=`text`,this.copyable=!0,this.lineNumbers=!1,this._copied=!1}async _copy(){try{await navigator.clipboard.writeText(this.code),this._copied=!0,setTimeout(()=>{this._copied=!1},2e3)}catch(e){console.warn(`Copy failed`,e)}}render(){let e=(this.code||``).split(`
-`);return k`
+`);return O`
       <div class="code-block" part="code-block">
-        ${this.filename||this.language!==`text`||this.copyable?k`
+        ${this.filename||this.language!==`text`||this.copyable?O`
           <div class="code-header">
             <div class="code-meta">
-              ${this.filename?k`<span class="filename">${this.filename}</span>`:``}
-              ${this.language&&this.language!==`text`?k`<span class="lang-badge">${this.language}</span>`:``}
+              ${this.filename?O`<span class="filename">${this.filename}</span>`:``}
+              ${this.language&&this.language!==`text`?O`<span class="lang-badge">${this.language}</span>`:``}
             </div>
-            ${this.copyable?k`
+            ${this.copyable?O`
               <button
                 class="copy-btn ${this._copied?`copied`:``}"
                 @click=${this._copy}
@@ -4044,16 +4044,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         `:``}
         <div class="code-scroll">
           <pre part="pre"><slot>
-            ${this.lineNumbers?k`
+            ${this.lineNumbers?O`
               <span class="line-numbers">
-                ${e.map((e,t)=>k`${t+1}\n`)}
+                ${e.map((e,t)=>O`${t+1}\n`)}
               </span>
             `:``}
             <code>${this.code}</code>
           </slot></pre>
         </div>
       </div>
-    `}};customElements.define(`pastis-code-block`,dt);var ft=class extends V{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-code-block`,ft);var pt=class extends B{static properties={icon:{type:String},heading:{type:String},body:{type:String},cta:{type:String},ctaSecondary:{type:String},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .empty-state {
@@ -4146,21 +4146,21 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       background: var(--border-default, #383c44);
       opacity: 0.3;
     }
-  `;constructor(){super(),this.variant=`default`}_getDefaultIcon(){let e={search:`🔍`,error:`✕`,loading:`⟳`,default:`□`};return e[this.variant]||e.default}render(){return k`
+  `;constructor(){super(),this.variant=`default`}_getDefaultIcon(){let e={search:`🔍`,error:`✕`,loading:`⟳`,default:`□`};return e[this.variant]||e.default}render(){return O`
       <div class="empty-state" part="empty-state">
         <span class="icon-wrap" aria-hidden="true">${this.icon||this._getDefaultIcon()}</span>
         <div class="pixel-deco"></div>
-        ${this.heading?k`<h3 class="heading">${this.heading}</h3>`:``}
-        ${this.body?k`<p class="body">${this.body}</p>`:``}
-        ${this.cta||this.ctaSecondary?k`
+        ${this.heading?O`<h3 class="heading">${this.heading}</h3>`:``}
+        ${this.body?O`<p class="body">${this.body}</p>`:``}
+        ${this.cta||this.ctaSecondary?O`
           <div class="actions">
-            ${this.cta?k`<button class="cta-primary" aria-label="${this.cta||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}>${this.cta}</button>`:``}
-            ${this.ctaSecondary?k`<button class="cta-secondary" aria-label="${this.ctaSecondary||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}>${this.ctaSecondary}</button>`:``}
+            ${this.cta?O`<button class="cta-primary" aria-label="${this.cta||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta`,{bubbles:!0,composed:!0}))}>${this.cta}</button>`:``}
+            ${this.ctaSecondary?O`<button class="cta-secondary" aria-label="${this.ctaSecondary||`Action`}" @click=${()=>this.dispatchEvent(new CustomEvent(`pastis-cta-secondary`,{bubbles:!0,composed:!0}))}>${this.ctaSecondary}</button>`:``}
           </div>
         `:``}
         <slot></slot>
       </div>
-    `}};customElements.define(`pastis-empty-state`,ft);var pt=class extends V{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number},labelCase:{type:String,attribute:`label-case`,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-empty-state`,pt);var mt=class extends B{static properties={label:{type:String},value:{type:String},selected:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},removable:{type:Boolean,reflect:!0},icon:{type:String},count:{type:Number},labelCase:{type:String,attribute:`label-case`,reflect:!0}};static styles=s`
     :host { display: inline-block; }
 
     .chip {
@@ -4263,18 +4263,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     .chip:focus-visible,
     .remove:focus-visible { outline: 2px solid var(--border-focus, #fcba28); outline-offset: 2px; }
-  `;constructor(){super(),this.selected=!1,this.disabled=!1,this.removable=!1,this.labelCase=`upper`}_toggle(){if(this.disabled)return;let e=!this.selected;this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{selected:e,value:this.value},bubbles:!0,composed:!0,cancelable:!0}))&&(this.selected=e)}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{detail:{value:this.value},bubbles:!0,composed:!0}))}render(){let e=this.label||this.value||``;return k`
+  `;constructor(){super(),this.selected=!1,this.disabled=!1,this.removable=!1,this.labelCase=`upper`}_toggle(){if(this.disabled)return;let e=!this.selected;this.dispatchEvent(new CustomEvent(`pastis-toggle`,{detail:{selected:e,value:this.value},bubbles:!0,composed:!0,cancelable:!0}))&&(this.selected=e)}_remove(e){e.stopPropagation(),this.dispatchEvent(new CustomEvent(`pastis-remove`,{detail:{value:this.value},bubbles:!0,composed:!0}))}render(){let e=this.label||this.value||``;return O`
       <span part="filter-chip">
         <button class="chip" @click=${this._toggle} aria-pressed="${this.selected}" ?disabled=${this.disabled}>
-          ${this.icon?k`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
+          ${this.icon?O`<span class="icon" aria-hidden="true">${this.icon}</span>`:``}
           ${e}
-          ${this.count==null?``:k`<span class="count">${this.count}</span>`}
+          ${this.count==null?``:O`<span class="count">${this.count}</span>`}
         </button>
-        ${this.removable?k`
+        ${this.removable?O`
           <button class="remove" @click=${this._remove} aria-label="Remove ${e}" ?disabled=${this.disabled}>✕</button>
         `:``}
       </span>
-    `}};customElements.define(`pastis-filter-chip`,pt);var mt=class extends V{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-chip`,mt);var ht=class extends B{static properties={filters:{type:Array},active:{type:Array},label:{type:String}};static styles=s`
     :host { display: block; }
 
     .filter-bar {
@@ -4312,10 +4312,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     .clear-btn:hover { border-color: var(--status-error, #f0505e); color: var(--status-error, #f0505e); }
-  `;constructor(){super(),this.filters=[],this.active=[],this.label=`Filter`}_isActive(e){return this.active.includes(e)}_handleToggle(e){let{value:t,selected:n}=e.detail;this.active=n?[...this.active,t]:this.active.filter(e=>e!==t),this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:this.active},bubbles:!0,composed:!0}))}_clearAll(){this.active=[],this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:[]},bubbles:!0,composed:!0}))}render(){return k`
+  `;constructor(){super(),this.filters=[],this.active=[],this.label=`Filter`}_isActive(e){return this.active.includes(e)}_handleToggle(e){let{value:t,selected:n}=e.detail;this.active=n?[...this.active,t]:this.active.filter(e=>e!==t),this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:this.active},bubbles:!0,composed:!0}))}_clearAll(){this.active=[],this.dispatchEvent(new CustomEvent(`pastis-filter-change`,{detail:{active:[]},bubbles:!0,composed:!0}))}render(){return O`
       <div class="filter-bar" part="filter-bar">
-        ${this.label?k`<span class="filter-label">${this.label}:</span>`:``}
-        ${this.filters.map(e=>k`
+        ${this.label?O`<span class="filter-label">${this.label}:</span>`:``}
+        ${this.filters.map(e=>O`
           <pastis-filter-chip
             .label=${e.label}
             .value=${e.value}
@@ -4325,11 +4325,11 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             @pastis-toggle=${this._handleToggle}
           ></pastis-filter-chip>
         `)}
-        ${this.active.length>0?k`
+        ${this.active.length>0?O`
           <button class="clear-btn" @click=${this._clearAll}>✕ Clear</button>
         `:``}
       </div>
-    `}};customElements.define(`pastis-filter-bar`,mt);var ht=class extends V{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-filter-bar`,ht);var gt=class extends B{static properties={theme:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:Boolean,reflect:!0},target:{type:String}};static styles=s`
     :host { display: inline-block; }
 
     button {
@@ -4366,12 +4366,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([size="lg"]) .icon { font-size: 20px; }
 
     .label-text { }
-  `;constructor(){super(),this.theme=`dark`,this.size=`md`,this.label=!0}connectedCallback(){super.connectedCallback();let e=this._getTarget();e&&(this.theme=e.getAttribute(`data-theme`)||`dark`),this._observer=new MutationObserver(()=>{let e=this._getTarget()?.getAttribute(`data-theme`)||`dark`;e!==this.theme&&(this.theme=e)}),this._observer.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect()}_getTarget(){return this.target?document.querySelector(this.target):document.documentElement}_toggle(){let e=this.theme===`dark`?`light`:`dark`,t=()=>{this.theme=e;let t=this._getTarget();t&&t.setAttribute(`data-theme`,e),this.dispatchEvent(new CustomEvent(`pastis-theme-change`,{detail:{theme:e},bubbles:!0,composed:!0}))};if(!document.startViewTransition){t();return}let n=this.getBoundingClientRect(),r=n.left+n.width/2,i=n.top+n.height/2,a=Math.hypot(Math.max(r,window.innerWidth-r),Math.max(i,window.innerHeight-i));document.startViewTransition(t).ready.then(()=>{document.documentElement.animate({clipPath:[`circle(0px at ${r}px ${i}px)`,`circle(${a}px at ${r}px ${i}px)`]},{duration:500,easing:`ease-in-out`,pseudoElement:`::view-transition-new(root)`})})}render(){let e=this.theme===`dark`,t=e?`☀`:`◑`,n=e?`Light`:`Dark`;return k`
+  `;constructor(){super(),this.theme=`dark`,this.size=`md`,this.label=!0}connectedCallback(){super.connectedCallback();let e=this._getTarget();e&&(this.theme=e.getAttribute(`data-theme`)||`dark`),this._observer=new MutationObserver(()=>{let e=this._getTarget()?.getAttribute(`data-theme`)||`dark`;e!==this.theme&&(this.theme=e)}),this._observer.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect()}_getTarget(){return this.target?document.querySelector(this.target):document.documentElement}_toggle(){let e=this.theme===`dark`?`light`:`dark`,t=()=>{this.theme=e;let t=this._getTarget();t&&t.setAttribute(`data-theme`,e),this.dispatchEvent(new CustomEvent(`pastis-theme-change`,{detail:{theme:e},bubbles:!0,composed:!0}))};if(!document.startViewTransition){t();return}let n=this.getBoundingClientRect(),r=n.left+n.width/2,i=n.top+n.height/2,a=Math.hypot(Math.max(r,window.innerWidth-r),Math.max(i,window.innerHeight-i));document.startViewTransition(t).ready.then(()=>{document.documentElement.animate({clipPath:[`circle(0px at ${r}px ${i}px)`,`circle(${a}px at ${r}px ${i}px)`]},{duration:500,easing:`ease-in-out`,pseudoElement:`::view-transition-new(root)`})})}render(){let e=this.theme===`dark`,t=e?`☀`:`◑`,n=e?`Light`:`Dark`;return O`
       <button @click=${this._toggle} aria-label="Toggle theme: switch to ${n} mode" part="theme-toggle">
         <span class="icon" aria-hidden="true">${t}</span>
-        ${this.label?k`<span class="label-text">${n} Mode</span>`:``}
+        ${this.label?O`<span class="label-text">${n} Mode</span>`:``}
       </button>
-    `}};customElements.define(`pastis-theme-toggle`,ht);var gt=class extends V{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-theme-toggle`,gt);var _t=class extends B{static properties={slides:{type:Array},active:{type:Number,reflect:!0},autoplay:{type:Number},loop:{type:Boolean,reflect:!0},showDots:{type:Boolean,reflect:!0},showArrows:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_timer:{state:!0},_paused:{state:!0}};static styles=s`
     :host { display: block; }
 
     .carousel {
@@ -4559,7 +4559,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         transition: none;
       }
     }
-  `;constructor(){super(),this.slides=[],this.active=0,this.autoplay=0,this.loop=!0,this.showDots=!0,this.showArrows=!0,this.variant=`default`,this._paused=!1}connectedCallback(){super.connectedCallback();let e=window.matchMedia?.(`(prefers-reduced-motion: reduce)`).matches;this.autoplay>0&&!e&&this._startAutoplay()}disconnectedCallback(){super.disconnectedCallback(),this._stopAutoplay()}_startAutoplay(){this._stopAutoplay(),this._timer=setInterval(()=>this._next(),this.autoplay)}_stopAutoplay(){this._timer&&=(clearInterval(this._timer),null)}_togglePause(){this._paused=!this._paused,this._paused?this._stopAutoplay():this.autoplay>0&&this._startAutoplay()}_handlePointerEnter(){this.autoplay>0&&!this._paused&&this._stopAutoplay()}_handlePointerLeave(){this.autoplay>0&&!this._paused&&this._startAutoplay()}_goTo(e){let t=this.slides.length;t&&(this.active=(e%t+t)%t,this.dispatchEvent(new CustomEvent(`pastis-slide-change`,{detail:{index:this.active},bubbles:!0,composed:!0})))}_prev(){this._goTo(this.active-1)}_next(){this._goTo(this.active+1)}render(){let e=this.slides.length,t=this.loop||this.active>0,n=this.loop||this.active<e-1;return k`
+  `;constructor(){super(),this.slides=[],this.active=0,this.autoplay=0,this.loop=!0,this.showDots=!0,this.showArrows=!0,this.variant=`default`,this._paused=!1}connectedCallback(){super.connectedCallback();let e=window.matchMedia?.(`(prefers-reduced-motion: reduce)`).matches;this.autoplay>0&&!e&&this._startAutoplay()}disconnectedCallback(){super.disconnectedCallback(),this._stopAutoplay()}_startAutoplay(){this._stopAutoplay(),this._timer=setInterval(()=>this._next(),this.autoplay)}_stopAutoplay(){this._timer&&=(clearInterval(this._timer),null)}_togglePause(){this._paused=!this._paused,this._paused?this._stopAutoplay():this.autoplay>0&&this._startAutoplay()}_handlePointerEnter(){this.autoplay>0&&!this._paused&&this._stopAutoplay()}_handlePointerLeave(){this.autoplay>0&&!this._paused&&this._startAutoplay()}_goTo(e){let t=this.slides.length;t&&(this.active=(e%t+t)%t,this.dispatchEvent(new CustomEvent(`pastis-slide-change`,{detail:{index:this.active},bubbles:!0,composed:!0})))}_prev(){this._goTo(this.active-1)}_next(){this._goTo(this.active+1)}render(){let e=this.slides.length,t=this.loop||this.active>0,n=this.loop||this.active<e-1;return O`
       <div
         class="carousel"
         part="carousel"
@@ -4572,22 +4572,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           class="slides-track"
           style=${this.variant===`fade`?``:`transform: translateX(-${this.active*100}%)`}
         >
-          ${this.slides.map((e,t)=>k`
+          ${this.slides.map((e,t)=>O`
             <div class="slide ${t===this.active?`active-slide`:``}" part="slide">
-              ${e.image?k`<img class="slide-image" src=${e.image} alt=${e.title||`Slide `+(t+1)} />`:``}
-              ${e.title||e.body?k`
+              ${e.image?O`<img class="slide-image" src=${e.image} alt=${e.title||`Slide `+(t+1)} />`:``}
+              ${e.title||e.body?O`
                 <div class="slide-caption">
-                  ${e.title?k`<p class="slide-title">${e.title}</p>`:``}
-                  ${e.body?k`<p class="slide-body">${e.body}</p>`:``}
+                  ${e.title?O`<p class="slide-title">${e.title}</p>`:``}
+                  ${e.body?O`<p class="slide-body">${e.body}</p>`:``}
                 </div>
-              `:k`<div class="slide-content"><slot name="slide-${t}"></slot></div>`}
+              `:O`<div class="slide-content"><slot name="slide-${t}"></slot></div>`}
             </div>
           `)}
         </div>
 
         <span class="counter" aria-live="polite" aria-atomic="true">${this.active+1} / ${e}</span>
 
-        ${this.autoplay>0?k`
+        ${this.autoplay>0?O`
           <button
             class="play-pause"
             @click=${this._togglePause}
@@ -4596,14 +4596,14 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           >${this._paused?`▶`:`❚❚`}</button>
         `:``}
 
-        ${this.showArrows?k`
+        ${this.showArrows?O`
           <button class="arrow prev" ?disabled=${!t} @click=${this._prev} aria-label="Previous">◀</button>
           <button class="arrow next" ?disabled=${!n} @click=${this._next} aria-label="Next">▶</button>
         `:``}
 
-        ${this.showDots?k`
+        ${this.showDots?O`
           <div class="dots">
-            ${this.slides.map((e,t)=>k`
+            ${this.slides.map((e,t)=>O`
               <button
                 class="dot ${t===this.active?`active-dot`:``}"
                 aria-label="Go to slide ${t+1}"
@@ -4614,7 +4614,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         `:``}
       </div>
-    `}};customElements.define(`pastis-carousel`,gt);var _t=class extends V{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-carousel`,_t);var vt=class extends B{static properties={items:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
     :host {
       display: block;
       container-type: inline-size;
@@ -4677,20 +4677,20 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         gap: var(--space-xs, 4px);
       }
     }
-  `;constructor(){super(),this.items=[],this.variant=`default`}render(){return k`
+  `;constructor(){super(),this.items=[],this.variant=`default`}render(){return O`
       <ol class="timeline" part="timeline">
-        ${this.items.map(e=>{let t=[e.tag,e.date].filter(Boolean).join(` · `);return k`
+        ${this.items.map(e=>{let t=[e.tag,e.date].filter(Boolean).join(` · `);return O`
             <li class="item" part="item">
               <p class="title">${e.title}</p>
               <div class="detail" part="detail">
-                ${t?k`<p class="meta">${t}</p>`:``}
-                ${e.body?k`<p class="body">${e.body}</p>`:``}
+                ${t?O`<p class="meta">${t}</p>`:``}
+                ${e.body?O`<p class="body">${e.body}</p>`:``}
                 <slot name="item-${e.title}"></slot>
               </div>
             </li>
           `})}
       </ol>
-    `}};customElements.define(`pastis-timeline`,_t);var vt=class extends V{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-timeline`,vt);var yt=class extends B{static properties={quote:{type:String},name:{type:String},role:{type:String},company:{type:String},src:{type:String},rating:{type:Number},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     .testimonial {
@@ -4805,13 +4805,13 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       font-size: 12px;
       color: var(--text-tertiary, #909498);
     }
-  `;constructor(){super(),this.rating=0,this.variant=`default`}_initials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}render(){let e=[this.role,this.company].filter(Boolean);return k`
+  `;constructor(){super(),this.rating=0,this.variant=`default`}_initials(){if(!this.name)return`?`;let e=this.name.trim().split(/\s+/);return e.length===1?e[0][0].toUpperCase():(e[0][0]+e[e.length-1][0]).toUpperCase()}render(){let e=[this.role,this.company].filter(Boolean);return O`
       <figure class="testimonial" part="testimonial">
         <span class="mark" aria-hidden="true">"</span>
 
-        ${this.rating>0?k`
+        ${this.rating>0?O`
           <div class="rating" role="img" aria-label="Rating: ${this.rating} out of 5 stars">
-            ${[1,2,3,4,5].map(e=>k`
+            ${[1,2,3,4,5].map(e=>O`
               <span class="star ${e<=this.rating?`filled`:``}" aria-hidden="true">★</span>
             `)}
           </div>
@@ -4825,15 +4825,15 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
         <figcaption class="author">
           <div class="avatar" aria-hidden="true">
-            ${this.src?k`<img src="${this.src}" alt="${this.name||`Author`}" />`:this._initials()}
+            ${this.src?O`<img src="${this.src}" alt="${this.name||`Author`}" />`:this._initials()}
           </div>
           <div class="author-info">
             <span class="author-name">${this.name||``}</span>
-            ${e.length?k`<span class="author-meta">${e.join(` · `)}</span>`:``}
+            ${e.length?O`<span class="author-meta">${e.join(` · `)}</span>`:``}
           </div>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-testimonial`,vt);var yt=class extends V{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=s`
+    `}};customElements.define(`pastis-testimonial`,yt);var bt=class extends B{static properties={label:{type:String},heading:{type:String},subheading:{type:String},align:{type:String,reflect:!0},padding:{type:String,reflect:!0},background:{type:String,reflect:!0},hasDivider:{type:Boolean,attribute:`has-divider`,reflect:!0},maxWidth:{type:String,attribute:`max-width`}};static styles=s`
     :host { display: block; }
 
     section {
@@ -4915,20 +4915,20 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (max-width: 768px) {
       section { padding: var(--space-3xl, 64px) var(--grid-margin-mobile, 16px); }
     }
-  `;constructor(){super(),this.align=`left`,this.padding=`md`,this.background=`primary`,this.hasDivider=!1}render(){let e=this.label||this.heading||this.subheading;return k`
+  `;constructor(){super(),this.align=`left`,this.padding=`md`,this.background=`primary`,this.hasDivider=!1}render(){let e=this.label||this.heading||this.subheading;return O`
       <section part="section" style="${this.maxWidth?`--section-max-width:${this.maxWidth}`:``}">
         <div class="container" part="container">
-          ${e?k`
+          ${e?O`
             <header class="header" part="header">
-              ${this.label?k`<div class="label">${this.label}</div>`:``}
-              ${this.heading?k`<h2>${this.heading}</h2>`:k`<slot name="heading"></slot>`}
-              ${this.subheading?k`<p>${this.subheading}</p>`:k`<slot name="subheading"></slot>`}
+              ${this.label?O`<div class="label">${this.label}</div>`:``}
+              ${this.heading?O`<h2>${this.heading}</h2>`:O`<slot name="heading"></slot>`}
+              ${this.subheading?O`<p>${this.subheading}</p>`:O`<slot name="subheading"></slot>`}
             </header>
           `:``}
           <slot></slot>
         </div>
       </section>
-    `}};customElements.define(`pastis-section`,yt);var bt=class extends V{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-section`,bt);var xt=class extends B{static properties={brand:{type:String},tagline:{type:String},copyright:{type:String},links:{type:Array},socials:{type:Array},variant:{type:String,reflect:!0}};static styles=s`
     :host { display: block; }
 
     footer {
@@ -5092,7 +5092,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       .main { grid-template-columns: 1fr; }
       .link-columns { flex-wrap: wrap; gap: var(--space-xl, 32px); }
     }
-  `;constructor(){super(),this.links=[],this.socials=[],this.variant=`default`}render(){return k`
+  `;constructor(){super(),this.links=[],this.socials=[],this.variant=`default`}render(){return O`
       <footer part="footer">
         <div class="inner">
           <div class="main" part="main">
@@ -5100,32 +5100,32 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               <slot name="brand">
                 <p class="brand-name">${this.brand||``}</p>
               </slot>
-              ${this.tagline?k`<p class="tagline">${this.tagline}</p>`:``}
-              ${this.socials.length?k`
+              ${this.tagline?O`<p class="tagline">${this.tagline}</p>`:``}
+              ${this.socials.length?O`
                 <nav class="socials" aria-label="Social links">
-                  ${this.socials.map(e=>k`
+                  ${this.socials.map(e=>O`
                     <a class="social-link" href="${e.href}" aria-label="${e.label}" target="_blank" rel="noopener noreferrer">
                       ${e.icon}
                     </a>
                   `)}
                 </nav>
-              `:k`<slot name="socials"></slot>`}
+              `:O`<slot name="socials"></slot>`}
             </div>
 
-            ${this.links.length?k`
+            ${this.links.length?O`
               <nav class="link-columns" aria-label="Footer navigation">
-                ${this.links.map(e=>k`
+                ${this.links.map(e=>O`
                   <div class="link-col">
                     <h3 class="col-heading">${e.heading}</h3>
                     <ul class="col-links">
-                      ${e.items.map(e=>k`
+                      ${e.items.map(e=>O`
                         <li><a href="${e.href}">${e.label}</a></li>
                       `)}
                     </ul>
                   </div>
                 `)}
               </nav>
-            `:k`<slot name="links"></slot>`}
+            `:O`<slot name="links"></slot>`}
           </div>
 
           <div class="bottom" part="bottom">
@@ -5136,7 +5136,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </div>
         </div>
       </footer>
-    `}};customElements.define(`pastis-footer`,bt);var xt=class extends V{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-footer`,xt);var St=class extends B{static properties={brand:{type:String},items:{type:Array},active:{type:String},sticky:{type:Boolean,reflect:!0},variant:{type:String,reflect:!0},_mobileOpen:{state:!0},_openDropdown:{state:!0}};static styles=s`
     :host { display: block; }
 
     nav {
@@ -5435,25 +5435,25 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (min-width: 769px) {
       .mobile-menu { display: none !important; }
     }
-  `;constructor(){super(),this.items=[],this.variant=`default`,this.sticky=!1,this._mobileOpen=!1,this._openDropdown=null,this._boundClose=this._handleOutsideClick.bind(this)}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this._openDropdown=null)}_toggleMobile(){this._mobileOpen=!this._mobileOpen}_toggleDropdown(e){this._openDropdown=this._openDropdown===e?null:e}_handleNavClick(e,t){if(e.children?.length){t.preventDefault(),this._toggleDropdown(e.id);return}this._mobileOpen=!1,this._openDropdown=null,this.dispatchEvent(new CustomEvent(`pastis-nav-click`,{detail:{item:e},bubbles:!0,composed:!0}))}_renderDropdownLink(e){return k`
+  `;constructor(){super(),this.items=[],this.variant=`default`,this.sticky=!1,this._mobileOpen=!1,this._openDropdown=null,this._boundClose=this._handleOutsideClick.bind(this)}connectedCallback(){super.connectedCallback(),document.addEventListener(`click`,this._boundClose)}disconnectedCallback(){super.disconnectedCallback(),document.removeEventListener(`click`,this._boundClose)}_handleOutsideClick(e){this.contains(e.target)||(this._openDropdown=null)}_toggleMobile(){this._mobileOpen=!this._mobileOpen}_toggleDropdown(e){this._openDropdown=this._openDropdown===e?null:e}_handleNavClick(e,t){if(e.children?.length){t.preventDefault(),this._toggleDropdown(e.id);return}this._mobileOpen=!1,this._openDropdown=null,this.dispatchEvent(new CustomEvent(`pastis-nav-click`,{detail:{item:e},bubbles:!0,composed:!0}))}_renderDropdownLink(e){return O`
       <a
         class="dropdown-link ${this.active===e.id?`active`:``}"
         href=${e.href||`#`}
         @click=${t=>this._handleNavClick(e,t)}
       >
-        ${e.icon?k`<span aria-hidden="true">${e.icon}</span>`:``}
+        ${e.icon?O`<span aria-hidden="true">${e.icon}</span>`:``}
         ${e.label}
       </a>
-    `}_renderDesktopItem(e){let t=this.active===e.id||e.children?.some(e=>e.id===this.active),n=e.children?.length>0,r=this._openDropdown===e.id;return k`
+    `}_renderDesktopItem(e){let t=this.active===e.id||e.children?.some(e=>e.id===this.active),n=e.children?.length>0,r=this._openDropdown===e.id;return O`
       <div class="nav-item ${r?`dropdown-open`:``}">
-        ${n?k`
+        ${n?O`
           <div class="nav-link-wrap">
             <a
               class="nav-link ${t?`active`:``}"
               href=${e.href||`#`}
               @click=${t=>this._handleNavClick(e,t)}
             >
-              ${e.icon?k`<span aria-hidden="true">${e.icon}</span>`:``}
+              ${e.icon?O`<span aria-hidden="true">${e.icon}</span>`:``}
               ${e.label}
             </a>
             <button
@@ -5464,47 +5464,47 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               @click=${t=>{t.preventDefault(),this._toggleDropdown(e.id)}}
             ><span class="chevron" aria-hidden="true">▼</span></button>
           </div>
-        `:k`
+        `:O`
           <a
             class="nav-link ${t?`active`:``}"
             href=${e.href||`#`}
             @click=${t=>this._handleNavClick(e,t)}
           >
-            ${e.icon?k`<span aria-hidden="true">${e.icon}</span>`:``}
+            ${e.icon?O`<span aria-hidden="true">${e.icon}</span>`:``}
             ${e.label}
           </a>
         `}
-        ${n?k`
+        ${n?O`
           <div class="dropdown" role="menu">
             ${e.children.map(e=>this._renderDropdownLink(e))}
           </div>
         `:``}
       </div>
-    `}_renderMobileItem(e){return k`
+    `}_renderMobileItem(e){return O`
       <a
         class="mobile-link ${this.active===e.id?`active`:``}"
         href=${e.href||`#`}
         @click=${t=>this._handleNavClick(e,t)}
       >
-        ${e.icon?k`<span aria-hidden="true">${e.icon}</span>`:``}
+        ${e.icon?O`<span aria-hidden="true">${e.icon}</span>`:``}
         ${e.label}
       </a>
-      ${e.children?.map(e=>k`
+      ${e.children?.map(e=>O`
         <a
           class="mobile-link mobile-sub-link ${this.active===e.id?`active`:``}"
           href=${e.href||`#`}
           @click=${t=>this._handleNavClick(e,t)}
         >
-          ${e.icon?k`<span aria-hidden="true">${e.icon}</span>`:``}
+          ${e.icon?O`<span aria-hidden="true">${e.icon}</span>`:``}
           ${e.label}
         </a>
       `)}
-    `}render(){return k`
+    `}render(){return O`
       <nav part="nav" role="navigation" aria-label="Main navigation">
         <!-- Brand -->
         <a class="brand" href="/" part="brand">
           <slot name="brand-icon">
-            ${this.brand?k`<span class="brand-icon">▶</span>`:``}
+            ${this.brand?O`<span class="brand-icon">▶</span>`:``}
           </slot>
           <slot name="brand">${this.brand||``}</slot>
         </a>
@@ -5546,7 +5546,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <slot name="mobile-links"></slot>
         <slot name="mobile-actions"></slot>
       </div>
-    `}};customElements.define(`pastis-nav`,xt);var St=class extends V{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
+    `}};customElements.define(`pastis-nav`,St);var Ct=class extends B{static properties={href:{type:String},heading:{type:String},client:{type:String},year:{type:String},summary:{type:String},image:{type:String},imageAlt:{type:String,attribute:`image-alt`},video:{type:String},tags:{type:Array},index:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},revealed:{type:Boolean,reflect:!0}};static styles=s`
     :host {
       display: block;
       --_ratio: 1 / 1;
@@ -5723,29 +5723,29 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (hover: none) {
       .tags { opacity: 1; transform: none; }
     }
-  `;constructor(){super(),this.tags=[],this.size=`square`}willUpdate(){if(typeof this.tags==`string`)try{this.tags=JSON.parse(this.tags)}catch{this.tags=[]}}updated(e){e.has(`reveal`)&&this.reveal&&!this.revealed&&!this._observer&&(this._observer=new IntersectionObserver(e=>{if(!e.some(e=>e.isIntersecting))return;this._observer.disconnect();let t=parseFloat(getComputedStyle(this).getPropertyValue(`--pastis-reveal-delay`))||0;setTimeout(()=>{this.revealed=!0},t)},{threshold:.2}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}_renderMedia(){return this.video?k`<video src=${this.video} poster=${this.image||``} autoplay muted loop playsinline aria-hidden="true"></video>`:this.image?k`<img src=${this.image} alt=${this.imageAlt||``} loading="lazy" decoding="async" />`:``}render(){return k`
+  `;constructor(){super(),this.tags=[],this.size=`square`}willUpdate(){if(typeof this.tags==`string`)try{this.tags=JSON.parse(this.tags)}catch{this.tags=[]}}updated(e){e.has(`reveal`)&&this.reveal&&!this.revealed&&!this._observer&&(this._observer=new IntersectionObserver(e=>{if(!e.some(e=>e.isIntersecting))return;this._observer.disconnect();let t=parseFloat(getComputedStyle(this).getPropertyValue(`--pastis-reveal-delay`))||0;setTimeout(()=>{this.revealed=!0},t)},{threshold:.2}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}_renderMedia(){return this.video?O`<video src=${this.video} poster=${this.image||``} autoplay muted loop playsinline aria-hidden="true"></video>`:this.image?O`<img src=${this.image} alt=${this.imageAlt||``} loading="lazy" decoding="async" />`:``}render(){return O`
       <a href=${this.href||`#`} part="link">
         <div class="stage">
           <div class="media" part="media">
             <slot name="media">${this._renderMedia()}</slot>
-            ${this.tags?.length?k`
+            ${this.tags?.length?O`
               <div class="tags" aria-hidden="true">
-                ${this.tags.map(e=>k`<span class="tag">${e}</span>`)}
+                ${this.tags.map(e=>O`<span class="tag">${e}</span>`)}
               </div>
             `:``}
           </div>
         </div>
         <div class="info">
           <div class="meta">
-            ${this.index?k`<span class="index">${this.index}</span>`:k`<span></span>`}
+            ${this.index?O`<span class="index">${this.index}</span>`:O`<span></span>`}
             <span class="client">${this.client||``}</span>
-            ${this.year?k`<span class="year">${this.year}</span>`:``}
+            ${this.year?O`<span class="year">${this.year}</span>`:``}
           </div>
           <h3 class="title">${this.heading||``} <span class="arrow" aria-hidden="true">→</span></h3>
-          ${this.summary?k`<p class="summary">${this.summary}</p>`:``}
+          ${this.summary?O`<p class="summary">${this.summary}</p>`:``}
         </div>
       </a>
-    `}};customElements.define(`pastis-project-card`,St);var Ct=class extends V{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-project-card`,Ct);var wt=class extends B{static properties={eyebrow:{type:String},size:{type:String,reflect:!0},reveal:{type:Boolean,reflect:!0},_visible:{state:!0}};static styles=s`
     :host {
       display: block;
       --_size: var(--font-size-statement-lg, clamp(2.25rem, 1.4rem + 3.6vw, 5.5rem));
@@ -5812,10 +5812,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         transform: none;
       }
     }
-  `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return k`
-      ${this.eyebrow?k`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
+  `;constructor(){super(),this.size=`lg`,this.reveal=!1,this._visible=!1}updated(e){e.has(`reveal`)&&this.reveal&&!this._observer&&(this._observer=new IntersectionObserver(e=>{e.some(e=>e.isIntersecting)&&(this._visible=!0,this._observer.disconnect())},{threshold:.15}),this._observer.observe(this))}disconnectedCallback(){super.disconnectedCallback(),this._observer?.disconnect(),this._observer=null}render(){let e=this._visible?`visible`:``;return O`
+      ${this.eyebrow?O`<span class="eyebrow ${e}" part="eyebrow">${this.eyebrow}</span>`:``}
       <div class="body ${e}" part="body"><slot></slot></div>
-    `}};customElements.define(`pastis-statement`,Ct);var wt=class extends V{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-statement`,wt);var Tt=class extends B{static properties={token:{type:String},label:{type:String},_value:{state:!0}};static styles=s`
     :host { display: block; }
 
     figure {
@@ -5854,7 +5854,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       color: var(--text-tertiary, #909498);
       overflow-wrap: anywhere;
     }
-  `;connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`token`)&&this._read()}_read(){this.token&&(this._value=getComputedStyle(document.documentElement).getPropertyValue(this.token).trim())}render(){return k`
+  `;connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`token`)&&this._read()}_read(){this.token&&(this._value=getComputedStyle(document.documentElement).getPropertyValue(this.token).trim())}render(){return O`
       <figure part="swatch">
         <div class="chip" style="background: var(${this.token})" aria-hidden="true"></div>
         <figcaption>
@@ -5863,7 +5863,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           <code class="value">${this._value||`—`}</code>
         </figcaption>
       </figure>
-    `}};customElements.define(`pastis-token-swatch`,wt);var Tt=class extends V{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-token-swatch`,Tt);var Et=class extends B{static properties={tokens:{type:Array},kind:{type:String,reflect:!0},caption:{type:String},sample:{type:String},_values:{state:!0}};static styles=s`
     :host { display: block; }
 
     table {
@@ -5958,9 +5958,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       td.value { display: none; }
       th.value { display: none; }
     }
-  `;constructor(){super(),this.tokens=[],this.kind=`space`,this.sample=`Design systems, Figma ↔ code`,this._values={}}willUpdate(){if(typeof this.tokens==`string`)try{this.tokens=JSON.parse(this.tokens)}catch{this.tokens=[]}}connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`tokens`)&&this._read()}_read(){let e=getComputedStyle(document.documentElement);this._values=Object.fromEntries((Array.isArray(this.tokens)?this.tokens:[]).map(t=>[t,e.getPropertyValue(t).trim()]))}_renderPreview(e){switch(this.kind){case`type`:return k`<div class="type-sample" style="font-size: var(${e})">${this.sample}</div>`;case`radius`:return k`<div class="radius" style="border-radius: var(${e})"></div>`;case`motion`:return k`<div class="motion" style="--_d: var(${e})"></div>`;case`color`:return k`<div class="color" style="background: var(${e})"></div>`;default:return k`<div class="bar" style="width: var(${e})"></div>`}}render(){return k`
+  `;constructor(){super(),this.tokens=[],this.kind=`space`,this.sample=`Design systems, Figma ↔ code`,this._values={}}willUpdate(){if(typeof this.tokens==`string`)try{this.tokens=JSON.parse(this.tokens)}catch{this.tokens=[]}}connectedCallback(){super.connectedCallback(),this._read(),this._themeObserver=new MutationObserver(()=>this._read()),this._themeObserver.observe(document.documentElement,{attributes:!0,attributeFilter:[`data-theme`]})}disconnectedCallback(){super.disconnectedCallback(),this._themeObserver?.disconnect()}updated(e){e.has(`tokens`)&&this._read()}_read(){let e=getComputedStyle(document.documentElement);this._values=Object.fromEntries((Array.isArray(this.tokens)?this.tokens:[]).map(t=>[t,e.getPropertyValue(t).trim()]))}_renderPreview(e){switch(this.kind){case`type`:return O`<div class="type-sample" style="font-size: var(${e})">${this.sample}</div>`;case`radius`:return O`<div class="radius" style="border-radius: var(${e})"></div>`;case`motion`:return O`<div class="motion" style="--_d: var(${e})"></div>`;case`color`:return O`<div class="color" style="background: var(${e})"></div>`;default:return O`<div class="bar" style="width: var(${e})"></div>`}}render(){return O`
       <table part="table">
-        ${this.caption?k`<caption>${this.caption}</caption>`:``}
+        ${this.caption?O`<caption>${this.caption}</caption>`:``}
         <thead>
           <tr>
             <th scope="col">Token</th>
@@ -5969,7 +5969,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </tr>
         </thead>
         <tbody>
-          ${(this.tokens||[]).map(e=>k`
+          ${(this.tokens||[]).map(e=>O`
             <tr>
               <td><code>${e}</code></td>
               <td class="value"><code>${this._values[e]||`—`}</code></td>
@@ -5978,7 +5978,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           `)}
         </tbody>
       </table>
-    `}};customElements.define(`pastis-spec-table`,Tt);var Et=class extends V{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
+    `}};customElements.define(`pastis-spec-table`,Et);var Dt=class extends B{static properties={label:{type:String},stagger:{type:Number},_progress:{state:!0},_atStart:{state:!0},_atEnd:{state:!0},_dragging:{state:!0}};static styles=s`
     :host {
       display: block;
       --_inset: var(--pastis-shelf-inset, var(--layout-gutter, 24px));
@@ -6071,7 +6071,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (hover: none) {
       .track { cursor: auto; }
     }
-  `;constructor(){super(),this.label=`Carousel`,this.stagger=90,this._progress=0,this._atStart=!0,this._atEnd=!1,this._dragging=!1,this._drag=null,this._suppressClick=!1}get _track(){return this.renderRoot?.querySelector(`.track`)}firstUpdated(){this._resizeObserver=new ResizeObserver(()=>this._updateScrollState()),this._resizeObserver.observe(this._track)}disconnectedCallback(){super.disconnectedCallback(),this._resizeObserver?.disconnect()}_onSlotChange(e){e.target.assignedElements().forEach((e,t)=>e.style.setProperty(`--pastis-reveal-delay`,`${t*this.stagger}ms`)),this._updateScrollState()}_updateScrollState(){let e=this._track;if(!e)return;let t=e.scrollWidth-e.clientWidth;this._progress=t>0?e.scrollLeft/t:1,this._atStart=e.scrollLeft<=1,this._atEnd=e.scrollLeft>=t-1}_scrollByPage(e){let t=this._track,n=this.querySelector(`:scope > *`),r=n?n.getBoundingClientRect().width+parseFloat(getComputedStyle(t).columnGap||0):t.clientWidth,i=Math.max(1,Math.floor((t.clientWidth-1)/r)),a=!window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;t.scrollBy({left:e*i*r,behavior:a?`smooth`:`auto`})}_onPointerDown(e){e.pointerType!==`mouse`||e.button!==0||(this._drag={x:e.clientX,scrollLeft:this._track.scrollLeft,moved:!1})}_onPointerMove(e){if(!this._drag)return;let t=e.clientX-this._drag.x;!this._drag.moved&&Math.abs(t)<5||(this._drag.moved||(this._drag.moved=!0,this._dragging=!0,this._track.setPointerCapture(e.pointerId)),this._track.scrollLeft=this._drag.scrollLeft-t)}_onPointerUp(){if(!this._drag)return;let{moved:e,scrollLeft:t}=this._drag;if(this._drag=null,!e)return;this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),this._snapToNearest(this._track.scrollLeft>t?1:-1);let n=()=>{this._dragging=!1};this._track.addEventListener(`scrollend`,n,{once:!0}),setTimeout(n,700)}_snapToNearest(e){let t=this._track,n=parseFloat(getComputedStyle(t).scrollPaddingInlineStart)||0,r=t.getBoundingClientRect().left,i=[...this.children].map(e=>e.getBoundingClientRect().left-r-n),a=e>0?i.find(e=>e>8)??i.at(-1):[...i].reverse().find(e=>e<-8)??i[0];a!==void 0&&t.scrollBy({left:a,behavior:`smooth`})}_onClickCapture(e){this._suppressClick&&(e.preventDefault(),e.stopPropagation())}render(){return k`
+  `;constructor(){super(),this.label=`Carousel`,this.stagger=90,this._progress=0,this._atStart=!0,this._atEnd=!1,this._dragging=!1,this._drag=null,this._suppressClick=!1}get _track(){return this.renderRoot?.querySelector(`.track`)}firstUpdated(){this._resizeObserver=new ResizeObserver(()=>this._updateScrollState()),this._resizeObserver.observe(this._track)}disconnectedCallback(){super.disconnectedCallback(),this._resizeObserver?.disconnect()}_onSlotChange(e){e.target.assignedElements().forEach((e,t)=>e.style.setProperty(`--pastis-reveal-delay`,`${t*this.stagger}ms`)),this._updateScrollState()}_updateScrollState(){let e=this._track;if(!e)return;let t=e.scrollWidth-e.clientWidth;this._progress=t>0?e.scrollLeft/t:1,this._atStart=e.scrollLeft<=1,this._atEnd=e.scrollLeft>=t-1}_scrollByPage(e){let t=this._track,n=this.querySelector(`:scope > *`),r=n?n.getBoundingClientRect().width+parseFloat(getComputedStyle(t).columnGap||0):t.clientWidth,i=Math.max(1,Math.floor((t.clientWidth-1)/r)),a=!window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;t.scrollBy({left:e*i*r,behavior:a?`smooth`:`auto`})}_onPointerDown(e){e.pointerType!==`mouse`||e.button!==0||(this._drag={x:e.clientX,scrollLeft:this._track.scrollLeft,moved:!1})}_onPointerMove(e){if(!this._drag)return;let t=e.clientX-this._drag.x;!this._drag.moved&&Math.abs(t)<5||(this._drag.moved||(this._drag.moved=!0,this._dragging=!0,this._track.setPointerCapture(e.pointerId)),this._track.scrollLeft=this._drag.scrollLeft-t)}_onPointerUp(){if(!this._drag)return;let{moved:e,scrollLeft:t}=this._drag;if(this._drag=null,!e)return;this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),this._snapToNearest(this._track.scrollLeft>t?1:-1);let n=()=>{this._dragging=!1};this._track.addEventListener(`scrollend`,n,{once:!0}),setTimeout(n,700)}_snapToNearest(e){let t=this._track,n=parseFloat(getComputedStyle(t).scrollPaddingInlineStart)||0,r=t.getBoundingClientRect().left,i=[...this.children].map(e=>e.getBoundingClientRect().left-r-n),a=e>0?i.find(e=>e>8)??i.at(-1):[...i].reverse().find(e=>e<-8)??i[0];a!==void 0&&t.scrollBy({left:a,behavior:`smooth`})}_onClickCapture(e){this._suppressClick&&(e.preventDefault(),e.stopPropagation())}render(){return O`
       <div
         class="track ${this._dragging?`dragging`:``}"
         part="track"
@@ -6094,7 +6094,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         <button aria-label="Previous" ?disabled=${this._atStart} @click=${()=>this._scrollByPage(-1)}>←</button>
         <button aria-label="Next" ?disabled=${this._atEnd} @click=${()=>this._scrollByPage(1)}>→</button>
       </div>
-    `}};customElements.define(`pastis-shelf`,Et);var W={today:A`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,calendar:A`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,list:A`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,search:A`<path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" />`,grip:A`<circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" /><circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />`,flag:A`<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />`,repeat:A`<path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" />`,clock:A`<circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />`,tag:A`<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />`,subtasks:A`<path d="M8 5h13" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="M3 10a2 2 0 0 0 2 2h3" /><path d="M3 5v12a2 2 0 0 0 2 2h3" />`,alert:A`<circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" />`,plus:A`<path d="M5 12h14" /><path d="M12 5v14" />`,check:A`<path d="M20 6 9 17l-5-5" />`,close:A`<path d="M18 6 6 18" /><path d="m6 6 12 12" />`,more:A`<circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />`,edit:A`<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" />`,trash:A`<path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />`,"chevron-right":A`<path d="m9 18 6-6-6-6" />`,"chevron-left":A`<path d="m15 18-6-6 6-6" />`,"chevron-down":A`<path d="m6 9 6 6 6-6" />`,inbox:A`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,"trash-restore":A`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`},Dt=Object.keys(W),Ot=class extends V{static properties={name:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:String}};static styles=s`
+    `}};customElements.define(`pastis-shelf`,Dt);var U={today:k`<circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />`,calendar:k`<path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" />`,list:k`<path d="M3 5h.01" /><path d="M3 12h.01" /><path d="M3 19h.01" /><path d="M8 5h13" /><path d="M8 12h13" /><path d="M8 19h13" />`,search:k`<path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" />`,grip:k`<circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" /><circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />`,flag:k`<path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />`,repeat:k`<path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" />`,clock:k`<circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />`,tag:k`<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />`,subtasks:k`<path d="M8 5h13" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="M3 10a2 2 0 0 0 2 2h3" /><path d="M3 5v12a2 2 0 0 0 2 2h3" />`,alert:k`<circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" />`,plus:k`<path d="M5 12h14" /><path d="M12 5v14" />`,check:k`<path d="M20 6 9 17l-5-5" />`,close:k`<path d="M18 6 6 18" /><path d="m6 6 12 12" />`,more:k`<circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />`,edit:k`<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" />`,trash:k`<path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />`,"chevron-right":k`<path d="m9 18 6-6-6-6" />`,"chevron-left":k`<path d="m15 18-6-6 6-6" />`,"chevron-down":k`<path d="m6 9 6 6 6-6" />`,inbox:k`<polyline points="22 12 16 12 14 15 10 15 8 12 2 12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />`,"trash-restore":k`<path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />`,"panel-left":k`<rect width="18" height="18" x="3" y="3" rx="2" /><path d="M9 3v18" />`,settings:k`<path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx="12" cy="12" r="3" />`,board:k`<rect width="18" height="18" x="3" y="3" rx="2" /><path d="M8 7v7" /><path d="M12 7v4" /><path d="M16 7v9" />`,layers:k`<path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />`,keyboard:k`<path d="M10 8h.01" /><path d="M12 12h.01" /><path d="M14 8h.01" /><path d="M16 12h.01" /><path d="M18 8h.01" /><path d="M6 8h.01" /><path d="M7 16h10" /><path d="M8 12h.01" /><rect width="20" height="16" x="2" y="4" rx="2" />`},Ot=Object.keys(U),kt=class extends B{static properties={name:{type:String,reflect:!0},size:{type:String,reflect:!0},label:{type:String}};static styles=s`
     :host {
       --_size: calc(var(--space-md, 16px) + var(--space-xs, 4px));
       display: inline-flex;
@@ -6108,7 +6108,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([hidden]) { display: none; }
 
     svg { display: block; width: 100%; height: 100%; }
-  `;constructor(){super(),this.size=`md`}willUpdate(e){e.has(`name`)&&!Object.hasOwn(W,this.name??``)&&console.warn(`pastis-icon: unknown icon name "${this.name??``}"`),this.label?(this.setAttribute(`role`,`img`),this.setAttribute(`aria-label`,this.label),this.removeAttribute(`aria-hidden`)):(this.removeAttribute(`role`),this.removeAttribute(`aria-label`),this.setAttribute(`aria-hidden`,`true`))}render(){let e=Object.hasOwn(W,this.name??``)?W[this.name]:null;return e?k`<svg
+  `;constructor(){super(),this.size=`md`}willUpdate(e){e.has(`name`)&&!Object.hasOwn(U,this.name??``)&&console.warn(`pastis-icon: unknown icon name "${this.name??``}"`),this.label?(this.setAttribute(`role`,`img`),this.setAttribute(`aria-label`,this.label),this.removeAttribute(`aria-hidden`)):(this.removeAttribute(`role`),this.removeAttribute(`aria-label`),this.setAttribute(`aria-hidden`,`true`))}render(){let e=Object.hasOwn(U,this.name??``)?U[this.name]:null;return e?O`<svg
       part="svg"
       viewBox="0 0 24 24"
       fill="none"
@@ -6118,7 +6118,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       stroke-linejoin="round"
       aria-hidden="true"
       focusable="false"
-    >${e}</svg>`:M}};customElements.define(`pastis-icon`,Ot);var kt=[``,`low`,`medium`,`high`],At=`Untitled task`,jt=class extends V{static properties={taskTitle:{type:String,attribute:`task-title`},done:{type:Boolean,reflect:!0},toggleLabel:{type:String,attribute:`toggle-label`},due:{type:String},overdue:{type:Boolean,reflect:!0},repeats:{type:Boolean,reflect:!0},flagged:{type:Boolean,reflect:!0},priority:{type:Number,reflect:!0},subtasks:{type:String},tags:{type:Array},indent:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},reorderable:{type:Boolean,reflect:!0},reorderLabel:{type:String,attribute:`reorder-label`}};static styles=s`
+    >${e}</svg>`:j}};customElements.define(`pastis-icon`,kt);var At=[``,`low`,`medium`,`high`],W=`Untitled task`,jt=class extends B{static properties={taskTitle:{type:String,attribute:`task-title`},done:{type:Boolean,reflect:!0},toggleLabel:{type:String,attribute:`toggle-label`},due:{type:String},overdue:{type:Boolean,reflect:!0},repeats:{type:Boolean,reflect:!0},flagged:{type:Boolean,reflect:!0},priority:{type:Number,reflect:!0},subtasks:{type:String},tags:{type:Array},indent:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},reorderable:{type:Boolean,reflect:!0},reorderLabel:{type:String,attribute:`reorder-label`},density:{type:String,reflect:!0},selected:{type:Boolean,reflect:!0},_hasMeta:{state:!0},_hasActions:{state:!0}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6306,17 +6306,115 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     :host([disabled][done]) .circle { background: var(--text-disabled, #4a4139); }
     :host([disabled]) .toggle:hover .circle { border-color: var(--text-disabled, #4a4139); }
 
+    /* ── Selected ── */
+    :host([selected]) .row {
+      background: var(--bg-elevated, #251f1a);
+      box-shadow: inset calc(var(--border-width, 1px) * 2) 0 0 var(--action-primary, #fcba28);
+    }
+
+    /* ── Compact density: one line, aligned meta columns, hover actions ── */
+    .row.compact {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-auto-columns: auto;
+      align-items: center;
+      gap: 0 var(--space-sm, 8px);
+      padding-block: 0;
+    }
+    .row.compact:hover { background: var(--bg-card, #1b1612); }
+    :host([selected]) .row.compact,
+    :host([selected]) .row.compact:hover { background: var(--bg-elevated, #251f1a); }
+
+    .compact .toggle,
+    .compact .handle {
+      width: var(--space-xl, 32px);
+      height: var(--space-xl, 32px);
+    }
+    .compact .circle {
+      width: var(--space-md, 16px);
+      height: var(--space-md, 16px);
+    }
+
+    .compact .body {
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-sm, 8px);
+      min-height: var(--space-xl, 32px);
+      padding-block: 0;
+    }
+    .compact .title {
+      flex: 0 1 auto;
+      width: auto;
+      min-width: 0;
+      font-size: var(--font-size-body-sm, 14px);
+      line-height: var(--line-height-body-sm, 1.5);
+    }
+    .compact .title-text {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .compact .meta {
+      flex: none;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+    .compact .meta.slotted { display: none; }
+
+    .trail { display: grid; align-items: center; min-width: 0; }
+    .trail > * { grid-area: 1 / 1; }
+
+    .columns {
+      display: grid;
+      grid-template-columns: var(--pastis-task-row-columns, none);
+      grid-auto-flow: column;
+      grid-auto-columns: auto;
+      align-items: center;
+      column-gap: var(--pastis-task-row-column-gap, var(--space-md, 16px));
+      min-width: 0;
+      font-size: var(--font-size-caption, 12px);
+      line-height: var(--line-height-caption, 1.4);
+      color: var(--text-tertiary, #a39b90);
+    }
+    ::slotted([slot="meta"]) {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .compact .actions {
+      justify-self: end;
+      opacity: 0;
+      pointer-events: none;
+    }
+    :host(:hover) .compact .actions,
+    :host(:focus-within) .compact .actions {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    :host(:hover) .compact.with-actions .columns,
+    :host(:focus-within) .compact.with-actions .columns { visibility: hidden; }
+
+    @media (hover: none) {
+      .compact .actions { opacity: 1; pointer-events: auto; }
+      .compact.with-actions .columns { visibility: hidden; }
+    }
+
     @media (forced-colors: active) {
       :host([done]) .circle { background: CanvasText; border-color: CanvasText; color: Canvas; }
+      :host([selected]) .row { outline: 2px solid Highlight; outline-offset: -2px; }
     }
-  `;constructor(){super(),this.taskTitle=``,this.done=!1,this.overdue=!1,this.repeats=!1,this.flagged=!1,this.priority=0,this.tags=[],this.indent=!1,this.disabled=!1,this.reorderable=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}_metaItems(){let e=[];(this.due||this.overdue)&&e.push({text:this.overdue?this.due?`Overdue: ${this.due}`:`Overdue`:this.due,view:k`<span class="meta-item due ${this.overdue?`overdue`:``}">
+  `;constructor(){super(),this.taskTitle=``,this.done=!1,this.overdue=!1,this.repeats=!1,this.flagged=!1,this.priority=0,this.tags=[],this.indent=!1,this.disabled=!1,this.reorderable=!1,this.selected=!1,this._hasMeta=!1,this._hasActions=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}_metaItems(){let e=[];(this.due||this.overdue)&&e.push({text:this.overdue?this.due?`Overdue: ${this.due}`:`Overdue`:this.due,view:O`<span class="meta-item due ${this.overdue?`overdue`:``}">
           <pastis-icon name=${this.overdue?`alert`:`clock`} size="sm"></pastis-icon>
           <span>${this.due||`Overdue`}</span>
-        </span>`}),this.repeats&&e.push({text:`Repeats`,view:k`<span class="meta-item repeats"><pastis-icon name="repeat" size="sm"></pastis-icon></span>`}),this.flagged&&e.push({text:`Flagged`,view:k`<span class="meta-item flagged"><pastis-icon name="flag" size="sm"></pastis-icon></span>`});let t=Math.trunc(Number(this.priority));t>=1&&t<=3&&e.push({text:`Priority ${kt[t]}`,view:k`<span class="meta-item priority">${`!`.repeat(t)}</span>`}),this.subtasks&&e.push({text:`Subtasks ${this.subtasks}`,view:k`<span class="meta-item subtasks">
+        </span>`}),this.repeats&&e.push({text:`Repeats`,view:O`<span class="meta-item repeats"><pastis-icon name="repeat" size="sm"></pastis-icon></span>`}),this.flagged&&e.push({text:`Flagged`,view:O`<span class="meta-item flagged"><pastis-icon name="flag" size="sm"></pastis-icon></span>`});let t=Math.trunc(Number(this.priority));t>=1&&t<=3&&e.push({text:`Priority ${At[t]}`,view:O`<span class="meta-item priority">${`!`.repeat(t)}</span>`}),this.subtasks&&e.push({text:`Subtasks ${this.subtasks}`,view:O`<span class="meta-item subtasks">
           <pastis-icon name="subtasks" size="sm"></pastis-icon><span>${this.subtasks}</span>
-        </span>`});let n=Array.isArray(this.tags)?this.tags.filter(Boolean).map(String):[];return n.length&&e.push({text:`Tags: ${n.join(`, `)}`,view:k`<span class="meta-item tags">
-          ${n.map(e=>k`<pastis-tag size="sm">${e}</pastis-tag>`)}
-        </span>`}),e}render(){let e=this._metaItems(),t=!!String(this.taskTitle??``).trim(),n=t?this.taskTitle:At;return k`
+        </span>`});let n=Array.isArray(this.tags)?this.tags.filter(Boolean).map(String):[];return n.length&&e.push({text:`Tags: ${n.join(`, `)}`,view:O`<span class="meta-item tags">
+          ${n.map(e=>O`<pastis-tag size="sm">${e}</pastis-tag>`)}
+        </span>`}),e}render(){if(this.density===`compact`)return this._renderCompact();let e=this._metaItems(),t=!!String(this.taskTitle??``).trim(),n=t?this.taskTitle:W;return O`
       <div class="row" part="row">
         <button
           class="toggle"
@@ -6330,7 +6428,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           @keydown=${this._onToggleKeydown}
         >
           <span class="circle" part="circle">
-            ${this.done?k`<pastis-icon name="check"></pastis-icon>`:M}
+            ${this.done?O`<pastis-icon name="check"></pastis-icon>`:j}
           </span>
         </button>
         <div class="body">
@@ -6338,18 +6436,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             class="title"
             part="title"
             type="button"
-            aria-label=${t?M:At}
-            aria-describedby=${e.length?`description`:M}
+            aria-label=${t?j:W}
+            aria-describedby=${e.length?`description`:j}
             ?disabled=${this.disabled}
             @click=${this._onOpen}
           ><span class="title-text">${this.taskTitle}</span></button>
-          ${e.length?k`
+          ${e.length?O`
             <div class="meta" part="meta" aria-hidden="true">${e.map(e=>e.view)}</div>
             <span id="description" hidden>${e.map(e=>e.text).join(`, `)}</span>
-          `:M}
+          `:j}
         </div>
         <div class="actions" part="actions"><slot name="actions"></slot></div>
-        ${this.reorderable?k`
+        ${this.reorderable?O`
           <button
             class="handle"
             part="handle"
@@ -6357,9 +6455,55 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             aria-label=${this.reorderLabel||`Reorder ${n}`}
             ?disabled=${this.disabled}
           ><pastis-icon name="grip"></pastis-icon></button>
-        `:M}
+        `:j}
       </div>
-    `}_onToggleKeydown(e){e.key===`Enter`&&e.preventDefault()}_onToggle(){if(this.disabled)return;let e=!this.done,t=new CustomEvent(`pastis-toggle`,{detail:{done:e},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)&&(this.done=e)}_onOpen(){this.disabled||this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-task-row`,jt);var Mt=class extends V{static properties={label:{type:String}};static styles=s`
+    `}_renderCompact(){let e=this._metaItems(),t=!!String(this.taskTitle??``).trim(),n=t?this.taskTitle:W;return O`
+      <div class="row compact ${this._hasActions?`with-actions`:``}" part="row">
+        <button
+          class="toggle"
+          part="toggle"
+          type="button"
+          role="checkbox"
+          aria-checked=${this.done?`true`:`false`}
+          aria-label=${this.toggleLabel||`Complete ${n}`}
+          ?disabled=${this.disabled}
+          @click=${this._onToggle}
+          @keydown=${this._onToggleKeydown}
+        >
+          <span class="circle" part="circle">
+            ${this.done?O`<pastis-icon name="check"></pastis-icon>`:j}
+          </span>
+        </button>
+        <div class="body">
+          <button
+            class="title"
+            part="title"
+            type="button"
+            aria-label=${t?j:W}
+            aria-describedby=${e.length?`description`:j}
+            ?disabled=${this.disabled}
+            @click=${this._onOpen}
+          ><span class="title-text">${this.taskTitle}</span></button>
+          ${e.length?O`
+            <div class="meta ${this._hasMeta?`slotted`:``}" part="meta" aria-hidden="true">${e.map(e=>e.view)}</div>
+            <span id="description" hidden>${e.map(e=>e.text).join(`, `)}</span>
+          `:j}
+        </div>
+        <div class="trail">
+          <div class="columns" part="columns"><slot name="meta" @slotchange=${this._onMetaSlotChange}></slot></div>
+          <div class="actions" part="actions"><slot name="actions" @slotchange=${this._onActionsSlotChange}></slot></div>
+        </div>
+        ${this.reorderable?O`
+          <button
+            class="handle"
+            part="handle"
+            type="button"
+            aria-label=${this.reorderLabel||`Reorder ${n}`}
+            ?disabled=${this.disabled}
+          ><pastis-icon name="grip"></pastis-icon></button>
+        `:j}
+      </div>
+    `}_onMetaSlotChange(e){this._hasMeta=e.target.assignedElements().length>0}_onActionsSlotChange(e){this._hasActions=e.target.assignedElements().length>0}_onToggleKeydown(e){e.key===`Enter`&&e.preventDefault()}_onToggle(){if(this.disabled)return;let e=!this.done,t=new CustomEvent(`pastis-toggle`,{detail:{done:e},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)&&(this.done=e)}_onOpen(){this.disabled||this.dispatchEvent(new CustomEvent(`pastis-open`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-task-row`,jt);var Mt=class extends B{static properties={label:{type:String}};static styles=s`
     :host {
       position: fixed;
       inset-inline: 0;
@@ -6382,7 +6526,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
 
     ::slotted(*) { flex: 1 1 0; min-width: 0; }
-  `;render(){return k`<nav part="nav" aria-label=${this.label||M}><slot></slot></nav>`}},Nt=class extends V{static properties={href:{type:String},icon:{type:String},label:{type:String},current:{type:Boolean,reflect:!0},badge:{type:String},badgeLabel:{type:String,attribute:`badge-label`}};static styles=s`
+  `;render(){return O`<nav part="nav" aria-label=${this.label||j}><slot></slot></nav>`}},Nt=class extends B{static properties={href:{type:String},icon:{type:String},label:{type:String},current:{type:Boolean,reflect:!0},badge:{type:String},badgeLabel:{type:String,attribute:`badge-label`}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6444,24 +6588,24 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       text-align: center;
       white-space: nowrap;
     }
-  `;constructor(){super(),this.current=!1}willUpdate(e){!this.href&&(!this.hasUpdated||e.has(`href`))&&console.warn(`pastis-tab-bar-item: "${this.label??``}" has no href; it is rendered as role="link" with tabindex="0"`)}get _hasBadge(){return this.badge!==void 0&&this.badge!==null&&String(this.badge)!==``}render(){let e=this._hasBadge;return k`
+  `;constructor(){super(),this.current=!1}willUpdate(e){!this.href&&(!this.hasUpdated||e.has(`href`))&&console.warn(`pastis-tab-bar-item: "${this.label??``}" has no href; it is rendered as role="link" with tabindex="0"`)}get _hasBadge(){return this.badge!==void 0&&this.badge!==null&&String(this.badge)!==``}render(){let e=this._hasBadge;return O`
       <a
         part="link"
-        href=${this.href||M}
-        role=${this.href?M:`link`}
-        tabindex=${this.href?M:`0`}
-        aria-current=${this.current?`page`:M}
-        aria-label=${e?`${this.label??``}, ${this.badgeLabel||this.badge}`:M}
+        href=${this.href||j}
+        role=${this.href?j:`link`}
+        tabindex=${this.href?j:`0`}
+        aria-current=${this.current?`page`:j}
+        aria-label=${e?`${this.label??``}, ${this.badgeLabel||this.badge}`:j}
         @click=${this._onClick}
         @keydown=${this._onKeydown}
       >
         <span class="icon-wrap">
-          ${this.icon?k`<pastis-icon part="icon" name=${this.icon} size="lg"></pastis-icon>`:M}
-          ${e?k`<span class="badge" part="badge" aria-hidden="true">${this.badge}</span>`:M}
+          ${this.icon?O`<pastis-icon part="icon" name=${this.icon} size="lg"></pastis-icon>`:j}
+          ${e?O`<span class="badge" part="badge" aria-hidden="true">${this.badge}</span>`:j}
         </span>
         <span class="label" part="label">${this.label}</span>
       </a>
-    `}_onKeydown(e){e.key!==`Enter`||this.href||(e.preventDefault(),e.currentTarget.click())}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-tab-bar`,Mt),customElements.define(`pastis-tab-bar-item`,Nt);var Pt=0,G={};function K(e,t){return t==null||t===``?``:(G[e]??=Object.assign(document.createElement(`input`),{type:e}),G[e].value=String(t),G[e].value)}function Ft(e){return Array.from(e.elements).find(e=>e.type===`submit`||e instanceof HTMLInputElement&&e.type===`image`)}var q=class extends V{static formAssociated=!0;static shadowRootOptions={...V.shadowRootOptions,delegatesFocus:!0};static inputType=`text`;static properties={label:{type:String},value:{type:String,reflect:!0},min:{type:String},max:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},name:{type:String},chips:{type:Array},_formDisabled:{state:!0}};static styles=s`
+    `}_onKeydown(e){e.key!==`Enter`||this.href||(e.preventDefault(),e.currentTarget.click())}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-tab-bar`,Mt),customElements.define(`pastis-tab-bar-item`,Nt);var Pt=0,G={};function K(e,t){return t==null||t===``?``:(G[e]??=Object.assign(document.createElement(`input`),{type:e}),G[e].value=String(t),G[e].value)}function Ft(e){return Array.from(e.elements).find(e=>e.type===`submit`||e instanceof HTMLInputElement&&e.type===`image`)}var q=class extends B{static formAssociated=!0;static shadowRootOptions={...B.shadowRootOptions,delegatesFocus:!0};static inputType=`text`;static properties={label:{type:String},value:{type:String,reflect:!0},min:{type:String},max:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0},required:{type:Boolean,reflect:!0},name:{type:String},chips:{type:Array},_formDisabled:{state:!0}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6611,34 +6755,34 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (forced-colors: active) {
       .chip[aria-pressed="true"] { background: Highlight; color: HighlightText; border-color: Highlight; }
     }
-  `;constructor(){super(),this.value=``,this.disabled=!1,this.required=!1,this.chips=[],this._formDisabled=!1,this._id=`pastis-dt-field-${++Pt}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``,this._input&&(this._input.value=this.value),this._syncForm()}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._input?this._input.focus(e):super.focus(e)}get _input(){return this.shadowRoot?.querySelector(`input`)??null}get _isDisabled(){return this.disabled||this._formDisabled}willUpdate(e){e.has(`value`)&&(this.value=K(this.constructor.inputType,this.value)),this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){this._syncForm()}_syncForm(){let e=this._input;e&&(this._internals.setFormValue(this.value,this.value),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e))}_inputAttributes(){return{}}render(){let e=this._id,t=!!this.error,n=this._isDisabled,r=Array.isArray(this.chips)?this.chips.filter(e=>e&&e.label):[],i=!this.required&&!n&&this.value!==``,a=this._inputAttributes();return k`
+  `;constructor(){super(),this.value=``,this.disabled=!1,this.required=!1,this.chips=[],this._formDisabled=!1,this._id=`pastis-dt-field-${++Pt}`,this._internals=this.attachInternals(),this.addEventListener(`keydown`,e=>this._onKeydown(e))}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}get willValidate(){return this._internals.willValidate}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``,this._input&&(this._input.value=this.value),this._syncForm()}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this._input?this._input.focus(e):super.focus(e)}get _input(){return this.shadowRoot?.querySelector(`input`)??null}get _isDisabled(){return this.disabled||this._formDisabled}willUpdate(e){e.has(`value`)&&(this.value=K(this.constructor.inputType,this.value)),this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){this._syncForm()}_syncForm(){let e=this._input;e&&(this._internals.setFormValue(this.value,this.value),e.validity.valid?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage,e))}_inputAttributes(){return{}}render(){let e=this._id,t=!!this.error,n=this._isDisabled,r=Array.isArray(this.chips)?this.chips.filter(e=>e&&e.label):[],i=!this.required&&!n&&this.value!==``,a=this._inputAttributes();return O`
       <div class="field ${t?`has-error`:``}">
-        ${this.label?k`
+        ${this.label?O`
           <label for="${e}">
             ${this.label}
-            ${this.required?k`<span class="required-dot" aria-hidden="true">*</span>`:M}
+            ${this.required?O`<span class="required-dot" aria-hidden="true">*</span>`:j}
           </label>
-        `:M}
+        `:j}
         <div class="control">
           <input
             id="${e}"
             part="input"
             type="${this.constructor.inputType}"
             .value="${this.value}"
-            min=${this.min||M}
-            max=${this.max||M}
-            step=${a.step??M}
+            min=${this.min||j}
+            max=${this.max||j}
+            step=${a.step??j}
             ?disabled=${n}
             ?required=${this.required}
-            aria-label=${this.label||M}
+            aria-label=${this.label||j}
             aria-invalid="${t?`true`:`false`}"
-            aria-describedby=${t?`${e}-error`:this.helper?`${e}-helper`:M}
+            aria-describedby=${t?`${e}-error`:this.helper?`${e}-helper`:j}
             @input=${this._onInput}
             @change=${this._onChange}
             @keyup=${this._syncForm}
             @blur=${this._syncForm}
           />
-          ${i?k`
+          ${i?O`
             <button
               class="clear"
               part="clear"
@@ -6646,12 +6790,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               aria-label=${this.label?`Clear ${this.label}`:`Clear`}
               @click=${this._onClear}
             ><pastis-icon name="close" size="sm"></pastis-icon></button>
-          `:M}
+          `:j}
         </div>
-        ${t?k`<p class="error-text" id="${e}-error" role="alert">${this.error}</p>`:this.helper?k`<p class="helper-text" id="${e}-helper">${this.helper}</p>`:M}
-        ${r.length?k`
-          <div class="chips" part="chips" role="group" aria-label=${this.label||M}>
-            ${r.map(e=>k`
+        ${t?O`<p class="error-text" id="${e}-error" role="alert">${this.error}</p>`:this.helper?O`<p class="helper-text" id="${e}-helper">${this.helper}</p>`:j}
+        ${r.length?O`
+          <div class="chips" part="chips" role="group" aria-label=${this.label||j}>
+            ${r.map(e=>O`
               <button
                 class="chip"
                 part="chip"
@@ -6662,9 +6806,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               >${e.label}</button>
             `)}
           </div>
-        `:M}
+        `:j}
       </div>
-    `}_emit(e){this.dispatchEvent(new CustomEvent(e,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onInput(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-input`)}_onChange(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-change`)}_setByUser(e){let t=K(this.constructor.inputType,e);return t===this.value&&(!this._input||this._input.value===t)?!1:(this.value=t,this._input&&(this._input.value=t),this._syncForm(),this._emit(`pastis-input`),this._emit(`pastis-change`),!0)}_pick(e){this._isDisabled||this._setByUser(e)}_onClear(){this._isDisabled||(this._setByUser(``),this._input?.focus())}_onKeydown(e){if(e.key!==`Enter`||e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||e.composedPath()[0]!==this._input)return;let t=this.form;t&&setTimeout(()=>{if(e.defaultPrevented)return;let n=Ft(t);n?!n.disabled&&!n.matches(`:disabled`)&&n.click():t.requestSubmit()})}},It=class extends q{static inputType=`date`};customElements.define(`pastis-date-field`,It);var Lt=class extends q{static inputType=`time`;static properties={...q.properties,step:{type:Number}};_inputAttributes(){return{step:this.step}}};customElements.define(`pastis-time-field`,Lt);var Rt=0,zt=class extends V{static shadowRootOptions={...V.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:String},placeholder:{type:String},maxlength:{type:Number},submitLabel:{type:String,attribute:`submit-label`},tokensLabel:{type:String,attribute:`tokens-label`},tokens:{type:Array},disabled:{type:Boolean,reflect:!0}};static styles=s`
+    `}_emit(e){this.dispatchEvent(new CustomEvent(e,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onInput(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-input`)}_onChange(e){this.value=e.target.value,this._syncForm(),this._emit(`pastis-change`)}_setByUser(e){let t=K(this.constructor.inputType,e);return t===this.value&&(!this._input||this._input.value===t)?!1:(this.value=t,this._input&&(this._input.value=t),this._syncForm(),this._emit(`pastis-input`),this._emit(`pastis-change`),!0)}_pick(e){this._isDisabled||this._setByUser(e)}_onClear(){this._isDisabled||(this._setByUser(``),this._input?.focus())}_onKeydown(e){if(e.key!==`Enter`||e.isComposing||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey||e.composedPath()[0]!==this._input)return;let t=this.form;t&&setTimeout(()=>{if(e.defaultPrevented)return;let n=Ft(t);n?!n.disabled&&!n.matches(`:disabled`)&&n.click():t.requestSubmit()})}},It=class extends q{static inputType=`date`};customElements.define(`pastis-date-field`,It);var Lt=class extends q{static inputType=`time`;static properties={...q.properties,step:{type:Number}};_inputAttributes(){return{step:this.step}}};customElements.define(`pastis-time-field`,Lt);var Rt=0,zt=class extends B{static shadowRootOptions={...B.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:String},placeholder:{type:String},maxlength:{type:Number},submitLabel:{type:String,attribute:`submit-label`},tokensLabel:{type:String,attribute:`tokens-label`},tokens:{type:Array},disabled:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6795,9 +6939,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
-  `;constructor(){super(),this.value=``,this.tokens=[],this.disabled=!1,this._id=`pastis-quick-add-${++Rt}`}focus(e){let t=this.shadowRoot?.querySelector(`input`);t?t.focus(e):super.focus(e)}_tokens(){return Array.isArray(this.tokens)?this.tokens.filter(e=>e&&e.label):[]}render(){let e=this._id,t=this._tokens(),n=this.tokensLabel||`Will set`;return k`
+  `;constructor(){super(),this.value=``,this.tokens=[],this.disabled=!1,this._id=`pastis-quick-add-${++Rt}`}focus(e){let t=this.shadowRoot?.querySelector(`input`);t?t.focus(e):super.focus(e)}_tokens(){return Array.isArray(this.tokens)?this.tokens.filter(e=>e&&e.label):[]}render(){let e=this._id,t=this._tokens(),n=this.tokensLabel||`Will set`;return O`
       <form @submit=${this._onSubmit} novalidate>
-        ${this.label?k`<label for="${e}">${this.label}</label>`:M}
+        ${this.label?O`<label for="${e}">${this.label}</label>`:j}
         <div class="control">
           <input
             id="${e}"
@@ -6806,10 +6950,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             autocomplete="off"
             enterkeyhint="done"
             .value="${this.value??``}"
-            placeholder=${this.placeholder||M}
-            maxlength=${this.maxlength??M}
-            aria-label=${this.label||M}
-            aria-describedby=${t.length?`${e}-summary`:M}
+            placeholder=${this.placeholder||j}
+            maxlength=${this.maxlength??j}
+            aria-label=${this.label||j}
+            aria-describedby=${t.length?`${e}-summary`:j}
             ?disabled=${this.disabled}
             @input=${this._onInput}
           />
@@ -6822,12 +6966,12 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             ?disabled=${this.disabled}
           >${this.submitLabel||`Add`}</button>
         </div>
-        ${t.length?k`
+        ${t.length?O`
           <p class="sr-only" id="${e}-summary">${n}: ${t.map(e=>e.label).join(`, `)}</p>
           <ul class="tokens" part="tokens" aria-label=${n}>
-            ${t.map(e=>k`
+            ${t.map(e=>O`
               <li class="token" part="token">
-                ${e.icon?k`<pastis-icon name=${e.icon} size="sm"></pastis-icon>`:M}
+                ${e.icon?O`<pastis-icon name=${e.icon} size="sm"></pastis-icon>`:j}
                 <span>${e.label}</span>
                 <button
                   class="remove"
@@ -6839,9 +6983,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               </li>
             `)}
           </ul>
-        `:M}
+        `:j}
       </form>
-    `}_onInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onSubmit(e){e.preventDefault(),!(this.disabled||(this.value??``).trim()===``)&&this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_remove(e){this.dispatchEvent(new CustomEvent(`pastis-token-remove`,{detail:{id:e},bubbles:!0,composed:!0})),this.focus()}};customElements.define(`pastis-quick-add`,zt);var Bt=0,Vt=[[``,`Never`],[`daily`,`Daily`],[`weekly`,`Weekly`],[`monthly`,`Monthly`],[`yearly`,`Yearly`]],Ht={daily:[`day`,`days`],weekly:[`week`,`weeks`],monthly:[`month`,`months`],yearly:[`year`,`years`]},Ut=[`MO`,`TU`,`WE`,`TH`,`FR`,`SA`,`SU`],J=99;function Y(e){if(!e||!Ht[e.freq])return null;let t=Math.min(J,Math.max(1,Math.trunc(Number(e.interval))||1)),n=Ut.filter(t=>Array.isArray(e.byDay)&&e.byDay.includes(t));return{freq:e.freq,interval:t,byDay:n,mode:e.mode===`completion`?`completion`:`schedule`,until:typeof e.until==`string`&&/^\d{4}-\d{2}-\d{2}$/.test(e.until)?e.until:null}}var X=class extends V{static shadowRootOptions={...V.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:Object},weekdayLabels:{type:Array,attribute:`weekday-labels`},helper:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=s`
+    `}_onInput(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-input`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_onSubmit(e){e.preventDefault(),!(this.disabled||(this.value??``).trim()===``)&&this.dispatchEvent(new CustomEvent(`pastis-submit`,{detail:{value:this.value},bubbles:!0,composed:!0}))}_remove(e){this.dispatchEvent(new CustomEvent(`pastis-token-remove`,{detail:{id:e},bubbles:!0,composed:!0})),this.focus()}};customElements.define(`pastis-quick-add`,zt);var Bt=0,Vt=[[``,`Never`],[`daily`,`Daily`],[`weekly`,`Weekly`],[`monthly`,`Monthly`],[`yearly`,`Yearly`]],Ht={daily:[`day`,`days`],weekly:[`week`,`weeks`],monthly:[`month`,`months`],yearly:[`year`,`years`]},Ut=[`MO`,`TU`,`WE`,`TH`,`FR`,`SA`,`SU`],J=99;function Y(e){if(!e||!Ht[e.freq])return null;let t=Math.min(J,Math.max(1,Math.trunc(Number(e.interval))||1)),n=Ut.filter(t=>Array.isArray(e.byDay)&&e.byDay.includes(t));return{freq:e.freq,interval:t,byDay:n,mode:e.mode===`completion`?`completion`:`schedule`,until:typeof e.until==`string`&&/^\d{4}-\d{2}-\d{2}$/.test(e.until)?e.until:null}}var Wt=class extends B{static shadowRootOptions={...B.shadowRootOptions,delegatesFocus:!0};static properties={label:{type:String},value:{type:Object},weekdayLabels:{type:Array,attribute:`weekday-labels`},helper:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -6965,7 +7109,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     @media (forced-colors: active) {
       .choice input:checked + span { background: Highlight; color: HighlightText; border-color: Highlight; }
     }
-  `;constructor(){super(),this.value=null,this.disabled=!1,this._id=`pastis-recurrence-${++Bt}`}_labels(){return Array.isArray(this.weekdayLabels)&&this.weekdayLabels.length===7?this.weekdayLabels:[`Mon`,`Tue`,`Wed`,`Thu`,`Fri`,`Sat`,`Sun`]}_choice({type:e,name:t,checked:n,label:r,onChange:i,value:a=``}){return k`
+  `;constructor(){super(),this.value=null,this.disabled=!1,this._id=`pastis-recurrence-${++Bt}`}_labels(){return Array.isArray(this.weekdayLabels)&&this.weekdayLabels.length===7?this.weekdayLabels:[`Mon`,`Tue`,`Wed`,`Thu`,`Fri`,`Sat`,`Sun`]}_choice({type:e,name:t,checked:n,label:r,onChange:i,value:a=``}){return O`
       <label class="choice">
         <input
           type=${e}
@@ -6976,14 +7120,14 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           @change=${i}
         /><span>${r}</span>
       </label>
-    `}render(){let e=this._id,t=Y(this.value),n=t?.freq??``,r=t?Ht[t.freq]:null,i=this._labels();return k`
+    `}render(){let e=this._id,t=Y(this.value),n=t?.freq??``,r=t?Ht[t.freq]:null,i=this._labels();return O`
       <div class="picker">
         <!-- aria-label on each fieldset: Chrome would name it by the uppercased legend -->
         <fieldset part="group" aria-label=${this.label||`Repeat`}>
           <legend>${this.label||`Repeat`}</legend>
           ${Vt.map(([t,r])=>this._choice({type:`radio`,name:`${e}-freq`,value:t,checked:n===t,label:r,onChange:()=>this._setFreq(t)}))}
         </fieldset>
-        ${t?k`
+        ${t?O`
           <div class="every">
             <label for="${e}-interval">Every</label>
             <input
@@ -7004,17 +7148,17 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
             ${this._choice({type:`radio`,name:`${e}-mode`,value:`schedule`,checked:t.mode===`schedule`,label:`The schedule`,onChange:()=>this._update({mode:`schedule`})})}
             ${this._choice({type:`radio`,name:`${e}-mode`,value:`completion`,checked:t.mode===`completion`,label:`Completion`,onChange:()=>this._update({mode:`completion`})})}
           </fieldset>
-          ${t.freq===`weekly`&&t.mode===`schedule`?k`
+          ${t.freq===`weekly`&&t.mode===`schedule`?O`
             <fieldset part="group" aria-label="On">
               <legend>On</legend>
               ${Ut.map((n,r)=>this._choice({type:`checkbox`,name:`${e}-day`,value:n,checked:t.byDay.includes(n),label:i[r],onChange:e=>this._toggleDay(n,e.target.checked)}))}
             </fieldset>
-          `:M}
+          `:j}
           <fieldset part="group" aria-label="Ends">
             <legend>Ends</legend>
             ${this._choice({type:`radio`,name:`${e}-end`,value:`never`,checked:t.until===null,label:`Never`,onChange:()=>this._update({until:null})})}
             ${this._choice({type:`radio`,name:`${e}-end`,value:`on`,checked:t.until!==null,label:`On a date`,onChange:()=>this._endOn()})}
-            ${t.until===null?M:k`
+            ${t.until===null?j:O`
               <input
                 type="date"
                 aria-label="End date"
@@ -7024,10 +7168,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
               />
             `}
           </fieldset>
-        `:M}
-        ${this.helper?k`<p class="helper">${this.helper}</p>`:M}
+        `:j}
+        ${this.helper?O`<p class="helper">${this.helper}</p>`:j}
       </div>
-    `}_emit(e){this.value=e,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:e},bubbles:!0,composed:!0}))}_update(e){let t=Y(this.value);t&&this._emit(Y({...t,...e}))}_setFreq(e){if(!e){this._emit(null);return}let t=Y(this.value);this._emit(Y({interval:1,byDay:[],mode:`schedule`,until:null,...t,freq:e,...e===`weekly`?{}:{byDay:[]}}))}_onInterval(e){let t=Math.min(J,Math.max(1,Math.trunc(Number(e.target.value))||1));e.target.value=String(t),this._update({interval:t})}_toggleDay(e,t){let n=Y(this.value);if(!n)return;let r=t?[...n.byDay,e]:n.byDay.filter(t=>t!==e);this._update({byDay:r})}_endOn(){let e=new Date;e.setDate(e.getDate()+28);let t=`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}-${String(e.getDate()).padStart(2,`0`)}`;this._update({until:t})}_onUntil(e){if(!e.target.value){e.target.value=Y(this.value)?.until??``;return}this._update({until:e.target.value})}};customElements.define(`pastis-recurrence-picker`,X);var Z=null;function Wt(){return Z?.isConnected?Z:(Z=document.createElement(`div`),Z.setAttribute(`aria-live`,`polite`),Z.setAttribute(`aria-atomic`,`true`),Z.dataset.pastisAnnouncer=``,Object.assign(Z.style,{position:`absolute`,width:`1px`,height:`1px`,padding:`0`,margin:`-1px`,overflow:`hidden`,clip:`rect(0, 0, 0, 0)`,whiteSpace:`nowrap`,border:`0`}),document.body.append(Z),Z)}function Q(e){let t=Wt();t.textContent=``,setTimeout(()=>{t.textContent=e},50)}function $(e){return e.getAttribute(`data-sortable-label`)||e.getAttribute(`aria-label`)||e.taskTitle||e.textContent.trim().replace(/\s+/g,` `)||`Item`}var Gt=6,Kt=class extends V{static properties={disabled:{type:Boolean,reflect:!0}};static styles=s`
+    `}_emit(e){this.value=e,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:e},bubbles:!0,composed:!0}))}_update(e){let t=Y(this.value);t&&this._emit(Y({...t,...e}))}_setFreq(e){if(!e){this._emit(null);return}let t=Y(this.value);this._emit(Y({interval:1,byDay:[],mode:`schedule`,until:null,...t,freq:e,...e===`weekly`?{}:{byDay:[]}}))}_onInterval(e){let t=Math.min(J,Math.max(1,Math.trunc(Number(e.target.value))||1));e.target.value=String(t),this._update({interval:t})}_toggleDay(e,t){let n=Y(this.value);if(!n)return;let r=t?[...n.byDay,e]:n.byDay.filter(t=>t!==e);this._update({byDay:r})}_endOn(){let e=new Date;e.setDate(e.getDate()+28);let t=`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}-${String(e.getDate()).padStart(2,`0`)}`;this._update({until:t})}_onUntil(e){if(!e.target.value){e.target.value=Y(this.value)?.until??``;return}this._update({until:e.target.value})}};customElements.define(`pastis-recurrence-picker`,Wt);var X=null;function Gt(){return X?.isConnected?X:(X=document.createElement(`div`),X.setAttribute(`aria-live`,`polite`),X.setAttribute(`aria-atomic`,`true`),X.dataset.pastisAnnouncer=``,Object.assign(X.style,{position:`absolute`,width:`1px`,height:`1px`,padding:`0`,margin:`-1px`,overflow:`hidden`,clip:`rect(0, 0, 0, 0)`,whiteSpace:`nowrap`,border:`0`}),document.body.append(X),X)}function Z(e){let t=Gt();t.textContent=``,setTimeout(()=>{t.textContent=e},50)}function Q(e){return e.getAttribute(`data-sortable-label`)||e.getAttribute(`aria-label`)||e.taskTitle||e.textContent.trim().replace(/\s+/g,` `)||`Item`}var Kt=6,qt=class extends B{static properties={disabled:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; position: relative; }
     :host([hidden]) { display: none; }
 
@@ -7055,10 +7199,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     .indicator[hidden] { display: none; }
 
-  `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this._endPress()}render(){return k`
+  `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this._endPress()}render(){return O`
       <slot></slot>
       <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
-    `}_items(){return[...this.children].filter(e=>!e.hidden)}_childOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));return n===-1||t[n].disabled?null:t.slice(n).find(e=>e instanceof Element&&e.parentElement===this)??null}_move(e,t){let n=this._items();e===t||e<0||t<0||t>=n.length||(this.dispatchEvent(new CustomEvent(`pastis-reorder`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),Q(`${$(n[e])}, ${t+1} of ${n.length}`))}_setPicked(e,{announced:t=!0}={}){let n=this._picked;n?.removeAttribute(`data-picked`),this._picked=e,e?.setAttribute(`data-picked`,``),t&&(e?Q(`${$(e)} picked up. Choose its place with another handle, or press Escape.`):n&&Q(`${$(n)} put back`))}_onClick(e){if(this.disabled)return;let t=this._childOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._items(),r=n.indexOf(this._picked),i=n.indexOf(t);this._setPicked(null,{announced:r===i}),r!==i&&this._move(r,i)}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(e.key!==`ArrowUp`&&e.key!==`ArrowDown`)return;let t=this._childOfHandle(e);if(!t)return;e.preventDefault();let n=e.composedPath()[0],r=this._items().indexOf(t);this._move(r,r+(e.key===`ArrowUp`?-1:1)),requestAnimationFrame(()=>{n instanceof HTMLElement&&n.isConnected&&!n.matches(`:focus`)&&n.focus()})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._childOfHandle(e);t&&(this._press={child:t,pointerId:e.pointerId,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let n=e.clientY-t.startY;if(!t.dragging){if(Math.abs(n)<Gt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null,{announced:!1}),t.child.setAttribute(`data-dragging`,``)}e.preventDefault(),t.child.style.transform=`translateY(${n}px)`,t.to=this._dropIndex(e.clientY,t.child),this._showIndicator(t.to,t.child)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{child:n,dragging:r,to:i}=t;this._endPress(),r&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||i===null)&&this._move(this._items().indexOf(n),i))}_endPress(){let e=this._press;if(e){this._press=null,e.child.removeAttribute(`data-dragging`),e.child.style.transform=``,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_dropIndex(e,t){let n=this._items().filter(e=>e!==t),r=0;for(let t of n){let n=t.getBoundingClientRect();e>n.top+n.height/2&&r++}return r}_showIndicator(e,t){let n=this.shadowRoot?.querySelector(`.indicator`);if(!n)return;let r=this._items().filter(e=>e!==t),i=this.getBoundingClientRect(),a=e<r.length?r[e].getBoundingClientRect().top:r.at(-1)?.getBoundingClientRect().bottom??i.top;n.style.top=`${a-i.top}px`,n.removeAttribute(`hidden`)}};customElements.define(`pastis-sortable`,Kt);var qt=class extends V{static properties={label:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=s`
+    `}_items(){return[...this.children].filter(e=>!e.hidden)}_childOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));return n===-1||t[n].disabled?null:t.slice(n).find(e=>e instanceof Element&&e.parentElement===this)??null}_move(e,t){let n=this._items();e===t||e<0||t<0||t>=n.length||(this.dispatchEvent(new CustomEvent(`pastis-reorder`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),Z(`${Q(n[e])}, ${t+1} of ${n.length}`))}_setPicked(e,{announced:t=!0}={}){let n=this._picked;n?.removeAttribute(`data-picked`),this._picked=e,e?.setAttribute(`data-picked`,``),t&&(e?Z(`${Q(e)} picked up. Choose its place with another handle, or press Escape.`):n&&Z(`${Q(n)} put back`))}_onClick(e){if(this.disabled)return;let t=this._childOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._items(),r=n.indexOf(this._picked),i=n.indexOf(t);this._setPicked(null,{announced:r===i}),r!==i&&this._move(r,i)}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(e.key!==`ArrowUp`&&e.key!==`ArrowDown`)return;let t=this._childOfHandle(e);if(!t)return;e.preventDefault();let n=e.composedPath()[0],r=this._items().indexOf(t);this._move(r,r+(e.key===`ArrowUp`?-1:1)),requestAnimationFrame(()=>{n instanceof HTMLElement&&n.isConnected&&!n.matches(`:focus`)&&n.focus()})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._childOfHandle(e);t&&(this._press={child:t,pointerId:e.pointerId,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let n=e.clientY-t.startY;if(!t.dragging){if(Math.abs(n)<Kt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null,{announced:!1}),t.child.setAttribute(`data-dragging`,``)}e.preventDefault(),t.child.style.transform=`translateY(${n}px)`,t.to=this._dropIndex(e.clientY,t.child),this._showIndicator(t.to,t.child)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{child:n,dragging:r,to:i}=t;this._endPress(),r&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||i===null)&&this._move(this._items().indexOf(n),i))}_endPress(){let e=this._press;if(e){this._press=null,e.child.removeAttribute(`data-dragging`),e.child.style.transform=``,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_dropIndex(e,t){let n=this._items().filter(e=>e!==t),r=0;for(let t of n){let n=t.getBoundingClientRect();e>n.top+n.height/2&&r++}return r}_showIndicator(e,t){let n=this.shadowRoot?.querySelector(`.indicator`);if(!n)return;let r=this._items().filter(e=>e!==t),i=this.getBoundingClientRect(),a=e<r.length?r[e].getBoundingClientRect().top:r.at(-1)?.getBoundingClientRect().bottom??i.top;n.style.top=`${a-i.top}px`,n.removeAttribute(`hidden`)}};customElements.define(`pastis-sortable`,qt);var Jt=class extends B{static properties={label:{type:String},helper:{type:String},error:{type:String},disabled:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -7124,18 +7268,18 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
 
     .helper-text { color: var(--text-tertiary, #a39b90); }
     .error-text { color: var(--text-error, #f45f6b); }
-  `;constructor(){super(),this.disabled=!1,this._toolbarFilled=!1}render(){let e=!!this.error;return k`
+  `;constructor(){super(),this.disabled=!1,this._toolbarFilled=!1}render(){let e=!!this.error;return O`
       <div class="field ${e?`has-error`:``}">
-        ${this.label?k`<span class="label">${this.label}</span>`:M}
+        ${this.label?O`<span class="label">${this.label}</span>`:j}
         <div class="frame" part="frame">
           <div class="toolbar ${this._toolbarFilled?`filled`:``}" part="toolbar">
             <slot name="toolbar" @slotchange=${this._onToolbarChange}></slot>
           </div>
           <div class="content" @click=${this._focusEditor}><slot @slotchange=${this._applyDisabled}></slot></div>
         </div>
-        ${e?k`<p class="error-text" role="alert">${this.error}</p>`:this.helper?k`<p class="helper-text">${this.helper}</p>`:M}
+        ${e?O`<p class="error-text" role="alert">${this.error}</p>`:this.helper?O`<p class="helper-text">${this.helper}</p>`:j}
       </div>
-    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};customElements.define(`pastis-editor`,qt);var Jt=class extends V{static properties={value:{type:String,reflect:!0},label:{type:String},dropTarget:{type:Boolean,reflect:!0,attribute:`drop-target`},over:{type:Boolean,reflect:!0},_count:{state:!0}};static styles=s`
+    `}updated(e){e.has(`disabled`)&&this._applyDisabled()}_applyDisabled(){for(let e of this.children)e.inert=this.disabled}_focusEditor(e){if(this.disabled)return;let t=this.querySelector(`[contenteditable="true"]`);t&&!t.contains(e.target)&&t.focus()}_onToolbarChange(e){let t=e.target.assignedElements().length>0;t!==this._toolbarFilled&&(this._toolbarFilled=t,this.requestUpdate())}};customElements.define(`pastis-editor`,Jt);var Yt=class extends B{static properties={value:{type:String,reflect:!0},label:{type:String},dropTarget:{type:Boolean,reflect:!0,attribute:`drop-target`},over:{type:Boolean,reflect:!0},_count:{state:!0}};static styles=s`
     :host {
       display: flex;
       flex-direction: column;
@@ -7199,17 +7343,17 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       min-height: var(--space-2xl, 48px);
       padding: 0 var(--space-xs, 4px) var(--space-xs, 4px);
     }
-  `;constructor(){super(),this.dropTarget=!1,this.over=!1,this._count=0}render(){let e=this.label||this.value||``;return k`
+  `;constructor(){super(),this.dropTarget=!1,this.over=!1,this._count=0}render(){let e=this.label||this.value||``;return O`
       <div class="header" part="header">
         <h3>${e} <span class="count" aria-hidden="true">${this._count}</span></h3>
-        ${this.dropTarget?k`
+        ${this.dropTarget?O`
           <button class="move" type="button" aria-label="Move here: ${e}" @click=${this._moveHere}>Move here</button>
-        `:M}
+        `:j}
       </div>
       <div class="cards" part="cards" role="list" aria-label="${e}, ${this._count} ${this._count===1?`item`:`items`}">
         <slot @slotchange=${this._onSlotChange}></slot>
       </div>
-    `}_onSlotChange(e){this._count=e.target.assignedElements().length}_moveHere(){this.dispatchEvent(new CustomEvent(`pastis-kanban-move-here`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-kanban-column`,Jt);var Yt=6,Xt=class extends V{static properties={disabled:{type:Boolean,reflect:!0}};static styles=s`
+    `}_onSlotChange(e){this._count=e.target.assignedElements().length}_moveHere(){this.dispatchEvent(new CustomEvent(`pastis-kanban-move-here`,{bubbles:!0,composed:!0}))}};customElements.define(`pastis-kanban-column`,Yt);var Xt=6,Zt=class extends B{static properties={disabled:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; position: relative; }
     :host([hidden]) { display: none; }
 
@@ -7235,10 +7379,10 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       pointer-events: none;
     }
     .indicator[hidden] { display: none; }
-  `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this),this._onMoveHere=this._onMoveHere.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown),this.addEventListener(`pastis-kanban-move-here`,this._onMoveHere)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this.removeEventListener(`pastis-kanban-move-here`,this._onMoveHere),this._endPress()}render(){return k`
+  `;constructor(){super(),this.disabled=!1,this._press=null,this._picked=null,this._onPointerDown=this._onPointerDown.bind(this),this._onPointerMove=this._onPointerMove.bind(this),this._onPointerUp=this._onPointerUp.bind(this),this._onClick=this._onClick.bind(this),this._onKeydown=this._onKeydown.bind(this),this._onMoveHere=this._onMoveHere.bind(this)}connectedCallback(){super.connectedCallback(),this.addEventListener(`pointerdown`,this._onPointerDown),this.addEventListener(`click`,this._onClick),this.addEventListener(`keydown`,this._onKeydown),this.addEventListener(`pastis-kanban-move-here`,this._onMoveHere)}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`pointerdown`,this._onPointerDown),this.removeEventListener(`click`,this._onClick),this.removeEventListener(`keydown`,this._onKeydown),this.removeEventListener(`pastis-kanban-move-here`,this._onMoveHere),this._endPress()}render(){return O`
       <div class="columns"><slot></slot></div>
       <div class="indicator" part="indicator" aria-hidden="true" hidden></div>
-    `}_columns(){return[...this.children].filter(e=>e.localName===`pastis-kanban-column`&&!e.hidden)}_cards(e){return[...e.children].filter(e=>!e.hidden)}_cardOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));if(n===-1||t[n].disabled)return null;let r=t.slice(n),i=r.find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`&&e.parentElement===this);if(!i)return null;let a=r.find(e=>e instanceof Element&&e.parentElement===i);return a?{card:a,column:i}:null}_where(e,t){return{column:t.value,index:this._cards(t).indexOf(e)}}_move(e,t){if(e.column===t.column&&e.index===t.index)return;let n=this._columns().find(t=>t.value===e.column),r=this._columns().find(e=>e.value===t.column),i=n?this._cards(n)[e.index]:null;if(this.dispatchEvent(new CustomEvent(`pastis-kanban-move`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),i&&r){let e=this._cards(r).length+(n===r?0:1);Q(`${$(i)}, ${r.label||r.value}, ${t.index+1} of ${e}`)}}_setPicked(e){this._picked&&this._picked.card.removeAttribute(`data-picked`),e&&Q(`${$(e.card)} picked up. Choose its place with another handle or a column's Move here, or press Escape.`),this._picked=e,e&&e.card.setAttribute(`data-picked`,``);for(let t of this._columns())t.dropTarget=!!e&&t!==e.column}_onClick(e){if(this.disabled)return;let t=this._cardOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._picked;if(this._setPicked(null),n.card===t.card)return;let r=this._where(n.card,n.column),i=this._where(t.card,t.column);this._move(r,i)}_onMoveHere(e){if(this.disabled||!this._picked)return;let t=e.composedPath().find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`);if(!t)return;let n=this._picked;this._setPicked(null),this._move(this._where(n.card,n.column),{column:t.value,index:this._cards(t).length})}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key))return;let t=this._cardOfHandle(e);if(!t)return;e.preventDefault();let n=this._where(t.card,t.column);if(e.key===`ArrowUp`||e.key===`ArrowDown`){let r=n.index+(e.key===`ArrowUp`?-1:1);if(r<0||r>=this._cards(t.column).length)return;this._move(n,{column:n.column,index:r});return}let r=this._columns(),i=r[r.indexOf(t.column)+(e.key===`ArrowLeft`?-1:1)];i&&this._move(n,{column:i.value,index:this._cards(i).length})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._cardOfHandle(e);t&&(this._press={...t,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;if(!t.dragging){if(Math.hypot(e.clientX-t.startX,e.clientY-t.startY)<Yt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null),t.card.setAttribute(`data-dragging`,``)}e.preventDefault();let n=this._columnAt(e.clientX);for(let e of this._columns())e.over=e===n;if(!n){t.to=null,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``);return}let r=this._dropIndex(n,e.clientY,t.card);t.to={column:n.value,index:r},this._showIndicator(n,r,t.card)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{card:n,column:r,dragging:i,to:a}=t;this._endPress(),i&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||!a)&&this._move(this._where(n,r),a))}_endPress(){let e=this._press;if(e){this._press=null,e.card.removeAttribute(`data-dragging`);for(let e of this._columns())e.over=!1;this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_columnAt(e){return this._columns().find(t=>{let n=t.getBoundingClientRect();return e>=n.left&&e<=n.right})??null}_dropIndex(e,t,n){let r=0;for(let i of this._cards(e)){if(i===n)continue;let e=i.getBoundingClientRect();t>e.top+e.height/2&&r++}return r}_showIndicator(e,t,n){let r=this.shadowRoot?.querySelector(`.indicator`);if(!r)return;let i=this._cards(e).filter(e=>e!==n),a=this.getBoundingClientRect(),o=e.getBoundingClientRect(),s=t<i.length?i[t].getBoundingClientRect().top:i.at(-1)?.getBoundingClientRect().bottom??o.top+o.height/2;r.style.top=`${s-a.top}px`,r.style.left=`${o.left-a.left+8}px`,r.style.width=`${o.width-16}px`,r.removeAttribute(`hidden`)}};customElements.define(`pastis-kanban-board`,Xt);var Zt=0,Qt=class extends V{static formAssociated=!0;static properties={label:{type:String},value:{type:String},options:{type:Array,attribute:!1},required:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String},error:{type:String},name:{type:String,reflect:!0},ariaLabel:{type:String,attribute:`aria-label`},_formDisabled:{state:!0}};static styles=s`
+    `}_columns(){return[...this.children].filter(e=>e.localName===`pastis-kanban-column`&&!e.hidden)}_cards(e){return[...e.children].filter(e=>!e.hidden)}_cardOfHandle(e){let t=e.composedPath(),n=t.findIndex(e=>e instanceof Element&&(e.hasAttribute(`data-sortable-handle`)||(e.getAttribute(`part`)??``).split(/\s+/).includes(`handle`)));if(n===-1||t[n].disabled)return null;let r=t.slice(n),i=r.find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`&&e.parentElement===this);if(!i)return null;let a=r.find(e=>e instanceof Element&&e.parentElement===i);return a?{card:a,column:i}:null}_where(e,t){return{column:t.value,index:this._cards(t).indexOf(e)}}_move(e,t){if(e.column===t.column&&e.index===t.index)return;let n=this._columns().find(t=>t.value===e.column),r=this._columns().find(e=>e.value===t.column),i=n?this._cards(n)[e.index]:null;if(this.dispatchEvent(new CustomEvent(`pastis-kanban-move`,{detail:{from:e,to:t},bubbles:!0,composed:!0})),i&&r){let e=this._cards(r).length+(n===r?0:1);Z(`${Q(i)}, ${r.label||r.value}, ${t.index+1} of ${e}`)}}_setPicked(e){this._picked&&this._picked.card.removeAttribute(`data-picked`),e&&Z(`${Q(e.card)} picked up. Choose its place with another handle or a column's Move here, or press Escape.`),this._picked=e,e&&e.card.setAttribute(`data-picked`,``);for(let t of this._columns())t.dropTarget=!!e&&t!==e.column}_onClick(e){if(this.disabled)return;let t=this._cardOfHandle(e);if(!t)return;if(this._suppressClick){this._suppressClick=!1;return}if(!this._picked){this._setPicked(t);return}let n=this._picked;if(this._setPicked(null),n.card===t.card)return;let r=this._where(n.card,n.column),i=this._where(t.card,t.column);this._move(r,i)}_onMoveHere(e){if(this.disabled||!this._picked)return;let t=e.composedPath().find(e=>e instanceof Element&&e.localName===`pastis-kanban-column`);if(!t)return;let n=this._picked;this._setPicked(null),this._move(this._where(n.card,n.column),{column:t.value,index:this._cards(t).length})}_onKeydown(e){if(this.disabled)return;if(e.key===`Escape`&&this._picked){this._setPicked(null);return}if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key))return;let t=this._cardOfHandle(e);if(!t)return;e.preventDefault();let n=this._where(t.card,t.column);if(e.key===`ArrowUp`||e.key===`ArrowDown`){let r=n.index+(e.key===`ArrowUp`?-1:1);if(r<0||r>=this._cards(t.column).length)return;this._move(n,{column:n.column,index:r});return}let r=this._columns(),i=r[r.indexOf(t.column)+(e.key===`ArrowLeft`?-1:1)];i&&this._move(n,{column:i.value,index:this._cards(i).length})}_onPointerDown(e){if(this.disabled||e.button!==0||this._press)return;let t=this._cardOfHandle(e);t&&(this._press={...t,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,dragging:!1,to:null},this.addEventListener(`pointermove`,this._onPointerMove),this.addEventListener(`pointerup`,this._onPointerUp),this.addEventListener(`pointercancel`,this._onPointerUp))}_onPointerMove(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;if(!t.dragging){if(Math.hypot(e.clientX-t.startX,e.clientY-t.startY)<Xt)return;t.dragging=!0;try{this.setPointerCapture(t.pointerId)}catch{}this._setPicked(null),t.card.setAttribute(`data-dragging`,``)}e.preventDefault();let n=this._columnAt(e.clientX);for(let e of this._columns())e.over=e===n;if(!n){t.to=null,this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``);return}let r=this._dropIndex(n,e.clientY,t.card);t.to={column:n.value,index:r},this._showIndicator(n,r,t.card)}_onPointerUp(e){let t=this._press;if(!t||e.pointerId!==t.pointerId)return;let{card:n,column:r,dragging:i,to:a}=t;this._endPress(),i&&(this._suppressClick=!0,setTimeout(()=>{this._suppressClick=!1},0),!(e.type===`pointercancel`||!a)&&this._move(this._where(n,r),a))}_endPress(){let e=this._press;if(e){this._press=null,e.card.removeAttribute(`data-dragging`);for(let e of this._columns())e.over=!1;this.shadowRoot?.querySelector(`.indicator`)?.setAttribute(`hidden`,``),this.removeEventListener(`pointermove`,this._onPointerMove),this.removeEventListener(`pointerup`,this._onPointerUp),this.removeEventListener(`pointercancel`,this._onPointerUp);try{this.hasPointerCapture(e.pointerId)&&this.releasePointerCapture(e.pointerId)}catch{}}}_columnAt(e){return this._columns().find(t=>{let n=t.getBoundingClientRect();return e>=n.left&&e<=n.right})??null}_dropIndex(e,t,n){let r=0;for(let i of this._cards(e)){if(i===n)continue;let e=i.getBoundingClientRect();t>e.top+e.height/2&&r++}return r}_showIndicator(e,t,n){let r=this.shadowRoot?.querySelector(`.indicator`);if(!r)return;let i=this._cards(e).filter(e=>e!==n),a=this.getBoundingClientRect(),o=e.getBoundingClientRect(),s=t<i.length?i[t].getBoundingClientRect().top:i.at(-1)?.getBoundingClientRect().bottom??o.top+o.height/2;r.style.top=`${s-a.top}px`,r.style.left=`${o.left-a.left+8}px`,r.style.width=`${o.width-16}px`,r.removeAttribute(`hidden`)}};customElements.define(`pastis-kanban-board`,Zt);var Qt=0,$t=class extends B{static formAssociated=!0;static properties={label:{type:String},value:{type:String},options:{type:Array,attribute:!1},required:{type:Boolean,reflect:!0},disabled:{type:Boolean,reflect:!0},helper:{type:String},error:{type:String},name:{type:String,reflect:!0},ariaLabel:{type:String,attribute:`aria-label`},_formDisabled:{state:!0}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -7298,22 +7442,22 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     }
     .helper { color: var(--text-tertiary, #909498); }
     .error { color: var(--status-error, #f0505e); }
-  `;constructor(){super(),this.label=``,this.value=``,this.options=[],this.required=!1,this.disabled=!1,this._formDisabled=!1,this._id=`pastis-select-${++Zt}`,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this.shadowRoot?.querySelector(`select`)?.focus(e)}willUpdate(e){this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){let e=this.shadowRoot.querySelector(`select`);e.value!==(this.value??``)&&(e.value=this.value??``),this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid||e.disabled?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage||`Choose an option`,e)}render(){let e=this.error?`${this._id}-error`:this.helper?`${this._id}-helper`:null;return k`
+  `;constructor(){super(),this.label=``,this.value=``,this.options=[],this.required=!1,this.disabled=!1,this._formDisabled=!1,this._id=`pastis-select-${++Qt}`,this._internals=this.attachInternals()}get form(){return this._internals.form}get validity(){return this._internals.validity}get validationMessage(){return this._internals.validationMessage}checkValidity(){return this._internals.checkValidity()}reportValidity(){return this._internals.reportValidity()}formResetCallback(){this.value=this._defaultValue??``}formDisabledCallback(e){this._formDisabled=e}formStateRestoreCallback(e){typeof e==`string`&&(this.value=e)}focus(e){this.shadowRoot?.querySelector(`select`)?.focus(e)}willUpdate(e){this.hasUpdated||(this._defaultValue=this.value),e.has(`disabled`)&&this.toggleAttribute(`disabled`,this.disabled)}updated(){let e=this.shadowRoot.querySelector(`select`);e.value!==(this.value??``)&&(e.value=this.value??``),this._internals.setFormValue(this.value??``,this.value??``),e.validity.valid||e.disabled?this._internals.setValidity({}):this._internals.setValidity(e.validity,e.validationMessage||`Choose an option`,e)}render(){let e=this.error?`${this._id}-error`:this.helper?`${this._id}-helper`:null;return O`
       <div class="field ${this.error?`has-error`:``}">
-        ${this.label?k`<label for=${this._id}>${this.label}</label>`:``}
+        ${this.label?O`<label for=${this._id}>${this.label}</label>`:``}
         <div class="wrap">
           <select
             id=${this._id}
             part="select"
-            name=${this.name||M}
+            name=${this.name||j}
             ?required=${this.required}
             ?disabled=${this.disabled||this._formDisabled}
-            aria-label=${this.label||this.ariaLabel||M}
-            aria-invalid=${this.error?`true`:M}
-            aria-describedby=${e??M}
+            aria-label=${this.label||this.ariaLabel||j}
+            aria-invalid=${this.error?`true`:j}
+            aria-describedby=${e??j}
             @change=${this._onChange}
           >
-            ${this.options.map(e=>k`
+            ${this.options.map(e=>O`
               <option
                 value=${e.value}
                 ?disabled=${e.disabled}
@@ -7323,9 +7467,9 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           </select>
           <pastis-icon name="chevron-down" size="sm" aria-hidden="true"></pastis-icon>
         </div>
-        ${this.error?k`<p class="error" id="${this._id}-error" role="alert">${this.error}</p>`:this.helper?k`<p class="helper" id="${this._id}-helper">${this.helper}</p>`:``}
+        ${this.error?O`<p class="error" id="${this._id}-error" role="alert">${this.error}</p>`:this.helper?O`<p class="helper" id="${this._id}-helper">${this.helper}</p>`:``}
       </div>
-    `}_onChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-select`,Qt);var $t=class extends V{static properties={label:{type:String},labelHidden:{type:Boolean,attribute:`label-hidden`,reflect:!0},value:{type:String},options:{type:Array,attribute:!1},disabled:{type:Boolean,reflect:!0}};static styles=s`
+    `}_onChange(e){this.value=e.target.value,this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:this.value},bubbles:!0,composed:!0}))}};customElements.define(`pastis-select`,$t);var $=class extends B{static properties={label:{type:String},labelHidden:{type:Boolean,attribute:`label-hidden`,reflect:!0},value:{type:String},options:{type:Array,attribute:!1},disabled:{type:Boolean,reflect:!0}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
 
@@ -7386,16 +7530,16 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     button[aria-checked="true"]:focus-visible { outline-color: var(--action-primary-text, #0d0d0d); }
 
     :host([disabled]) button { opacity: 0.3; cursor: not-allowed; }
-  `;constructor(){super(),this.label=``,this.labelHidden=!1,this.value=``,this.options=[],this.disabled=!1}focus(e){let t=this._buttons();(t.find(e=>e.getAttribute(`aria-checked`)===`true`)??t[0])?.focus(e)}_buttons(){return[...this.shadowRoot?.querySelectorAll(`button`)??[]]}render(){let e=this.options.findIndex(e=>e.value===this.value),t=e===-1?0:e;return k`
-      ${this.label?k`<span class="label" id="label">${this.label}</span>`:``}
+  `;constructor(){super(),this.label=``,this.labelHidden=!1,this.value=``,this.options=[],this.disabled=!1}focus(e){let t=this._buttons();(t.find(e=>e.getAttribute(`aria-checked`)===`true`)??t[0])?.focus(e)}_buttons(){return[...this.shadowRoot?.querySelectorAll(`button`)??[]]}render(){let e=this.options.findIndex(e=>e.value===this.value),t=e===-1?0:e;return O`
+      ${this.label?O`<span class="label" id="label">${this.label}</span>`:``}
       <div
         class="group"
         role="radiogroup"
-        aria-labelledby=${this.label?`label`:M}
-        aria-disabled=${this.disabled?`true`:M}
+        aria-labelledby=${this.label?`label`:j}
+        aria-disabled=${this.disabled?`true`:j}
         @keydown=${this._onKeydown}
       >
-        ${this.options.map((e,n)=>k`
+        ${this.options.map((e,n)=>O`
           <button
             type="button"
             role="radio"
@@ -7407,7 +7551,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           >${e.label}</button>
         `)}
       </div>
-    `}_choose(e,{focus:t=!1}={}){let n=this.options[e];!n||this.disabled||(t&&this._buttons()[e]?.focus(),n.value!==this.value&&this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:n.value},bubbles:!0,composed:!0,cancelable:!0}))&&(this.value=n.value))}_onKeydown(e){let t=this._buttons(),n=t.indexOf(e.composedPath()[0]);if(n===-1)return;let r=t.length-1,i=getComputedStyle(this).direction===`rtl`,a={ArrowRight:i?n-1:n+1,ArrowLeft:i?n+1:n-1,ArrowDown:n+1,ArrowUp:n-1,Home:0,End:r}[e.key];a!==void 0&&(e.preventDefault(),this._choose((a+t.length)%t.length,{focus:!0}))}};customElements.define(`pastis-segmented-control`,$t);var en=class extends V{static styles=s`
+    `}_choose(e,{focus:t=!1}={}){let n=this.options[e];!n||this.disabled||(t&&this._buttons()[e]?.focus(),n.value!==this.value&&this.dispatchEvent(new CustomEvent(`pastis-change`,{detail:{value:n.value},bubbles:!0,composed:!0,cancelable:!0}))&&(this.value=n.value))}_onKeydown(e){let t=this._buttons(),n=t.indexOf(e.composedPath()[0]);if(n===-1)return;let r=t.length-1,i=getComputedStyle(this).direction===`rtl`,a={ArrowRight:i?n-1:n+1,ArrowLeft:i?n+1:n-1,ArrowDown:n+1,ArrowUp:n-1,Home:0,End:r}[e.key];a!==void 0&&(e.preventDefault(),this._choose((a+t.length)%t.length,{focus:!0}))}};customElements.define(`pastis-segmented-control`,$);var en=class extends B{static styles=s`
     :host {
       display: block;
       background: var(--bg-card, #1e1e1e);
@@ -7416,7 +7560,7 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       overflow: hidden;
     }
     :host([hidden]) { display: none; }
-  `;render(){return k`<slot></slot>`}},tn=class extends V{static properties={label:{type:String},href:{type:String},icon:{type:String},marker:{type:String},count:{type:Number},meta:{type:String},linkLabel:{type:String,attribute:`link-label`}};static styles=s`
+  `;render(){return O`<slot></slot>`}},tn=class extends B{static properties={label:{type:String},href:{type:String},icon:{type:String},marker:{type:String},count:{type:Number},meta:{type:String},linkLabel:{type:String,attribute:`link-label`}};static styles=s`
     :host { display: block; }
     :host([hidden]) { display: none; }
     :host(:not(:last-child)) .row { border-bottom: var(--border-width, 1px) solid var(--border-subtle, #383c44); }
@@ -7461,11 +7605,348 @@ var Pastis=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     .wrap { display: flex; align-items: center; }
     .wrap > .row { flex: 1; min-width: 0; }
     ::slotted([slot="trailing"]) { flex: none; margin-inline-end: var(--space-sm, 8px); }
-  `;connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}render(){let e=k`
-      ${this.icon?k`<span class="lead" aria-hidden="true"><pastis-icon name=${this.icon}></pastis-icon></span>`:this.marker?k`<span class="lead marker" aria-hidden="true">${this.marker}</span>`:``}
+  `;connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}render(){let e=O`
+      ${this.icon?O`<span class="lead" aria-hidden="true"><pastis-icon name=${this.icon}></pastis-icon></span>`:this.marker?O`<span class="lead marker" aria-hidden="true">${this.marker}</span>`:``}
       <span class="text">
         <span class="label">${this.label}</span>
-        ${this.meta?k`<span class="meta">${this.meta}</span>`:``}
+        ${this.meta?O`<span class="meta">${this.meta}</span>`:``}
       </span>
-      ${this.count==null?``:k`<span class="count" aria-hidden=${this.linkLabel?`true`:M}>${this.count}</span>`}
-    `;return k`<div class="wrap">${this.href?k`<a class="row" part="row" href=${this.href} aria-label=${this.linkLabel||M} @click=${this._onClick}>${e}</a>`:k`<div class="row" part="row">${e}</div>`}<slot name="trailing"></slot></div>`}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};return customElements.define(`pastis-list-group`,en),customElements.define(`pastis-list-row`,tn),e.PastisAccordion=Ze,e.PastisAlert=Be,e.PastisAvatar=Re,e.PastisBadge=Le,e.PastisBreadcrumb=Qe,e.PastisButton=Oe,e.PastisButtonSplit=ke,e.PastisCard=ze,e.PastisCarousel=gt,e.PastisCheckbox=Pe,e.PastisCodeBlock=dt,e.PastisCookieBanner=st,e.PastisDateField=It,e.PastisDivider=nt,e.PastisDrawer=at,e.PastisDropdown=Ye,e.PastisEditor=qt,e.PastisEmptyState=ft,e.PastisFileUpload=ot,e.PastisFilterBar=mt,e.PastisFilterChip=pt,e.PastisFooter=bt,e.PastisHero=rt,e.PastisIcon=Ot,e.PastisInput=Ne,e.PastisKanbanBoard=Xt,e.PastisKanbanColumn=Jt,e.PastisListGroup=en,e.PastisListRow=tn,e.PastisModal=We,e.PastisNav=xt,e.PastisPagination=$e,e.PastisProgress=et,e.PastisProjectCard=St,e.PastisQuickAdd=zt,e.PastisRadio=ct,e.PastisRecurrencePicker=X,e.PastisSearch=it,e.PastisSection=yt,e.PastisSegmentedControl=$t,e.PastisSelect=Qt,e.PastisShelf=Et,e.PastisSkeleton=qe,e.PastisSortable=Kt,e.PastisSpecTable=Tt,e.PastisSpinner=Ke,e.PastisStatCard=lt,e.PastisStatement=Ct,e.PastisTabBar=Mt,e.PastisTabBarItem=Nt,e.PastisTable=ut,e.PastisTabs=Xe,e.PastisTag=tt,e.PastisTaskRow=jt,e.PastisTestimonial=vt,e.PastisThemeToggle=ht,e.PastisTimeField=Lt,e.PastisTimeline=_t,e.PastisToast=Ge,e.PastisToggle=Ie,e.PastisTokenSwatch=wt,e.PastisTooltip=Je,e.iconNames=Dt,e.icons=W,e})({});
+      ${this.count==null?``:O`<span class="count" aria-hidden=${this.linkLabel?`true`:j}>${this.count}</span>`}
+    `;return O`<div class="wrap">${this.href?O`<a class="row" part="row" href=${this.href} aria-label=${this.linkLabel||j} @click=${this._onClick}>${e}</a>`:O`<div class="row" part="row">${e}</div>`}<slot name="trailing"></slot></div>`}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-list-group`,en),customElements.define(`pastis-list-row`,tn);var nn=380,rn=.6,an=16,on=64,sn=class extends B{static properties={sidebarCollapsed:{type:Boolean,reflect:!0,attribute:`sidebar-collapsed`},detailOpen:{type:Boolean,reflect:!0,attribute:`detail-open`},detailWidth:{type:Number,attribute:`detail-width`},breakpoint:{type:Number},sidebarLabel:{type:String,attribute:`sidebar-label`},detailLabel:{type:String,attribute:`detail-label`},splitterLabel:{type:String,attribute:`splitter-label`},mode:{type:String,reflect:!0},_width:{state:!0}};static styles=s`
+    :host {
+      display: block;
+      box-sizing: border-box;
+      height: var(--pastis-app-layout-height, 100dvh);
+      color: var(--text-primary, #f4eee3);
+    }
+    :host([hidden]) { display: none; }
+    :host([mode="narrow"]) { height: auto; }
+
+    .layout {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      height: 100%;
+      min-height: 0;
+    }
+    :host([mode="narrow"]) .layout { display: block; height: auto; }
+
+    nav, main, aside {
+      box-sizing: border-box;
+      min-width: 0;
+      min-height: 0;
+      padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-inline-start: env(safe-area-inset-left, 0px);
+      border-inline-end: var(--border-width, 1px) solid var(--border-subtle, #221c17);
+      background: var(--bg-secondary, #16110d);
+    }
+    ::slotted([slot="sidebar"]) { flex: 1; min-height: 0; }
+
+    main {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    main.first { padding-inline-start: env(safe-area-inset-left, 0px); }
+    main.last { padding-inline-end: env(safe-area-inset-right, 0px); }
+    :host([mode="narrow"]) main {
+      overflow: visible;
+      padding-block: 0;
+      padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+    }
+
+    aside {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding-inline-end: env(safe-area-inset-right, 0px);
+      border-inline-start: var(--border-width, 1px) solid var(--border-subtle, #221c17);
+    }
+    .detail {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* The splitter: an 8 px strip on the detail pane's leading edge; a line shows on hover and focus */
+    .splitter {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: calc(var(--border-width, 1px) * -1);
+      z-index: 1;
+      width: var(--space-sm, 8px);
+      cursor: col-resize;
+      touch-action: none;
+    }
+    .splitter::before {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 0;
+      width: calc(var(--border-width, 1px) * 2);
+      background: transparent;
+      transition: background var(--transition-fast, 120ms ease);
+    }
+    .splitter:hover::before,
+    :host([data-dragging]) .splitter::before { background: var(--border-default, #3a322b); }
+    .splitter:focus-visible { outline: none; }
+    .splitter:focus-visible::before {
+      width: calc(var(--border-width, 1px) * 3);
+      background: var(--border-focus, #fcba28);
+    }
+    :host([data-dragging]) { cursor: col-resize; user-select: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .splitter::before { transition: none; }
+    }
+
+    @media (forced-colors: active) {
+      .splitter:focus-visible::before { background: Highlight; }
+    }
+  `;constructor(){super(),this.sidebarCollapsed=!1,this.detailOpen=!1,this.detailWidth=420,this.breakpoint=1024,this._width=0,this._onMediaChange=this._onMediaChange.bind(this)}connectedCallback(){super.connectedCallback(),this._watchMedia(),this._resizeObserver=new ResizeObserver(e=>{this._width=e[0].contentRect.width}),this._resizeObserver.observe(this)}disconnectedCallback(){super.disconnectedCallback(),this._unwatchMedia(),this._resizeObserver?.disconnect(),this._resizeObserver=void 0}willUpdate(e){e.has(`breakpoint`)&&this.hasUpdated&&this._watchMedia()}get detailMaxWidth(){let e=this._width||window.innerWidth;return Math.max(380,Math.floor(e*rn))}get detailEffectiveWidth(){return this._clamp(Number(this.detailWidth)||380)}_clamp(e){return Math.round(Math.min(Math.max(e,380),this.detailMaxWidth))}_watchMedia(){this._unwatchMedia();let e=Number.isFinite(Number(this.breakpoint))?Number(this.breakpoint):1024;this._media=window.matchMedia(`(min-width: ${e}px)`),this._media.addEventListener(`change`,this._onMediaChange),this._setMode(this._media.matches?`wide`:`narrow`)}_unwatchMedia(){this._media?.removeEventListener(`change`,this._onMediaChange),this._media=void 0}_onMediaChange(e){this._setMode(e.matches?`wide`:`narrow`)}_setMode(e){let t=this.mode;t!==e&&(this.mode=e,t!==void 0&&this.dispatchEvent(new CustomEvent(`pastis-layout-change`,{detail:{mode:e},bubbles:!0,composed:!0})))}render(){if(this.mode!==`wide`)return O`<div class="layout" part="layout"><main part="main"><slot></slot></main></div>`;let e=!this.sidebarCollapsed,t=this.detailOpen;return O`
+      <div class="layout" part="layout" style="grid-template-columns: ${[e?`var(--pastis-app-layout-sidebar-width, 260px)`:``,`minmax(0, 1fr)`,t?`${this.detailEffectiveWidth}px`:``].filter(Boolean).join(` `)}">
+        ${e?O`
+          <nav part="sidebar" aria-label=${this.sidebarLabel||`Sidebar`}><slot name="sidebar"></slot></nav>
+        `:j}
+        <main part="main" class="${e?``:`first`} ${t?``:`last`}"><slot></slot></main>
+        ${t?O`
+          <aside id="detail" part="detail" aria-label=${this.detailLabel||`Details`}>
+            <div
+              class="splitter"
+              part="splitter"
+              role="separator"
+              tabindex="0"
+              aria-orientation="vertical"
+              aria-label=${this.splitterLabel||`Resize details`}
+              aria-controls="detail"
+              aria-valuenow=${this.detailEffectiveWidth}
+              aria-valuemin=${380}
+              aria-valuemax=${this.detailMaxWidth}
+              @keydown=${this._onSplitterKeydown}
+              @dblclick=${this._onSplitterDoubleClick}
+              @pointerdown=${this._onPointerDown}
+              @pointermove=${this._onPointerMove}
+              @pointerup=${this._onPointerUp}
+              @pointercancel=${this._onPointerUp}
+              @lostpointercapture=${this._onPointerUp}
+            ></div>
+            <div class="detail"><slot name="detail"></slot></div>
+          </aside>
+        `:j}
+      </div>
+    `}_resize(e){let t=this._clamp(e),n=t!==this.detailEffectiveWidth;return this.detailWidth=t,n}_emitResize(){this.dispatchEvent(new CustomEvent(`pastis-resize`,{detail:{width:this.detailEffectiveWidth},bubbles:!0,composed:!0}))}_onSplitterKeydown(e){let t=e.shiftKey?on:an,n=this.detailEffectiveWidth,r;if(e.key===`ArrowLeft`)r=n+t;else if(e.key===`ArrowRight`)r=n-t;else if(e.key===`Home`)r=380;else if(e.key===`End`)r=this.detailMaxWidth;else return;e.preventDefault(),this._resize(r)&&this._emitResize()}_onSplitterDoubleClick(){let e=this.detailMaxWidth;this._resize(this.detailEffectiveWidth>=e?380:e)&&this._emitResize()}_onPointerDown(e){if(e.button===0){e.preventDefault();try{e.currentTarget.setPointerCapture(e.pointerId)}catch{}this._drag={x:e.clientX,width:this.detailEffectiveWidth},this.toggleAttribute(`data-dragging`,!0)}}_onPointerMove(e){this._drag&&this._resize(this._drag.width+(this._drag.x-e.clientX))}_onPointerUp(){if(!this._drag)return;let e=this._drag.width;this._drag=void 0,this.removeAttribute(`data-dragging`),this.detailEffectiveWidth!==e&&this._emitResize()}};customElements.define(`pastis-app-layout`,sn);var cn=class extends B{static properties={label:{type:String},_filled:{state:!0}};static styles=s`
+    :host {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+      min-height: 0;
+      background: var(--bg-secondary, #16110d);
+      color: var(--text-primary, #f4eee3);
+      font-family: var(--font-family-body, sans-serif);
+    }
+    :host([hidden]) { display: none; }
+
+    .header, .footer {
+      flex: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm, 8px);
+      padding: var(--space-sm, 8px);
+    }
+    .header:not(.filled), .footer:not(.filled) { display: none; }
+    .footer { border-top: var(--border-width, 1px) solid var(--border-subtle, #221c17); }
+
+    .list {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-xs, 4px) var(--space-sm, 8px) var(--space-sm, 8px);
+    }
+  `;constructor(){super(),this._filled={header:!1,footer:!1}}render(){return O`
+      <div class="header ${this._filled.header?`filled`:``}" part="header">
+        <slot name="header" @slotchange=${this._onSlotChange}></slot>
+      </div>
+      <div class="list" part="list" role="list" aria-label=${this.label||j}><slot></slot></div>
+      <div class="footer ${this._filled.footer?`filled`:``}" part="footer">
+        <slot name="footer" @slotchange=${this._onSlotChange}></slot>
+      </div>
+    `}_onSlotChange(e){let t=e.target;this._filled={...this._filled,[t.name]:t.assignedNodes({flatten:!0}).length>0}}},ln=class extends B{static properties={label:{type:String},collapsed:{type:Boolean,reflect:!0}};static styles=s`
+    :host { display: block; margin-block-start: var(--space-sm, 8px); }
+    :host([hidden]) { display: none; }
+
+    .head { display: flex; align-items: center; gap: var(--space-xs, 4px); }
+
+    .heading {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs, 4px);
+      box-sizing: border-box;
+      min-height: calc(var(--space-lg, 24px) + var(--space-xs, 4px));
+      margin: 0;
+      padding: 0 var(--space-sm, 8px);
+      border: 0;
+      border-radius: var(--radius-md, 6px);
+      background: none;
+      color: var(--text-tertiary, #a39b90);
+      font-family: inherit;
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-semibold, 600);
+      letter-spacing: var(--letter-spacing-wide, 0.05em);
+      line-height: var(--line-height-caption, 1.4);
+      text-align: start;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .heading:hover { color: var(--text-primary, #f4eee3); }
+    .heading:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .chevron { flex: none; display: inline-flex; transition: transform var(--transition-fast, 120ms ease); }
+    :host([collapsed]) .chevron { transform: rotate(-90deg); }
+
+    .items { display: flex; flex-direction: column; }
+    .items[hidden] { display: none; }
+
+    ::slotted([slot="trailing"]) { flex: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chevron { transition: none; }
+    }
+  `;constructor(){super(),this.collapsed=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}render(){return O`
+      <div class="head">
+        <button
+          class="heading"
+          part="heading"
+          type="button"
+          aria-expanded=${this.collapsed?`false`:`true`}
+          aria-controls="items"
+          @click=${this._onToggle}
+        >
+          <span class="chevron" aria-hidden="true"><pastis-icon name="chevron-down" size="sm"></pastis-icon></span>
+          <span class="label">${this.label}</span>
+        </button>
+        <slot name="trailing"></slot>
+      </div>
+      <div id="items" class="items" part="items" role="list" aria-label=${this.label||j} ?hidden=${this.collapsed}>
+        <slot></slot>
+      </div>
+    `}_onToggle(){let e=!this.collapsed,t=new CustomEvent(`pastis-toggle`,{detail:{collapsed:e},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)&&(this.collapsed=e)}},un=class extends B{static properties={href:{type:String},icon:{type:String},marker:{type:String},label:{type:String},count:{type:Number},countLabel:{type:String,attribute:`count-label`},current:{type:Boolean,reflect:!0}};static styles=s`
+    :host { display: block; }
+    :host([hidden]) { display: none; }
+
+    .wrap {
+      display: flex;
+      align-items: center;
+      border-radius: var(--radius-md, 6px);
+    }
+    .wrap:hover { background: var(--bg-elevated, #2a231d); }
+    :host([current]) .wrap { background: var(--bg-elevated, #2a231d); }
+
+    a {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm, 8px);
+      box-sizing: border-box;
+      min-height: var(--space-xl, 32px);
+      padding: 0 var(--space-sm, 8px);
+      border-radius: var(--radius-md, 6px);
+      color: var(--text-secondary, #d8d0c4);
+      font-family: inherit;
+      font-size: var(--font-size-body-sm, 14px);
+      line-height: var(--line-height-body-sm, 1.5);
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a:not([href]) { cursor: pointer; }
+    a:hover { color: var(--text-primary, #f4eee3); }
+    :host([current]) a {
+      color: var(--text-primary, #f4eee3);
+      font-weight: var(--font-weight-semibold, 600);
+    }
+    a:focus-visible {
+      outline: 2px solid var(--border-focus, #fcba28);
+      outline-offset: -2px;
+    }
+
+    .lead { flex: none; display: inline-flex; width: var(--space-md, 16px); justify-content: center; }
+    :host([current]) .lead { color: var(--text-accent, #fcba28); }
+    .marker { font-family: var(--font-family-mono, monospace); }
+
+    .label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .count {
+      flex: none;
+      font-family: var(--font-family-mono, monospace);
+      font-size: var(--font-size-caption, 12px);
+      color: var(--text-tertiary, #a39b90);
+    }
+
+    ::slotted([slot="trailing"]) { flex: none; margin-inline-end: var(--space-xs, 4px); }
+  `;constructor(){super(),this.current=!1}connectedCallback(){super.connectedCallback(),this.hasAttribute(`role`)||this.setAttribute(`role`,`listitem`)}willUpdate(e){!this.href&&(!this.hasUpdated||e.has(`href`))&&console.warn(`pastis-sidebar-item: "${this.label??``}" has no href; it is rendered as role="link" with tabindex="0"`)}get _hasCount(){return this.count!==void 0&&this.count!==null&&String(this.count)!==``&&Number(this.count)!==0}render(){let e=this._hasCount,t=this.icon?O`<span class="lead" aria-hidden="true"><pastis-icon part="icon" name=${this.icon} size="sm"></pastis-icon></span>`:this.marker?O`<span class="lead marker" aria-hidden="true">${this.marker}</span>`:j;return O`
+      <div class="wrap">
+        <a
+          part="link"
+          href=${this.href||j}
+          role=${this.href?j:`link`}
+          tabindex=${this.href?j:`0`}
+          aria-current=${this.current?`page`:j}
+          aria-label=${e?`${this.label??``}, ${this.countLabel||this.count}`:j}
+          @click=${this._onClick}
+          @keydown=${this._onKeydown}
+        >
+          ${t}
+          <span class="label" part="label">${this.label}</span>
+          ${e?O`<span class="count" part="count" aria-hidden="true">${this.count}</span>`:j}
+        </a>
+        <slot name="trailing"></slot>
+      </div>
+    `}_onKeydown(e){e.key!==`Enter`||this.href||(e.preventDefault(),e.currentTarget.click())}_onClick(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=new CustomEvent(`pastis-navigate`,{detail:{href:this.href},bubbles:!0,composed:!0,cancelable:!0});this.dispatchEvent(t)||e.preventDefault()}};customElements.define(`pastis-sidebar`,cn),customElements.define(`pastis-sidebar-section`,ln),customElements.define(`pastis-sidebar-item`,un);var dn=class extends B{static properties={label:{type:String}};static styles=s`
+    :host { display: inline-flex; vertical-align: baseline; }
+    :host([hidden]) { display: none; }
+
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      min-width: calc(var(--space-md, 16px) + var(--space-xs, 4px));
+      padding: 0 var(--space-xs, 4px);
+      border: var(--border-width, 1px) solid var(--border-default, #3a322b);
+      border-bottom-width: calc(var(--border-width, 1px) * 2);
+      border-radius: var(--radius-sm, 4px);
+      background: var(--bg-elevated, #2a231d);
+      color: var(--text-primary, #f4eee3);
+      font-family: var(--font-family-mono, monospace);
+      font-size: var(--font-size-caption, 12px);
+      font-weight: var(--font-weight-medium, 500);
+      line-height: var(--line-height-caption, 1.4);
+      white-space: nowrap;
+    }
+
+    .sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  `;render(){return this.label?O`<kbd part="kbd"><span aria-hidden="true"><slot></slot></span><span class="sr">${this.label}</span></kbd>`:O`<kbd part="kbd"><slot></slot></kbd>`}};return customElements.define(`pastis-kbd`,dn),e.DETAIL_MAX_RATIO=rn,e.DETAIL_MIN_WIDTH=nn,e.PastisAccordion=Qe,e.PastisAlert=Ve,e.PastisAppLayout=sn,e.PastisAvatar=ze,e.PastisBadge=Re,e.PastisBreadcrumb=$e,e.PastisButton=ke,e.PastisButtonSplit=Ae,e.PastisCard=Be,e.PastisCarousel=_t,e.PastisCheckbox=Fe,e.PastisCodeBlock=ft,e.PastisCookieBanner=ct,e.PastisDateField=It,e.PastisDivider=rt,e.PastisDrawer=ot,e.PastisDropdown=Xe,e.PastisEditor=Jt,e.PastisEmptyState=pt,e.PastisFileUpload=st,e.PastisFilterBar=ht,e.PastisFilterChip=mt,e.PastisFooter=xt,e.PastisHero=it,e.PastisIcon=kt,e.PastisInput=Pe,e.PastisKanbanBoard=Zt,e.PastisKanbanColumn=Yt,e.PastisKbd=dn,e.PastisListGroup=en,e.PastisListRow=tn,e.PastisModal=Ge,e.PastisNav=St,e.PastisPagination=et,e.PastisProgress=tt,e.PastisProjectCard=Ct,e.PastisQuickAdd=zt,e.PastisRadio=lt,e.PastisRecurrencePicker=Wt,e.PastisSearch=at,e.PastisSection=bt,e.PastisSegmentedControl=$,e.PastisSelect=$t,e.PastisShelf=Dt,e.PastisSidebar=cn,e.PastisSidebarItem=un,e.PastisSidebarSection=ln,e.PastisSkeleton=Je,e.PastisSortable=qt,e.PastisSpecTable=Et,e.PastisSpinner=qe,e.PastisStatCard=ut,e.PastisStatement=wt,e.PastisTabBar=Mt,e.PastisTabBarItem=Nt,e.PastisTable=dt,e.PastisTabs=Ze,e.PastisTag=nt,e.PastisTaskRow=jt,e.PastisTestimonial=yt,e.PastisThemeToggle=gt,e.PastisTimeField=Lt,e.PastisTimeline=vt,e.PastisToast=Ke,e.PastisToggle=Le,e.PastisTokenSwatch=Tt,e.PastisTooltip=Ye,e.iconNames=Ot,e.icons=U,e})({});

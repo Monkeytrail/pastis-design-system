@@ -1,0 +1,51 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as SidebarStories from '../../components/sidebar/pastis-sidebar.stories.js';
+
+<Meta of={SidebarStories} name="Usage" />
+
+# Sidebar
+
+`<pastis-sidebar>` is a desktop app's navigation column: compact `<pastis-sidebar-item>` links
+and collapsible `<pastis-sidebar-section>`s, with a header and a footer that stay in view while
+the list scrolls.
+
+<Canvas of={SidebarStories.Default} />
+
+## Usage
+
+- **Placement:** in the `sidebar` slot of [`<pastis-app-layout>`](?path=/docs/layout-applayout--usage),
+  which gives it a `nav` landmark, or in your own `nav`. It fills its parent's height.
+- **Areas:** the `header` slot (a search field, an “Add item” button), the default slot (items
+  and sections, a `role="list"` named by `label`) and the `footer` slot (a sync status).
+- **Item:** a 32 px link row: `href`, `icon` (a Pastis icon) or `marker` (`#`), `label` (one
+  line, ellipsis), `count` (hidden when 0 or empty; `count-label` words it for the link's name,
+  “Today, 3 items due”), `current` (`aria-current="page"`). An action goes in its `trailing` slot.
+- **Routing:** a plain click fires a cancelable `pastis-navigate { href }`, as the tab bar and
+  list rows do; a client-side router cancels it and navigates itself.
+- **Section:** a heading button with `aria-expanded` and a nested list named by `label`. A click
+  fires a cancelable `pastis-toggle { collapsed }`; cancel it to keep `collapsed` controlled. An
+  action beside the heading goes in its `trailing` slot.
+
+<Canvas of={SidebarStories.Item} />
+
+## Do
+
+```html
+<pastis-sidebar label="Views and lists">
+  <pastis-sidebar-item href="/today" icon="today" label="Today" count="3" count-label="3 items due" current></pastis-sidebar-item>
+  <pastis-sidebar-section label="Personal">
+    <pastis-sidebar-item href="/lists/1" icon="list" label="Groceries" count="4"></pastis-sidebar-item>
+  </pastis-sidebar-section>
+  <span slot="footer">Synced just now</span>
+</pastis-sidebar>
+```
+
+## Don't
+
+```html
+<!-- Don't put buttons or inputs in the default slot: the list only takes items and sections;
+     use the header, footer or trailing slots -->
+<pastis-sidebar><pastis-button>Add item</pastis-button></pastis-sidebar>
+
+<!-- Don't show a count of 0: leave it out, the item hides it anyway -->
+```
